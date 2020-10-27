@@ -4,10 +4,7 @@ import Methods.Read_Database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -62,6 +59,14 @@ public class AddDomainController extends Globals implements Initializable, Above
     void pressed(ActionEvent event) throws SQLException, ClassNotFoundException {
         if (event.getSource() == AddDomain)
         {
+
+            //Get the Pricing labels of thee customer and the main GUI so as to update them
+            Linker linker = new Linker();
+            Label TotalIncomeLabel = linker.GetLabelLink("IncomeLabel");
+            Label CustomerCostLabel = linker.GetLabelLink(CustomerId+"CustomerPrice");
+
+
+
             //Create a database reader so as to add the new domain to the customer in the database
             Read_Database AddDomain = new Read_Database();
 

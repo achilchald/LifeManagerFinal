@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="wholePanel" prefHeight="671.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.appointment_add_Controller">
+   <children>
+      <TextField fx:id="Title" layoutX="105.0" layoutY="178.0" />
+      <TextField fx:id="Time" layoutX="105.0" layoutY="234.0" />
+      <TextField fx:id="Attendee" layoutX="105.0" layoutY="288.0" />
+      <TextArea fx:id="Notes" layoutX="105.0" layoutY="336.0" prefHeight="117.0" prefWidth="149.0" />
+      <Label layoutX="39.0" layoutY="182.0" text="Title" />
+      <Label layoutX="38.0" layoutY="238.0" text="Time" />
+      <Label layoutX="40.0" layoutY="292.0" text="Attendee" />
+      <Button fx:id="AddB" layoutX="161.0" layoutY="558.0" mnemonicParsing="false" onAction="#add_Appointment" text="Add" />
+      <Label layoutX="41.0" layoutY="336.0" text="Notes" />
+      <RadioButton fx:id="Important" layoutX="41.0" layoutY="474.0" mnemonicParsing="false" onAction="#setImportant" text="Important" />
+      <RadioButton fx:id="Regular" layoutX="42.0" layoutY="504.0" mnemonicParsing="false" onAction="#setRegular" text="Regular" />
+      <RadioButton fx:id="Unimportant" layoutX="42.0" layoutY="534.0" mnemonicParsing="false" onAction="#setUnimportant" text="Unimportant" />
+      <Label layoutX="64.0" layoutY="59.0" text="Appointment">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="Date" layoutX="64.0" layoutY="97.0" text="date">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ScrollPane fx:id="pnAppointments" layoutX="332.0" layoutY="176.0" prefHeight="274.0" prefWidth="474.0">
+         <content>
+            <VBox prefHeight="273.0" prefWidth="497.0">
+               <children>
+                  <VBox fx:id="pnItems" alignment="BASELINE_LEFT" prefHeight="273.0" prefWidth="421.0" spacing="5.0" style="-fx-background-color: #ffffff;">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Label layoutX="332.0" layoutY="155.0" text="Other appointments on this day:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="Hbc" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#Edit_Project" prefHeight="35.0" prefWidth="700.0" spacing="80.0" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Edit_Controller">
+    <children>
+        <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../kwstas/LifeManager/src/sample/gps-searching.png" />
+            </image>
+            <HBox.margin>
+                <Insets left="10.0" />
+            </HBox.margin>
+        </ImageView>
+        <Label fx:id="nameid" prefWidth="60.0" text="name" textFill="#b7c3d7">
+            <HBox.margin>
+                <Insets left="-70.0" />
+            </HBox.margin></Label>
+        <Label fx:id="dateid" prefWidth="75.0" text="date" textFill="#b7c3d7">
+            <HBox.margin>
+                <Insets left="48.0" />
+            </HBox.margin>
+        </Label>
+        <Label fx:id="priceid" prefWidth="40.0" text="Price" textFill="#b7c3d7">
+         <HBox.margin>
+            <Insets left="-1.0" />
+         </HBox.margin></Label>
+      <Label fx:id="wfid" prefHeight="17.0" prefWidth="58.0" text="Workforce" textFill="#b7c3d7">
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin></Label>
+        <Label fx:id="Projectid" textFill="WHITE" />
+      <Button fx:id="Del" mnemonicParsing="false" onAction="#Delete_Project" prefWidth="20.0" text="X">
+         <HBox.margin>
+            <Insets left="-70.0" />
+         </HBox.margin></Button>
+    </children>
+    <effect>
+        <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+    </effect>
+</HBox>

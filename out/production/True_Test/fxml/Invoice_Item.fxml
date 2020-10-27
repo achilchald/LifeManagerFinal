@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="InvoiceItem" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="80.0" style="-fx-background-color: #02030A; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Invoice_Editing_Controller">
+   <children>
+      <Label fx:id="nameid" prefHeight="17.0" prefWidth="75.0" text="name" textFill="#b7c3d7">
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+      </Label>
+      <Label fx:id="BillingDate" text="Billing Date" textFill="WHITE" />
+      <Label text="Payment Date" textFill="WHITE" />
+      <Label fx:id="Price" text="Price" textFill="WHITE" />
+      <Label fx:id="PayedAmount" text="Payed Amount" textFill="WHITE" />
+      <ComboBox fx:id="Options_Box" onAction="#OptionSelected" prefWidth="150.0" promptText="Options" />
+   </children>
+   <effect>
+      <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+   </effect>
+</HBox>

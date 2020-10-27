@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="pnlProjects" prefHeight="633.0" prefWidth="1241.0" style="-fx-background-color: #253138;" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Projects_Controller">
+   <children>
+      <TextField layoutX="575.0" layoutY="40.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: transparent; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+      <Label layoutX="14.0" layoutY="36.0" text="Projects" textFill="#c4dbe9">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="98.0" prefHeight="92.0" prefWidth="746.0" spacing="50.0" style="-fx-background-color: #2f3e47; -fx-background-radius: 17px 17px 0px 0px;">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="ActiveProjectsPanel" text="0" textFill="#2a73ff">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label text="Active Projects" textFill="#c4dbe9" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="CompletedProjectsPanel" text="0" textFill="#26bfbc">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label text="Completed" textFill="#e7e5e5" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="ClosestDeadlinePanel" text="0" textFill="#fa5f7e">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label text="Near deadline" textFill="#e7e5e5" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="TotalRevenuePanel" text="0" textFill="#de0000">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label text="Total Revenue" textFill="#e7e5e5" />
+               </children>
+            </VBox>
+            <Button fx:id="Add" mnemonicParsing="false" onAction="#Add_Project" prefHeight="55.0" prefWidth="100.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Add Project">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="190.0" prefHeight="42.0" prefWidth="746.0" spacing="80.0" style="-fx-background-color: #05071F;">
+         <children>
+            <Label text="Company Name" textFill="#e7e5e5" wrapText="true">
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+            </Label>
+            <Label prefWidth="100.0" text="Delivery Date" textFill="#e7e5e5">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="Price" textFill="#e7e5e5">
+               <HBox.margin>
+                  <Insets left="-25.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="Workforce" textFill="#e7e5e5">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="232.0" prefHeight="320.0" prefWidth="746.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css">
+         <content>
+            <VBox fx:id="pnItems" alignment="BASELINE_LEFT" prefHeight="318.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: #2f3e47;">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="749.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Desktop/JobStuff/RestaurantMgtSampleUI-master/src/images/icons8_Search_52px.png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="TabPaneAnchor" layoutX="784.0" layoutY="98.0" prefHeight="442.0" prefWidth="307.0" style="-fx-background-color: #FFFFFF;" />
+   </children>
+</Pane>

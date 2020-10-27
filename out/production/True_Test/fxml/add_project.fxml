@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="AddProjectAnchor" prefHeight="671.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.proj_add_Controller">
+   <children>
+      <Label layoutX="14.0" layoutY="30.0" prefWidth="210.0" text="Add New Project">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Line endX="483.0" layoutX="211.0" layoutY="61.0" startX="-197.0" />
+      <TabPane fx:id="TabProject" focusTraversable="false" layoutY="97.0" prefHeight="526.0" prefWidth="453.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab closable="false" text="Project Details">
+               <content>
+                  <AnchorPane prefHeight="448.0" prefWidth="282.0">
+                     <children>
+                        <TextField fx:id="NameF" layoutX="104.0" layoutY="49.0" />
+                        <TextField fx:id="PriceF" layoutX="104.0" layoutY="123.0" />
+                        <Label layoutY="53.0" text="Name" />
+                        <Label layoutX="3.0" layoutY="86.0" text="Date" />
+                        <Label layoutX="3.0" layoutY="127.0" text="Price" />
+                        <Label layoutX="4.0" layoutY="14.0" text="Project Details">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Line endX="174.0" layoutX="107.0" layoutY="41.0" startX="-106.0" />
+                        <DatePicker fx:id="date" layoutX="104.0" layoutY="82.0" prefHeight="25.0" prefWidth="149.0" />
+                        <Button fx:id="AddB" layoutX="212.0" layoutY="187.0" mnemonicParsing="false" onAction="#pressed" text="Next" />
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+          <Tab closable="false" text="Workers">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="361.0" prefWidth="422.0">
+                     <children>
+                        <Line endX="264.0" layoutX="24.0" layoutY="27.0" startX="-20.0" />
+                        <Label layoutX="8.0" text="Workers">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="addWorkerBtn" layoutX="8.0" layoutY="272.0" mnemonicParsing="false" onAction="#addWorkerToProject" text="Add Worker" />
+                        <ComboBox fx:id="workerscombo" layoutX="4.0" layoutY="39.0" prefWidth="150.0" style="-fx-background-color: #FFFFFF;" />
+                        <VBox fx:id="workersbox" layoutX="12.0" layoutY="83.0" prefHeight="186.0" prefWidth="285.0" />
+                        <Button fx:id="AddW" layoutX="146.0" layoutY="272.0" mnemonicParsing="false" onAction="#AddedWorker" text="Next" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Task">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="464.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="6.0" text="ToDo">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Line endX="174.0" layoutX="116.0" layoutY="23.0" startX="-106.0" />
+                        <Button fx:id="AddToDoBtn" layoutX="160.0" layoutY="293.0" mnemonicParsing="false" onAction="#addTask" text="Add Task" />
+                        <VBox fx:id="todobox" layoutX="16.0" layoutY="327.0" prefHeight="121.0" prefWidth="418.0" />
+                        <TextField fx:id="nametask" layoutX="84.0" layoutY="27.0" prefHeight="25.0" prefWidth="153.0" />
+                        <Label layoutX="9.0" layoutY="31.0" text="Name" />
+                        <Label layoutX="12.0" layoutY="224.0" text="Desc" />
+                        <TextField fx:id="desctask" layoutX="86.0" layoutY="224.0" prefHeight="62.0" prefWidth="233.0" />
+                        <ComboBox fx:id="taskCombo" layoutX="85.0" layoutY="72.0" prefHeight="25.0" prefWidth="152.0" />
+                        <Label layoutX="12.0" layoutY="76.0" text="Worker" />
+                        <Button fx:id="AddT" layoutX="169.0" layoutY="448.0" mnemonicParsing="false" onAction="#finish" text="Finish" />
+                        <Label layoutX="14.0" layoutY="178.0" text="Category" />
+                        <ComboBox fx:id="taskCategory" layoutX="85.0" layoutY="174.0" prefHeight="25.0" prefWidth="150.0" />
+                        <Label layoutX="13.0" layoutY="127.0" text="Due Date" />
+                        <DatePicker fx:id="datePicker" layoutX="86.0" layoutY="123.0" prefHeight="25.0" prefWidth="150.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

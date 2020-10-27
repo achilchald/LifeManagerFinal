@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1050.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="207.0" style="-fx-background-color: #05071F;" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="181.0" fitWidth="187.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo_casperweb.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="30.0" top="30.0" />
+               </VBox.margin></ImageView>
+            <Button fx:id="btnHome" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@style.css" text="Home" textAlignment="CENTER" textFill="#e7e5e5">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnProjects" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@style.css" text="Projects" textAlignment="CENTER">
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@style.css" text="Customers" textAlignment="CENTER">
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCalendar" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@style.css" text="Calendar">
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnEmails" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@style.css" text="Emails">
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnExit" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@style.css" text="Exit">
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <StackPane fx:id="Stackpane" layoutX="209.0" prefHeight="576.0" prefWidth="842.0" style="-fx-background-color: #02030A;">
+         <children>
+            <Pane fx:id="pnlCustomers" prefHeight="554.0" prefWidth="793.0">
+
+               <children>
+                  <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <Label layoutX="57.0" layoutY="25.0" text="Restaurant Orders" textFill="#e7e5e5">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="72.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="2345" textFill="#2a73ff">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Total Orders" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="1500" textFill="#26bfbc">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Total delivered" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="1000" textFill="#fa5f7e">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Peding Orders" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="780" textFill="#de0000">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Orders on Hold" textFill="#e7e5e5" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="11.0" layoutY="178.0" prefHeight="42.0" prefWidth="768.0" spacing="80.0" style="-fx-background-color: #02030A;">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="118.0" text="Company Name" textFill="#e7e5e5" wrapText="true">
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label prefWidth="100.0" text="Delivery Date" textFill="#e7e5e5">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Amount" textFill="#e7e5e5">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Status" textFill="#e7e5e5">
+                           <HBox.margin>
+                              <Insets left="-15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="320.0" prefWidth="746.0" stylesheets="@style.css">
+                     <content>
+                        <VBox fx:id="pnItems" alignment="BASELINE_LEFT" prefHeight="318.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                  <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="749.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Desktop/JobStuff/RestaurantMgtSampleUI-master/src/images/icons8_Search_52px.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="pnlProjects" prefHeight="576.0" prefWidth="909.0" />
+            <Pane fx:id="pnlEmails" prefHeight="576.0" prefWidth="919.0" />
+            <Pane fx:id="pnlExit" prefHeight="576.0" prefWidth="912.0" />
+            <Pane fx:id="pnlHome" prefHeight="554.0" prefWidth="793.0" />
+            <Pane fx:id="pnlCalendar" prefHeight="554.0" prefWidth="793.0" stylesheets="@style.css" />
+         </children>
+      </StackPane>
+      <ImageView fitHeight="23.0" fitWidth="27.0" layoutX="30.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@calendar.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="27.0" layoutX="30.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@8807.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="28.0" fitWidth="38.0" layoutX="3.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" x="28.0">
+         <image>
+            <Image url="@projects-icon-png-17.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="27.0" layoutX="31.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@PinClipart.com_vault-boy-clipart_1442705.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="158.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" x="32.0">
+         <image>
+            <Image url="@unnamed.png" />
+            
+                           </image>
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="27.0" layoutX="26.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" x="8.0" y="19.0">
+         <image>
+            <Image url="@free-exit-logout-icon-2857-thumb.png" />
+         </image>
+      </ImageView>
+   </children>
+   <effect>
+      <DropShadow color="#1b1eeb" />
+   </effect>
+</AnchorPane>

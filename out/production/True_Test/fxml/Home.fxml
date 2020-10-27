@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="MainAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1612.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="207.0" style="-fx-background-color: #05071F;" stylesheets="@../sample/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="181.0" fitWidth="187.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../kwstas/LifeManager/src/sample/logo_casperweb.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="30.0" top="30.0" />
+               </VBox.margin></ImageView>
+            <Button fx:id="btnHome" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Home" textAlignment="CENTER" textFill="#e7e5e5">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnProjects" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Projects" textAlignment="CENTER">
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Customers" textAlignment="CENTER">
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnItems" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Items" textAlignment="CENTER">
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCalendar" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Calendar">
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnWorkers" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Workers">
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnExit" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" text="Exit">
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <StackPane fx:id="Stackpane" layoutX="209.0" prefHeight="836.0" prefWidth="1413.0" style="-fx-background-color: #02030A;">
+         <children>
+            <Pane fx:id="pnlProjects" prefHeight="690.0" prefWidth="1004.0" />
+            <Pane fx:id="pnlWorkers" prefHeight="576.0" prefWidth="919.0" />
+            <Pane fx:id="pnlExit" prefHeight="576.0" prefWidth="912.0" />
+            <Pane fx:id="pnlHome" prefHeight="554.0" prefWidth="793.0" />
+            <Pane fx:id="pnlCalendar" prefHeight="554.0" prefWidth="793.0" />
+            <Pane fx:id="paneItems" prefHeight="576.0" prefWidth="909.0" />
+         </children>
+      </StackPane>
+      <ImageView fitHeight="23.0" fitWidth="27.0" layoutX="30.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../sample/calendar.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="27.0" layoutX="30.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../sample/8807.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="28.0" fitWidth="38.0" layoutX="3.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" x="28.0">
+         <image>
+            <Image url="@../sample/projects-icon-png-17.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="27.0" layoutX="31.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../sample/PinClipart.com_vault-boy-clipart_1442705.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" x="32.0">
+         <image>
+            <Image url="@../sample/unnamed.png" />
+            
+         </image>
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="27.0" layoutX="26.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" x="8.0" y="19.0">
+         <image>
+            <Image url="@../sample/free-exit-logout-icon-2857-thumb.png" />
+         </image>
+      </ImageView>
+   </children>
+   <effect>
+      <DropShadow color="#1b1eeb" />
+   </effect>
+</AnchorPane>

@@ -1030,6 +1030,7 @@ public class Editor extends Globals implements AboveGod {
                     //customerMap.get(id).getDomainsList().get(i).setStart_Date(StartDate);
                     customerMap.get(id).getDomainsList().get(i).setExpiry_Date(ExpiryDate);
                     NewDomain = customerMap.get(id).getDomainsList().get(i);
+                    break ;
                 }
             }
 
@@ -1126,6 +1127,12 @@ public class Editor extends Globals implements AboveGod {
             ctrl.SetCustomerDomains(CustomerDomains);
             //Set to the controller the id of the customer so as to add the domain successfully
             ctrl.SetCustomerId(id);
+
+            //Set the Domain Combox so as to update it when a new domain is added
+            ctrl.SetDomainCombox(DomList);
+
+            //Set the containers that contain the invoices
+            ctrl.SetContainers(YearlyBox,CustomBox);
 
 
         }

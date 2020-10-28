@@ -262,7 +262,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
 
         //If the item is marked as scaling with the reccurence then calculate its total price
         if(Scaling.isSelected())
-            temp.CalculateReccuringPrice(CurrentInvoice.getRecurring());
+            temp.CalculateReccuringPrice(CurrentInvoice.getType());
 
         System.out.println("Item to be added = "+temp.getType());
 
@@ -360,6 +360,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         if(NewAmount > CurrentInvoice.getPrice() - CurrentInvoice.getPayedAmount())
         {
             System.out.println("Wrong amount ,please enter a valid amount");
+            System.out.println("New Ammount = "+NewAmount + "Invoice Cost = " + CurrentInvoice.getPrice());
         }
         else
         {

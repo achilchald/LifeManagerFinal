@@ -71,6 +71,7 @@ public class Invoice {
 
     public void Calc_Invoice_Price()
     {
+        this.price = 0;
         for(int i = 0;i<items.size();i++)
         {
             this.price = this.price + items.get(i).getPrice();

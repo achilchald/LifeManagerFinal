@@ -537,6 +537,11 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         Payer.SetChange(CurrentInvoice);
         System.out.println("Resta = "+temp);
 
+        if(CurrentInvoice.getPayedAmount() == CurrentInvoice.getPrice())
+        {
+            Payer.setInvoiceAsPayed(CurrentInvoice.getId());
+        }
+
     }
 
 }

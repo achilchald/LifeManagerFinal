@@ -133,22 +133,25 @@ public class AddInvoiceController extends Globals implements AboveGod, Initializ
          if(event.getSource() == AddInvoice)
         {
             Date BillingDate = Date.valueOf(LocalDate.now());
+            int cycles = 0;
+            int repetitions = 0;
 
             //If the flag is true then the user made the invoice reccuring
             if (checkFlag)
+            {
                 DefaultType = ReccurenceType.getValue();//Add the recurrence type to the Deafault type variable
+                cycles = Integer.parseInt( Cycles.getText() ) ;
+                repetitions = Integer.parseInt( TypeCount.getText() ) ;
+            }
+
 
             //Increment the last invoice id
             LastInvoiceId++;
             //Create the new invoice
             Invoice NewInvoice = new Invoice(LastInvoiceId,BillingDate,Date.valueOf(PayDate.getValue()),InvoiceType.getValue(),DefaultType,new ArrayList<Item>(),new ArrayList<Payment>(),0);
+            NewInvoice.setRepetitions(repetitions);
+            NewInvoice.setCycles(cycles);
 
-            //If the flag is true then add cycles and repetions to the invoice
-            if(checkFlag)
-            {
-                NewInvoice.setRepetitions(Integer.parseInt(TypeCount.getText()));
-                NewInvoice.setCycles(Integer.parseInt(Cycles.getText()));
-            }
             //Set notes to the invoice
             NewInvoice.setNotes(Notes.getText());
 

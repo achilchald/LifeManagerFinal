@@ -109,7 +109,7 @@ public class Projects_Controller  extends Globals implements Initializable ,Abov
             try {
 
                 HBox box;
-                box = FXMLLoader.load(getClass().getResource("../fxml/Project_Item.fxml"));
+                box = FXMLLoader.load(getClass().getResource("/fxml/Project_Item.fxml"));
 
 
 

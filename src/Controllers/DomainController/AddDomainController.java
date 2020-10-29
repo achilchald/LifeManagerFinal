@@ -195,55 +195,57 @@ public class AddDomainController extends Globals implements Initializable, Above
 
 
         //Load the invoice template
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Invoice_Item.fxml"));
-
-        box = loader.load();
-
-        //Linker to get the price label
-        Linker linker = new Linker();
-
-
-
-        //Append a controller to the invoice GUI component
-        Invoice_Editing_Controller EditControl = loader.getController();
-
-        System.out.println("Customer id = "+CustomerId+"Invoice id = "+temp.getId());
-        //Set to the controller the invoice and customer id's
-        EditControl.setCustomerAndInvoiceId(CustomerId,temp.getId());
-
-
-        //Initialize the Hbox that shows the invoice basic data such as price ,expiration date etc
-        ((Label)box.getChildren().get(0)).setText("Invoice#"+temp.getId());
-        ((Label)box.getChildren().get(1)).setText(temp.getBill_Date().toString());
-        ((Label)box.getChildren().get(2)).setText(temp.getPayment_Date().toString());
-        ((Label)box.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
-        ((Label)box.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
-        ((ComboBox)box.getChildren().get(5)).getItems().addAll("Add Payment","Edit","Delete");
-
-
-        //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
-        ((Label)box.getChildren().get(3)).setId(temp.getId() + ((Label)box.getChildren().get(3)).getId());
-        System.out.println("Invoice price label id = "+ ((Label)box.getChildren().get(3)).getId());
-        linker.CreateLink( ( (Label)box.getChildren().get(3) ) );
-
-
-
-
-        System.out.println(temp.getRecurring());
-        System.out.println(temp.getType());
-
-
-        //Add the invoice to the Yearly box since its a domain invoice
-        EditControl.SetContainer(YearlyBox);
-
-        //Add to Yearly Box
-        YearlyBox.getChildren().add(box);
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Invoice_Item.fxml"));
+//
+//        box = loader.load();
+//
+//        //Linker to get the price label
+//        Linker linker = new Linker();
+//
+//
+//
+//        //Append a controller to the invoice GUI component
+//        Invoice_Editing_Controller EditControl = loader.getController();
+//
+//        System.out.println("Customer id = "+CustomerId+"Invoice id = "+temp.getId());
+//        //Set to the controller the invoice and customer id's
+//        EditControl.setCustomerAndInvoiceId(CustomerId,temp.getId());
+//
+//
+//        //Initialize the Hbox that shows the invoice basic data such as price ,expiration date etc
+//        ((Label)box.getChildren().get(0)).setText("Invoice#"+temp.getId());
+//        ((Label)box.getChildren().get(1)).setText(temp.getBill_Date().toString());
+//        ((Label)box.getChildren().get(2)).setText(temp.getPayment_Date().toString());
+//        ((Label)box.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
+//        ((Label)box.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
+//        ((ComboBox)box.getChildren().get(5)).getItems().addAll("Add Payment","Edit","Delete");
+//
+//
+//        //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
+//        ((Label)box.getChildren().get(3)).setId(temp.getId() + ((Label)box.getChildren().get(3)).getId());
+//        System.out.println("Invoice price label id = "+ ((Label)box.getChildren().get(3)).getId());
+//        linker.CreateLink( ( (Label)box.getChildren().get(3) ) );
+//
+//
+//
+//
+//        System.out.println(temp.getRecurring());
+//        System.out.println(temp.getType());
+//
+//
+//        //Add the invoice to the Yearly box since its a domain invoice
+//        EditControl.SetContainer(YearlyBox);
+//
+//        //Add to Yearly Box
+//        YearlyBox.getChildren().add(box);
 
 
 
 
 
             //Add to Recurring Box
+
+        Linker linker = new Linker();
             //Load the invoice template
             FXMLLoader loaderRec = new FXMLLoader(getClass().getResource("/fxml/Invoice_Item.fxml"));
 
@@ -265,6 +267,11 @@ public class AddDomainController extends Globals implements Initializable, Above
             ((Label)RecBox.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
             ((Label)RecBox.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
             ((ComboBox)RecBox.getChildren().get(5)).getItems().addAll("Add Payment","Edit","Delete");
+
+        //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
+        ((Label) RecBox.getChildren().get(3)).setId(temp.getId() + ((Label) RecBox.getChildren().get(3)).getId());
+        System.out.println("Invoice price label id = " + ((Label) RecBox.getChildren().get(3)).getId());
+        linker.CreateLink(((Label) RecBox.getChildren().get(3)));
 
             //Add the component to the Reccurrence Box
             ReccuringBox.getChildren().add(RecBox);

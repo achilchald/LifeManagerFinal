@@ -167,48 +167,52 @@ public class AddInvoiceController extends Globals implements AboveGod, Initializ
             //-----Add invoice to Box----
             HBox box,RecBox;
 
-            //Load the invoice template component
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Invoice_Item.fxml"));
+            Linker linker = new Linker();
+            if(NewInvoice.getRecurring().equals("ONCE")) {
+                //Load the invoice template component
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Invoice_Item.fxml"));
 
-            box = loader.load();
-
-
-
-
-            //Append a controller to the invoice
-            Invoice_Editing_Controller EditControl = loader.getController();
-
-            System.out.println("Customer id = "+CustomerID+"Invoice id = "+NewInvoice.getId());
-            //Set the customer and invoice id's to the controller
-            EditControl.setCustomerAndInvoiceId(CustomerID,NewInvoice.getId());
-            //EditControl.SetIncomeLabel(this.TotalIncome);
-
-            //Initialize the HBoxes components with the invoice data
-            ((Label)box.getChildren().get(0)).setText("Invoice#"+NewInvoice.getId());
-            ((Label)box.getChildren().get(1)).setText(NewInvoice.getBill_Date().toString());
-            ((Label)box.getChildren().get(2)).setText(NewInvoice.getPayment_Date().toString());
-            ((Label)box.getChildren().get(3)).setText(Float.toString(NewInvoice.getPrice()));
-            ((Label)box.getChildren().get(4)).setText(Float.toString(NewInvoice.getPayedAmount()));
-            ((ComboBox)box.getChildren().get(5)).getItems().addAll("Add Payment","Edit","Delete");
+                box = loader.load();
 
 
-            //Check the type of the invoice and add it to the corresponding VBox container
-            if (NewInvoice.getType().equals("MONTHLY"))
-            {
-                MonthlyBox.getChildren().add(box);
-                EditControl.SetContainer(MonthlyBox);
+                //Append a controller to the invoice
+                Invoice_Editing_Controller EditControl = loader.getController();
+
+                System.out.println("Customer id = " + CustomerID + "Invoice id = " + NewInvoice.getId());
+                //Set the customer and invoice id's to the controller
+                EditControl.setCustomerAndInvoiceId(CustomerID, NewInvoice.getId());
+                //EditControl.SetIncomeLabel(this.TotalIncome);
+
+                //Initialize the HBoxes components with the invoice data
+                ((Label) box.getChildren().get(0)).setText("Invoice#" + NewInvoice.getId());
+                ((Label) box.getChildren().get(1)).setText(NewInvoice.getBill_Date().toString());
+                ((Label) box.getChildren().get(2)).setText(NewInvoice.getPayment_Date().toString());
+                ((Label) box.getChildren().get(3)).setText(Float.toString(NewInvoice.getPrice()));
+                ((Label) box.getChildren().get(4)).setText(Float.toString(NewInvoice.getPayedAmount()));
+                ((ComboBox) box.getChildren().get(5)).getItems().addAll("Add Payment", "Edit", "Delete");
+
+                //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
+                ((Label) box.getChildren().get(3)).setId(NewInvoice.getId() + ((Label) box.getChildren().get(3)).getId());
+                System.out.println("Invoice price label id = " + ((Label) box.getChildren().get(3)).getId());
+                linker.CreateLink(((Label) box.getChildren().get(3)));
+
+
+                //Check the type of the invoice and add it to the corresponding VBox container
+                if (NewInvoice.getType().equals("MONTHLY")) {
+                    MonthlyBox.getChildren().add(box);
+                    EditControl.SetContainer(MonthlyBox);
+                }
+                if (NewInvoice.getType().equals("ONCE")) {
+                    OneTimeBox.getChildren().add(box);
+                    EditControl.SetContainer(OneTimeBox);
+                }
+                if (NewInvoice.getType().equals("YEARLY")) {
+                    YearlyBox.getChildren().add(box);
+                    EditControl.SetContainer(YearlyBox);
+                }
+
+
             }
-            if (NewInvoice.getType().equals("ONCE"))
-            {
-                OneTimeBox.getChildren().add(box);
-                EditControl.SetContainer(OneTimeBox);
-            }
-            if(NewInvoice.getType().equals("YEARLY"))
-            {
-                YearlyBox.getChildren().add(box);
-                EditControl.SetContainer(YearlyBox);
-            }
-
 
             //If the invoice is marked as recurring then add it to the recurring VBox container
             if(!NewInvoice.getRecurring().equals("ONCE"))
@@ -231,6 +235,11 @@ public class AddInvoiceController extends Globals implements AboveGod, Initializ
                 ((Label)RecBox.getChildren().get(3)).setText(Float.toString(NewInvoice.getPrice()));
                 ((Label)RecBox.getChildren().get(4)).setText(Float.toString(NewInvoice.getPayedAmount()));
                 ((ComboBox)RecBox.getChildren().get(5)).getItems().addAll("Add Payment","Edit","Delete");
+
+                //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
+                ((Label) RecBox.getChildren().get(3)).setId(NewInvoice.getId() + ((Label) RecBox.getChildren().get(3)).getId());
+                System.out.println("Invoice price label id = " + ((Label) RecBox.getChildren().get(3)).getId());
+                linker.CreateLink(((Label) RecBox.getChildren().get(3)));
 
                 //Add the invoice to the reccuring box
                 ReccuruningBox.getChildren().add(RecBox);

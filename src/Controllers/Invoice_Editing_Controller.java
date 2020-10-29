@@ -91,8 +91,9 @@ private Pane pnlCustomers;
         //This is triggered if the user selects the edit option in the Invoice HBox
         if(Options_Box.getValue().equals("Edit"))
         {
+            //Options_Box.getSelectionModel().clearSelection();
             //Load the Invoice summary GUI panel
-            FXMLLoader LoadEditGui = new FXMLLoader(getClass().getResource("../fxml/Invoice_Summary.fxml"));
+            FXMLLoader LoadEditGui = new FXMLLoader(getClass().getResource("/fxml/Invoice_Summary.fxml"));
             Parent root = LoadEditGui.load();
             //Append a controller to the panel so as to apply any changes made
             InvoiceGuiController GuiControll = LoadEditGui.getController();

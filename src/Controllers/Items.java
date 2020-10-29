@@ -42,7 +42,7 @@ public class Items implements Initializable {
             try {
 
                 HBox box;
-                box = FXMLLoader.load(getClass().getResource("../fxml/ItemForItems.fxml"));
+                box = FXMLLoader.load(getClass().getResource("/fxml/ItemForItems.fxml"));
 
                 //give the items some effect
 

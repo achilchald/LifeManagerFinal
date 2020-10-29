@@ -86,7 +86,7 @@ public class Controller implements Initializable {
 
         Pane prj = new Pane();
         try {
-            prj = FXMLLoader.load(getClass().getResource("../fxml/Projects.fxml"));
+            prj = FXMLLoader.load(getClass().getResource("/fxml/Projects.fxml"));
             prj.setId("project");
 
         } catch (IOException e) {
@@ -97,7 +97,7 @@ public class Controller implements Initializable {
 
         Pane cust = new Pane();
         try {
-            cust = FXMLLoader.load(getClass().getResource("../fxml/Customers.fxml"));
+            cust = FXMLLoader.load(getClass().getResource("/fxml/Customers.fxml"));
             cust.setId("customers");
 
         } catch (IOException e) {
@@ -108,7 +108,7 @@ public class Controller implements Initializable {
 
         Pane Calendar_sp = new Pane();
         try {
-            Calendar_sp = FXMLLoader.load(getClass().getResource("../fxml/fullCalendar.fxml"));
+            Calendar_sp = FXMLLoader.load(getClass().getResource("/fxml/fullCalendar.fxml"));
             Calendar_sp.setId("calendar");
 
         } catch (IOException e) {
@@ -119,7 +119,7 @@ public class Controller implements Initializable {
 
         Pane Items_sp = new Pane();
                 try {
-                    Items_sp = FXMLLoader.load(getClass().getResource("../fxml/Items.fxml"));
+                    Items_sp = FXMLLoader.load(getClass().getResource("/fxml/Items.fxml"));
                     Items_sp.setId("items");
 
                 } catch (IOException e) {
@@ -130,7 +130,7 @@ public class Controller implements Initializable {
 
         Pane Workers_sp = new Pane();
         try {
-            Workers_sp = FXMLLoader.load(getClass().getResource("../fxml/Workers.fxml"));
+            Workers_sp = FXMLLoader.load(getClass().getResource("/fxml/Workers.fxml"));
             Workers_sp.setId("workers");
 
         } catch (IOException e) {

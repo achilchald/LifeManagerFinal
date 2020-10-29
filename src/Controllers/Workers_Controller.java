@@ -90,7 +90,7 @@ public class Workers_Controller  implements Initializable,AboveGod {
 
                 HBox box;
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Worker_Item.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Worker_Item.fxml"));
 
                 box = loader.load();
 

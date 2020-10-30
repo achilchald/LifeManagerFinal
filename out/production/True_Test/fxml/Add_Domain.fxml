@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="496.0" prefWidth="438.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DomainController.AddDomainController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="496.0" prefWidth="438.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.DomainController.AddDomainController">
    <children>
       <Pane fx:id="DomainPane" prefHeight="501.0" prefWidth="439.0">
          <children>

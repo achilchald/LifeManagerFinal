@@ -12,7 +12,7 @@ public class Read_Database extends Globals implements AboveGod {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
-//here sonoo is database name, root is username and password
+            //here sonoo is database name, root is username and password
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from CUSTOMERS");
             while (rs.next()) {
@@ -29,7 +29,6 @@ public class Read_Database extends Globals implements AboveGod {
                 customerMap.put(id, customer);
                 LastCustomerId = Integer.parseInt(id);
 
-                System.out.println(id + " " + name + " " + Country + " " + City + " " + Address + " " + Zip + " " + Phone + " " + Email + " " + AFM);
                 //customerMap.put(id,customer);
 
 
@@ -39,11 +38,10 @@ public class Read_Database extends Globals implements AboveGod {
         } catch (Exception e){ System.out.println(e);}
     }
 
-    public void Load_Items() throws ClassNotFoundException, SQLException
-    {
+    public void Load_Items() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
-//here sonoo is database name, root is username and password
+        //here sonoo is database name, root is username and password
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("select * from ITEMS");
         while (rs.next()) {
@@ -57,14 +55,9 @@ public class Read_Database extends Globals implements AboveGod {
 
 
 
-            System.out.println(id+ " " +name+" " +Reccuring+" " +price+" " );
-
-
-
         }
         con.close();
     }
-
 
     public void Load_Domains() throws ClassNotFoundException, SQLException {
 
@@ -86,16 +79,11 @@ public class Read_Database extends Globals implements AboveGod {
 
 
 
-            System.out.println(id+ " " +name+" " +Start_Date+" " +Expiry_Date+" ");
-
-
-
         }
         con.close();
     }
 
-    public void Load_Invoices() throws ClassNotFoundException, SQLException
-    {
+    public void Load_Invoices() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
 
@@ -132,7 +120,6 @@ public class Read_Database extends Globals implements AboveGod {
                 Item temp = new Item(item_id,ItemType,price,discount);
                 temp.SetPayed(isPayed);
                 temp.setPayedDate(paymentDate);
-                System.out.println("Entry = "+" "+id+" "+temp.isPayed()+" "+temp.getType());
                 items.add(temp);
             }
 
@@ -160,15 +147,11 @@ public class Read_Database extends Globals implements AboveGod {
 
             invoice.Calc_Invoice_Price();
             invoice.Calc_Payed_Amount();
-            for (int i = 0;i<invoice.getItems().size();i++)
-            {
-                System.out.println("Item and Status "+invoice.getItems().get(i).getType()+" "+invoice.getItems().get(i).isPayed());
-            }
+
 
             customerMap.get(Integer.toString(Customer_ID)).GetInvoicesList().add(invoice);
 
 
-            System.out.println();
 
 
 
@@ -177,7 +160,6 @@ public class Read_Database extends Globals implements AboveGod {
 
 
     }
-
 
     public void UpdateCustomer(String id) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
@@ -236,7 +218,6 @@ public class Read_Database extends Globals implements AboveGod {
             stmt.executeUpdate("INSERT INTO CUSTOMER_ITEMS VALUES("
                     +UpdatedInvoice.getId() +","+UpdatedInvoice.getItems().get(i).getId()+", \""+UpdatedInvoice.getItems().get(i).getType() + "\" , "+UpdatedInvoice.getItems().get(i).getPrice()
                     +",0"+ ","+ "0"+  ","+" null "+");");
-            System.out.println("ITEM ADDED = "+UpdatedInvoice.getItems().get(i).getType());
         }
 
 
@@ -250,7 +231,6 @@ public class Read_Database extends Globals implements AboveGod {
         Statement stmt = con.createStatement();
         stmt.executeUpdate("INSERT INTO CUSTOMER_ITEMS VALUES("
                 +InvoiceID +","+item.getId()+ " , \""+item.getType()+"\" , " + item.getPrice()+    ","+item.getDiscount()+ ","+ "0"+  "," +" null "+ ");");
-        System.out.println("ITEM ADDED = "+ItemsMap.get(item.getId()).getType());
         con.close();
     }
 
@@ -286,7 +266,6 @@ public class Read_Database extends Globals implements AboveGod {
         stmt.executeUpdate("DELETE FROM CUSTOMER_ITEMS"
                 +" WHERE INVOICE_ID = "+InvoiceID +" AND ITEM_ID = "+ItemId+";");
 
-        System.out.println("ITEM DELETED = "+ItemsMap.get(ItemId).getType());
         con.close();
     }
 
@@ -300,7 +279,6 @@ public class Read_Database extends Globals implements AboveGod {
                 "\'"+PaymentDate + "\'"
                 +" WHERE INVOICE_ID = "+InvoiceID +" AND ITEM_ID = "+ItemId+";");
 
-        System.out.println("ITEM Payed = "+ItemsMap.get(ItemId).getType());
         con.close();
 
 
@@ -339,10 +317,6 @@ public class Read_Database extends Globals implements AboveGod {
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
 
-
-
-
-        System.out.println(id + "name = "+NewName + " " +NewCountry+ " " +NewAddress + " " + NewCity + " " + NewZip + " " + NewPhone + " " + NewEmail + " " + NewAFM+ " " +Group);
         Statement stmt = con.createStatement();
         stmt.executeUpdate("INSERT INTO CUSTOMERS VALUES ("
                 +id
@@ -360,9 +334,7 @@ public class Read_Database extends Globals implements AboveGod {
         con.close();
     }
 
-
-    public void Load_Category() throws ClassNotFoundException, SQLException
-    {
+    public void Load_Category() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
 //here sonoo is database name, root is username and password
@@ -374,9 +346,6 @@ public class Read_Database extends Globals implements AboveGod {
 
             categoryMap.put(Integer.valueOf(id),name);
 
-
-
-            System.out.println("ID :"+id+ "nameeeee : " +name);
 
 
 
@@ -403,9 +372,6 @@ public class Read_Database extends Globals implements AboveGod {
 
 
 
-            System.out.println("Project id : " +id+ " Name :  " +name+" Price :  " +price + " Workforce :  " +workforce );
-
-
 
         }
         con.close();
@@ -429,7 +395,6 @@ public class Read_Database extends Globals implements AboveGod {
 
 
 
-            System.out.println("Worker id : " +id+ " Name :  " +name+" Email :  " +email  );
 
 
 
@@ -459,12 +424,10 @@ public class Read_Database extends Globals implements AboveGod {
 
 
 
-            System.out.println("PROJECT ___Worker id : " + worker_id + " ||  Project id : "+ project_id);
 
         }
         con.close();
     }
-
 
     public void LoadWorkerTasks() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -496,7 +459,6 @@ public class Read_Database extends Globals implements AboveGod {
 
 
 
-            System.out.println("THIS IS THE FINAL Task id : " + task_id+ " name : " + "Project id : " + project_id + " Worker id : "+ worker_id);
 
 
 

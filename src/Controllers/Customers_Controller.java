@@ -77,8 +77,6 @@ public class Customers_Controller implements AboveGod , Initializable  {
         //Create a linker so as to handle the income label from the various methods that change its pricing
         Linker Link = new Linker();
         Link.CreateLink(this.IncomeLabel);
-
-        System.out.println(HostingLabel.getId());
         try {
             reader.Load_Customers();
             reader.Load_Items();
@@ -88,7 +86,6 @@ public class Customers_Controller implements AboveGod , Initializable  {
             for(Map.Entry<String,Customer> entry : customerMap.entrySet())
             {
                 entry.getValue().GetCustomerData();
-                System.out.println();
             }
 
         } catch (ClassNotFoundException e) {
@@ -103,7 +100,6 @@ public class Customers_Controller implements AboveGod , Initializable  {
         for (Map.Entry<String,Customer>entry:customerMap.entrySet()){
 
             entry.getValue().calculatePrice();
-            System.out.println("Customer cost = "+entry.getValue().getPrice());
             try {
 
                 //The main customer data are stored in a HBox component
@@ -204,9 +200,7 @@ public class Customers_Controller implements AboveGod , Initializable  {
             ctrl.SetCustomerVbox(pnItems);
             ctrl.SetEditArea(EditArea);
 
-            System.out.println("Counter before =" + counter);
             setCounter(counter+1);
-            System.out.println("Counter after =" + counter);
 
             EditArea.getChildren().setAll(root);
 

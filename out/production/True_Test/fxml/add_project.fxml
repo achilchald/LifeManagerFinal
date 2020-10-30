@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AddProjectAnchor" prefHeight="671.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.proj_add_Controller">
+<AnchorPane fx:id="AddProjectAnchor" prefHeight="671.0" prefWidth="857.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.proj_add_Controller">
    <children>
       <Label layoutX="14.0" layoutY="30.0" prefWidth="210.0" text="Add New Project">
          <font>

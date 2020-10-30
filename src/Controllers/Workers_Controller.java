@@ -79,10 +79,8 @@ public class Workers_Controller  implements Initializable,AboveGod {
             reader.LoadWorkerTasks();
 
 
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
 
         for (Map.Entry<Integer, Worker> entry : workerMap.entrySet()) {

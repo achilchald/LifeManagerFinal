@@ -79,7 +79,6 @@ public class Customer implements AboveGod{
             }
 
         //Get the invoices of the customer
-        System.out.println("INV SIZE = " + InvoiceTypes.length);
 
         for (int i = 0;i<invoiceTypes.size();i++)
         {
@@ -126,24 +125,7 @@ public class Customer implements AboveGod{
     }
 
     public void GetCustomerData()
-    {
-        System.out.println(getId() + " " + getCountry()+ " "+ getName() + " " + getAddress());
-        for (int i = 0;i<DomainsList.size();i++)
-        {
-            System.out.println(DomainsList.get(i).DisplayDomain());
-        }
-
-        for (int i = 0;i<invoicesList.size();i++)
-        {
-            //System.out.println(invoicesList.get(i).DisplayInvoiceData());
-            System.out.println();
-        }
-
-
-
-
-
-    }
+    {}
 
 
 
@@ -191,7 +173,6 @@ public class Customer implements AboveGod{
         int[] localList = new int[invoiceTypes.size()];
         for (int i = 0; i < temp.length(); i++) {
             localList[i] = temp.charAt(i) - '0';
-//            System.out.println("In local List : "+localList[i]);
         }
 
 
@@ -216,7 +197,6 @@ public class Customer implements AboveGod{
     public void calculatePrice(){
         price = 0;
        for (int i=0;i<invoicesList.size();i++){
-//               System.out.println("" + this.name + "Type : " + invoicesList.get(i).getType() + " , Price : " + invoicesList.get(i).getPrice() + " , Times : ");
 
 
                this.price += invoicesList.get(i).getPrice();

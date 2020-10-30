@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="pnlWorkers" prefHeight="782.0" prefWidth="1241.0" style="-fx-background-color: #253138;" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Workers_Controller">
+<Pane fx:id="pnlWorkers" prefHeight="782.0" prefWidth="1241.0" style="-fx-background-color: #253138;" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.Workers_Controller">
    <children>
       <TextField layoutX="575.0" layoutY="40.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #253138; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
       <Label layoutX="14.0" layoutY="36.0" text="Workers" textFill="#c4dbe9">

@@ -37,7 +37,6 @@ public class ReadFromFile implements AboveGod{
                     Map<String,Date> tempMap=new HashMap<>();
                     if (Customers[1].contains(":")){
                         domainz=Customers[1].split(":");
-                        System.out.println(domainz[1]);
                         dates=Customers[2].split(":");
 
                         for(int j=0;j<domainz.length;j++){
@@ -46,7 +45,6 @@ public class ReadFromFile implements AboveGod{
                     }
                     //if there are no more than 1 domain just add it
                     else{
-                        System.out.println("Date : "+Customers[2]);
                         tempMap.put(Customers[1],Date.valueOf(Customers[2]));
                     }
 
@@ -186,7 +184,6 @@ return customerMap;
                 // use comma as separator
                 Items = line.split(cvsSplitBy);
                 item.add(new Item(Items[0],Float.valueOf(Items[1]),Items[2]));
-                System.out.println("Type : " + Items[0] + " ,Price : " + Items[1]+ " ,Recurring : " + Items[2]);
             }
 
         } catch (FileNotFoundException e) {

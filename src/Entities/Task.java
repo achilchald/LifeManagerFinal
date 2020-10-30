@@ -1,6 +1,9 @@
 package Entities;
 
+import Methods.WriteToDatabase;
+
 import java.sql.Date;
+import java.sql.SQLException;
 
 public class Task {
     int taskid;
@@ -35,6 +38,10 @@ public class Task {
         this.category=category;
     }
 
+    public void assignTo(Worker worker) {
+        this.worker_id=worker.getWorkerid();
+    }
+
     public int getProject_id() {
         return project_id;
     }
@@ -53,5 +60,17 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getWorker_id() {
+        return worker_id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public boolean getStatus() {
+        return status;
     }
 }

@@ -164,8 +164,6 @@ public class FullCalendarView {
     public boolean hasAppointment(LocalDate calendarDate, ArrayList<Appointment> appointments){
         boolean flag = false;
 
-        System.out.println(appointments.get(0).getDate());
-        System.out.println(calendarDate);
 
         for (Appointment appointment : appointments) {
             flag = appointment.getDate().equals(calendarDate.toString());

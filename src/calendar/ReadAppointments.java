@@ -27,7 +27,6 @@ public class ReadAppointments {
                 // use comma as separator
                 Appointments = line.split(cvsSplitBy);
                 appointment.add(new Appointment(Appointments[0],Appointments[1],Appointments[2],Appointments[3],Appointments[4],Appointments[5]));
-                System.out.println("Title : " + Appointments[0] + " ,Date : " + Appointments[1]+ " ,Time : " + Appointments[2] + " ,Attendee : "+Appointments[3] + " ,Notes : "+Appointments[4] + " ,Importance : "+Appointments[5]);
             }
 
         } catch (FileNotFoundException e) {

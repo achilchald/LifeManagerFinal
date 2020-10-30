@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="InvoicePane" prefHeight="642.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Editor">
+<Pane fx:id="InvoicePane" prefHeight="642.0" prefWidth="774.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.Editor">
    <children>
       <AnchorPane fx:id="anchor" prefHeight="642.0" prefWidth="774.0" style="-fx-background-color: #253138;">
          <children>

@@ -11,9 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -41,6 +39,9 @@ public class Edit_Controller implements AboveGod {
 
     @FXML
     private HBox Hbc;
+
+    @FXML
+    private HBox ToDoItem;
 
     @FXML
     private HBox itemC;
@@ -104,8 +105,6 @@ public class Edit_Controller implements AboveGod {
     //So as to be able to be utilised by other controllers
     public void SetPriceLabelId(){
         CustomerPrice.setId(Customerid.getText()+CustomerPrice.getId());
-        System.out.println("Customer id = "+Customerid.getText());
-        System.out.println("Customer Price Label Id = "+CustomerPrice.getId());
         Linker link = new Linker();
         link.CreateLink(CustomerPrice);
 
@@ -147,9 +146,6 @@ public class Edit_Controller implements AboveGod {
 
 
             String id= (((Label) itemC.getChildren().get(4)).getText());
-            System.out.println("Domain  : " +id);
-
-            System.out.println("Id searching for : " + id);
 
 
             //Delete the box
@@ -175,32 +171,31 @@ public class Edit_Controller implements AboveGod {
 
     public void deleteWorker() throws SQLException, ClassNotFoundException {
 
-        VBox ri = (VBox) WorkerItem.getParent();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to delete this worker?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
 
-        String temp = WorkerItem.getId();
+            VBox ri = (VBox) WorkerItem.getParent();
 
-        System.out.println("Temp id = "+temp);
-
-        //Delete the Worker from the map
-
-        //Delete operation
-
-        String id=WorkerItem.getId();
+            String temp = WorkerItem.getId();
 
 
-        System.out.println("Worker Id searching for : " + id);
-//
-        WriteToDatabase deleter=new WriteToDatabase();
+            //Delete the Worker from the map
 
-        deleter.deleteWorker(id);
+            //Delete operation
 
+            String id = WorkerItem.getId();
 
-        //Delete the box
-        ri.getChildren().remove(ri.lookup("#" + temp));
+            WriteToDatabase deleter = new WriteToDatabase();
+
+            deleter.deleteWorker(id);
+
+            //Delete the box
+            ri.getChildren().remove(ri.lookup("#" + temp));
+        }
     }
 
 
-    //todo Na kleinei kai na apo8ikeyei to arxeio
     public void Edit_Project(MouseEvent event) throws IOException, InterruptedException, SQLException, ClassNotFoundException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Edit_Project.fxml"));
@@ -219,39 +214,51 @@ public class Edit_Controller implements AboveGod {
     }
 
 
-    public void Delete_Project(ActionEvent event) throws IOException,  SQLException, ClassNotFoundException {
+    public void Delete_Project(ActionEvent event) throws SQLException, ClassNotFoundException {
 
 
         if (event.getSource() == Del) {
 
-            VBox ri = (VBox) Hbc.getParent();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to delete this project?", ButtonType.YES, ButtonType.NO);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                VBox ri = (VBox) Hbc.getParent();
 
-            String temp = Hbc.getId();
-
-            System.out.println("Temp id = "+temp);
-
-            //Delete the Project Entry
-
-            //Delete operation
-
-            String id = (((Label) Hbc.getChildren().get(5)).getText());
-
-            System.out.println("Project Id searching for : " + id);
-
-            WriteToDatabase deleter=new WriteToDatabase();
-
-            deleter.deleteProject(Integer.valueOf(id));
+                String temp = Hbc.getId();
 
 
+                //Delete the Project Entry
 
-            //Delete the box
-            ri.getChildren().remove(ri.lookup("#" + temp));
+                //Delete operation
+
+                String id = (((Label) Hbc.getChildren().get(5)).getText());
+
+                WriteToDatabase deleter = new WriteToDatabase();
+
+                deleter.deleteProject(Integer.parseInt(id));
+
+
+                //Delete the box
+                ri.getChildren().remove(ri.lookup("#" + temp));
+            }
         }
     }
 
+    public void Edit_Task(MouseEvent event) throws IOException {
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TaskInfo.fxml"));
 
+        Parent root = loader.load();
+        Editor ctrl = loader.getController();
 
+        ctrl.setTaskInfo(ToDoItem);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Task");
+        stage.show();
+
+    }
 
     //todo Na kleinei kai na apo8ikeyei to arxeio
 

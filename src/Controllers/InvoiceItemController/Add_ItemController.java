@@ -51,11 +51,8 @@ public class Add_ItemController implements AboveGod {
         this.cost = Price;
         this.TotalIncome = TotalIncome;
 
-        System.out.println();
-
         for (Map.Entry<String,Item>entry : ItemsMap.entrySet())
         {
-            System.out.println(entry.getValue().getType());
             ItemListBox.getItems().addAll(entry.getValue().getType());
         }
 
@@ -86,7 +83,6 @@ public class Add_ItemController implements AboveGod {
 
         Item temp = new Item(ItemsMap.get(ItemId));
 
-        System.out.println("Item to be added = "+temp.getType());
 
         ItemList.add(temp);
 
@@ -101,7 +97,6 @@ public class Add_ItemController implements AboveGod {
        // ctrl.SetPriceLabels(cost,TotalIncome,Cu);
         ctrl.SetItemList(ItemList);
 
-        System.out.println("Pane id = "+pane.getId());
         pane.setGridLinesVisible(true);
 
         pane.add(new Label(temp.getType()), 0, 0);
@@ -118,7 +113,6 @@ public class Add_ItemController implements AboveGod {
         TotalIncome.setText(String.valueOf( Float.parseFloat(TCost) + temp.getPrice() ) + "$");
 
         Read_Database updater = new Read_Database();
-        System.out.println(InvoiceID + ItemId);
         //updater.UpdateInvoice(InvoiceID,ItemId);
     }
 

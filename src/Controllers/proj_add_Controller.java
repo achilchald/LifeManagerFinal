@@ -219,7 +219,7 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         String selection = taskCombo.getSelectionModel().getSelectedItem();
 
         //gets the id from the name selected in the combobox
-        int id = Integer.valueOf(selection.substring(0, selection.indexOf(".")));
+        int id = Integer.parseInt(selection.substring(0, selection.indexOf(".")));
         System.out.println("Id of worker = " + id);
 
         HBox box = new HBox();
@@ -316,9 +316,6 @@ public class proj_add_Controller  extends Globals implements AboveGod {
     public  void initComboBoxes() {
 
         for (Map.Entry<Integer, Worker> entry2 : workerMap.entrySet()) {
-
-            System.out.println("yo : " + entry2.getValue().getName());
-
             workerscombo.getItems().add(entry2.getKey()+"."+entry2.getValue().getName());
 
         }
@@ -326,7 +323,6 @@ public class proj_add_Controller  extends Globals implements AboveGod {
 
         for (Map.Entry<Integer, String> entry2 :categoryMap.entrySet()) {
 
-            System.out.println("Adding to box :"+entry2.getKey()+"."+entry2.getValue());
             taskCategory.getItems().add(entry2.getKey()+"."+entry2.getValue());
 
         }

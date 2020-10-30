@@ -11,7 +11,6 @@ import java.util.Map;
 public class WriteToDatabase extends Globals implements AboveGod {
 
 
-
     //todo fix Vunerabilities
     public void addWorker(Worker worker) throws ClassNotFoundException, SQLException {
 
@@ -55,11 +54,6 @@ public class WriteToDatabase extends Globals implements AboveGod {
         Statement stmt = con.createStatement();
 
         stmt.executeUpdate("UPDATE Workers " + "Set worker_name = \"" + name + "\",EMAIL = \"" + email + "\" WHERE Worker_id = " + id + ";");
-
-
-
-
-
     }
 
     public void addWorkerToProjectDB(Worker worker,int projectid) throws ClassNotFoundException, SQLException {
@@ -80,9 +74,8 @@ public class WriteToDatabase extends Globals implements AboveGod {
 
 
         stmt.executeUpdate("INSERT INTO tasks VALUES (" + temp.getTaskid() + " ,  \"" + temp.getName() + " \",  \"" + temp.getDescription() + "\" ,  \" " + temp.getTodoDate() + "  \" ,  " + 0 + "  ,  " + temp.getProject_id() + " ,  " + workid+ "  );");
+        lastTaskId=temp.getTaskid();
     }
-
-
 
     public void addProject(Project project) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -111,7 +104,6 @@ public class WriteToDatabase extends Globals implements AboveGod {
         }
 
 
-        //todo add workers and tasks to project
 //        project.getWorkers().get(0).getTasks();
 
         con.close();
@@ -124,9 +116,6 @@ public class WriteToDatabase extends Globals implements AboveGod {
         //here sonoo is database name, root is username and password
         Statement stmt = con.createStatement();
 
-
-
-
         //Deletes the tasks of the project
         stmt.executeUpdate("DELETE FROM casperweb_databse.tasks WHERE Project_ID = "+ projectId +";");
 
@@ -137,11 +126,39 @@ public class WriteToDatabase extends Globals implements AboveGod {
         stmt.executeUpdate("DELETE FROM casperweb_databse.projects WHERE Project_ID = "+ projectId +";");
 
 
-        System.out.println("DELETE FROM casperweb_databse.project WHERE Project_ID = "+ projectId +";");
 
 
 
         con.close();
+    }
+
+    public void deleteWorkerFromProject(String id,int projid) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+        //here sonoo is database name, root is username and password
+        Statement stmt = con.createStatement();
+
+        //todo If there are projects WITH ACTIVE STATUS ask where to put them
+
+        //Delete the workers Tasks
+        stmt.executeUpdate("Delete from casperweb_databse.tasks where Worker_id="+id+ " AND PROJECT_ID = "+projid+";");
+
+        //Deletes the worker from the projects
+        stmt.executeUpdate("Delete from  casperweb_databse.proj_worker_link where Worker_id= "+id+ " AND PROJECT_ID = "+ projid  +";");
+
+    }
+
+    public void reassignTask(int prevWorkerID ,int newWorkerID, int projectID) throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+        //here sonoo is database name, root is username and password
+        Statement stmt = con.createStatement();
+
+        stmt.executeUpdate("UPDATE TASKS " + "Set WORKER_ID = " + newWorkerID + " WHERE PROJECT_ID = " + projectID + " AND WORKER_ID = "+ prevWorkerID + ";");
+
+        stmt.executeUpdate("Update proj_worker_link "+"set worker_id = "+newWorkerID +" Where project_id = "+projectID+" And worker_id = "+prevWorkerID+";");
+
     }
 
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="594.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.InvoiceItemController.AddInvoiceController">
+<AnchorPane prefHeight="594.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.InvoiceItemController.AddInvoiceController">
    <children>
       <TextField fx:id="InvoiceName" layoutX="77.0" layoutY="68.0" text="Name" />
       <DatePicker fx:id="PayDate" layoutX="77.0" layoutY="117.0" prefHeight="25.0" prefWidth="149.0" promptText="Pay Date" />

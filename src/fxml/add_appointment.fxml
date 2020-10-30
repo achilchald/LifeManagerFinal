@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="wholePanel" prefHeight="671.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.appointment_add_Controller">
+<AnchorPane fx:id="wholePanel" prefHeight="671.0" prefWidth="857.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.appointment_add_Controller">
    <children>
       <TextField fx:id="Title" layoutX="105.0" layoutY="178.0" />
       <TextField fx:id="Time" layoutX="105.0" layoutY="234.0" />

@@ -86,7 +86,7 @@ public class Controller implements Initializable {
 
         Pane prj = new Pane();
         try {
-            prj = FXMLLoader.load(getClass().getResource("../fxml/Projects.fxml"));
+            prj = FXMLLoader.load(getClass().getResource("/fxml/Projects.fxml"));
             prj.setId("project");
 
         } catch (IOException e) {

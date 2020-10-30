@@ -2,6 +2,7 @@ package Controllers.InvoiceItemController;
 
 import Entities.*;
 import Methods.Read_Database;
+import com.mysql.cj.util.StringUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,7 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-//import org.apache.commons.lang3.StringUtils;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -97,7 +98,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
 
     private Label cost;
 
-//------Payment Fields-----
+    //------Payment Fields-----
     private Label TotalIncome;
 
     private Label CustomerCost;
@@ -148,10 +149,10 @@ public class InvoiceGuiController extends Globals implements AboveGod {
                 CurrentInvoice = customerMap.get(CustomerId).GetInvoicesList().get(i);
 
                 //Get the list of the invoice payments
-               this.PaymentsList = customerMap.get(CustomerId).GetInvoicesList().get(i).getPayments();
+                this.PaymentsList = customerMap.get(CustomerId).GetInvoicesList().get(i).getPayments();
 
 
-               //Get the list of the invoice items,its type and cost
+                //Get the list of the invoice items,its type and cost
                 this.ItemList = customerMap.get(CustomerId).GetInvoicesList().get(i).getItems();
                 this.InvoiceType = customerMap.get(CustomerId).GetInvoicesList().get(i).getRecurring();
                 this.cost = InvoiceCost;
@@ -162,9 +163,9 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         //Load the invoice items to the GUI
         for (int i = 0; i < ItemList.size(); i++) {
             System.out.println("Item = "+ItemList.get(i).getType()+" "+ItemList.get(i).isPayed());
-               LoadItems(i);
+            LoadItems(i);
             System.out.println("Max id = "+maxId);
-            }
+        }
 
         //Load the invoice payments to the GUI
         for(int i = 0;i<PaymentsList.size();i++)
@@ -261,7 +262,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
 
         //If the item is marked as scaling with the reccurence then calculate its total price
         if(Scaling.isSelected())
-        temp.CalculateReccuringPrice(CurrentInvoice.getRecurring());
+            temp.CalculateReccuringPrice(CurrentInvoice.getType());
 
         System.out.println("Item to be added = "+temp.getType());
 
@@ -325,7 +326,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         //Update the cost of the invoice
         cost.setText(String.valueOf( Float.parseFloat(cost.getText()) + temp.getPrice() ) );
         String TCost = TotalIncome.getText();
-        //TCost = StringUtils.chop(TCost);
+        TCost = TCost.substring(0,TCost.length() - 1);
 
 
         //Update the total income label
@@ -353,43 +354,56 @@ public class InvoiceGuiController extends Globals implements AboveGod {
     //This method is responsible adding a payment to the invoice
     @FXML
     void Pay(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-        //Load the payment template
-        FXMLLoader ItemLoader = new FXMLLoader(getClass().getResource("/fxml/PaymentGrid.fxml"));
-        //Create a payment entity and fill its values from the fields in the GUI
-        Payment NewPayment = new Payment(LastPaymentId++,InvoiceID, Date.valueOf(LocalDate.now()) ,Float.parseFloat(PaymentPrice.getText()),PaymentNote.getText());
+        float NewAmount =  Float.parseFloat(  PaymentPrice.getText()  );
 
-        System.out.println(NewPayment.getPaymentDate());
-        //Create a database reader so as to add the payment to the databse
-        Read_Database payer = new Read_Database();
-        payer.AddPayment(NewPayment);
+        //Check if the payed amount is valid
+        if(NewAmount > CurrentInvoice.getPrice() - CurrentInvoice.getPayedAmount())
+        {
+            System.out.println("Wrong amount ,please enter a valid amount");
+            System.out.println("New Ammount = "+NewAmount + "Invoice Cost = " + CurrentInvoice.getPrice());
+        }
+        else
+        {
+            //Load the payment template
+            FXMLLoader ItemLoader = new FXMLLoader(getClass().getResource("/fxml/PaymentGrid.fxml"));
+            //Create a payment entity and fill its values from the fields in the GUI
+            Payment NewPayment = new Payment(LastPaymentId++,InvoiceID, Date.valueOf(LocalDate.now()) ,NewAmount,PaymentNote.getText());
 
-        GridPane PaymentGrid = ItemLoader.load();
-        //Set the id of the payment to the gridpane
-        PaymentGrid.setId(String.valueOf(LastPaymentId));
+            System.out.println(NewPayment.getPaymentDate());
+            //Create a database reader so as to add the payment to the databse
+            Read_Database payer = new Read_Database();
+            payer.AddPayment(NewPayment);
 
-        PaymentGrid.setGridLinesVisible(true);
+            GridPane PaymentGrid = ItemLoader.load();
+            //Set the id of the payment to the gridpane
+            PaymentGrid.setId(String.valueOf(LastPaymentId));
 
-
-        //Load the services elements into the Gui GridPane
-        PaymentGrid.add(new Label(NewPayment.getPaymentDate().toString()),0,0);
-        PaymentGrid.add(new Label(String.valueOf(NewPayment.getPaymentId())),1,0);
-        PaymentGrid.add(new Label(String.valueOf(NewPayment.getPrice())), 2, 0);
-        PaymentGrid.add(new Label(NewPayment.getNotes()), 3, 0);
-
-        //Update the invoices payed amount label
-        float Payed_Amount = Float.parseFloat(PayedAmount.getText());
-        Payed_Amount = Payed_Amount + NewPayment.getPrice();
-        PayedAmount.setText(String.valueOf(Payed_Amount));
+            PaymentGrid.setGridLinesVisible(true);
 
 
+            //Load the services elements into the Gui GridPane
+            PaymentGrid.add(new Label(NewPayment.getPaymentDate().toString()),0,0);
+            PaymentGrid.add(new Label(String.valueOf(NewPayment.getPaymentId())),1,0);
+            PaymentGrid.add(new Label(String.valueOf(NewPayment.getPrice())), 2, 0);
+            PaymentGrid.add(new Label(NewPayment.getNotes()), 3, 0);
 
-        //Add the payment to the invoice
-        CurrentInvoice.getPayments().add(NewPayment);
-        CurrentInvoice.NewPayedAmount(NewPayment.getPrice());
-        //Start the payment algorithm to determine if the amount payed is enough to mark an item as payed
-        PaymentAlgorithm(NewPayment.getPrice());
-        //Add the payment to the GUI
-        PaymentsBox.getChildren().add(PaymentGrid);
+            //Update the invoices payed amount label
+            float Payed_Amount = Float.parseFloat(PayedAmount.getText());
+            Payed_Amount = Payed_Amount + NewPayment.getPrice();
+            PayedAmount.setText(String.valueOf(Payed_Amount));
+
+
+
+            //Add the payment to the invoice
+            CurrentInvoice.getPayments().add(NewPayment);
+            CurrentInvoice.NewPayedAmount(NewPayment.getPrice());
+            //Start the payment algorithm to determine if the amount payed is enough to mark an item as payed
+            PaymentAlgorithm(NewPayment.getPrice());
+            //Add the payment to the GUI
+            PaymentsBox.getChildren().add(PaymentGrid);
+        }
+
+
     }
 
 
@@ -429,7 +443,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
 
         //if the item is fully payed then mark it
         if(temp.isPayed())
-        pane.setStyle("-fx-background-color:#42f587;");
+            pane.setStyle("-fx-background-color:#42f587;");
 
         //Load the services elements into the Gui GridPane
         pane.add(new Label(temp.getType()),0,0);
@@ -453,7 +467,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         FXMLLoader ItemLoader = new FXMLLoader(getClass().getResource("/fxml/PaymentGrid.fxml"));
 
         //Get the Service
-       Payment payment = PaymentsList.get(i);
+        Payment payment = PaymentsList.get(i);
         System.out.println("payed item = "+payment.getPaymentDate());
 
         //Take the services GridPane
@@ -522,6 +536,11 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         //Set the change to the invoice in the database
         Payer.SetChange(CurrentInvoice);
         System.out.println("Resta = "+temp);
+
+        if(CurrentInvoice.getPayedAmount() == CurrentInvoice.getPrice())
+        {
+            Payer.setInvoiceAsPayed(CurrentInvoice.getId());
+        }
 
     }
 

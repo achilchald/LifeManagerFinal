@@ -3,9 +3,12 @@ package Controllers;
 import Controllers.DomainController.AddDomainController;
 import Controllers.InvoiceItemController.AddInvoiceController;
 import Entities.*;
+import Methods.Database_Deleter;
 import Methods.Read_Database;
 import Methods.WriteFile;
 import Methods.WriteToDatabase;
+import calendar.WriteFileAppointment;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 
 import javax.swing.event.ChangeListener;
 import java.io.IOException;
@@ -115,7 +119,7 @@ public class Editor extends Globals implements AboveGod {
     private TextField AFM;
     //-------------------
 
-//-------   Domains Data --------
+    //-------   Domains Data --------
     @FXML
     public ComboBox<String>  DomList;
 
@@ -139,6 +143,10 @@ public class Editor extends Globals implements AboveGod {
 
     @FXML
     private Pane DomainPane;
+
+    private int DomainId;
+
+    private boolean DeleteFlag = false;
     //-----------------------------------
 
     //Invoice Gui Data
@@ -304,7 +312,6 @@ public class Editor extends Globals implements AboveGod {
     @FXML
     private Button UpdateDomain;
 
-
     @FXML
     private Button AddInvoice;
 
@@ -359,10 +366,16 @@ public class Editor extends Globals implements AboveGod {
 
     Label TotalIncome;
 
+<<<<<<< HEAD
     int strayTasksCounter=0;
     int strayTasksCounterHelp=0;
 
     int flag = 0;
+=======
+    @FXML
+    private Button DeleteDomain;
+
+>>>>>>> faf1d9f8d4b52ff95d3f3a6d0a5b888e94c19265
 
     //-------- Kwstas methods aka a bunch of trash LMFAO -------
     //todo by kwstas
@@ -853,19 +866,11 @@ public class Editor extends Globals implements AboveGod {
         String selection = projectCombo.getSelectionModel().getSelectedItem();
         //gets the id from the name selected in the combobox
         int projectid = Integer.parseInt(selection.substring(0, selection.indexOf(".")));
-
-        int taskid=++lastTaskId;
+        int taskid=projectMap.get(projectid).getWorkers().get(workid).getTasks().size()+1;
 
         //creates the new Task and temporary saves it.
 
         Task temptask=new Task(taskid,name,desc,Date.valueOf(LocalDate.now()),false,projectid,workid);
-
-
-        if(!(projectMap.get(projectid).getWorkers().containsKey(workid))){
-            projectMap.get(projectid).addWorker(workid);
-
-        }
-
         projectMap.get(projectid).getWorkers().get(workid).addTasks(temptask);
 
         ((Label) box.getChildren().get(1)).setText(name);
@@ -931,28 +936,6 @@ public class Editor extends Globals implements AboveGod {
             }
 
         }
-
-
-    }
-
-    public void editWorkerSave() throws SQLException, ClassNotFoundException {
-        String name=NameWorker.getText();
-        String email=EmailWorker.getText();
-
-        String id=(((Label) Hbc.getChildren().get(3)).getText());
-
-        //call the database edit
-
-        WriteToDatabase edit=new WriteToDatabase();
-
-
-
-        Worker temp=new Worker(Integer.parseInt(id),name,email);
-        edit.updateWorker(temp);
-
-        (((Label) Hbc.getChildren().get(1))).setText(name);
-        (((Label) Hbc.getChildren().get(2))).setText(email);
-
 
 
     }
@@ -1032,6 +1015,8 @@ public class Editor extends Globals implements AboveGod {
         }
 
 
+        //Create a linker so as to generate links to labels that will be updated
+        Linker linker = new Linker();
 
         //Set the customer invoices to the FXML Elements coresponding to them
         for (int i = 0;i<customerMap.get(id).GetInvoicesList().size();i++)
@@ -1043,30 +1028,37 @@ public class Editor extends Globals implements AboveGod {
             //Get the invoice from the customer entity
             Invoice temp = customerMap.get(id).GetInvoicesList().get(i);
 
-            //Load the invoice template
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Invoice_Item.fxml"));
 
-            box = loader.load();
+            if(temp.getRecurring().equals("ONCE")) {
+                //Load the invoice template
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Invoice_Item.fxml"));
+
+                box = loader.load();
 
 
+                //Append a controller to the invoice GUI component
+                Invoice_Editing_Controller EditControl = loader.getController();
 
-
-            //Append a controller to the invoice GUI component
-            Invoice_Editing_Controller EditControl = loader.getController();
-
+<<<<<<< HEAD
             //Set to the controller the invoice and customer id's
             EditControl.setCustomerAndInvoiceId(id,temp.getId());
            // EditControl.SetIncomeLabel(this.TotalIncome);
-
-            //Initialize the Hbox that shows the invoice basic data such as price ,expiration date etc
-            ((Label)box.getChildren().get(0)).setText("Invoice#"+temp.getId());
-            ((Label)box.getChildren().get(1)).setText(temp.getBill_Date().toString());
-            ((Label)box.getChildren().get(2)).setText(temp.getPayment_Date().toString());
-            ((Label)box.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
-            ((Label)box.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
-            ((ComboBox)box.getChildren().get(5)).getItems().addAll("Add Payment","Edit","Delete");
+=======
+                System.out.println("Customer id = " + id + "Invoice id = " + temp.getId());
+                //Set to the controller the invoice and customer id's
+                EditControl.setCustomerAndInvoiceId(id, temp.getId());
+>>>>>>> faf1d9f8d4b52ff95d3f3a6d0a5b888e94c19265
 
 
+                //Initialize the Hbox that shows the invoice basic data such as price ,expiration date etc
+                ((Label) box.getChildren().get(0)).setText("Invoice#" + temp.getId());
+                ((Label) box.getChildren().get(1)).setText(temp.getBill_Date().toString());
+                ((Label) box.getChildren().get(2)).setText(temp.getPayment_Date().toString());
+                ((Label) box.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
+                ((Label) box.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
+                ((ComboBox) box.getChildren().get(5)).getItems().addAll("Add Payment", "Edit", "Delete");
+
+<<<<<<< HEAD
             //Add the invoice to a box that coresponds with its type
             if (temp.getType().equals("MONTHLY"))
             {
@@ -1083,9 +1075,34 @@ public class Editor extends Globals implements AboveGod {
                 YearlyBox.getChildren().add(box);
                 EditControl.SetContainer(YearlyBox);
             }
+=======
+
+                //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
+                ((Label) box.getChildren().get(3)).setId(temp.getId() + ((Label) box.getChildren().get(3)).getId());
+                System.out.println("Invoice price label id = " + ((Label) box.getChildren().get(3)).getId());
+                linker.CreateLink(((Label) box.getChildren().get(3)));
 
 
-             //If the invoice is recurring then add it to the recurring panel
+                System.out.println(temp.getRecurring());
+                System.out.println(temp.getType());
+>>>>>>> faf1d9f8d4b52ff95d3f3a6d0a5b888e94c19265
+
+                //Add the invoice to a box that coresponds with its type
+                if (temp.getType().equals("MONTHLY")) {
+                    MonthlyBox.getChildren().add(box);
+                    EditControl.SetContainer(MonthlyBox);
+                }
+                if (temp.getType().equals("ONCE")) {
+                    OneTimeBox.getChildren().add(box);
+                    EditControl.SetContainer(OneTimeBox);
+                }
+                if (temp.getType().equals("YEARLY")) {
+                    YearlyBox.getChildren().add(box);
+                    EditControl.SetContainer(YearlyBox);
+                }
+
+            }
+            //If the invoice is recurring then add it to the recurring panel
             if(!temp.getRecurring().equals("ONCE"))
             {
                 //Load the invoice template
@@ -1108,19 +1125,18 @@ public class Editor extends Globals implements AboveGod {
                 ((Label)RecBox.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
                 ((ComboBox)RecBox.getChildren().get(5)).getItems().addAll("Add Payment","Edit","Delete");
 
+                //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
+                ((Label) RecBox.getChildren().get(3)).setId(temp.getId() + ((Label) RecBox.getChildren().get(3)).getId());
+                System.out.println("Invoice price label id = " + ((Label) RecBox.getChildren().get(3)).getId());
+                linker.CreateLink(((Label) RecBox.getChildren().get(3)));
+
                 //Add the component to the Reccurrence Box
                 CustomBox.getChildren().add(RecBox);
                 EditControlRec.SetContainer(CustomBox);
             }
 
 
-
-
-
         }
-
-
-
 
 
     }
@@ -1130,42 +1146,75 @@ public class Editor extends Globals implements AboveGod {
     @FXML
     void SelectDomain(ActionEvent event) {
 
+<<<<<<< HEAD
 
         //Get the domains invoice ID
          DomainInvoiceId = CustomerDomains.get(DomList.getValue()).getInvoice_Id();
-
-         //Initialize an empty invoice entity for later use
-        Invoice DomainInvoice = null;
-
-        //Get the invoice entity that belongs to this domain
-        for(int i = 0; i<customerMap.get(id).GetInvoicesList().size();i++)
+=======
+        if (event.getSource() == DomList && !DeleteFlag)
         {
-            if (customerMap.get(id).GetInvoicesList().get(i).getId() == DomainInvoiceId)
+            System.out.println(DomList.getValue());
+
+            //Get the domains invoice ID
+            DomainId = CustomerDomains.get(DomList.getValue()).getId();
+            DomainInvoiceId = CustomerDomains.get(DomList.getValue()).getInvoice_Id();
+            System.out.println("Domain invoice id = "+DomainInvoiceId);
+>>>>>>> faf1d9f8d4b52ff95d3f3a6d0a5b888e94c19265
+
+            //Initialize an empty invoice entity for later use
+            Invoice DomainInvoice = null;
+
+            //Get the invoice entity that belongs to this domain
+            for(int i = 0; i<customerMap.get(id).GetInvoicesList().size();i++)
             {
+<<<<<<< HEAD
                 DomainInvoice = customerMap.get(id).GetInvoicesList().get(i);
+=======
+                if (customerMap.get(id).GetInvoicesList().get(i).getId() == DomainInvoiceId)
+                {
+                    DomainInvoice = customerMap.get(id).GetInvoicesList().get(i);
+                    System.out.println(DomainInvoice.getItems().size());
+                }
+>>>>>>> faf1d9f8d4b52ff95d3f3a6d0a5b888e94c19265
             }
-        }
 
 
-        //Set the domain name to the textfield
-        DomName.setText(DomList.getValue());
+            //Set the domain name to the textfield
+            DomName.setText(DomList.getValue());
 
-        //Set the expiration date to the Date Picker field
-        ExpDate.setText(CustomerDomains.get(DomList.getValue()).getExpiry_Date().toString());
+            //Set the expiration date to the Date Picker field
+            ExpDate.setText(CustomerDomains.get(DomList.getValue()).getExpiry_Date().toString());
 
+<<<<<<< HEAD
         //Get the Hosting and Domain types and put show them in the combo box
         for (int i = 0;i<DomainInvoice.getItems().size();i++)
         {
             if(DomainInvoice.getItems().get(i).getType().equals("HOSTING SMALL") || DomainInvoice.getItems().get(i).getType().equals("HOSTING MEDIUM") || DomainInvoice.getItems().get(i).getType().equals("HOSTING BIG"))
+=======
+            //Get the Hosting and Domain types and put show them in the combo box
+            for (int i = 0;i<DomainInvoice.getItems().size();i++)
+>>>>>>> faf1d9f8d4b52ff95d3f3a6d0a5b888e94c19265
             {
-                HostingType.setPromptText(DomainInvoice.getItems().get(i).getType());
-                hostingType = DomainInvoice.getItems().get(i).getType();
+                System.out.println(DomainInvoice.getItems().get(i).getType());
+                if(DomainInvoice.getItems().get(i).getType().equals("HOSTING SMALL") || DomainInvoice.getItems().get(i).getType().equals("HOSTING MEDIUM") || DomainInvoice.getItems().get(i).getType().equals("HOSTING BIG"))
+                {
+                    HostingType.setPromptText(DomainInvoice.getItems().get(i).getType());
+                    hostingType = DomainInvoice.getItems().get(i).getType();
+                }
+                else if(DomainInvoice.getItems().get(i).getType().equals("DOMAIN.GR") || DomainInvoice.getItems().get(i).getType().equals("DOMAIN.COM"))
+                {
+                    DomainType.setPromptText(DomainInvoice.getItems().get(i).getType());
+                    domainType = DomainInvoice.getItems().get(i).getType();
+                }
             }
-            else if(DomainInvoice.getItems().get(i).getType().equals("DOMAIN.GR") || DomainInvoice.getItems().get(i).getType().equals("DOMAIN.COM"))
-            {
-                DomainType.setPromptText(DomainInvoice.getItems().get(i).getType());
-                domainType = DomainInvoice.getItems().get(i).getType();
-            }
+            System.out.println(hostingType);
+            System.out.println(domainType);
+
+        } else if(event.getSource() == DomList && DeleteFlag)
+        {
+            //DomList.setPromptText("Domains");
+            DomList.valueProperty().set(null);
+            DeleteFlag = false;
         }
 
 
@@ -1173,13 +1222,8 @@ public class Editor extends Globals implements AboveGod {
     }
 
 
-
-
-
-
-
     @FXML
-    void pressed(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    void pressed(ActionEvent event) throws IOException,  SQLException, ClassNotFoundException {
         //This part is triggered if the user updates the customers data
         if (event.getSource() == UpdateCustomer)
         {
@@ -1211,8 +1255,6 @@ public class Editor extends Globals implements AboveGod {
             Date ExpiryDate = Date.valueOf(ExpDate.getText());
             String HostType = HostingType.getValue();
             String DomType = DomainType.getValue();
-            int InvoiceId ;
-            int DomainId;
 
             //Create 4 items responsible for updating the invoice in the database and in the customer
             Invoice NewInvoice = null;
@@ -1220,6 +1262,27 @@ public class Editor extends Globals implements AboveGod {
             Item HostingItem = null;
             Item DomainItem= null;
 
+<<<<<<< HEAD
+=======
+            //The price of the invoice before it was changed and the total income and customer cost
+            Linker linker = new Linker();
+            float PreviousPrice = 0 ;
+            Label TotalIncomeLabel = linker.GetLabelLink("IncomeLabel");
+            Label CustomerCostLabel = linker.GetLabelLink(id+"CustomerPrice");
+            String TotalIncomeString = TotalIncomeLabel.getText().substring(0, TotalIncomeLabel.getText().length() - 1);
+            String CustomerIncomeString = CustomerCostLabel.getText().substring(0 ,CustomerCostLabel.getText().length() - 1 );
+            float TotalIncome = Float.parseFloat( TotalIncomeString );
+            float CustomerIncome = Float.parseFloat( CustomerIncomeString );
+            TotalIncome -= CustomerIncome;
+
+
+
+            System.out.println("New Domain Name : " + DomainName);
+            System.out.println("New Hosting Type : " + HostType);
+            System.out.println("New Domain Type : " + DomType);
+
+
+>>>>>>> faf1d9f8d4b52ff95d3f3a6d0a5b888e94c19265
 
 
             //Get the domain from the customer
@@ -1227,11 +1290,11 @@ public class Editor extends Globals implements AboveGod {
             {
                 if(customerMap.get(id).getDomainsList().get(i).getName().equals(DomList.getValue()))
                 {
-                    DomainId = customerMap.get(id).GetInvoicesList().get(i).getId();
                     customerMap.get(id).getDomainsList().get(i).setName(DomainName);
                     //customerMap.get(id).getDomainsList().get(i).setStart_Date(StartDate);
                     customerMap.get(id).getDomainsList().get(i).setExpiry_Date(ExpiryDate);
                     NewDomain = customerMap.get(id).getDomainsList().get(i);
+                    break ;
                 }
             }
 
@@ -1261,16 +1324,31 @@ public class Editor extends Globals implements AboveGod {
                         //Check if a new hosting is added
                         if(customerMap.get(id).GetInvoicesList().get(i).getItems().get(j).getType().equals(hostingType) && HostType != null)
                         {
+                            float Hosting_Price = customerMap.get(id).GetInvoicesList().get(i).getItems().get(j).getPrice();
+                            hostingType = HostType;
+                            CustomerIncome -= Hosting_Price;
+                            CustomerIncome += HostingItem.getPrice();
                             customerMap.get(id).GetInvoicesList().get(i).getItems().remove(j);
                             customerMap.get(id).GetInvoicesList().get(i).getItems().add(HostingItem);
                             NewInvoice = customerMap.get(id).GetInvoicesList().get(i);
+<<<<<<< HEAD
+=======
+                            NewInvoice.RemovePrice(Hosting_Price);
+
+                            System.out.println("HOSTING ADDED");
+>>>>>>> faf1d9f8d4b52ff95d3f3a6d0a5b888e94c19265
                         }
                         //Check if a new domain type is added
-                         if(customerMap.get(id).GetInvoicesList().get(i).getItems().get(j).getType().equals(domainType) && DomType != null)
+                        if(customerMap.get(id).GetInvoicesList().get(i).getItems().get(j).getType().equals(domainType) && DomType != null)
                         {
+                            float Type_Price = customerMap.get(id).GetInvoicesList().get(i).getItems().get(j).getPrice();
+                            domainType = DomType;
+                            CustomerIncome -= Type_Price;
+                            CustomerIncome += DomainItem.getPrice();
                             customerMap.get(id).GetInvoicesList().get(i).getItems().remove(j);
                             customerMap.get(id).GetInvoicesList().get(i).getItems().add(DomainItem);
                             NewInvoice = customerMap.get(id).GetInvoicesList().get(i);
+                            NewInvoice.RemovePrice(Type_Price);
                             System.out.println("DOMAIN TYPE ADDED");
                         }
 
@@ -1278,6 +1356,14 @@ public class Editor extends Globals implements AboveGod {
 
                 }
             }
+
+            //Calculate the new price of the invoice
+            NewInvoice.Calc_Invoice_Price();
+            System.out.println("New Price = " + NewInvoice.getPrice() + "Invoice Label Id = " + linker.GetLabelLink( NewInvoice.getId()+"Price").getId());
+            linker.GetLabelLink( NewInvoice.getId() + "Price").setText( String.valueOf( NewInvoice.getPrice() ) );
+            CustomerCostLabel.setText(String.valueOf(CustomerIncome));
+            TotalIncome +=CustomerIncome;
+            TotalIncomeLabel.setText(String.valueOf(TotalIncome));
 
 
 
@@ -1302,6 +1388,12 @@ public class Editor extends Globals implements AboveGod {
             //Set to the controller the id of the customer so as to add the domain successfully
             ctrl.SetCustomerId(id);
 
+            //Set the Domain Combox so as to update it when a new domain is added
+            ctrl.SetDomainCombox(DomList);
+
+            //Set the containers that contain the invoices
+            ctrl.SetContainers(YearlyBox,CustomBox);
+
 
         }
 
@@ -1325,23 +1417,37 @@ public class Editor extends Globals implements AboveGod {
             stage.show();
         }
 
-        if (event.getSource() == EditB) {
+        if(event.getSource() == DeleteDomain)
+        {
+            DeleteFlag = true;
+            DomList.getItems().remove(DomList.getValue());
+            DomName.setText(null);
+            ExpDate.setText(null);
+            HostingType.setPromptText("Hosting Types");
+            DomainType.setPromptText("Domain Type");
+            Database_Deleter deleter = new Database_Deleter();
+            deleter.Delete_Domain(DomainId,DomainInvoiceId);
 
-            //Create a database reader so as to update the customer values in the database
-            Read_Database DatabaseUpdater = new Read_Database();
+            for(int i = 0; i<customerMap.get(id).getDomainsList().size(); i++)
+            {
+                if(customerMap.get(id).getDomainsList().get(i).getId() == DomainId)
+                {
+                    customerMap.get(id).getDomainsList().remove(i);
+                    break ;
+                }
+            }
 
-            String id = ((Label) Hbc.getChildren().get(5)).getText();
+            for(int i = 0; i<customerMap.get(id).GetInvoicesList().size(); i++)
+            {
+                if(customerMap.get(id).GetInvoicesList().get(i).getId() == DomainInvoiceId)
+                {
+                    customerMap.get(id).GetInvoicesList().remove(i);
+                    break;
+                }
+            }
 
-            //Set to the customer the new values
 
 
-            projectMap.get(Integer.valueOf(id)).setName(NameF.getText());
-            projectMap.get(Integer.valueOf(id)).setDueDate(Date.valueOf(DateF.getText()));
-            projectMap.get(Integer.valueOf(id)).setWorkforce(Integer.parseInt(PriceF.getText()));
-            projectMap.get(Integer.valueOf(id)).setPrice(Float.parseFloat(WorkforceF.getText()));
-
-            //Update the customer in the database
-            DatabaseUpdater.UpdateProject(Integer.valueOf(id));
 
         }
 
@@ -1349,6 +1455,7 @@ public class Editor extends Globals implements AboveGod {
 
     }
 
+<<<<<<< HEAD
     public void setTaskInfo(HBox ToDoItem){
 
         this.Hbc = ToDoItem;
@@ -1375,6 +1482,10 @@ public class Editor extends Globals implements AboveGod {
 
         DescF.setText(String.valueOf(projectMap.get(projID).getWorkers().get(workerID).getTasks().get(projID).get(i).getDescription()));
     }
+=======
+
+
+>>>>>>> faf1d9f8d4b52ff95d3f3a6d0a5b888e94c19265
 
 
 

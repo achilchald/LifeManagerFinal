@@ -3,6 +3,7 @@ package Controllers;
 import Entities.AboveGod;
 import Entities.Customer;
 import Entities.Linker;
+import Methods.Database_Deleter;
 import Methods.WriteFile;
 
 import Methods.WriteToDatabase;
@@ -119,7 +120,7 @@ public class Edit_Controller implements AboveGod {
 
 
         //Load the customer edit GUI
-        FXMLLoader EditLoader = new FXMLLoader(getClass().getResource("../fxml/CustomerInfo.fxml"));
+        FXMLLoader EditLoader = new FXMLLoader(getClass().getResource("/fxml/CustomerInfo.fxml"));
         Parent root = EditLoader.load();
 
 
@@ -139,10 +140,11 @@ public class Edit_Controller implements AboveGod {
 
 
     //todo delete has bugs
-    public void Delete_Customer(ActionEvent event) throws IOException {
+    public void Delete_Customer(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         if (event.getSource() == DelC) {
             VBox ri = (VBox) itemC.getParent();
             String temp = itemC.getId();
+            Database_Deleter deleter = new Database_Deleter();
 
 
             String id= (((Label) itemC.getChildren().get(4)).getText());
@@ -150,6 +152,13 @@ public class Edit_Controller implements AboveGod {
 
             //Delete the box
             ri.getChildren().remove(ri.lookup("#" + temp));
+
+            deleter.Delete_Customer(customerMap.get(Customerid.getText()));
+
+            customerMap.remove(Customerid.getText());
+
+
+
         }
     }
 
@@ -158,7 +167,7 @@ public class Edit_Controller implements AboveGod {
 
     public void Edit_Worker(MouseEvent event) throws  IOException{
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Edit_Worker.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Edit_Worker.fxml"));
 
         Parent root = loader.load();
         Editor ctrl = loader.getController();
@@ -198,7 +207,7 @@ public class Edit_Controller implements AboveGod {
 
     public void Edit_Project(MouseEvent event) throws IOException, InterruptedException, SQLException, ClassNotFoundException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Edit_Project.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Edit_Project.fxml"));
 
         Parent root = loader.load();
         Editor ctrl = loader.getController();

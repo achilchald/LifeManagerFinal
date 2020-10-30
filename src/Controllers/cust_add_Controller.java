@@ -78,6 +78,9 @@ public class cust_add_Controller extends Globals implements AboveGod {
         Read_Database adder = new Read_Database();
         adder.AddCustomer(NewCustomer);
 
+        //Add Customer to customers map
+        customerMap.put(String.valueOf( LastCustomerId ), NewCustomer );
+
         HBox box;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Item.fxml"));

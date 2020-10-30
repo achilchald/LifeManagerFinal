@@ -254,7 +254,7 @@ public class Read_Database extends Globals implements AboveGod {
         stmt.executeUpdate("INSERT INTO INVOICE VALUES("+
         invoice.getId()+" , "+customerid + " , \'" + invoice.getBill_Date() + "\' , \'" +
                 invoice.getPayment_Date() + "\' , \"" + invoice.getType() + "\" , \"" + invoice.getRecurring() +
-                "\"  , "  + invoice.getRepetitions() + " , " + invoice.getCycles() + " , " + invoice.getChangeFromPayment() + " ) ;" );
+                "\"  , "  + invoice.getRepetitions() + " , " + invoice.getCycles() + " , " + invoice.getChangeFromPayment() + " , 0 " + " ) ;" );
         con.close();
     }
 
@@ -491,6 +491,15 @@ public class Read_Database extends Globals implements AboveGod {
     }
 
 
+    public void setInvoiceAsPayed(int InvoiceId) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+
+        Statement stmt = con.createStatement();
+        stmt.executeUpdate("UPDATE INVOICE SET FULLYPAYED = 1 WHERE INVOICE_ID = " + InvoiceId);
+
+        con.close();
+    }
 
 
 }

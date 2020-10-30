@@ -74,8 +74,9 @@
                                           <ComboBox fx:id="HostingType" layoutX="125.0" layoutY="214.0" prefWidth="150.0" promptText="Hosting Type" />
                                           <Label layoutX="42.0" layoutY="259.0" text="Domain Type" textFill="WHITE" />
                                           <ComboBox fx:id="DomainType" layoutX="125.0" layoutY="255.0" prefWidth="150.0" promptText="Domain Type" />
-                                          <Button fx:id="UpdateDomain" layoutX="127.0" layoutY="352.0" mnemonicParsing="false" onAction="#pressed" prefHeight="54.0" prefWidth="111.0" text="Update" />
-                                          <Button fx:id="AddDomain" layoutX="119.0" layoutY="431.0" mnemonicParsing="false" onAction="#pressed" prefHeight="46.0" prefWidth="128.0" text="Add New Domain" />
+                                          <Button fx:id="UpdateDomain" layoutX="168.0" layoutY="302.0" mnemonicParsing="false" onAction="#pressed" prefHeight="38.0" prefWidth="64.0" text="Update" />
+                                          <Button fx:id="AddDomain" layoutX="510.0" layoutY="32.0" mnemonicParsing="false" onAction="#pressed" prefHeight="46.0" prefWidth="128.0" text="Add New Domain" />
+                                          <Button fx:id="DeleteDomain" layoutX="149.0" layoutY="366.0" mnemonicParsing="false" onAction="#pressed" prefHeight="35.0" prefWidth="102.0" text="Delete Domain" />
                                        </children>
                                     </AnchorPane>
                                     <TextField fx:id="ExpDate" layoutX="126.0" layoutY="180.0" />

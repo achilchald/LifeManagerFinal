@@ -1,16 +1,18 @@
 package Controllers.DomainController;
+import Controllers.Invoice_Editing_Controller;
 import Entities.*;
 import Methods.Read_Database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -52,6 +54,11 @@ public class AddDomainController extends Globals implements Initializable, Above
 
     private Map<String,Domain> CustomerDomains;
 
+    private  ComboBox<String> DomainComboBox;
+
+    private VBox YearlyBox;
+
+    private VBox RecurringBox;
 
 
 
@@ -59,9 +66,21 @@ public class AddDomainController extends Globals implements Initializable, Above
 //todo Refresh invoices and domains combobox on info
     //This is triggered if the user hits the add domain button in the gui
     @FXML
-    void pressed(ActionEvent event) throws SQLException, ClassNotFoundException {
+    void pressed(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
         if (event.getSource() == AddDomain)
         {
+
+            //Get the Pricing labels of thee customer and the main GUI so as to update them
+            Linker linker = new Linker();
+            Label TotalIncomeLabel = linker.GetLabelLink("IncomeLabel");
+            Label CustomerCostLabel = linker.GetLabelLink(CustomerId+"CustomerPrice");
+            String TotalIncomeString = TotalIncomeLabel.getText().substring(0, TotalIncomeLabel.getText().length() - 1 );
+            String CustomerIncomeString = CustomerCostLabel.getText().substring(0 ,CustomerCostLabel.getText().length() - 1 );
+            float TotalIncome = Float.parseFloat( TotalIncomeString );
+            float CustomerIncome = Float.parseFloat( CustomerIncomeString );
+
+
+
             //Create a database reader so as to add the new domain to the customer in the database
             Read_Database AddDomain = new Read_Database();
 
@@ -110,6 +129,22 @@ public class AddDomainController extends Globals implements Initializable, Above
             }
 
             AddDomain.AddDomain(CustomerId,NewDomain);
+
+            //Update the Total income and Customer income labels
+            TotalIncome += NewInvoice.getPrice();
+            CustomerIncome += NewInvoice.getPrice();
+
+            TotalIncomeLabel.setText( String.valueOf( TotalIncome ) );
+            CustomerCostLabel.setText( String.valueOf( CustomerIncome ) );
+
+            //Add the new Domain to the Domains Combo Box
+            DomainComboBox.getItems().add(NewDomain.getName());
+
+            //Add the invoice to the Recurring and Yearly Boxes
+            Add_Invoice_to_VBox(YearlyBox,RecurringBox,NewInvoice);
+
+
+
         }
 
     }
@@ -134,4 +169,127 @@ public class AddDomainController extends Globals implements Initializable, Above
     {
         this.CustomerDomains = CustomerDomains;
     }
+
+    //Set the Customers Domain ComboBox
+    public void SetDomainCombox (ComboBox<String> DomainsComboBox)
+    {
+        this.DomainComboBox = DomainsComboBox;
+    }
+
+    //Method responsible for knowing the cointainers to add the invoice to
+    public void SetContainers(VBox YearlyBox , VBox ReccuringBox)
+    {
+        this.YearlyBox = YearlyBox;
+        this.RecurringBox = ReccuringBox;
+    }
+
+
+    //Method responsible for adding the invoice to the VBoxes
+    public void Add_Invoice_to_VBox(VBox YearlyBox , VBox ReccuringBox , Invoice temp) throws IOException {
+
+        //Two boxes,one holds the items by its type(yearly,monthly etc)
+        //the other is added if the items is reccuring
+        HBox box,RecBox;
+
+        //Get the invoice from the customer entity
+
+
+        //Load the invoice template
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Invoice_Item.fxml"));
+//
+//        box = loader.load();
+//
+//        //Linker to get the price label
+//        Linker linker = new Linker();
+//
+//
+//
+//        //Append a controller to the invoice GUI component
+//        Invoice_Editing_Controller EditControl = loader.getController();
+//
+//        System.out.println("Customer id = "+CustomerId+"Invoice id = "+temp.getId());
+//        //Set to the controller the invoice and customer id's
+//        EditControl.setCustomerAndInvoiceId(CustomerId,temp.getId());
+//
+//
+//        //Initialize the Hbox that shows the invoice basic data such as price ,expiration date etc
+//        ((Label)box.getChildren().get(0)).setText("Invoice#"+temp.getId());
+//        ((Label)box.getChildren().get(1)).setText(temp.getBill_Date().toString());
+//        ((Label)box.getChildren().get(2)).setText(temp.getPayment_Date().toString());
+//        ((Label)box.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
+//        ((Label)box.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
+//        ((ComboBox)box.getChildren().get(5)).getItems().addAll("Add Payment","Edit","Delete");
+//
+//
+//        //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
+//        ((Label)box.getChildren().get(3)).setId(temp.getId() + ((Label)box.getChildren().get(3)).getId());
+//        System.out.println("Invoice price label id = "+ ((Label)box.getChildren().get(3)).getId());
+//        linker.CreateLink( ( (Label)box.getChildren().get(3) ) );
+//
+//
+//
+//
+//        System.out.println(temp.getRecurring());
+//        System.out.println(temp.getType());
+//
+//
+//        //Add the invoice to the Yearly box since its a domain invoice
+//        EditControl.SetContainer(YearlyBox);
+//
+//        //Add to Yearly Box
+//        YearlyBox.getChildren().add(box);
+
+
+
+
+
+            //Add to Recurring Box
+
+        Linker linker = new Linker();
+            //Load the invoice template
+            FXMLLoader loaderRec = new FXMLLoader(getClass().getResource("/fxml/Invoice_Item.fxml"));
+
+            RecBox = loaderRec.load();
+
+            //Append a controller to the invoice component
+            Invoice_Editing_Controller EditControlRec = loaderRec.getController();
+
+            System.out.println("Reccurence type = "+temp.getRecurring());
+
+            //Set customer and invoice id's to the controller
+            EditControlRec.setCustomerAndInvoiceId(CustomerId,temp.getId());
+           // EditControlRec.SetIncomeLabel(this.TotalIncome);
+
+            //Initialize the Hbox values
+            ((Label)RecBox.getChildren().get(0)).setText("Invoice#"+temp.getId());
+            ((Label)RecBox.getChildren().get(1)).setText(temp.getBill_Date().toString());
+            ((Label)RecBox.getChildren().get(2)).setText(temp.getPayment_Date().toString());
+            ((Label)RecBox.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
+            ((Label)RecBox.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
+            ((ComboBox)RecBox.getChildren().get(5)).getItems().addAll("Add Payment","Edit","Delete");
+
+        //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
+        ((Label) RecBox.getChildren().get(3)).setId(temp.getId() + ((Label) RecBox.getChildren().get(3)).getId());
+        System.out.println("Invoice price label id = " + ((Label) RecBox.getChildren().get(3)).getId());
+        linker.CreateLink(((Label) RecBox.getChildren().get(3)));
+
+            //Add the component to the Reccurrence Box
+            ReccuringBox.getChildren().add(RecBox);
+            EditControlRec.SetContainer(ReccuringBox);
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
 }

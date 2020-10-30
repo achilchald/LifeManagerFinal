@@ -5,6 +5,7 @@ import Entities.AboveGod;
 import Entities.Customer;
 import Entities.Linker;
 import Methods.Database_Deleter;
+import com.mysql.cj.util.StringUtils;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -90,8 +91,9 @@ private Pane pnlCustomers;
         //This is triggered if the user selects the edit option in the Invoice HBox
         if(Options_Box.getValue().equals("Edit"))
         {
+            //Options_Box.getSelectionModel().clearSelection();
             //Load the Invoice summary GUI panel
-            FXMLLoader LoadEditGui = new FXMLLoader(getClass().getResource("../fxml/Invoice_Summary.fxml"));
+            FXMLLoader LoadEditGui = new FXMLLoader(getClass().getResource("/fxml/Invoice_Summary.fxml"));
             Parent root = LoadEditGui.load();
             //Append a controller to the panel so as to apply any changes made
             InvoiceGuiController GuiControll = LoadEditGui.getController();
@@ -118,7 +120,9 @@ private Pane pnlCustomers;
             Linker link = new Linker();
 
             //Get the values of the customer price label and total income label
-            //float TotalCost = Float.parseFloat(StringUtils.chop(link.GetLabelLink("IncomeLabel").getText()));
+            String Tcost = link.GetLabelLink("IncomeLabel").getText();
+            Tcost = Tcost.substring(0 , Tcost.length() - 1);
+            float TotalCost = Float.parseFloat(Tcost);
             float CustomerCost = Float.parseFloat(link.GetLabelLink(CustomerId+"CustomerPrice").getText());
 
 
@@ -127,10 +131,10 @@ private Pane pnlCustomers;
             {
                 if(customerMap.get(CustomerId).GetInvoicesList().get(i).getId() == InvoiceId)
                 {
-                    //TotalCost = TotalCost - customerMap.get(CustomerId).GetInvoicesList().get(i).getPrice();
+                    TotalCost = TotalCost - customerMap.get(CustomerId).GetInvoicesList().get(i).getPrice();
                     CustomerCost = CustomerCost - customerMap.get(CustomerId).GetInvoicesList().get(i).getPrice();
 
-                    //link.GetLabelLink("IncomeLabel").setText(String.valueOf(TotalCost));
+                    link.GetLabelLink("IncomeLabel").setText(String.valueOf(TotalCost));
                     link.GetLabelLink(CustomerId+"CustomerPrice").setText(String.valueOf(CustomerCost));
 
                     customerMap.get(CustomerId).GetInvoicesList().remove(i);

@@ -74,6 +74,8 @@ public class Customers_Controller implements AboveGod , Initializable  {
         //Create a database reader to load the Customer Data from the sql database
         Read_Database reader = new Read_Database();
 
+        IncomeLabel.setText("0");
+
         //Create a linker so as to handle the income label from the various methods that change its pricing
         Linker Link = new Linker();
         Link.CreateLink(this.IncomeLabel);
@@ -106,7 +108,7 @@ public class Customers_Controller implements AboveGod , Initializable  {
                 HBox box;
 
                 //Load the fxml template for the customer data
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Item.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Item.fxml"));
 
                 box = loader.load();
 
@@ -189,7 +191,7 @@ public class Customers_Controller implements AboveGod , Initializable  {
         {
 
             //Load the Gui elements
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/add_customer.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add_customer.fxml"));
 
             Parent root = loader.load();
 

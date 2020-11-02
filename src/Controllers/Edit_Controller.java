@@ -3,6 +3,7 @@ package Controllers;
 import Entities.AboveGod;
 import Entities.Customer;
 import Entities.Linker;
+import Entities.Task;
 import Methods.Database_Deleter;
 import Methods.WriteFile;
 
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
 import javax.xml.transform.Source;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /*
 This Controller is responsible for for the Customer HBox gui element
@@ -94,6 +96,8 @@ public class Edit_Controller implements AboveGod {
 
     @FXML
     private HBox HBoxToDo;
+
+
 
 
     //-----------------------------
@@ -269,6 +273,49 @@ public class Edit_Controller implements AboveGod {
 
     }
 
-    //todo Na kleinei kai na apo8ikeyei to arxeio
+    @FXML
+    public void DeleteTask() throws SQLException, ClassNotFoundException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to delete this task?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
+
+            VBox ri = (VBox) ToDoItem.getParent();
+
+            String temp = ToDoItem.getId();
+
+            int WorkerId = Integer.parseInt(((Label) ToDoItem.getChildren().get(5)).getText());
+
+            int ProjectId = Integer.parseInt(((Label) ToDoItem.getChildren().get(7)).getText());
+
+            int IndexOfTask =  Integer.parseInt(((Label) ToDoItem.getChildren().get(6)).getText());
+
+           
+
+
+            projectMap.get(ProjectId).getWorkers().get(WorkerId).getTasks().get(ProjectId).remove(IndexOfTask);
+
+
+
+
+
+
+
+            //Delete the Worker from the map
+
+            //Delete operation
+
+            String id = ToDoItem.getId();
+
+            Database_Deleter deleter = new Database_Deleter();
+
+            deleter.Delete_Task(Integer.parseInt(id));
+
+            //Delete the box
+            ri.getChildren().remove(ri.lookup("#" + temp));
+        }
+
+    }
+
+
 
 }

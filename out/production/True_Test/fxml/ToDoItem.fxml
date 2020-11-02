@@ -25,7 +25,7 @@
       </Label>
       <Label fx:id="projectId" prefHeight="17.0" prefWidth="71.0" text="ProjectId" textFill="WHITE" />
       <Label text="Descritpion" textFill="WHITE" />
-      <Button fx:id="DeleteToDo" mnemonicParsing="false" prefHeight="25.0" prefWidth="0.0" text="Delete" />
+      <Button fx:id="DeleteToDo" mnemonicParsing="false" onAction="#DeleteTask" prefHeight="25.0" prefWidth="74.0" text="Delete" />
       <Label fx:id="TaskWorkerID" opacity="0.0" text="Label" />
       <Label fx:id="index" opacity="0.0" text="Label" />
       <Label fx:id="taskProjectID" opacity="0.0" text="Label" />

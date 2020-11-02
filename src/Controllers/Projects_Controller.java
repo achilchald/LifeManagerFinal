@@ -1,8 +1,6 @@
 package Controllers;
 
-import Entities.AboveGod;
-import Entities.Globals;
-import Entities.Project;
+import Entities.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,7 +11,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import Entities.Worker;
 import Methods.Read_Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -103,6 +100,9 @@ public class Projects_Controller  extends Globals implements Initializable ,Abov
         catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        //Linker for the labels
+        Linker linker = new Linker();
 
         for (Map.Entry<Integer, Project>entry:projectMap.entrySet()){
             entry.getValue().truesetWorkforce();

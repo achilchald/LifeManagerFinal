@@ -97,6 +97,13 @@ public class Edit_Controller implements AboveGod {
     @FXML
     private HBox HBoxToDo;
 
+    private Label completed;
+
+    private Label notCompleted;
+
+    private ProgressBar bar;
+
+    private Label progressLabel;
 
 
 
@@ -270,6 +277,74 @@ public class Edit_Controller implements AboveGod {
         stage.setScene(new Scene(root));
         stage.setTitle("Task");
         stage.show();
+
+    }
+
+    public void setLabel(Label completed,Label notCompleted,ProgressBar bar,Label progress){
+
+        this.completed = completed;
+
+        this.notCompleted = notCompleted;
+
+        this.bar=bar;
+
+        this.progressLabel=progress;
+
+
+    }
+
+    public void setStatus() throws SQLException, ClassNotFoundException {
+        int ProjectId = Integer.parseInt(((Label) ToDoItem.getChildren().get(7)).getText());
+        int WorkerId = Integer.parseInt(((Label) ToDoItem.getChildren().get(5)).getText());
+        int IndexOfTask =  Integer.parseInt(((Label) ToDoItem.getChildren().get(6)).getText());
+        int taskId= Integer.parseInt(ToDoItem.getId());
+
+
+        projectMap.get(ProjectId).getWorkers().get(WorkerId).getTasks().get(ProjectId).get(IndexOfTask).changeStatus();
+
+        boolean status=projectMap.get(ProjectId).getWorkers().get(WorkerId).getTasks().get(ProjectId).get(IndexOfTask).getStatus();
+
+        int completed_tasks= Integer.parseInt(completed.getText());
+        int pending_tasks= Integer.parseInt(notCompleted.getText());
+        double total=completed_tasks+pending_tasks;
+
+        if (status) {
+            ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #34eb37; ");//set to green
+
+
+            completed_tasks++;
+            pending_tasks--;
+
+            completed.setText(String.valueOf(completed_tasks));
+            notCompleted.setText(String.valueOf(pending_tasks));
+
+            double progress=completed_tasks/total;
+
+            bar.setProgress(progress);
+
+            progressLabel.setText(String.valueOf(Math.round(progress*100)));
+
+
+
+
+        }
+        else {
+            ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #000000; ");
+            completed_tasks--;
+            pending_tasks++;
+
+            completed.setText(String.valueOf(completed_tasks));
+            notCompleted.setText(String.valueOf(pending_tasks));
+
+            double progress=completed_tasks/total;
+
+            bar.setProgress(progress);
+
+            progressLabel.setText(String.valueOf(progress*100));
+        }
+        System.out.println("Task id= "+taskId);
+        WriteToDatabase wr = new WriteToDatabase();
+        wr.changeTaskStatus(status,taskId);
 
     }
 

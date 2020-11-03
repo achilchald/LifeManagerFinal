@@ -39,6 +39,8 @@ It calls other controllers, each one responsible for doing different things to t
  */
 public class Editor extends Globals implements AboveGod {
 
+    @FXML
+    private Label progressLabel;
 
     @FXML
     private TextField PriceF;
@@ -188,6 +190,12 @@ public class Editor extends Globals implements AboveGod {
     @FXML
     private Label projectIdLabel;
 
+    @FXML
+    private Label pendingTasksLabel;
+
+    @FXML
+    private Label completedTasksLabel;
+
 
     @FXML
     private TextField DomainC;
@@ -298,6 +306,9 @@ public class Editor extends Globals implements AboveGod {
     private Label idLabel;
 
     @FXML
+    private ProgressBar progressBar;
+
+    @FXML
     private ComboBox<String>workerComboProject;
 
     @FXML
@@ -357,6 +368,8 @@ public class Editor extends Globals implements AboveGod {
 
 
 
+
+
     //Helper Variables
     private String importance = "";
 
@@ -389,6 +402,9 @@ public class Editor extends Globals implements AboveGod {
         DateF.setText(((Label) Hbc.getChildren().get(2)).getText());
         WorkforceF.setText(((Label) Hbc.getChildren().get(3)).getText());
         PriceF.setText(((Label) Hbc.getChildren().get(4)).getText());
+        int completedTasks=0;
+        int notCompletedTask=0;
+
 
 
         String projectid = ((Label) Hbc.getChildren().get(5)).getText();
@@ -443,7 +459,11 @@ public class Editor extends Globals implements AboveGod {
                         //box for to do
                         HBox box2;
 
-                        box2 = FXMLLoader.load(getClass().getResource("../fxml/ToDoItem.fxml"));
+                        FXMLLoader loader=new FXMLLoader(getClass().getResource("../fxml/ToDoItem.fxml"));
+
+
+
+                        box2 = loader.load();
                         ((Label) box2.getChildren().get(1)).setText(temp.get(i).getName());
                         ((Label) box2.getChildren().get(2)).setText(String.valueOf(entry.getValue().getName()));
                         ((Label) box2.getChildren().get(3)).setText(temp.get(i).getDescription());
@@ -451,9 +471,28 @@ public class Editor extends Globals implements AboveGod {
                         ((Label) box2.getChildren().get(6)).setText(String.valueOf(i));
                         ((Label) box2.getChildren().get(7)).setText(projectid);
 
+                        boolean status=projectMap.get(Integer.parseInt(projectid)).getWorkers().get(temp.get(i).getWorker_id()).getTasks().get(Integer.parseInt(projectid)).get(i).getStatus();
+                        if (status) {
+                            box2.getChildren().get(8).setStyle("-fx-background-color: #34eb37; ");//set to green
+                            completedTasks++;
+                        }
+                        else {
+                            box2.getChildren().get(8).setStyle("-fx-background-color: #000000; ");//set to black
+                            notCompletedTask++;
+                        }
+
+                        Edit_Controller ctrl=loader.getController();
+
+                        ctrl.setLabel(completedTasksLabel,pendingTasksLabel,progressBar,progressLabel);
+
                         box2.setId(String.valueOf(temp.get(i).getTaskid()));
                         ProjectToDoPanel.getChildren().add(box2);
+
+
                     }
+
+
+
                 }
             }
 
@@ -492,6 +531,27 @@ public class Editor extends Globals implements AboveGod {
                 ProjectWorkersPanel.getChildren().add(boxAvailable);
             }
         }
+
+        //Sets the Data Labels
+        completedTasksLabel.setText(String.valueOf(completedTasks));
+        pendingTasksLabel.setText(String.valueOf(notCompletedTask));
+
+
+        int total_tasks=completedTasks+notCompletedTask;
+
+        double colmple=completedTasks;
+        double nocomple=notCompletedTask;
+
+        double progress = (double) colmple/(double)total_tasks;
+
+        System.out.println("Progress = "+progress);
+
+        progressBar.setProgress(progress);
+
+        progressBar.setStyle("-fx-background-color: green;");
+
+        progressLabel.setText(String.valueOf(Math.round(progress*100)));
+
     }
 
     public void setToDoBox(VBox box){
@@ -756,6 +816,21 @@ public class Editor extends Globals implements AboveGod {
         WriteToDatabase wr=new WriteToDatabase();
         wr.addTaskToProjectDB(temp,id);
 
+        int pend= Integer.parseInt(pendingTasksLabel.getText());
+
+        pend++;
+
+        pendingTasksLabel.setText(String.valueOf(pend));
+
+        int completed_tasks= Integer.parseInt(completedTasksLabel.getText());
+        int pending_tasks= Integer.parseInt(pendingTasksLabel.getText());
+        double total=completed_tasks+pending_tasks;
+
+        double progress=completed_tasks/total;
+
+        progressBar.setProgress(progress);
+
+        progressLabel.setText(String.valueOf(Math.round(progress*100)));
 
         //close the window
         Stage stage = (Stage)nametaskpr.getScene().getWindow();

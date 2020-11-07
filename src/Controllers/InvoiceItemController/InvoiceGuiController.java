@@ -2,7 +2,6 @@ package Controllers.InvoiceItemController;
 
 import Entities.*;
 import Methods.Read_Database;
-import com.mysql.cj.util.StringUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

@@ -447,20 +447,12 @@ public class Read_Database extends Globals implements AboveGod {
 
             Task task=new Task(task_id,taskname,taskDesc,deadline,status,project_id,worker_id);
 
-
-
-
             //
             //adds every task to its corresponding worker
             lastTaskId=task_id;
             workerMap.get(worker_id).addTasks(task);
 
             //projectMap.get(project_id).getWorkers().get(worker_id).addTasks(task);
-
-
-
-
-
 
         }
         con.close();
@@ -490,7 +482,6 @@ public class Read_Database extends Globals implements AboveGod {
 
     }
 
-
     public void setInvoiceAsPayed(int InvoiceId) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
@@ -499,6 +490,20 @@ public class Read_Database extends Globals implements AboveGod {
         stmt.executeUpdate("UPDATE INVOICE SET FULLYPAYED = 1 WHERE INVOICE_ID = " + InvoiceId);
 
         con.close();
+    }
+
+    public int totalTasks() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM TASKS;");
+
+        rs.next();
+        int total = rs.getInt(1);
+        con.close();
+
+        return total;
+
     }
 
 

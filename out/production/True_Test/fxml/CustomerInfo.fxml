@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -12,183 +11,180 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="821.0" prefWidth="1328.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.Editor">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="819.0" prefWidth="1327.0">
-         <children>
-            <Label layoutX="37.0" layoutY="25.0" prefHeight="40.0" prefWidth="194.0" text="Customer Info">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-            <TabPane layoutX="21.0" layoutY="118.0" prefHeight="658.0" prefWidth="1249.0" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab text="Personal Info">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="819.0" prefWidth="1327.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Editor">
+   <children>
+      <Label layoutX="37.0" layoutY="25.0" prefHeight="40.0" prefWidth="194.0" text="Customer Info">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TabPane layoutX="21.0" layoutY="118.0" prefHeight="658.0" prefWidth="611.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Personal Info">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane fx:id="megaPane" prefHeight="618.0" prefWidth="594.0">
                            <children>
-                              <Pane fx:id="megaPane" prefHeight="563.0" prefWidth="1227.0">
-                                 <children>
-                                    <AnchorPane fx:id="anchor" prefHeight="556.0" prefWidth="1229.0" style="-fx-background-color: #253138;" />
-                                    <TextField fx:id="NameC" layoutX="116.0" layoutY="89.0" />
-                                    <TextField fx:id="ZIP" layoutX="116.0" layoutY="250.0" />
-                                    <TextField fx:id="Country" layoutX="116.0" layoutY="130.0" />
-                                    <TextField fx:id="Address" layoutX="116.0" layoutY="210.0" />
-                                    <TextField fx:id="City" layoutX="116.0" layoutY="170.0" />
-                                    <TextField fx:id="Phone" layoutX="116.0" layoutY="290.0" />
-                                    <TextField fx:id="Email" layoutX="116.0" layoutY="330.0" />
-                                    <TextField fx:id="AFM" layoutX="116.0" layoutY="370.0" />
-                                    <Label layoutX="58.0" layoutY="90.0" text="Name" textFill="WHITE" />
-                                    <Button fx:id="UpdateCustomer" layoutX="154.0" layoutY="422.0" mnemonicParsing="false" onAction="#pressed" prefHeight="54.0" prefWidth="111.0" text="Update" />
-                                    <Label layoutX="58.0" layoutY="130.0" text="Country" textFill="WHITE" />
-                                    <Label layoutX="58.0" layoutY="170.0" text="City" textFill="WHITE" />
-                                    <Label layoutX="58.0" layoutY="210.0" text="Address" textFill="WHITE" />
-                                    <Label layoutX="58.0" layoutY="250.0" text="ZIP" textFill="WHITE" />
-                                    <Label layoutX="58.0" layoutY="290.0" text="Phone" textFill="WHITE" />
-                                    <Label layoutX="58.0" layoutY="330.0" text="Email" textFill="WHITE" />
-                                    <Label layoutX="58.0" layoutY="370.0" text="AFM" textFill="WHITE" />
-                                    <Label text="Edit Customer" textFill="WHITE">
-                                       <font>
-                                          <Font size="22.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </Pane>
+                              <AnchorPane fx:id="anchor" prefHeight="496.0" prefWidth="353.0" />
+                              <TextField fx:id="NameC" layoutX="116.0" layoutY="89.0" />
+                              <TextField fx:id="ZIP" layoutX="116.0" layoutY="250.0" />
+                              <TextField fx:id="Country" layoutX="116.0" layoutY="130.0" />
+                              <TextField fx:id="Address" layoutX="116.0" layoutY="210.0" />
+                              <TextField fx:id="City" layoutX="116.0" layoutY="170.0" />
+                              <TextField fx:id="Phone" layoutX="116.0" layoutY="290.0" />
+                              <TextField fx:id="Email" layoutX="116.0" layoutY="330.0" />
+                              <TextField fx:id="AFM" layoutX="116.0" layoutY="370.0" />
+                              <Label layoutX="58.0" layoutY="90.0" text="Name" />
+                              <Button fx:id="UpdateCustomer" layoutX="154.0" layoutY="422.0" mnemonicParsing="false" onAction="#pressed" prefHeight="54.0" prefWidth="111.0" text="Update" />
+                              <Label layoutX="58.0" layoutY="130.0" text="Country" />
+                              <Label layoutX="58.0" layoutY="170.0" text="City" />
+                              <Label layoutX="58.0" layoutY="210.0" text="Address" />
+                              <Label layoutX="58.0" layoutY="250.0" text="ZIP" />
+                              <Label layoutX="58.0" layoutY="290.0" text="Phone" />
+                              <Label layoutX="58.0" layoutY="330.0" text="Email" />
+                              <Label layoutX="58.0" layoutY="370.0" text="AFM" />
+                              <Label text="Edit Customer">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
                            </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="Domains">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Domains">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane fx:id="DomainPane" prefHeight="597.0" prefWidth="535.0">
                            <children>
-                              <Pane fx:id="DomainPane" prefHeight="642.0" prefWidth="661.0">
+                              <AnchorPane fx:id="anchor1" prefHeight="479.0" prefWidth="404.0">
                                  <children>
-                                    <AnchorPane fx:id="anchor1" prefHeight="642.0" prefWidth="661.0" style="-fx-background-color: #253138;">
+                                    <ComboBox fx:id="DomList" layoutX="125.0" layoutY="97.0" onAction="#SelectDomain" prefWidth="150.0" promptText="Domains" />
+                                    <Label layoutX="30.0" layoutY="138.0" text="Domain Name" />
+                                    <TextField fx:id="DomName" layoutX="125.0" layoutY="135.0" />
+                                    <Label layoutX="30.0" layoutY="180.0" text="Expiration Date" />
+                                    <Label layoutX="30.0" layoutY="218.0" text="Hosting Type" />
+                                    <ComboBox fx:id="HostingType" layoutX="125.0" layoutY="217.0" prefWidth="150.0" promptText="Hosting Type" />
+                                    <Label layoutX="30.0" layoutY="259.0" text="Domain Type" />
+                                    <ComboBox fx:id="DomainType" layoutX="125.0" layoutY="255.0" prefWidth="150.0" promptText="Domain Type" />
+                                    <Button fx:id="UpdateDomain" layoutX="210.0" layoutY="302.0" mnemonicParsing="false" onAction="#pressed" prefHeight="38.0" prefWidth="64.0" text="Update" />
+                                    <Button fx:id="AddDomain" layoutX="157.0" layoutY="361.0" mnemonicParsing="false" onAction="#pressed" prefHeight="56.0" prefWidth="123.0" text="Add New Domain" />
+                                    <Button fx:id="DeleteDomain" layoutX="29.0" layoutY="362.0" mnemonicParsing="false" onAction="#pressed" prefHeight="55.0" prefWidth="110.0" text="Delete Domain" />
+                                 </children>
+                              </AnchorPane>
+                              <TextField fx:id="ExpDate" layoutX="125.0" layoutY="177.0" />
+                              <Label layoutX="30.0" layoutY="100.0" text="Domains" />
+                              <Label layoutX="10.0" layoutY="10.0" text="Edit Domains">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <AnchorPane fx:id="AddDomainPane" layoutX="661.0" layoutY="7.0" prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Invoices">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <TabPane layoutX="42.0" layoutY="27.0" prefHeight="545.0" prefWidth="447.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab text="One Time">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <ComboBox fx:id="DomList" layoutX="125.0" layoutY="97.0" onAction="#SelectDomain" prefWidth="150.0" promptText="Domains" />
-                                          <Label layoutX="38.0" layoutY="138.0" text="Domain Name" textFill="WHITE" />
-                                          <TextField fx:id="DomName" layoutX="126.0" layoutY="135.0" />
-                                          <Label layoutX="32.0" layoutY="180.0" text="Expiration Date" textFill="WHITE" />
-                                          <Label layoutX="29.0" layoutY="218.0" text="Hosting Type" textFill="WHITE" />
-                                          <ComboBox fx:id="HostingType" layoutX="125.0" layoutY="214.0" prefWidth="150.0" promptText="Hosting Type" />
-                                          <Label layoutX="42.0" layoutY="259.0" text="Domain Type" textFill="WHITE" />
-                                          <ComboBox fx:id="DomainType" layoutX="125.0" layoutY="255.0" prefWidth="150.0" promptText="Domain Type" />
-                                          <Button fx:id="UpdateDomain" layoutX="168.0" layoutY="302.0" mnemonicParsing="false" onAction="#pressed" prefHeight="38.0" prefWidth="64.0" text="Update" />
-                                          <Button fx:id="AddDomain" layoutX="510.0" layoutY="32.0" mnemonicParsing="false" onAction="#pressed" prefHeight="46.0" prefWidth="128.0" text="Add New Domain" />
-                                          <Button fx:id="DeleteDomain" layoutX="149.0" layoutY="366.0" mnemonicParsing="false" onAction="#pressed" prefHeight="35.0" prefWidth="102.0" text="Delete Domain" />
+                                          <Pane fx:id="InvoicePane" prefHeight="520.0" prefWidth="447.0">
+                                             <children>
+                                                <AnchorPane fx:id="anchor2" prefHeight="524.0" prefWidth="447.0">
+                                                   <children>
+                                                      <VBox fx:id="OneTimeBox" layoutX="16.0" layoutY="98.0" />
+                                                      <Button fx:id="AddInvoice" layoutX="50.0" layoutY="454.0" mnemonicParsing="false" onAction="#pressed" prefHeight="40.0" prefWidth="113.0" text="Add New Invoice" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <Label layoutX="10.0" layoutY="10.0" text="Invoices">
+                                                   <font>
+                                                      <Font size="22.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
                                        </children>
                                     </AnchorPane>
-                                    <TextField fx:id="ExpDate" layoutX="126.0" layoutY="180.0" />
-                                    <Label layoutX="68.0" layoutY="100.0" text="Domains" textFill="WHITE" />
-                                    <Label layoutX="10.0" layoutY="10.0" text="Edit Domains" textFill="WHITE">
-                                       <font>
-                                          <Font size="22.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </Pane>
-                              <AnchorPane fx:id="AddDomainPane" layoutX="661.0" layoutY="7.0" prefHeight="200.0" prefWidth="200.0" />
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-                  <Tab text="Invoices">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0">
-                           <children>
-                              <TabPane layoutX="42.0" layoutY="27.0" prefHeight="603.0" prefWidth="1103.0" tabClosingPolicy="UNAVAILABLE">
-                                <tabs>
-                                  <Tab text="One Time">
-                                    <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 </content>
+                              </Tab>
+                              <Tab text="Monthly">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Pane fx:id="InvoicePane1" prefHeight="516.0" prefWidth="446.0">
                                              <children>
-                                                <Pane fx:id="InvoicePane" prefHeight="564.0" prefWidth="1226.0">
+                                                <AnchorPane fx:id="anchor21" prefHeight="542.0" prefWidth="447.0">
                                                    <children>
-                                                      <AnchorPane fx:id="anchor2" prefHeight="558.0" prefWidth="1227.0" style="-fx-background-color: #253138;">
-                                                         <children>
-                                                            <VBox fx:id="OneTimeBox" layoutX="16.0" layoutY="98.0" />
-                                                            <Button fx:id="AddInvoice" layoutX="50.0" layoutY="454.0" mnemonicParsing="false" onAction="#pressed" prefHeight="40.0" prefWidth="113.0" text="Add New Invoice" />
-                                                         </children>
-                                                      </AnchorPane>
-                                                      <Label layoutX="10.0" layoutY="10.0" text="Invoices" textFill="WHITE">
-                                                         <font>
-                                                            <Font size="22.0" />
-                                                         </font>
-                                                      </Label>
+                                                      <VBox fx:id="MonthlyBox" layoutX="16.0" layoutY="98.0" />
                                                    </children>
-                                                </Pane>
+                                                </AnchorPane>
+                                                <Label layoutX="10.0" layoutY="10.0" text="Invoices">
+                                                   <font>
+                                                      <Font size="22.0" />
+                                                   </font>
+                                                </Label>
                                              </children>
-                                          </AnchorPane>
-                                    </content>
-                                  </Tab>
-                                  <Tab text="Monthly">
-                                    <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                          </Pane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Yearly">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Pane fx:id="InvoicePane2" prefHeight="564.0" prefWidth="1226.0">
                                              <children>
-                                                <Pane fx:id="InvoicePane1" prefHeight="564.0" prefWidth="1226.0">
+                                                <AnchorPane fx:id="anchor22" prefHeight="527.0" prefWidth="447.0">
                                                    <children>
-                                                      <AnchorPane fx:id="anchor21" prefHeight="558.0" prefWidth="1227.0" style="-fx-background-color: #253138;">
-                                                         <children>
-                                                            <VBox fx:id="MonthlyBox" layoutX="16.0" layoutY="98.0" />
-                                                         </children>
-                                                      </AnchorPane>
-                                                      <Label layoutX="10.0" layoutY="10.0" text="Invoices" textFill="WHITE">
-                                                         <font>
-                                                            <Font size="22.0" />
-                                                         </font>
-                                                      </Label>
+                                                      <VBox fx:id="YearlyBox" layoutX="16.0" layoutY="98.0" />
                                                    </children>
-                                                </Pane>
+                                                </AnchorPane>
+                                                <Label layoutX="10.0" layoutY="10.0" text="Invoices">
+                                                   <font>
+                                                      <Font size="22.0" />
+                                                   </font>
+                                                </Label>
                                              </children>
-                                          </AnchorPane>
-                                    </content>
-                                  </Tab>
-                                    <Tab text="Yearly">
-                                      <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                             <children>
-                                                <Pane fx:id="InvoicePane2" prefHeight="564.0" prefWidth="1226.0">
-                                                   <children>
-                                                      <AnchorPane fx:id="anchor22" prefHeight="558.0" prefWidth="1227.0" style="-fx-background-color: #253138;">
-                                                         <children>
-                                                            <VBox fx:id="YearlyBox" layoutX="16.0" layoutY="98.0" />
-                                                         </children>
-                                                      </AnchorPane>
-                                                      <Label layoutX="10.0" layoutY="10.0" text="Invoices" textFill="WHITE">
-                                                         <font>
-                                                            <Font size="22.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </Pane>
-                                             </children>
-                                          </AnchorPane>
-                                      </content>
-                                    </Tab>
-                                    <Tab text="Custom">
-                                       <content>
-                                          <AnchorPane fx:id="anchor23" prefHeight="558.0" prefWidth="1227.0" style="-fx-background-color: #253138;">
-                                             <children>
-                                                <VBox fx:id="CustomBox" layoutX="16.0" layoutY="98.0" />
-                                                <Button fx:id="AddInvoice1" layoutX="50.0" layoutY="454.0" mnemonicParsing="false" onAction="#pressed" prefHeight="40.0" prefWidth="113.0" text="Add New Invoice" />
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </Tab>
-                                </tabs>
-                              </TabPane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="Payments">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
-              </tabs>
-            </TabPane>
-         </children></AnchorPane>
-  </content>
-</ScrollPane>
+                                          </Pane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Custom">
+                                 <content>
+                                    <AnchorPane fx:id="anchor23" prefHeight="558.0" prefWidth="1227.0">
+                                       <children>
+                                          <VBox fx:id="CustomBox" layoutX="16.0" layoutY="98.0" />
+                                          <Button fx:id="AddInvoice1" layoutX="50.0" layoutY="454.0" mnemonicParsing="false" onAction="#pressed" prefHeight="40.0" prefWidth="113.0" text="Add New Invoice" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Payments">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

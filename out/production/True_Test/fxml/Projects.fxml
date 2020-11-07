@@ -11,31 +11,52 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="pnlProjects" prefHeight="633.0" prefWidth="1241.0" style="-fx-background-color: #253138;" stylesheets="@../sample/style.css" xmlns="http://javafx.com" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.Projects_Controller">
+<Pane fx:id="pnlProjects" prefHeight="782.0" prefWidth="1241.0" style="-fx-background-color: #eceef0;" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Projects_Controller">
    <children>
-      <TextField layoutX="575.0" layoutY="40.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: transparent; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-      <Label layoutX="14.0" layoutY="36.0" text="Projects" textFill="#c4dbe9">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="98.0" prefHeight="92.0" prefWidth="746.0" spacing="50.0" style="-fx-background-color: #2f3e47; -fx-background-radius: 17px 17px 0px 0px;">
+      <Line endX="91.0" endY="-345.013671875" layoutX="1157.0" layoutY="506.0" startX="-114.0" startY="317.986328125" stroke="#343854" strokeWidth="20.0" styleClass="line">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.42380952380952386" startX="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color blue="0.33725491166114807" green="0.2235294133424759" red="0.2078431397676468" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color blue="0.33000001311302185" green="0.2213200032711029" opacity="0.0" red="0.2046000063419342" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Line>
+      <Line endX="72.289306640625" endY="-389.697021484375" layoutX="1217.0" layoutY="564.0" startX="-134.710693359375" startY="274.12847900390625" stroke="#cda976" strokeWidth="20.0" styleClass="line" />
+      <Line endX="76.0" endY="-366.697021484375" layoutX="1277.0" layoutY="605.0" startX="-104.0" startY="212.986328125" stroke="#343854" strokeWidth="100.0" styleClass="line" />
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="98.0" prefHeight="92.0" prefWidth="746.0" spacing="50.0" style="-fx-background-color: transparemt; -fx-background-radius: 17px 17px 0px 0px;">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #f06c71; -fx-background-radius: 10px 10px 10px 10px;" styleClass="statisticVbox">
                <children>
-                  <Label fx:id="ActiveProjectsPanel" text="0" textFill="#2a73ff">
+                  <Label fx:id="ActiveProjectsPanel" text="0" textFill="#c4dbe9">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
                   <Label text="Active Projects" textFill="#c4dbe9" />
                </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #35a7d6; -fx-background-radius: 10px 10px 10px 10px;" styleClass="statisticVbox">
                <children>
-                  <Label fx:id="CompletedProjectsPanel" text="0" textFill="#26bfbc">
+                  <Label fx:id="CompletedProjectsPanel" text="0" textFill="#c4dbe9">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
@@ -43,9 +64,9 @@
                   <Label text="Completed" textFill="#e7e5e5" />
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #00b393; -fx-background-radius: 10px 10px 10px 10px;" styleClass="statisticVbox">
                <children>
-                  <Label fx:id="ClosestDeadlinePanel" text="0" textFill="#fa5f7e">
+                  <Label fx:id="ClosestDeadlinePanel" text="0" textFill="#c4dbe9">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
@@ -53,9 +74,9 @@
                   <Label text="Near deadline" textFill="#e7e5e5" />
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #f0a66c; -fx-background-radius: 10px 10px 10px 10px;" styleClass="statisticVbox">
                <children>
-                  <Label fx:id="TotalRevenuePanel" text="0" textFill="#de0000">
+                  <Label fx:id="TotalRevenuePanel" text="0" textFill="#c4dbe9">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
@@ -63,40 +84,43 @@
                   <Label text="Total Revenue" textFill="#e7e5e5" />
                </children>
             </VBox>
-            <Button fx:id="Add" mnemonicParsing="false" onAction="#Add_Project" prefHeight="55.0" prefWidth="100.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Add Project">
+            <Button fx:id="Add" mnemonicParsing="false" onAction="#Add_Project" prefHeight="110.0" prefWidth="100.0" styleClass="addButton" stylesheets="@../sample\style.css" text="Add Project">
                <HBox.margin>
-                  <Insets left="20.0" />
+                  <Insets />
                </HBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Button>
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="190.0" prefHeight="42.0" prefWidth="746.0" spacing="80.0" style="-fx-background-color: #05071F;">
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="205.0" prefHeight="27.0" prefWidth="746.0" spacing="80.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 10px 10px 0px 0px;">
          <children>
-            <Label text="Company Name" textFill="#e7e5e5" wrapText="true">
+            <Label text="Company Name" wrapText="true">
                <HBox.margin>
                   <Insets left="50.0" />
                </HBox.margin>
             </Label>
-            <Label prefWidth="100.0" text="Delivery Date" textFill="#e7e5e5">
+            <Label prefWidth="100.0" text="Delivery Date">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin>
             </Label>
-            <Label text="Price" textFill="#e7e5e5">
+            <Label text="Price">
                <HBox.margin>
                   <Insets left="-25.0" />
                </HBox.margin>
             </Label>
-            <Label text="Workforce" textFill="#e7e5e5">
+            <Label text="Workforce">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </Label>
          </children>
       </HBox>
-      <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="232.0" prefHeight="320.0" prefWidth="746.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css">
+      <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="232.0" prefHeight="503.0" prefWidth="746.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 0px 0px 10px 10px;" stylesheets="@../sample/style.css">
          <content>
-            <VBox fx:id="pnItems" alignment="BASELINE_LEFT" prefHeight="318.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: #2f3e47;">
+            <VBox fx:id="pnItems" alignment="BASELINE_LEFT" prefHeight="501.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 0px 0px 10px 10px;">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -108,6 +132,12 @@
             <Image url="@../../../../Desktop/JobStuff/RestaurantMgtSampleUI-master/src/images/icons8_Search_52px.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="TabPaneAnchor" layoutX="784.0" layoutY="98.0" prefHeight="442.0" prefWidth="307.0" style="-fx-background-color: #FFFFFF;" />
+      <AnchorPane fx:id="TabPaneAnchor" layoutX="784.0" layoutY="205.0" prefHeight="531.0" prefWidth="365.0" style="-fx-background-color: transparent;" />
+      <Label layoutX="14.0" layoutY="31.0" prefHeight="45.0" prefWidth="721.0" style="-fx-background-color: linear-gradient( to right,  #cda976, transparent ); -fx-background-radius: 15px 15px 15px 15px;" text="   Projects" textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TextField layoutX="575.0" layoutY="40.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: transparent; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
    </children>
 </Pane>

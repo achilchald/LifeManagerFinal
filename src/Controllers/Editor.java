@@ -7,6 +7,7 @@ import Methods.Database_Deleter;
 import Methods.Read_Database;
 import Methods.WriteFile;
 import Methods.WriteToDatabase;
+import animatefx.animation.*;
 import calendar.WriteFileAppointment;
 
 import javafx.event.ActionEvent;
@@ -16,10 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 
@@ -149,7 +147,6 @@ public class Editor extends Globals implements AboveGod {
     private int DomainId;
 
     private boolean DeleteFlag = false;
-    //-----------------------------------
 
     //Invoice Gui Data
 
@@ -182,10 +179,6 @@ public class Editor extends Globals implements AboveGod {
 
     @FXML
     private VBox CustomBox;
-
-    //-------------------------------
-
-    //----Kwstas Staffs----
 
     @FXML
     private Label projectIdLabel;
@@ -294,6 +287,15 @@ public class Editor extends Globals implements AboveGod {
     private Button AddT;
 
     @FXML
+    private Button ProjBtnBack;
+
+    @FXML
+    private Button WorkerBtnBack;
+
+    @FXML
+    private Button CustomerBtnBack;
+
+    @FXML
     private Button finish;
 
     @FXML
@@ -313,8 +315,6 @@ public class Editor extends Globals implements AboveGod {
 
     @FXML
     private ComboBox<String>taskCategory;
-
-    //--------------------
 
     //Update Buttons
     @FXML
@@ -366,10 +366,6 @@ public class Editor extends Globals implements AboveGod {
 
     private String domainType;
 
-
-
-
-
     //Helper Variables
     private String importance = "";
 
@@ -379,10 +375,6 @@ public class Editor extends Globals implements AboveGod {
 
     Label TotalIncome;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ebd54015ff19cdec827d8520b3f380953f8849fe
     int strayTasksCounter=0;
     int strayTasksCounterHelp=0;
 
@@ -391,15 +383,6 @@ public class Editor extends Globals implements AboveGod {
     @FXML
     private Button DeleteDomain;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ebd54015ff19cdec827d8520b3f380953f8849fe
-    //-------- Kwstas methods aka a bunch of trash LMFAO -------
-    //todo by kwstas
-    public void AddWorkerInEdit(){
-
-    }
 
     //SetBox 1 sets the projects view thing.
     public void SetBox1(HBox hb) throws IOException, SQLException, ClassNotFoundException {
@@ -589,7 +572,6 @@ public class Editor extends Globals implements AboveGod {
 
     }
 
-    //todo MAKE IT WORK DAMN IT
     public void deleteWorkerFromProject(int workerId) throws SQLException, ClassNotFoundException, IOException {
         //Delete operation
 
@@ -679,23 +661,53 @@ public class Editor extends Globals implements AboveGod {
 
         ArrayList<Task> straytasks = projectMap.get(Integer.parseInt(projId)).getWorkers().get(Integer.parseInt(String.valueOf(workerIDstray.getText()))).getTasks().get(Integer.parseInt(projId));
 
-        String worker=workersComboHandle.getSelectionModel().getSelectedItem();
+
+        String worker = workersComboHandle.getSelectionModel().getSelectedItem();
         String id = worker.substring(0, worker.indexOf("."));
 
-        Worker temp=workerMap.get(Integer.parseInt(id));
+        Worker temp = workerMap.get(Integer.parseInt(id));
 
-        if ( strayTasksCounter < straytasks.size() ) {
-            workerMap.get(Integer.parseInt(id)).addTasks(straytasks.get(strayTasksCounter));
+        if (strayTasksCounter < straytasks.size()) {
+
+            //Handling the reassigned but completed tasks
+//            if (straytasks.get(strayTasksCounter).getStatus()) {
+//                //Remove the task visually
+//                HBox item = (HBox) ProjectToDoPanel.lookup("#" + straytasks.get(strayTasksCounter).getTaskid());
+//                ProjectToDoPanel.getChildren().remove(item);
+//
+//                item.getChildren().remove(8);
+//
+//                //projectMap.get(Integer.parseInt(projId)).getWorkers().get(Integer.parseInt(workerIDstray.getText())).getTasks().get(Integer.parseInt(projId)).remove(strayTasksCounter);
+//
+//                //Database_Deleter db = new Database_Deleter();
+//                //db.Delete_Task(straytasks.get(strayTasksCounter).getTaskid());
+//            }
+
+            projectMap.get(Integer.parseInt(projId)).getWorkers().get(Integer.parseInt(id)).addTasks(straytasks.get(strayTasksCounter));
+
+            //workerMap.get(Integer.parseInt(id)).addTasks(straytasks.get(strayTasksCounter));
+
             WriteToDatabase wr = new WriteToDatabase();
-            wr.reassignTask( Integer.parseInt(workerIDstray.getText()),Integer.parseInt(id),Integer.parseInt(projId) );
-            System.out.println("Task assigned !"+straytasks.size());
-            System.out.println("Task id = " + strayTasksCounter + "Worker id = "+ id + "Project id = "+ projId);
+            wr.reassignTask(Integer.parseInt(workerIDstray.getText()), Integer.parseInt(id), Integer.parseInt(projId));
+            System.out.println("Task assigned !" + straytasks.size());
+            System.out.println("Task id = " + strayTasksCounter + "Worker id = " + id + "Project id = " + projId);
 
             //Handles the visual aspect of the reassign
 
             HBox box;
-            box = FXMLLoader.load(getClass().getResource("../fxml/ToDoItem.fxml"));
 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ToDoItem.fxml"));
+
+            box = loader.load();
+
+            Edit_Controller ctrl = loader.getController();
+
+            ctrl.setLabel(completedTasksLabel, pendingTasksLabel, progressBar, progressLabel);
+
+            int index = projectMap.get(Integer.parseInt(projId)).getWorkers().get(Integer.parseInt(id)).getTasks().get(Integer.parseInt(projId)).size() - 1;
+            //int index =workerMap.get(Integer.parseInt(id)).getTasks().get(Integer.parseInt(projId)).size()-1;
+
+            System.out.println("Index now is + " + index);
             //find the worker name selected and get its id;
 
             ((Label) box.getChildren().get(1)).setText(straytasks.get(strayTasksCounter).getName());
@@ -706,17 +718,19 @@ public class Editor extends Globals implements AboveGod {
 
             ((Label) box.getChildren().get(5)).setText(id);
 
-            ((Label) box.getChildren().get(6)).setText(String.valueOf(strayTasksCounter));
+            ((Label) box.getChildren().get(6)).setText(String.valueOf(index));
 
             ((Label) box.getChildren().get(7)).setText(projId);
 
             ProjectToDoPanel.getChildren().add(box);
 
-            ProjectToDoPanel.getChildren().remove( ProjectToDoPanel.lookup("#" + straytasks.get(strayTasksCounter).getTaskid()));
+            ProjectToDoPanel.getChildren().remove(ProjectToDoPanel.lookup("#" + straytasks.get(strayTasksCounter).getTaskid()));
 
             box.setId(String.valueOf(straytasks.get(strayTasksCounter).getTaskid()));
+
+
         }
-        if (strayTasksCounter==straytasks.size()-1){
+        if (strayTasksCounter == straytasks.size() - 1) {
             flag = 1;
 
             //Empties the worker tasks list inside this project.
@@ -727,18 +741,18 @@ public class Editor extends Globals implements AboveGod {
 
 
             WriteToDatabase wr = new WriteToDatabase();
-            wr.deleteWorkerFromProject(workerIDstray.getText(),Integer.parseInt(projId));
+            wr.deleteWorkerFromProject(workerIDstray.getText(), Integer.parseInt(projId));
 
 
             ProjectWorkersPanel.lookup("#" + workerIDstray.getText()).setStyle("-fx-background-color : #50b065;");
-            HBox boxWorkerToDelete=(HBox)ProjectWorkersPanel.lookup("#" + workerIDstray.getText());
+            HBox boxWorkerToDelete = (HBox) ProjectWorkersPanel.lookup("#" + workerIDstray.getText());
             boxWorkerToDelete.getChildren().remove(4);
 
-            Button plus=new Button("+");
+            Button plus = new Button("+");
             boxWorkerToDelete.getChildren().add(plus);
             plus.setOnAction(e -> {
                 try {
-                    addWorkerToProject(Integer.parseInt(workerIDstray.getText()),projId,boxWorkerToDelete);
+                    addWorkerToProject(Integer.parseInt(workerIDstray.getText()), projId, boxWorkerToDelete);
                 } catch (SQLException | ClassNotFoundException throwables) {
                     throwables.printStackTrace();
                 }
@@ -746,9 +760,12 @@ public class Editor extends Globals implements AboveGod {
 
 
         }
+
+
         strayTasksCounter++;
         strayTasksCounterHelp++;
     }
+
 
     public void addStrayTask(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
 
@@ -803,10 +820,18 @@ public class Editor extends Globals implements AboveGod {
         int i =  projectMap.get(temp.getProject_id()).getWorkers().get(id).getTasks().get(temp.getProject_id()).size()-1;
 
         //Now the visual
-        HBox box = new HBox();
-        box = FXMLLoader.load(getClass().getResource("../fxml/ToDoItem.fxml"));
 
-        //find the worker name selected and get its id;
+
+
+        HBox box;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ToDoItem.fxml"));
+
+        box = loader.load();
+
+        Edit_Controller ctrl = loader.getController();
+
+        ctrl.setLabel(completedTasksLabel, pendingTasksLabel, progressBar, progressLabel);
 
         ((Label) box.getChildren().get(1)).setText(temp.getName());
         ((Label) box.getChildren().get(2)).setText(workerMap.get(id).getName());
@@ -845,7 +870,6 @@ public class Editor extends Globals implements AboveGod {
 
     }
 
-
     public void addWorkerToProject(int workId,String projectid,HBox box) throws SQLException, ClassNotFoundException {
 
         projectMap.get(Integer.valueOf(projectid)).addWorker(workId);
@@ -870,7 +894,6 @@ public class Editor extends Globals implements AboveGod {
         WriteToDatabase wr=new WriteToDatabase();
         wr.addWorkerToProjectDB(workerMap.get(workId),Integer.parseInt(projectid));
     }
-
 
     @FXML
     public void Add_Edited_Worker(ActionEvent event) throws IOException {
@@ -924,7 +947,7 @@ public class Editor extends Globals implements AboveGod {
             workerComboProject.getItems().add(entry2.getValue().getWorkerid()+"."+entry2.getValue().getName());
         }
     }
-    //At
+
     @FXML
     public  void initComboBoxesWorker() {
 
@@ -979,19 +1002,12 @@ public class Editor extends Globals implements AboveGod {
     }
 
 
-    public void setWorkerBox(HBox hb,Pane pane) throws IOException {
+    public void setWorkerBox(HBox hb) throws IOException {
         this.Hbc=hb;
-
-
-        pane.getChildren().setAll(megaPane);
-
 
         NameWorker.setText(((Label) Hbc.getChildren().get(1)).getText());
 
-
         EmailWorker.setText(((Label) Hbc.getChildren().get(2)).getText());
-
-
 
         String id=(((Label) Hbc.getChildren().get(3)).getText());
         workerId.setText(id);
@@ -1026,11 +1042,6 @@ public class Editor extends Globals implements AboveGod {
 
 
     }
-
-
-
-
-    //---------------------------------------------------------
 
 
     public void SetBox3(HBox hb) {
@@ -1126,17 +1137,9 @@ public class Editor extends Globals implements AboveGod {
                 //Append a controller to the invoice GUI component
                 Invoice_Editing_Controller EditControl = loader.getController();
 
-<<<<<<< HEAD
-
                 System.out.println("Customer id = " + id + "Invoice id = " + temp.getId());
                 //Set to the controller the invoice and customer id's
                 EditControl.setCustomerAndInvoiceId(id, temp.getId());
-=======
-                System.out.println("Customer id = " + id + "Invoice id = " + temp.getId());
-                //Set to the controller the invoice and customer id's
-                EditControl.setCustomerAndInvoiceId(id, temp.getId());
-
->>>>>>> ebd54015ff19cdec827d8520b3f380953f8849fe
 
                 //Initialize the Hbox that shows the invoice basic data such as price ,expiration date etc
                 ((Label) box.getChildren().get(0)).setText("Invoice#" + temp.getId());
@@ -1216,10 +1219,6 @@ public class Editor extends Globals implements AboveGod {
     @FXML
     void SelectDomain(ActionEvent event) {
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ebd54015ff19cdec827d8520b3f380953f8849fe
         if (event.getSource() == DomList && !DeleteFlag)
         {
             System.out.println(DomList.getValue());
@@ -1228,10 +1227,6 @@ public class Editor extends Globals implements AboveGod {
             DomainId = CustomerDomains.get(DomList.getValue()).getId();
             DomainInvoiceId = CustomerDomains.get(DomList.getValue()).getInvoice_Id();
             System.out.println("Domain invoice id = "+DomainInvoiceId);
-<<<<<<< HEAD
-=======
-
->>>>>>> ebd54015ff19cdec827d8520b3f380953f8849fe
 
             //Initialize an empty invoice entity for later use
             Invoice DomainInvoice = null;
@@ -1245,10 +1240,6 @@ public class Editor extends Globals implements AboveGod {
                     DomainInvoice = customerMap.get(id).GetInvoicesList().get(i);
                     System.out.println(DomainInvoice.getItems().size());
                 }
-<<<<<<< HEAD
-=======
-
->>>>>>> ebd54015ff19cdec827d8520b3f380953f8849fe
             }
 
 
@@ -1258,10 +1249,6 @@ public class Editor extends Globals implements AboveGod {
             //Set the expiration date to the Date Picker field
             ExpDate.setText(CustomerDomains.get(DomList.getValue()).getExpiry_Date().toString());
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ebd54015ff19cdec827d8520b3f380953f8849fe
             //Get the Hosting and Domain types and put show them in the combo box
             for (int i = 0;i<DomainInvoice.getItems().size();i++)
             {
@@ -1350,13 +1337,6 @@ public class Editor extends Globals implements AboveGod {
             System.out.println("New Hosting Type : " + HostType);
             System.out.println("New Domain Type : " + DomType);
 
-
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> ebd54015ff19cdec827d8520b3f380953f8849fe
             //Get the domain from the customer
             for (int i = 0;i<customerMap.get(id).getDomainsList().size();i++)
             {
@@ -1407,10 +1387,6 @@ public class Editor extends Globals implements AboveGod {
                             NewInvoice.RemovePrice(Hosting_Price);
 
                             System.out.println("HOSTING ADDED");
-<<<<<<< HEAD
-=======
-
->>>>>>> ebd54015ff19cdec827d8520b3f380953f8849fe
                         }
                         //Check if a new domain type is added
                         if(customerMap.get(id).GetInvoicesList().get(i).getItems().get(j).getType().equals(domainType) && DomType != null)
@@ -1520,9 +1496,6 @@ public class Editor extends Globals implements AboveGod {
                 }
             }
 
-
-
-
         }
 
         if (event.getSource() == EditB) {
@@ -1545,15 +1518,8 @@ public class Editor extends Globals implements AboveGod {
 
         }
 
-
-
-
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ebd54015ff19cdec827d8520b3f380953f8849fe
     public void setTaskInfo(HBox ToDoItem){
 
         this.Hbc = ToDoItem;
@@ -1580,8 +1546,7 @@ public class Editor extends Globals implements AboveGod {
 
         DescF.setText(String.valueOf(projectMap.get(projID).getWorkers().get(workerID).getTasks().get(projID).get(i).getDescription()));
     }
-<<<<<<< HEAD
-=======
+
 
     public void editWorkerSave() throws SQLException, ClassNotFoundException {
         String name=NameWorker.getText();
@@ -1592,38 +1557,12 @@ public class Editor extends Globals implements AboveGod {
         //call the database edit
 
         WriteToDatabase edit=new WriteToDatabase();
->>>>>>> ebd54015ff19cdec827d8520b3f380953f8849fe
-
-    public void editWorkerSave() throws SQLException, ClassNotFoundException {
-        String name=NameWorker.getText();
-        String email=EmailWorker.getText();
-
-        String id=(((Label) Hbc.getChildren().get(3)).getText());
-
-        //call the database edit
-
-<<<<<<< HEAD
-        WriteToDatabase edit=new WriteToDatabase();
-=======
->>>>>>> ebd54015ff19cdec827d8520b3f380953f8849fe
 
         Worker temp=new Worker(Integer.parseInt(id),name,email);
         edit.updateWorker(temp);
 
         (((Label) Hbc.getChildren().get(1))).setText(name);
         (((Label) Hbc.getChildren().get(2))).setText(email);
-
-
-
-    }
-
-
-        Worker temp=new Worker(Integer.parseInt(id),name,email);
-        edit.updateWorker(temp);
-
-        (((Label) Hbc.getChildren().get(1))).setText(name);
-        (((Label) Hbc.getChildren().get(2))).setText(email);
-
 
 
     }
@@ -1654,6 +1593,32 @@ public class Editor extends Globals implements AboveGod {
         } else {
             importance = Unimportant.getId();
         }
+    }
+
+    public void projGoBack () {
+
+        Parent root = Hbc.getParent().getParent().getParent().getParent().getParent();
+
+        root.toFront();
+        new FadeInRight(root).play();
+
+    }
+
+    public void workerGoBack () {
+
+        Parent root = Hbc.getParent().getParent().getParent().getParent().getParent();
+
+        root.toFront();
+        new FadeInRight(Hbc).play();
+
+    }
+
+    public void customerGoBack () {
+
+        Parent root = Hbc.getParent().getParent().getParent().getParent().getParent();
+
+        root.toFront();
+        new FadeInRight(root).play();
     }
 
 

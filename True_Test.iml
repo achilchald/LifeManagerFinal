@@ -8,18 +8,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="java" level="project" />
-    <orderEntry type="library" name="java1" level="project" />
     <orderEntry type="library" name="adaptive" level="project" />
-<<<<<<< HEAD
     <orderEntry type="library" name="mysql-connector-java-8.0" level="project" />
     <orderEntry type="library" name="javafx-sdk-11.0" level="project" />
-    <orderEntry type="library" name="java2" level="project" />
-    <orderEntry type="library" name="batik-1" level="project" />
-=======
-    <orderEntry type="library" name="Thing" level="project" />
-    <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="bin" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-8.0.21" level="project" />
->>>>>>> ebd54015ff19cdec827d8520b3f380953f8849fe
+    <orderEntry type="library" name="io.github.typhon0:AnimateFX:1.2.0" level="project" />
   </component>
 </module>

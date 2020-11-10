@@ -3,8 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/True_Test_jar</output-path>
     <root id="archive" name="True_Test.jar">
       <element id="module-output" name="True_Test" />
-      <element id="library" level="project" name="java1" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../LFMDBv/mysql-connector-java-8.0.22/mysql-connector-java-8.0.22.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/LFMDBv/mysql-connector-java-8.0.22/mysql-connector-java-8.0.22.jar" path-in-jar="/" />
       <element id="library" level="project" name="java" />
       <element id="library" level="project" name="adaptive" />
     </root>

@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -105,12 +106,16 @@ public class Edit_Controller implements AboveGod {
 
     private Label progressLabel;
 
+    private StackPane stackPane;
+
 
 
     //-----------------------------
 
 
-    public void SetEditArea (Pane EditArea){this.EditPane = EditArea;}
+    public void SetEditArea (Pane EditArea) {this.EditPane = EditArea;}
+
+    public void SetStackArea (StackPane stackPane) {this.stackPane = stackPane;}
 
 
     //This method sets the is of the price label of the customer
@@ -129,24 +134,17 @@ public class Edit_Controller implements AboveGod {
     //todo Na kleinei kai na apo8ikeyei to arxeio
     public void Edit_Customer(MouseEvent event) throws IOException  {
 
-
         //Load the customer edit GUI
         FXMLLoader EditLoader = new FXMLLoader(getClass().getResource("/fxml/CustomerInfo.fxml"));
-        Parent root = EditLoader.load();
-
-
-
-        //Append a controller to the GUI
+        Pane pane = EditLoader.load();
         Editor CustomerEditor = EditLoader.getController();
         CustomerEditor.SetEditArea(itemC,TotalIncome);
 
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Add Item");
-        stage.show();
+        pane.setId("pasxalinoavgo");
 
+        stackPane.getChildren().add(pane);
 
-
+        pane.toFront();
     }
 
 
@@ -168,8 +166,6 @@ public class Edit_Controller implements AboveGod {
 
             customerMap.remove(Customerid.getText());
 
-
-
         }
     }
 
@@ -179,14 +175,15 @@ public class Edit_Controller implements AboveGod {
     public void Edit_Worker(MouseEvent event) throws  IOException{
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Edit_Worker.fxml"));
-
-        Parent root = loader.load();
+        Pane pane = loader.load();
         Editor ctrl = loader.getController();
+        ctrl.setWorkerBox(WorkerItem);
 
+        pane.setId("pasxalinoavgo");
 
+        stackPane.getChildren().add(pane);
 
-        ctrl.setWorkerBox(WorkerItem,this.addPane);
-
+        pane.toFront();
     }
 
     public void deleteWorker() throws SQLException, ClassNotFoundException {
@@ -220,16 +217,15 @@ public class Edit_Controller implements AboveGod {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Edit_Project.fxml"));
 
-        Parent root = loader.load();
+        Pane pane = loader.load();
         Editor ctrl = loader.getController();
         ctrl.SetBox1(Hbc);
 
-        //The following both lines are the only addition we need to pass the arguments
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Editor");
-        stage.show();
+        pane.setId("pasxalinoavgo");
 
+        stackPane.getChildren().add(pane);
+
+        pane.toFront();
 
     }
 
@@ -340,7 +336,7 @@ public class Edit_Controller implements AboveGod {
 
             bar.setProgress(progress);
 
-            progressLabel.setText(String.valueOf(progress*100));
+            progressLabel.setText(String.valueOf(Math.round(progress*100)));
         }
         System.out.println("Task id= "+taskId);
         WriteToDatabase wr = new WriteToDatabase();

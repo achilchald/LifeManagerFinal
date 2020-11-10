@@ -11,10 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -100,8 +97,13 @@ public class proj_add_Controller  extends Globals implements AboveGod {
 
     private AnchorPane parent;
 
+    private StackPane Stackpane;
 
     public int counter = 0;
+
+    public void setProjectStackPane(StackPane Stackpane){
+        this.Stackpane=Stackpane;
+    }
 
     //SetBox is PROJECT ADD INITILIAZE
     public void SetBox(VBox box, int counter, AnchorPane pane)
@@ -110,13 +112,8 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         this.counter = counter + 1;
         this.parent=pane;
 
-
         pane.getChildren().add(AddProjectAnchor);
         initComboBoxes();
-
-
-
-
 
     }
 
@@ -279,8 +276,14 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         }
         else {
             //now it sets the project item
-            HBox hbox = new HBox();
-            hbox = FXMLLoader.load(getClass().getResource("../fxml/Project_Item.fxml"));
+            HBox hbox;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Project_Item.fxml"));
+
+            hbox = loader.load();
+
+            Edit_Controller control = loader.getController();
+
+            control.SetStackArea(Stackpane);
 
             ((Label) hbox.getChildren().get(1)).setText(name);
 
@@ -350,11 +353,9 @@ public class proj_add_Controller  extends Globals implements AboveGod {
 
             alert.showAndWait();
             selectionModel.select(0);
-
         }
         else {
             selectionModel.select(2);
-
         }
     }
 
@@ -365,15 +366,5 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         if (event.getSource() == AddB) {
             Add_Project();
         }
-
-
-
     }
-
-
-
-
-
-
-
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<HBox fx:id="Hbc" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#Edit_Project" prefHeight="35.0" prefWidth="700.0" spacing="80.0" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Edit_Controller">
+    <children>
+        <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../kwstas/LifeManager/src/sample/gps-searching.png" />
+            </image>
+            <HBox.margin>
+                <Insets left="10.0" />
+            </HBox.margin>
+        </ImageView>
+        <Label fx:id="nameid" prefWidth="60.0" text="name">
+            <HBox.margin>
+                <Insets left="-70.0" />
+            </HBox.margin></Label>
+        <Label fx:id="dateid" prefWidth="75.0" text="date">
+            <HBox.margin>
+                <Insets left="48.0" />
+            </HBox.margin>
+        </Label>
+        <Label fx:id="priceid" prefWidth="40.0" text="Price">
+         <HBox.margin>
+            <Insets left="-1.0" />
+         </HBox.margin></Label>
+      <Label fx:id="wfid" prefHeight="17.0" prefWidth="58.0" text="Workforce">
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin></Label>
+        <Label fx:id="Projectid" textFill="WHITE" />
+      <Button fx:id="Del" mnemonicParsing="false" onAction="#Delete_Project" prefWidth="20.0" styleClass="trashButton">
+         <HBox.margin>
+            <Insets left="-70.0" />
+         </HBox.margin>
+         <graphic>
+            <SVGPath content="M230.2,249.3h-3.6l-0.3-0.6c-0.1-0.2-0.4-0.4-0.6-0.4h-3.4c-0.3,0-0.5,0.2-0.6,0.4l-0.3,0.6h-3.6c-0.3,0-0.5,0.2-0.5,0.5v1c0,0.3,0.2,0.5,0.5,0.5h12.5c0.3,0,0.5-0.2,0.5-0.5v-1C230.7,249.5,230.5,249.3,230.2,249.3z M218.9,262.3c0,0.8,0.7,1.3,1.4,1.3h7.4c0.8,0,1.4-0.6,1.4-1.3l0.6-10.2h-11.5L218.9,262.3z" fillRule="EVEN_ODD" styleClass="trashButton" />
+         </graphic></Button>
+    </children>
+    <effect>
+        <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+    </effect>
+</HBox>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="839.0" spacing="80.0" style="-fx-background-color: #05071F; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.Domain_Edit">
+   <children>
+      <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../sample/gps-searching.png" />
+         </image>
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+      </ImageView>
+      <Label fx:id="Domain" prefHeight="17.0" prefWidth="98.0" text="name" textFill="#b7c3d7">
+         <HBox.margin>
+            <Insets left="-70.0" />
+         </HBox.margin>
+      </Label>
+      <Label fx:id="date" prefHeight="17.0" prefWidth="70.0" text="Date" textFill="#eeeeee" />
+      <CheckBox fx:id="Small" mnemonicParsing="false" text="Small" textFill="WHITE" />
+      <CheckBox fx:id="Medium" mnemonicParsing="false" text="Medium" textFill="WHITE" />
+      <CheckBox fx:id="Large" mnemonicParsing="false" text="Large" textFill="#f8f7f7" />
+      <Button fx:id="RemoveB" mnemonicParsing="false" text="Remove" />
+   </children>
+   <effect>
+      <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+   </effect>
+</HBox>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox fx:id="WorkerItem" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="612.0" spacing="80.0" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Edit_Controller">
+   <children>
+      <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Erp/CasperWebErp/src/sample/gps-searching.png" />
+         </image>
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+      </ImageView>
+      <Label fx:id="name" prefHeight="17.0" prefWidth="69.0" text="name" textFill="WHITE">
+         <HBox.margin>
+            <Insets left="-70.0" />
+         </HBox.margin>
+      </Label>
+      <Label fx:id="email" prefHeight="17.0" prefWidth="71.0" text="Email" textFill="WHITE" />
+      <Label fx:id="WorkerId" text="id" textFill="WHITE" />
+      <Button fx:id="ViewWorkerBtn" mnemonicParsing="false" onAction="#deleteWorker" prefHeight="25.0" prefWidth="32.0" text="X" />
+   </children>
+   <effect>
+      <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+   </effect>
+</HBox>

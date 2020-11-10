@@ -11,12 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-
 import javafx.event.ActionEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;

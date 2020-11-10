@@ -3,6 +3,7 @@ package Controllers;
 import Entities.AboveGod;
 import Entities.Customer;
 import Entities.Linker;
+import Entities.Task;
 import Methods.Database_Deleter;
 import Methods.WriteFile;
 
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
 import javax.xml.transform.Source;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /*
 This Controller is responsible for for the Customer HBox gui element
@@ -94,6 +96,15 @@ public class Edit_Controller implements AboveGod {
 
     @FXML
     private HBox HBoxToDo;
+
+    private Label completed;
+
+    private Label notCompleted;
+
+    private ProgressBar bar;
+
+    private Label progressLabel;
+
 
 
     //-----------------------------
@@ -269,6 +280,117 @@ public class Edit_Controller implements AboveGod {
 
     }
 
-    //todo Na kleinei kai na apo8ikeyei to arxeio
+    public void setLabel(Label completed,Label notCompleted,ProgressBar bar,Label progress){
+
+        this.completed = completed;
+
+        this.notCompleted = notCompleted;
+
+        this.bar=bar;
+
+        this.progressLabel=progress;
+
+
+    }
+
+    public void setStatus() throws SQLException, ClassNotFoundException {
+        int ProjectId = Integer.parseInt(((Label) ToDoItem.getChildren().get(7)).getText());
+        int WorkerId = Integer.parseInt(((Label) ToDoItem.getChildren().get(5)).getText());
+        int IndexOfTask =  Integer.parseInt(((Label) ToDoItem.getChildren().get(6)).getText());
+        int taskId= Integer.parseInt(ToDoItem.getId());
+
+
+        projectMap.get(ProjectId).getWorkers().get(WorkerId).getTasks().get(ProjectId).get(IndexOfTask).changeStatus();
+
+        boolean status=projectMap.get(ProjectId).getWorkers().get(WorkerId).getTasks().get(ProjectId).get(IndexOfTask).getStatus();
+
+        int completed_tasks= Integer.parseInt(completed.getText());
+        int pending_tasks= Integer.parseInt(notCompleted.getText());
+        double total=completed_tasks+pending_tasks;
+
+        if (status) {
+            ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #34eb37; ");//set to green
+
+
+            completed_tasks++;
+            pending_tasks--;
+
+            completed.setText(String.valueOf(completed_tasks));
+            notCompleted.setText(String.valueOf(pending_tasks));
+
+            double progress=completed_tasks/total;
+
+            bar.setProgress(progress);
+
+            progressLabel.setText(String.valueOf(Math.round(progress*100)));
+
+
+
+
+        }
+        else {
+            ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #000000; ");
+            completed_tasks--;
+            pending_tasks++;
+
+            completed.setText(String.valueOf(completed_tasks));
+            notCompleted.setText(String.valueOf(pending_tasks));
+
+            double progress=completed_tasks/total;
+
+            bar.setProgress(progress);
+
+            progressLabel.setText(String.valueOf(progress*100));
+        }
+        System.out.println("Task id= "+taskId);
+        WriteToDatabase wr = new WriteToDatabase();
+        wr.changeTaskStatus(status,taskId);
+
+    }
+
+    @FXML
+    public void DeleteTask() throws SQLException, ClassNotFoundException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to delete this task?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
+
+            VBox ri = (VBox) ToDoItem.getParent();
+
+            String temp = ToDoItem.getId();
+
+            int WorkerId = Integer.parseInt(((Label) ToDoItem.getChildren().get(5)).getText());
+
+            int ProjectId = Integer.parseInt(((Label) ToDoItem.getChildren().get(7)).getText());
+
+            int IndexOfTask =  Integer.parseInt(((Label) ToDoItem.getChildren().get(6)).getText());
+
+           
+
+
+            projectMap.get(ProjectId).getWorkers().get(WorkerId).getTasks().get(ProjectId).remove(IndexOfTask);
+
+
+
+
+
+
+
+            //Delete the Worker from the map
+
+            //Delete operation
+
+            String id = ToDoItem.getId();
+
+            Database_Deleter deleter = new Database_Deleter();
+
+            deleter.Delete_Task(Integer.parseInt(id));
+
+            //Delete the box
+            ri.getChildren().remove(ri.lookup("#" + temp));
+        }
+
+    }
+
+
 
 }

@@ -70,4 +70,17 @@ public class Database_Deleter {
         con.close();
     }
 
+    public void Delete_Task(int TaskId) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+        //here sonoo is database name, root is username and password
+        Statement stmt = con.createStatement();
+
+        //todo If there are projects WITH ACTIVE STATUS ask where to put them
+
+        //Delete the workers Tasks
+        stmt.executeUpdate("DELETE FROM TASKS WHERE ID ="+TaskId+";");
+
+    }
+
 }

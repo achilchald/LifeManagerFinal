@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.awt.*;
 import java.io.IOException;
@@ -37,7 +34,7 @@ public class Worker_add_Controller implements AboveGod {
     private TextField EmailWorker;
 
     private Pane pane;
-
+    private StackPane Stackpane;
 
 
     public void SetBox(VBox box) {
@@ -46,6 +43,10 @@ public class Worker_add_Controller implements AboveGod {
 
     public void setWorkerPane(Pane pane){
         this.pane=pane;
+    }
+
+    public void setWorkerStackPane(StackPane Stackpane){
+        this.Stackpane=Stackpane;
     }
 
 
@@ -66,6 +67,10 @@ public class Worker_add_Controller implements AboveGod {
 
         box = loader.load();
 
+        Edit_Controller control = loader.getController();
+
+        control.SetStackArea(Stackpane);
+
         ((Label)box.getChildren().get(1)).setText( name);
 
         ((Label)box.getChildren().get(2)).setText(email);
@@ -74,7 +79,7 @@ public class Worker_add_Controller implements AboveGod {
 
         box.setId(String.valueOf(temp.getWorkerid()));
 
-        Edit_Controller control = loader.getController();
+        control = loader.getController();
 
         control.setPane(pane);
 

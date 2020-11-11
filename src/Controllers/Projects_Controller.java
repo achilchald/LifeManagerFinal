@@ -21,10 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import sample.ReadFromFile;
@@ -32,7 +29,7 @@ import sample.ReadFromFile;
 public class Projects_Controller  extends Globals implements Initializable ,AboveGod  {
 
     @FXML
-    private Pane pnlProjects;
+    private StackPane pnlProjects;
 
     @FXML
     private Label ActiveProjectsPanel;
@@ -58,14 +55,8 @@ public class Projects_Controller  extends Globals implements Initializable ,Abov
     @FXML
     private AnchorPane TabPaneAnchor;
 
-
     @FXML
     private TabPane TabProject;
-
-
-
-
-
 
     @FXML
     public Button Edit;
@@ -94,11 +85,8 @@ public class Projects_Controller  extends Globals implements Initializable ,Abov
             reader.Load_Category();
 
         }
-        catch (ClassNotFoundException e) {
+        catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
 
         //Linker for the labels
@@ -109,11 +97,14 @@ public class Projects_Controller  extends Globals implements Initializable ,Abov
             try {
 
                 HBox box;
-                box = FXMLLoader.load(getClass().getResource("/fxml/Project_Item.fxml"));
 
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Project_Item.fxml"));
 
+                box = loader.load();
 
+                Edit_Controller temp = loader.getController();
 
+                temp.SetStackArea(pnlProjects);
 
                 //Make the items
                 ((Label)box.getChildren().get(1)).setText(entry.getValue().getName());
@@ -130,15 +121,10 @@ public class Projects_Controller  extends Globals implements Initializable ,Abov
                 //Set the box id with its project id.
                 box.setId(String.valueOf(entry.getValue().getId()));
 
-
-
                 pnItems.getChildren().add(box);
 
                 setCounter(i);
                 i++;
-
-
-
 
 
             } catch (IOException e) {
@@ -146,12 +132,7 @@ public class Projects_Controller  extends Globals implements Initializable ,Abov
             }
 
 
-
         }
-
-
-
-
 
         ActiveProjectsPanel.setText(String.valueOf(projectMap.size()));
 
@@ -159,11 +140,6 @@ public class Projects_Controller  extends Globals implements Initializable ,Abov
         colourDead();
 
         TotalRevenuePanel.setText(String.valueOf(totalRevenue()));
-
-
-
-
-
 
     }
 
@@ -179,7 +155,6 @@ public class Projects_Controller  extends Globals implements Initializable ,Abov
         }
         return min;
     }
-
 
 
     public int totalRevenue(){
@@ -210,26 +185,19 @@ public class Projects_Controller  extends Globals implements Initializable ,Abov
         {
             int count=0;
 
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/add_project.fxml"));
 
             Parent root = loader.load();
             proj_add_Controller ctrl = loader.getController();
             ctrl.SetBox(pnItems,count,this.TabPaneAnchor);
 
-
-
-
-
+            ctrl.setProjectStackPane(pnlProjects);
 
             setCounter(counter+1);
 
         }
 
-
     }
-
-
 
 }
 

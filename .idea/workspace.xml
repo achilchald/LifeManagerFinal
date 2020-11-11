@@ -20,46 +20,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8eb3ac6e-0f37-4e54-b71c-f412310a2f2c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/LifeManagerFinal.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Thing.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/bin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_21.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/LifeManager.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/True_Test_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/cssdialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4d3701db-ccf2-4316-a5b4-6b564a5b021c.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4d3701db-ccf2-4316-a5b4-6b564a5b021c/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Achil.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/java.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/javafx_sdk_11_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/adaptive.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/java.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/java1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/True_Test/demo/Controller.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/True_Test/demo/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/True_Test/demo/sample.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/LifeManagerFinal.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/LifeManagerFinal.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/True_Test_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/True_Test_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/qaplug_profiles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/True_Test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Customers_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Customers_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Edit_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Edit_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Editor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Editor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Projects_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Projects_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Worker_add_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Worker_add_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Workers_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Workers_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/cust_add_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/cust_add_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/proj_add_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/proj_add_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/CustomerInfo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/CustomerInfo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Customers.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Customers.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Edit_Project.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Edit_Project.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Edit_Worker.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Edit_Worker.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Projects.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Projects.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/ToDoItem.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/ToDoItem.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Workers.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Workers.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/sample/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/sample/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/Controllers/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/Controllers/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/Controllers/Customers_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/Controllers/Customers_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/Controllers/Edit_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/Controllers/Edit_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/Controllers/Editor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/Controllers/Editor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/Controllers/InvoiceItemController/InvoiceGuiController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/Controllers/InvoiceItemController/InvoiceGuiController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/Controllers/Projects_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/Controllers/Projects_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/Controllers/Worker_add_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/Controllers/Worker_add_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/Controllers/Workers_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/Controllers/Workers_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/Controllers/cust_add_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/Controllers/cust_add_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/Controllers/proj_add_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/Controllers/proj_add_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/Entities/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/Entities/Task.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/Methods/Database_Deleter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/Methods/Database_Deleter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/Methods/WriteToDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/Methods/WriteToDatabase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/fxml/CustomerInfo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/fxml/CustomerInfo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/fxml/Customers.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/fxml/Customers.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/fxml/Edit_Project.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/fxml/Edit_Project.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/fxml/Edit_Worker.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/fxml/Edit_Worker.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/fxml/Projects.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/fxml/Projects.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/fxml/ToDoItem.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/fxml/ToDoItem.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/fxml/Workers.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/fxml/Workers.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/sample/CalendarView$TimeSlot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/sample/CalendarView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/True_Test/sample/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/True_Test/sample/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Customers_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Customers_Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/Edit_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Edit_Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/Editor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Editor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fxml/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Projects_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Projects_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Worker_add_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Worker_add_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Workers_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Workers_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/cust_add_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/cust_add_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/proj_add_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/proj_add_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/CustomerInfo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/CustomerInfo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Customers.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Customers.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Edit_Project.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Edit_Project.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Edit_Worker.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Edit_Worker.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Projects.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Projects.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fxml/ToDoItem.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/ToDoItem.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fxml/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Workers.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Workers.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,14 +102,14 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Program Files/SceneBuilder/SceneBuilder.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -99,6 +121,17 @@
       <option name="MAIN_CLASS_NAME" value="sample.Main" />
       <module name="LifeManagerFinal" />
       <option name="VM_PARAMETERS" value="--module-path &quot;C:\Job\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -115,7 +148,12 @@
       <workItem from="1605013515910" duration="2000" />
       <workItem from="1605013527533" duration="16000" />
       <workItem from="1605013553834" duration="27000" />
-      <workItem from="1605013594877" duration="4596000" />
+      <workItem from="1605013594877" duration="4784000" />
+      <workItem from="1605018408368" duration="122000" />
+      <workItem from="1605018894423" duration="65000" />
+      <workItem from="1605018989810" duration="431000" />
+      <workItem from="1605019446516" duration="5057000" />
+      <workItem from="1605100889186" duration="6754000" />
     </task>
     <servers />
   </component>
@@ -132,43 +170,91 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="94" y="147" width="1092" height="834" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605014244557">
+    <state x="120" y="66" key="#Project_Structure" timestamp="1605019244366">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="94" y="147" width="1092" height="834" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.984@0.0.1280.984" timestamp="1605014244557" />
-    <state x="369" y="294" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1605013958658">
+    <state x="120" y="66" key="#Project_Structure/0.0.1280.984@0.0.1280.984" timestamp="1605019244366" />
+    <state x="131" y="0" width="1092" height="984" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605019479136">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="369" y="294" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1280.984@0.0.1280.984" timestamp="1605013958658" />
-    <state x="437" y="362" key="DetectedRootsChooserDialog" timestamp="1605013709461">
+    <state x="131" y="0" width="1092" height="984" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.984@0.0.1280.984" timestamp="1605019479136" />
+    <state x="369" y="294" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1605019361645">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="437" y="362" key="DetectedRootsChooserDialog/0.0.1280.984@0.0.1280.984" timestamp="1605013709461" />
-    <state x="315" y="209" key="FileChooserDialogImpl" timestamp="1605015189493">
+    <state x="369" y="294" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1280.984@0.0.1280.984" timestamp="1605019361645" />
+    <state x="543" y="162" key="#xdebugger.evaluate" timestamp="1605103596725">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="315" y="209" key="FileChooserDialogImpl/0.0.1280.984@0.0.1280.984" timestamp="1605015189493" />
-    <state width="1237" height="121" key="GridCell.Tab.0.bottom" timestamp="1605017911808">
+    <state x="543" y="162" key="#xdebugger.evaluate/0.0.1280.984@0.0.1280.984" timestamp="1605103596725" />
+    <state x="437" y="362" key="DetectedRootsChooserDialog" timestamp="1605019497163">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1237" height="121" key="GridCell.Tab.0.bottom/0.0.1280.984@0.0.1280.984" timestamp="1605017911808" />
-    <state width="1237" height="121" key="GridCell.Tab.0.center" timestamp="1605017911808">
+    <state x="437" y="362" key="DetectedRootsChooserDialog/0.0.1280.984@0.0.1280.984" timestamp="1605019497163" />
+    <state x="315" y="209" key="FileChooserDialogImpl" timestamp="1605107716636">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1237" height="121" key="GridCell.Tab.0.center/0.0.1280.984@0.0.1280.984" timestamp="1605017911808" />
-    <state width="1237" height="121" key="GridCell.Tab.0.left" timestamp="1605017911808">
+    <state x="315" y="209" key="FileChooserDialogImpl/0.0.1280.984@0.0.1280.984" timestamp="1605107716636" />
+    <state width="1237" height="325" key="GridCell.Tab.0.bottom" timestamp="1605107734621">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1237" height="121" key="GridCell.Tab.0.left/0.0.1280.984@0.0.1280.984" timestamp="1605017911808" />
-    <state width="1237" height="121" key="GridCell.Tab.0.right" timestamp="1605017911808">
+    <state width="1237" height="325" key="GridCell.Tab.0.bottom/0.0.1280.984@0.0.1280.984" timestamp="1605107734621" />
+    <state width="1237" height="325" key="GridCell.Tab.0.center" timestamp="1605107734621">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1237" height="121" key="GridCell.Tab.0.right/0.0.1280.984@0.0.1280.984" timestamp="1605017911808" />
-    <state x="120" y="66" key="SettingsEditor" timestamp="1605014044737">
+    <state width="1237" height="325" key="GridCell.Tab.0.center/0.0.1280.984@0.0.1280.984" timestamp="1605107734621" />
+    <state width="1237" height="325" key="GridCell.Tab.0.left" timestamp="1605107734621">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="120" y="66" key="SettingsEditor/0.0.1280.984@0.0.1280.984" timestamp="1605014044737" />
+    <state width="1237" height="325" key="GridCell.Tab.0.left/0.0.1280.984@0.0.1280.984" timestamp="1605107734621" />
+    <state width="1237" height="325" key="GridCell.Tab.0.right" timestamp="1605107734621">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1237" height="325" key="GridCell.Tab.0.right/0.0.1280.984@0.0.1280.984" timestamp="1605107734621" />
+    <state width="1237" height="325" key="GridCell.Tab.1.bottom" timestamp="1605107734622">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1237" height="325" key="GridCell.Tab.1.bottom/0.0.1280.984@0.0.1280.984" timestamp="1605107734622" />
+    <state width="1237" height="325" key="GridCell.Tab.1.center" timestamp="1605107734621">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1237" height="325" key="GridCell.Tab.1.center/0.0.1280.984@0.0.1280.984" timestamp="1605107734621" />
+    <state width="1237" height="325" key="GridCell.Tab.1.left" timestamp="1605107734621">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1237" height="325" key="GridCell.Tab.1.left/0.0.1280.984@0.0.1280.984" timestamp="1605107734621" />
+    <state width="1237" height="325" key="GridCell.Tab.1.right" timestamp="1605107734622">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1237" height="325" key="GridCell.Tab.1.right/0.0.1280.984@0.0.1280.984" timestamp="1605107734622" />
+    <state x="305" y="196" key="NewModule_or_Project.wizard" timestamp="1605019110766">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state x="305" y="196" key="NewModule_or_Project.wizard/0.0.1280.984@0.0.1280.984" timestamp="1605019110766" />
+    <state x="120" y="66" key="SettingsEditor" timestamp="1605019656409">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state x="120" y="66" key="SettingsEditor/0.0.1280.984@0.0.1280.984" timestamp="1605019656409" />
+    <state x="23" y="112" key="new project wizard" timestamp="1605019087202">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state x="23" y="112" key="new project wizard/0.0.1280.984@0.0.1280.984" timestamp="1605019087202" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="value" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="projectMap" language="JAVA" />
+        <watch expression="((Project)((HashMap.Node)((HashMap)projectMap).entrySet().toArray()[0]).getValue()).workers" language="JAVA" custom="Entities.Project,java.util.HashMap.Node,java.util.HashMap" />
+        <watch expression="((Project)((HashMap.Node)((HashMap)projectMap).entrySet().toArray()[0]).getValue()).workers" language="JAVA" custom="Entities.Project,java.util.HashMap.Node,java.util.HashMap" />
+        <watch expression="((Task)((java.util.ArrayList)((HashMap.Node)((HashMap)((Worker)((HashMap.Node)((HashMap)((Project)((HashMap.Node)((HashMap)projectMap).entrySet().toArray()[0]).getValue()).workers).entrySet().toArray()[0]).getValue()).todo).entrySet().toArray()[0]).getValue()).get(0)).status" custom="Entities.Task,Entities.Project,java.util.HashMap,Entities.Worker,java.util.HashMap.Node,java.util.ArrayList" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

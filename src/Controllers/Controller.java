@@ -19,13 +19,6 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-    //home projects calendar customers email exit
-    @FXML
-    private Pane pnlProjects = null;
-
-    @FXML
-    private VBox pnItems = null;
-
     @FXML
     private Button btnHome;
 
@@ -39,37 +32,10 @@ public class Controller implements Initializable {
     private Button btnItems;
 
     @FXML
-    private Button btnCalendar;
-
-    @FXML
-    private Button btnEmails;
-
-    @FXML
     private Button btnExit;
 
     @FXML
-    private Pane pnlCustomers;
-
-    @FXML
-    private Pane pnlHome;
-
-    @FXML
-    private Pane paneItems;
-
-    @FXML
-    private Pane pnlEmails;
-
-    @FXML
-    private Pane pnlExit;
-
-    @FXML
-    private Pane pnlCalendar;
-
-    @FXML
     private StackPane Stackpane;
-
-    @FXML
-    private Pane pnlWorkers;
 
     @FXML
     private Button btnWorkers;
@@ -77,14 +43,20 @@ public class Controller implements Initializable {
     @FXML
     private AnchorPane MainAnchor;
 
+    private Pane prj;
+    private Pane cust;
+    private Pane Items_sp;
+    private Pane Workers_sp;
+    private Pane home;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        pnlHome.setStyle("-fx-background-color : #50b065"); //green
-        //pnlEmails.setStyle("-fx-background-color : #ffffff"); //white
-        MainAnchor.setPrefWidth(1280);
+        MainAnchor.setPrefSize(1450, 760);
 
-        Pane prj = new Pane();
+
+        prj = new Pane();
         try {
             prj = FXMLLoader.load(getClass().getResource("/fxml/Projects.fxml"));
             prj.setId("project");
@@ -95,7 +67,7 @@ public class Controller implements Initializable {
 
         Stackpane.getChildren().add(prj);
 
-        Pane cust = new Pane();
+        cust = new Pane();
         try {
             cust = FXMLLoader.load(getClass().getResource("/fxml/Customers.fxml"));
             cust.setId("customers");
@@ -106,29 +78,18 @@ public class Controller implements Initializable {
 
         Stackpane.getChildren().add(cust);
 
-        Pane Calendar_sp = new Pane();
+        Items_sp = new Pane();
         try {
-            Calendar_sp = FXMLLoader.load(getClass().getResource("/fxml/fullCalendar.fxml"));
-            Calendar_sp.setId("calendar");
+            Items_sp = FXMLLoader.load(getClass().getResource("/fxml/Items.fxml"));
+            Items_sp.setId("items");
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Stackpane.getChildren().add(Calendar_sp);
+        Stackpane.getChildren().add(Items_sp);
 
-        Pane Items_sp = new Pane();
-                try {
-                    Items_sp = FXMLLoader.load(getClass().getResource("/fxml/Items.fxml"));
-                    Items_sp.setId("items");
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                Stackpane.getChildren().add(Items_sp);
-
-        Pane Workers_sp = new Pane();
+        Workers_sp = new Pane();
         try {
             Workers_sp = FXMLLoader.load(getClass().getResource("/fxml/Workers.fxml"));
             Workers_sp.setId("workers");
@@ -139,8 +100,19 @@ public class Controller implements Initializable {
 
         Stackpane.getChildren().add(Workers_sp);
 
+        home = new Pane();
+        try {
+            home = FXMLLoader.load(getClass().getResource("/fxml/dashboard.fxml"));
+            home.setId("home");
 
-        pnlHome.toFront();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Stackpane.getChildren().add(home);
+
+        home.toFront();
+
     }
 
     @FXML
@@ -151,41 +123,25 @@ public class Controller implements Initializable {
         stage.close();
     }
 
-
     public void handleClicks(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == btnCustomers) {
-            Stackpane.lookup("#customers").toFront();
-        }
+
         if (actionEvent.getSource() == btnHome) {
-            pnlHome.toFront();
+            home.toFront();
         }
-        if (actionEvent.getSource() == btnCalendar) {
-            Stackpane.lookup("#calendar").toFront();
+        if(actionEvent.getSource()==btnProjects) {
+            prj.toFront();
         }
-        if(actionEvent.getSource()==btnProjects)
-        {
-            Stackpane.lookup("#project").toFront();
+        if (actionEvent.getSource() == btnCustomers) {
+            cust.toFront();
         }
-
-        if(actionEvent.getSource()==btnItems)
-        {
-            Stackpane.lookup("#items").toFront();
+        if(actionEvent.getSource()==btnItems) {
+            Items_sp.toFront();
         }
-
-
-        if(actionEvent.getSource()== btnWorkers)
-        {
-            Stackpane.lookup("#workers").toFront();
+        if(actionEvent.getSource()== btnWorkers) {
+            Workers_sp.toFront();
         }
-
-        if(actionEvent.getSource()==btnExit)
-        {
+        if(actionEvent.getSource()==btnExit) {
             closeButtonAction();
-        }
-
-        if(actionEvent.getSource()==btnEmails)
-        {
-            pnlEmails.toFront();
         }
 
     }

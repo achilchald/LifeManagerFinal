@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="handleTasksPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="537.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+   <children>
+      <ComboBox fx:id="workersComboHandle" layoutX="102.0" layoutY="107.0" prefWidth="150.0" />
+      <Label layoutX="26.0" layoutY="111.0" text="Worker" />
+      <Label layoutX="26.0" layoutY="49.0" text="Task Name" />
+      <Label fx:id="NameTask" layoutX="102.0" layoutY="49.0" prefHeight="17.0" prefWidth="183.0" text="Label" />
+      <Button layoutX="214.0" layoutY="165.0" mnemonicParsing="false" onAction="#addStrayTask" text="Add" />
+      <Label fx:id="strayTaskId" layoutX="331.0" layoutY="41.0" text="ID" />
+      <Label fx:id="workerIDstray" layoutX="337.0" layoutY="90.0" text="ID" />
+   </children>
+</AnchorPane>

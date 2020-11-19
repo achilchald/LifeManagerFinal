@@ -5,7 +5,6 @@ import Entities.AboveGod;
 import Entities.Customer;
 import Entities.Linker;
 import Methods.Database_Deleter;
-import com.mysql.cj.util.StringUtils;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

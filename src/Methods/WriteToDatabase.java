@@ -161,13 +161,27 @@ public class WriteToDatabase extends Globals implements AboveGod {
 
     }
 
+
     public void UpdatePayment(int PaymentId,float NewPrice) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
         //here sonoo is database name, root is username and password
         Statement stmt = con.createStatement();
 
+
         stmt.executeUpdate("UPDATE PAYMENTS " + "Set PRICE = " + NewPrice + " WHERE PAYMENT_ID = " + PaymentId +  ";");
+
+    }
+
+    public void changeTaskStatus(boolean status,int taskId) throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+        //here sonoo is database name, root is username and password
+        Statement stmt = con.createStatement();
+
+
+        stmt.executeUpdate("Update tasks "+" Set status = "+ status+ " Where id = " +taskId +";");
 
 
     }
@@ -179,6 +193,8 @@ public class WriteToDatabase extends Globals implements AboveGod {
         Statement stmt = con.createStatement();
 
         stmt.executeUpdate("UPDATE CUSTOMER_ITEMS " + "Set PRICE = " + item.getPrice() +", DISCOUNT = "+item.getDiscount() + ", ISRECURRING = "+ item.isRecurring() +" WHERE ITEM_ID = " + item.getId() +  ";");
+
+
     }
 
 }

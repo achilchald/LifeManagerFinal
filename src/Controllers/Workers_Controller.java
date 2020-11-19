@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -25,7 +26,7 @@ import java.util.ResourceBundle;
 public class Workers_Controller  implements Initializable,AboveGod {
 
     @FXML
-    private Pane pnlWorkers;
+    private StackPane pnlWorkers;
 
     @FXML
     private Label TotalWorkersLabel;
@@ -94,7 +95,7 @@ public class Workers_Controller  implements Initializable,AboveGod {
 
                 Edit_Controller control = loader.getController();
 
-                control.setPane(addWorkerPane);
+                control.SetStackArea(pnlWorkers);
 
 
                 ((Label) box.getChildren().get(1)).setText(entry.getValue().getName());
@@ -141,6 +142,8 @@ public class Workers_Controller  implements Initializable,AboveGod {
             ctrl.SetBox(pnWorkerItems);
 
             ctrl.setWorkerPane(addWorkerPane);
+
+            ctrl.setWorkerStackPane(pnlWorkers);
 
 
             setCounter(counter+1);

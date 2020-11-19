@@ -30,47 +30,49 @@ public class FullCalendarView {
         currentYearMonth = yearMonth;
         // Create the calendar grid pane
         GridPane calendar = new GridPane();
-        calendar.setPrefSize(750, 500);
+        calendar.setPrefSize(350, 100);
         calendar.setGridLinesVisible(true);
         // Create rows and columns with anchor panes for the calendar
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 7; j++) {
                 AnchorPaneNode ap = new AnchorPaneNode();
-                ap.setPrefSize(200,200);
+                ap.setPrefSize(40,30);
                 calendar.add(ap,j,i);
                 allCalendarDays.add(ap);
             }
         }
         // Days of the week labels
-        Text[] dayNames = new Text[]{ new Text("Sunday"), new Text("Monday"), new Text("Tuesday"),
-                                        new Text("Wednesday"), new Text("Thursday"), new Text("Friday"),
-                                        new Text("Saturday") };
+        Text[] dayNames = new Text[]{ new Text("   S"), new Text("   M"), new Text("   T"),
+                                        new Text("   W"), new Text("   T"), new Text("   F"),
+                                        new Text("   S") };
         GridPane dayLabels = new GridPane();
-        dayLabels.setPrefWidth(600);
+        dayLabels.setPrefWidth(10);
         Integer col = 0;
         for (Text txt : dayNames) {
             AnchorPane ap = new AnchorPane();
-            txt.setFill(Paint.valueOf("#c4dbe9"));
-            ap.setPrefSize(200, 10);
-            ap.setBottomAnchor(txt, 5.0);
+            txt.setFill(Paint.valueOf("#000000"));
+            ap.setPrefSize(40, 5);
+            ap.setBottomAnchor(txt, 1.0);
             ap.getChildren().add(txt);
             dayLabels.add(ap, col++, 0);
 
         }
         // Create calendarTitle and buttons to change current month
         calendarTitle = new Text();
-        Button previousMonth = new Button(" << ");
+        Button previousMonth = new Button("<");
         previousMonth.setOnAction(e -> previousMonth());
-        Button nextMonth = new Button(" >> ");
+        Button nextMonth = new Button(">");
         nextMonth.setOnAction(e -> nextMonth());
-        Button refresh = new Button(" refresh ");
+        Button refresh = new Button("R");
         refresh.setOnAction(e -> refresh());
         HBox titleBar = new HBox(previousMonth, calendarTitle, nextMonth,refresh);
-        titleBar.setAlignment(Pos.BASELINE_CENTER);
+        titleBar.setStyle("-fx-background-color: white");
+        titleBar.setAlignment(Pos.CENTER_LEFT);
         // Populate calendar with the appropriate day numbers
         populateCalendar(yearMonth);
         // Create the calendar view
         view = new VBox(titleBar, dayLabels, calendar); //---------------------------------------------
+        view.setStyle("-fx-background-color: white");
     }
 
     /**
@@ -96,28 +98,28 @@ public class FullCalendarView {
             ArrayList<Appointment> myAppointments = appointments.ReadFile("src\\Csv\\appointments.csv");
 
             Text txt = new Text(String.valueOf(calendarDate.getDayOfMonth()));
-            txt.setFill(Paint.valueOf("#c4dbe9"));
+            txt.setFill(Paint.valueOf("#000000"));
 
             if( hasAppointment(calendarDate, myAppointments) ) {
                 setAppointment(txt, calendarDate);
-                ap.setStyle("-fx-background-color: #2f3e47");
+                ap.setStyle("-fx-background-color: #9d9d9d");
             }else{
-                ap.setStyle("-fx-background-color: #253138");
+                ap.setStyle("-fx-background-color: #ffffff");
             }
-            ap.setBorder(new Border(new BorderStroke(Color.rgb(196,219,233),
+            ap.setBorder(new Border(new BorderStroke(Color.rgb(230,230,230),
                     BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
             //---------------------------------------------------------------------------------------------------------------
 
 
             ap.setDate(calendarDate);
-            ap.setTopAnchor(txt, 5.0);
-            ap.setLeftAnchor(txt, 5.0);
+            ap.setTopAnchor(txt, 9.0);
+            ap.setLeftAnchor(txt, 9.0);
             ap.getChildren().add(txt);
             calendarDate = calendarDate.plusDays(1);
         }
         // Change the title of the calendar
-        calendarTitle.setFill(Paint.valueOf("#c4dbe9"));
+        calendarTitle.setFill(Paint.valueOf("#000000"));
         calendarTitle.setText(yearMonth.getMonth().toString() + " " + String.valueOf(yearMonth.getYear()));
 
     }
@@ -157,7 +159,8 @@ public class FullCalendarView {
     public void setAppointment (Text txt, LocalDate calendarDate){
 
 
-        txt.setText(String.valueOf(calendarDate.getDayOfMonth())+"\n"+appointmentTitle);
+        //txt.setText(String.valueOf(calendarDate.getDayOfMonth()));
+        //txt.setStyle("-fx-font-weight: bold");
 
     }
 

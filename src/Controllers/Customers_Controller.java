@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -41,7 +42,7 @@ adding a customer to the application and showing him in this controller
 public class Customers_Controller implements AboveGod , Initializable  {
 
     @FXML
-    private Pane pnlCustomers;
+    private StackPane pnlCustomers;
 
     @FXML
     private Pane EditArea;
@@ -102,12 +103,9 @@ public class Customers_Controller implements AboveGod , Initializable  {
                 entry.getValue().GetCustomerData();
             }
 
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
-
 
 
         //In this loop the Customers are loaded in the GUI and controllers are added to their GUI Elements
@@ -127,11 +125,7 @@ public class Customers_Controller implements AboveGod , Initializable  {
                 //Get the Gui element Controller
                 Edit_Controller control = loader.getController();
 
-
-                //todo will be removed
-               // control.SetEditArea(EditArea);
-               // control.SetIncomeLabel(IncomeLabel);
-
+                control.SetStackArea(pnlCustomers);
 
 
                 ((Label)box.getChildren().get(1)).setText(entry.getValue().getName());
@@ -213,6 +207,7 @@ public class Customers_Controller implements AboveGod , Initializable  {
             //Set to the controller the Vbox containing the customers and the small area to appear
             ctrl.SetCustomerVbox(pnItems);
             ctrl.SetEditArea(EditArea);
+            ctrl.setCustomerStackPane(pnlCustomers);
 
             setCounter(counter+1);
 

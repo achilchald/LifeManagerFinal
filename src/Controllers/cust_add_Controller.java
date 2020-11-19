@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -53,12 +54,18 @@ public class cust_add_Controller extends Globals implements AboveGod {
 
     private Pane EditArea;
 
+    private StackPane Stackpane;
+
     public void SetCustomerVbox(VBox CustomerBox)
     {
         this.CustomerBox = CustomerBox;
     }
     public void SetEditArea(Pane EditPane){
         this.EditArea = EditPane;
+    }
+
+    public void setCustomerStackPane(StackPane Stackpane){
+        this.Stackpane=Stackpane;
     }
 
     @FXML
@@ -91,6 +98,9 @@ public class cust_add_Controller extends Globals implements AboveGod {
 
 
         control.SetEditArea(EditArea);
+
+        control.SetStackArea(Stackpane);
+
 
 
         //give the items some effect

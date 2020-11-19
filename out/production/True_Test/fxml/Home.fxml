@@ -1,134 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="MainAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1612.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.Controller">
+<AnchorPane fx:id="MainAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1612.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="207.0" style="-fx-background-color: #05071F;" stylesheets="@../sample/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" layoutX="-42.0" prefHeight="825.0" prefWidth="291.0" style="-fx-background-color: #2a2d42;" stylesheets="@../sample/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="181.0" fitWidth="187.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../kwstas/LifeManager/src/sample/logo_casperweb.png" />
-               </image>
-               <VBox.margin>
-                  <Insets bottom="30.0" top="30.0" />
-               </VBox.margin></ImageView>
-            <Button fx:id="btnHome" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Home" textAlignment="CENTER" textFill="#e7e5e5">
+            <Button fx:id="btnHome" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="215.0" styleClass="menuButton" stylesheets="@/sample/style.css" text="Home" textAlignment="CENTER" textFill="#e7e5e5">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
-               <padding>
-                  <Insets left="25.0" />
-               </padding>
                <font>
                   <Font size="18.0" />
                </font>
+               <padding>
+                  <Insets left="-45.0" />
+               </padding>
+               <graphic>
+                  <SVGPath content="M287.6,250.6l-9.2,7.6v8.2c0,0.5,0.4,0.8,0.8,0.8h5.6c0.5,0,0.8-0.4,0.8-0.8v-4.8c0-0.5,0.4-0.8,0.8-0.8h3.2c0.4,0,0.8,0.4,0.8,0.8v4.8c0,0.5,0.4,0.8,0.8,0.8l0,0h5.6c0.4,0,0.8-0.4,0.8-0.8v-8.2l-9.2-7.6C288.1,250.4,287.8,250.4,287.6,250.6L287.6,250.6z M302.2,255.8l-4.2-3.4v-6.9c0-0.4-0.3-0.6-0.6-0.6h-2.8c-0.4,0-0.6,0.3-0.6,0.6v3.6l-4.5-3.7c-0.9-0.8-2.1-0.8-3.1,0l-12.6,10.4c-0.3,0.2-0.3,0.6-0.1,0.9l0,0l1.3,1.5c0.2,0.3,0.6,0.3,0.9,0.1l0,0l11.8-9.7c0.3-0.2,0.6-0.2,0.8,0l11.8,9.7c0.3,0.2,0.6,0.2,0.9-0.1l0,0l1.3-1.5C302.4,256.3,302.4,256,302.2,255.8L302.2,255.8L302.2,255.8z" fill="#e7e5e5" translateX="-45.0">
+                     <styleClass>
+                        <String fx:value="menuIcon" />
+                        <String fx:value="menuButton" />
+                     </styleClass></SVGPath>
+               </graphic>
             </Button>
-            <Button fx:id="btnProjects" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Projects" textAlignment="CENTER">
-               <padding>
-                  <Insets left="25.0" />
-               </padding>
+            <Button fx:id="btnProjects" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="215.0" styleClass="menuButton" stylesheets="@/sample/style.css" text="Projects" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="-30.0" />
+               </padding>
+               <graphic>
+                  <SVGPath content="M259.1,259.8c0,0.5-0.4,0.8-0.8,0.8h-4.6c-0.5,0-0.7-0.4-0.7-0.8v-2.3h-9.2v6.9c0,1.3,1,2.3,2.3,2.3h19.9c1.2,0,2.3-1.1,2.3-2.3v-6.9h-9.2L259.1,259.8L259.1,259.8z M266,249.8h-3.8v-2.3c0-1.3-1.1-2.3-2.3-2.3h-7.7c-1.3,0-2.3,1-2.3,2.3v2.3H246c-1.3,0-2.3,1.1-2.3,2.3v3.8h24.6v-3.8C268.3,250.9,267.2,249.8,266,249.8z M259.1,249.8H253v-1.5h6.2V249.8z" fill="#e7e5e5" translateX="-53.0" />
+               </graphic>
             </Button>
-            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Customers" textAlignment="CENTER">
-               <padding>
-                  <Insets left="25.0" />
-               </padding>
+            <Button fx:id="btnCustomers" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="215.0" styleClass="menuButton" stylesheets="@/sample/style.css" text="Customers" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
+               <padding>
+                  <Insets left="-5.0" />
+               </padding>
+               <graphic>
+                  <SVGPath content="M309.2,254.5c1.7,0,3.1-1.4,3.1-3.1c0-1.7-1.4-3.1-3.1-3.1s-3.1,1.4-3.1,3.1C306.1,253.1,307.5,254.5,309.2,254.5z M330.7,254.5c1.7,0,3.1-1.4,3.1-3.1c0-1.7-1.4-3.1-3.1-3.1c-1.7,0-3.1,1.4-3.1,3.1C327.7,253.1,329,254.5,330.7,254.5z M332.3,256h-3.1c-0.8,0-1.6,0.4-2.2,0.9c1.9,1.1,3.3,3,3.6,5.2h3.2c0.8,0,1.5-0.7,1.5-1.5v-1.5C335.3,257.4,334,256,332.3,256z M320,256c3,0,5.4-2.4,5.4-5.4c0-3-2.4-5.4-5.4-5.4s-5.4,2.4-5.4,5.4C314.6,253.6,317,256,320,256z M323.7,257.5h-0.4c-1,0.5-2.1,0.8-3.3,0.8s-2.3-0.3-3.3-0.8h-0.4c-3,0-5.5,2.5-5.5,5.5v1.4c0,1.3,1,2.3,2.3,2.3h13.8c1.3,0,2.3-1,2.3-2.3v-1.4C329.2,260,326.7,257.5,323.7,257.5z M312.9,256.9c-0.6-0.6-1.3-0.9-2.2-0.9h-3.1c-1.7,0-3.1,1.4-3.1,3.1v1.5c0,0.8,0.7,1.5,1.5,1.5h3.2C309.6,259.9,311,258,312.9,256.9L312.9,256.9z" fill="#e7e5e5" translateX="-66.0" />
+               </graphic>
             </Button>
-            <Button fx:id="btnItems" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Items" textAlignment="CENTER">
-               <padding>
-                  <Insets left="25.0" />
-               </padding>
+            <Button fx:id="btnItems" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="215.0" styleClass="menuButton" stylesheets="@/sample/style.css" text="Items" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
+               <padding>
+                  <Insets left="-45.0" />
+               </padding>
+               <graphic>
+                  <SVGPath content="M264.8,246.5h-17.7c-1.1,0-2,0.9-2,2v15c0,1.1,0.9,2,2,2h17.7c1.1,0,2-0.9,2-2v-15C266.9,247.4,266,246.5,264.8,246.5z M254.6,262.8h-6.8v-4.1h6.8V262.8z M254.6,256h-6.8v-4.1h6.8V256z M264.2,262.8h-6.8v-4.1h6.8V262.8z M264.2,256h-6.8v-4.1h6.8V256z" fill="#e7e5e5" translateX="-46.0" />
+               </graphic>
             </Button>
-            <Button fx:id="btnCalendar" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Calendar">
-               <padding>
-                  <Insets left="25.0" />
-               </padding>
+            <Button fx:id="btnWorkers" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="215.0" styleClass="menuButton" stylesheets="@/sample/style.css" text="Workers">
                <font>
                   <Font size="18.0" />
                </font>
+               <padding>
+                  <Insets left="-25.0" />
+               </padding>
+               <graphic>
+                  <SVGPath content="M975.9,550.1c-0.2-1.2-0.7-2.4-1.6-3.3c-0.9-1-2.1-1.7-3.4-2.1c-0.8-0.2-1.5-0.2-2.3-0.2c0,0-0.1,0-0.2,0c-1.3,0.6-2.6,0.8-4,0.8c-1-0.1-2-0.3-2.8-0.7c-0.2-0.1-0.4-0.1-0.6-0.1c-0.2,0-0.5,0-0.7,0c-0.6,0-1.3,0.1-1.9,0.3c-1.1,0.4-2,1-2.8,1.8c-0.4,0.5-0.8,1.1-1.1,1.7c-0.3,0.7-0.5,1.5-0.6,2.2c0,0.3,0,0.6,0,0.8c0.2,0.6,0.6,0.9,1.3,0.9c3.2,0,6.4,0,9.7,0c3.2,0,6.4,0,9.6,0c0.2,0,0.3,0,0.5,0c0.5-0.1,0.9-0.6,0.9-1.1C976,550.9,976,550.5,975.9,550.1z M958.3,535.8c4.4,0,8.8,0,13.2,0c0.4,0,0.5-0.2,0.5-0.5c0-0.4,0-0.9,0-1.3c0-0.1,0-0.2,0-0.2c0-0.2-0.2-0.3-0.3-0.3c-0.1,0-0.2,0-0.3,0s-0.2,0-0.2-0.2c0-0.2,0-0.5-0.1-0.8c-0.2-1-0.6-1.9-1.2-2.7c-0.5-0.6-1.2-1.1-1.9-1.4c-0.1,0-0.2,0-0.2,0.1c-0.3,0.6-0.6,1.2-0.9,1.8c-0.1,0.2-0.2,0.4-0.3,0.7h0c0,0,0-0.1,0-0.2c0-0.9,0-1.9,0-2.8c0-0.5-0.3-0.9-0.9-0.9c-0.5,0-1,0-1.4,0c-0.6,0-0.9,0.4-0.9,0.9c0,0.9,0,1.8,0,2.8c0,0,0,0.1,0,0.2h0c0,0,0-0.1-0.1-0.2c-0.4-0.8-0.8-1.5-1.2-2.3c-0.1-0.1-0.1-0.2-0.2-0.1c-0.8,0.4-1.4,0.8-1.9,1.5c-0.8,1-1.2,2.1-1.3,3.3c0,0.2,0,0.2-0.2,0.2c-0.4,0-0.6,0.2-0.6,0.6c0,0.4,0,0.9,0,1.3C957.8,535.7,958,535.8,958.3,535.8z M958.9,537.4c-0.2,0-0.2,0-0.2,0.2c0.3,1.9,1.3,3.4,2.9,4.4c1.2,0.8,2.6,1.1,4,0.9c1.6-0.2,2.9-0.9,4-2.1c0.8-0.9,1.4-2,1.5-3.3c0-0.2,0-0.2-0.2-0.2c-2,0-4,0-6.1,0l0,0C962.9,537.4,960.9,537.4,958.9,537.4z" fill="#e7e5e5" translateX="-56.0" />
+               </graphic>
             </Button>
-            <Button fx:id="btnWorkers" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" stylesheets="@../../../kwstas/LifeManager/src/sample/style.css" text="Workers">
-               <padding>
-                  <Insets left="25.0" />
-               </padding>
+            <Button fx:id="btnExit" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="22.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="215.0" styleClass="menuButton" text="Exit">
                <font>
                   <Font size="18.0" />
                </font>
-            </Button>
-            <Button fx:id="btnExit" alignment="BASELINE_LEFT" contentDisplay="CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="140.0" text="Exit">
                <padding>
-                  <Insets left="25.0" />
+                  <Insets left="-60.0" />
                </padding>
-               <font>
-                  <Font size="18.0" />
-               </font>
+               <graphic>
+                  <SVGPath content="M261.8,256.7l-6.7,6.7c-0.6,0.6-1.6,0.2-1.6-0.7v-3.8H248c-0.5,0-1-0.4-1-1v-3.8c0-0.5,0.4-1,1-1h5.4v-3.8c0-0.8,1-1.3,1.6-0.7l6.7,6.7C262.2,255.7,262.2,256.3,261.8,256.7z M249.6,263.2v-1.6c0-0.3-0.2-0.5-0.5-0.5h-3.4c-0.7,0-1.3-0.6-1.3-1.3v-7.7c0-0.7,0.6-1.3,1.3-1.3h3.4c0.3,0,0.5-0.2,0.5-0.5v-1.6c0-0.3-0.2-0.5-0.5-0.5h-3.4c-2.1,0-3.8,1.7-3.8,3.8v7.7c0,2.1,1.7,3.8,3.8,3.8h3.4C249.4,263.7,249.6,263.5,249.6,263.2z" fill="#e7e5e5" translateX="-38.0" />
+               </graphic>
             </Button>
          </children>
+         <padding>
+            <Insets top="175.0" />
+         </padding>
       </VBox>
-      <StackPane fx:id="Stackpane" layoutX="209.0" prefHeight="836.0" prefWidth="1413.0" style="-fx-background-color: #02030A;">
-         <children>
-            <Pane fx:id="pnlProjects" prefHeight="690.0" prefWidth="1004.0" />
-            <Pane fx:id="pnlWorkers" prefHeight="576.0" prefWidth="919.0" />
-            <Pane fx:id="pnlExit" prefHeight="576.0" prefWidth="912.0" />
-            <Pane fx:id="pnlHome" prefHeight="554.0" prefWidth="793.0" />
-            <Pane fx:id="pnlCalendar" prefHeight="554.0" prefWidth="793.0" />
-            <Pane fx:id="paneItems" prefHeight="576.0" prefWidth="909.0" />
-         </children>
-      </StackPane>
-      <ImageView fitHeight="23.0" fitWidth="27.0" layoutX="30.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+      <StackPane fx:id="Stackpane" layoutX="209.0" prefHeight="836.0" prefWidth="1413.0" style="-fx-background-color: #02030A;" />
+      <ImageView fitHeight="172.0" fitWidth="262.0" layoutX="-22.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../sample/calendar.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="23.0" fitWidth="27.0" layoutX="30.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../sample/8807.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="28.0" fitWidth="38.0" layoutX="3.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" x="28.0">
-         <image>
-            <Image url="@../sample/projects-icon-png-17.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="23.0" fitWidth="27.0" layoutX="31.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../sample/PinClipart.com_vault-boy-clipart_1442705.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" x="32.0">
-         <image>
-            <Image url="@../sample/unnamed.png" />
-            
-         </image>
-         <viewport>
-            <Rectangle2D />
-         </viewport>
-      </ImageView>
-      <ImageView fitHeight="23.0" fitWidth="27.0" layoutX="26.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" x="8.0" y="19.0">
-         <image>
-            <Image url="@../sample/free-exit-logout-icon-2857-thumb.png" />
+            <Image url="@../sample/trashArtboard%201@2x.png" />
          </image>
       </ImageView>
    </children>

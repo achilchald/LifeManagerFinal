@@ -73,4 +73,8 @@ public class Task {
     public boolean getStatus() {
         return status;
     }
+
+    public void changeStatus(){
+        this.status=!status;
+    }
 }

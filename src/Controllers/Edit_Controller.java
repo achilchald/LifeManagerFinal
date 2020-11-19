@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -97,13 +98,24 @@ public class Edit_Controller implements AboveGod {
     @FXML
     private HBox HBoxToDo;
 
+    private Label completed;
+
+    private Label notCompleted;
+
+    private ProgressBar bar;
+
+    private Label progressLabel;
+
+    private StackPane stackPane;
 
 
 
     //-----------------------------
 
 
-    public void SetEditArea (Pane EditArea){this.EditPane = EditArea;}
+    public void SetEditArea (Pane EditArea) {this.EditPane = EditArea;}
+
+    public void SetStackArea (StackPane stackPane) {this.stackPane = stackPane;}
 
 
     //This method sets the is of the price label of the customer
@@ -122,24 +134,17 @@ public class Edit_Controller implements AboveGod {
     //todo Na kleinei kai na apo8ikeyei to arxeio
     public void Edit_Customer(MouseEvent event) throws IOException  {
 
-
         //Load the customer edit GUI
         FXMLLoader EditLoader = new FXMLLoader(getClass().getResource("/fxml/CustomerInfo.fxml"));
-        Parent root = EditLoader.load();
-
-
-
-        //Append a controller to the GUI
+        Pane pane = EditLoader.load();
         Editor CustomerEditor = EditLoader.getController();
         CustomerEditor.SetEditArea(itemC,TotalIncome);
 
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Add Item");
-        stage.show();
+        pane.setId("pasxalinoavgo");
 
+        stackPane.getChildren().add(pane);
 
-
+        pane.toFront();
     }
 
 
@@ -161,8 +166,6 @@ public class Edit_Controller implements AboveGod {
 
             customerMap.remove(Customerid.getText());
 
-
-
         }
     }
 
@@ -172,14 +175,15 @@ public class Edit_Controller implements AboveGod {
     public void Edit_Worker(MouseEvent event) throws  IOException{
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Edit_Worker.fxml"));
-
-        Parent root = loader.load();
+        Pane pane = loader.load();
         Editor ctrl = loader.getController();
+        ctrl.setWorkerBox(WorkerItem);
 
+        pane.setId("pasxalinoavgo");
 
+        stackPane.getChildren().add(pane);
 
-        ctrl.setWorkerBox(WorkerItem,this.addPane);
-
+        pane.toFront();
     }
 
     public void deleteWorker() throws SQLException, ClassNotFoundException {
@@ -213,16 +217,15 @@ public class Edit_Controller implements AboveGod {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Edit_Project.fxml"));
 
-        Parent root = loader.load();
+        Pane pane = loader.load();
         Editor ctrl = loader.getController();
         ctrl.SetBox1(Hbc);
 
-        //The following both lines are the only addition we need to pass the arguments
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Editor");
-        stage.show();
+        pane.setId("pasxalinoavgo");
 
+        stackPane.getChildren().add(pane);
+
+        pane.toFront();
 
     }
 
@@ -270,6 +273,74 @@ public class Edit_Controller implements AboveGod {
         stage.setScene(new Scene(root));
         stage.setTitle("Task");
         stage.show();
+
+    }
+
+    public void setLabel(Label completed,Label notCompleted,ProgressBar bar,Label progress){
+
+        this.completed = completed;
+
+        this.notCompleted = notCompleted;
+
+        this.bar=bar;
+
+        this.progressLabel=progress;
+
+
+    }
+
+    public void setStatus() throws SQLException, ClassNotFoundException {
+        int ProjectId = Integer.parseInt(((Label) ToDoItem.getChildren().get(7)).getText());
+        int WorkerId = Integer.parseInt(((Label) ToDoItem.getChildren().get(5)).getText());
+        int IndexOfTask =  Integer.parseInt(((Label) ToDoItem.getChildren().get(6)).getText());
+        int taskId= Integer.parseInt(ToDoItem.getId());
+
+
+        projectMap.get(ProjectId).getWorkers().get(WorkerId).getTasks().get(ProjectId).get(IndexOfTask).changeStatus();
+
+        boolean status=projectMap.get(ProjectId).getWorkers().get(WorkerId).getTasks().get(ProjectId).get(IndexOfTask).getStatus();
+
+        int completed_tasks= Integer.parseInt(completed.getText());
+        int pending_tasks= Integer.parseInt(notCompleted.getText());
+        double total=completed_tasks+pending_tasks;
+
+        if (status) {
+            ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #34eb37; ");//set to green
+
+
+            completed_tasks++;
+            pending_tasks--;
+
+            completed.setText(String.valueOf(completed_tasks));
+            notCompleted.setText(String.valueOf(pending_tasks));
+
+            double progress=completed_tasks/total;
+
+            bar.setProgress(progress);
+
+            progressLabel.setText(String.valueOf(Math.round(progress*100)));
+
+
+
+
+        }
+        else {
+            ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #e0e0e0; ");
+            completed_tasks--;
+            pending_tasks++;
+
+            completed.setText(String.valueOf(completed_tasks));
+            notCompleted.setText(String.valueOf(pending_tasks));
+
+            double progress=completed_tasks/total;
+
+            bar.setProgress(progress);
+
+            progressLabel.setText(String.valueOf(Math.round(progress*100)));
+        }
+        System.out.println("Task id= "+taskId);
+        WriteToDatabase wr = new WriteToDatabase();
+        wr.changeTaskStatus(status,taskId);
 
     }
 

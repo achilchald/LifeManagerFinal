@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="wholePanel" prefHeight="542.0" prefWidth="346.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Editor">
+   <children>
+      <TextField fx:id="Title" layoutX="110.0" layoutY="153.0" />
+      <TextField fx:id="Time" layoutX="110.0" layoutY="209.0" />
+      <TextField fx:id="Attendee" layoutX="110.0" layoutY="263.0" />
+      <TextArea fx:id="Notes" layoutX="110.0" layoutY="311.0" prefHeight="117.0" prefWidth="149.0" />
+      <Label layoutX="44.0" layoutY="157.0" text="Title" />
+      <Label layoutX="43.0" layoutY="213.0" text="Time" />
+      <Label layoutX="45.0" layoutY="267.0" text="Attendee" />
+      <Button fx:id="Change" layoutX="145.0" layoutY="492.0" mnemonicParsing="false" onAction="#pressed" text="Change" />
+      <Label layoutX="46.0" layoutY="311.0" text="Notes" />
+      <RadioButton fx:id="Important" layoutX="46.0" layoutY="449.0" mnemonicParsing="false" onAction="#setImportant" text="Important" />
+      <RadioButton fx:id="Regular" layoutX="136.0" layoutY="449.0" mnemonicParsing="false" onAction="#setRegular" text="Regular" />
+      <RadioButton fx:id="Unimportant" layoutX="215.0" layoutY="449.0" mnemonicParsing="false" onAction="#setUnimportant" text="Unimportant" />
+      <Label layoutX="43.0" layoutY="22.0" text="Edit appointment">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TextField fx:id="date" layoutX="110.0" layoutY="97.0" />
+      <Label layoutX="44.0" layoutY="101.0" text="Date" />
+   </children>
+</AnchorPane>

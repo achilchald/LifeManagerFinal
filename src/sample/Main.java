@@ -60,7 +60,8 @@ public class Main extends Application {
             primaryStage.setY(event.getScreenY() - y);
 
         });
-        root.prefWidth(screenBounds.getWidth());
+        root.prefHeight(1280);
+        root.prefWidth(1024);
         primaryStage.show();
     }
 

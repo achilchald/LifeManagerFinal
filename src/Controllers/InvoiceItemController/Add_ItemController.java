@@ -92,7 +92,7 @@ public class Add_ItemController implements AboveGod {
         pane.setId(String.valueOf(maxId));
 
         ctrl.SetInvoiceID(InvoiceID);
-        ctrl.SetItemId(temp.getType());
+        ctrl.SetItemId(temp.getId());
         ctrl.SetIdAndItemsBox(pane.getId(),ItemsList);
        // ctrl.SetPriceLabels(cost,TotalIncome,Cu);
         ctrl.SetItemList(ItemList);

@@ -139,6 +139,7 @@ public class Controller implements Initializable {
 
         Stackpane.getChildren().add(Workers_sp);
 
+
         pnlHome.toFront();
     }
 

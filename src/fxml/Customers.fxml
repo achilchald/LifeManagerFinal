@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="pnlCustomers" prefHeight="782.0" prefWidth="1314.0" style="-fx-background-color: #253138;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.Customers_Controller">
+<Pane fx:id="pnlCustomers" prefHeight="782.0" prefWidth="1314.0" style="-fx-background-color: #253138;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Customers_Controller">
    <children>
       <TextField layoutX="575.0" layoutY="40.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #253138; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
       <Label layoutX="14.0" layoutY="36.0" text="Customers" textFill="#c4dbe9">
@@ -73,7 +73,7 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="190.0" prefHeight="42.0" prefWidth="746.0" spacing="80.0" style="-fx-background-color: #05071F;" stylesheets="@../sample/style.css">
          <children>
-            <Label prefHeight="17.0" prefWidth="118.0" text="Company Name" textFill="#c4dbe9" wrapText="true">
+            <Label fx:id="CustomerName" onMouseClicked="#SortCustomers" prefHeight="17.0" prefWidth="118.0" text="Company Name" textFill="#c4dbe9" wrapText="true">
                <HBox.margin>
                   <Insets left="50.0" />
                </HBox.margin>
@@ -83,7 +83,7 @@
                   <Insets left="40.0" />
                </HBox.margin>
             </Label>
-            <Label text="Amount" textFill="#c4dbe9">
+            <Label fx:id="CustomerPrice" onMouseClicked="#SortCustomers" text="Amount" textFill="#c4dbe9">
                <HBox.margin>
                   <Insets left="65.0" />
                </HBox.margin>

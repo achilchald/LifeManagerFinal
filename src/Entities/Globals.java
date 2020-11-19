@@ -6,4 +6,5 @@ public class Globals {
     public static int LastPaymentId = 0;
     public static int LastCustomerId = 0;
     public static int lastTaskId = 0;
+    public static int LastItemId = 0;
 }

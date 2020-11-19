@@ -9,31 +9,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="pnlCustomers" prefHeight="839.0" prefWidth="1361.0" style="-fx-background-color: #253138;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.InvoiceItemController.InvoiceGuiController">
+<Pane fx:id="pnlCustomers" prefHeight="839.0" prefWidth="1361.0" style="-fx-background-color: #253138;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.InvoiceItemController.InvoiceGuiController">
    <children>
       <Label layoutX="50.0" layoutY="36.0" text="Invoice #ID" textFill="#c4dbe9">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER_LEFT" layoutX="50.0" layoutY="217.0" prefHeight="42.0" prefWidth="496.0" spacing="80.0" style="-fx-background-color: #05071F;" stylesheets="@../sample/style.css">
+      <HBox alignment="CENTER_LEFT" layoutX="50.0" layoutY="220.0" prefHeight="42.0" prefWidth="546.0" spacing="80.0" style="-fx-background-color: #05071F;" stylesheets="@../sample/style.css">
          <children>
-            <Label prefHeight="17.0" prefWidth="118.0" text="Item" textFill="#c4dbe9" wrapText="true">
+            <Label prefHeight="17.0" prefWidth="33.0" text="Item" textFill="#c4dbe9" wrapText="true">
                <HBox.margin>
                   <Insets left="50.0" />
                </HBox.margin>
             </Label>
-            <Label text="Quantity" textFill="#c4dbe9">
+            <Label prefHeight="17.0" prefWidth="59.0" text="Discount" textFill="#c4dbe9">
                <HBox.margin>
                   <Insets left="25.0" />
                </HBox.margin>
             </Label>
-            <Label text="Price" textFill="#c4dbe9">
+            <Label prefHeight="17.0" prefWidth="81.0" text="Price" textFill="#c4dbe9">
                <HBox.margin>
                   <Insets left="-26.0" />
                </HBox.margin>
             </Label>
-            <Label text="Menu" textFill="#c4dbe9">
+            <Label prefHeight="17.0" prefWidth="91.0" text="Menu" textFill="#c4dbe9">
                <HBox.margin>
                   <Insets left="-40.0" />
                </HBox.margin>
@@ -54,19 +54,19 @@
                   <Insets left="25.0" />
                </HBox.margin>
             </Label>
-            <Label text="Payment method" textFill="#c4dbe9">
+            <Label prefHeight="17.0" prefWidth="65.0" text="Payment id" textFill="#c4dbe9">
                <HBox.margin>
                   <Insets left="-55.0" />
-               </HBox.margin>
-            </Label>
-            <Label text="Note" textFill="#c4dbe9">
-               <HBox.margin>
-                  <Insets left="13.0" />
                </HBox.margin>
             </Label>
             <Label text="Amount" textFill="#c4dbe9">
                <HBox.margin>
                   <Insets left="25.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="Note" textFill="#c4dbe9">
+               <HBox.margin>
+                  <Insets left="13.0" />
                </HBox.margin>
             </Label>
             <Label text="Menu" textFill="#c4dbe9">
@@ -91,12 +91,12 @@
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="ActiveCustomersPanel" text="0" textFill="#5e6cc3">
+                  <Label fx:id="InvoiceCostLabel" text="0" textFill="#5e6cc3">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
-                  <Label text="Statistic #1" textFill="#c4dbe9" />
+                  <Label text="Invoice Cost" textFill="#c4dbe9" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -107,12 +107,12 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="IncomeLabel" text="0" textFill="#5e6cc3">
+                  <Label fx:id="PayedAmountLabel" text="0" textFill="#5e6cc3">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
-                  <Label text="Statistic #2" textFill="#c4dbe9" />
+                  <Label text="Payed Amount" textFill="#c4dbe9" />
                </children>
                <HBox.margin>
                   <Insets />
@@ -120,12 +120,12 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="HostingLabel" text="0" textFill="#5e6cc3">
+                  <Label fx:id="DueAmountLabel" text="0" textFill="#5e6cc3">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
-                  <Label text="Statistic #3" textFill="#c4dbe9" />
+                  <Label prefHeight="17.0" prefWidth="72.0" text="Due Amount" textFill="#c4dbe9" />
                </children>
                <HBox.margin>
                   <Insets />
@@ -133,12 +133,12 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="HostingLabel1" text="0" textFill="#5e6cc3">
+                  <Label fx:id="ChangeLabel" text="0" textFill="#5e6cc3">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
-                  <Label text="Statistic #4" textFill="#c4dbe9" />
+                  <Label text="Change" textFill="#c4dbe9" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">

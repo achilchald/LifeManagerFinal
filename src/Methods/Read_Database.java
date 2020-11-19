@@ -14,7 +14,7 @@ public class Read_Database extends Globals implements AboveGod {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
             //here sonoo is database name, root is username and password
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from CUSTOMERS");
+            ResultSet rs = stmt.executeQuery("select * from CUSTOMERS ");
             while (rs.next()) {
                 String id = rs.getString(1);
                 String name = rs.getString(2);
@@ -114,13 +114,19 @@ public class Read_Database extends Globals implements AboveGod {
                 String ItemType = rs2.getString(3);
                 float price = rs2.getFloat(4);
                 float discount = rs2.getFloat(5);
-                Boolean isPayed = rs2.getBoolean(6);
-                Date paymentDate = rs2.getDate(7);
+                Boolean isPayed = rs2.getBoolean(7);
+                int quantity = rs2.getInt(6);
+                Date paymentDate = rs2.getDate(8);
+                boolean isRecurring = rs2.getBoolean(9);
+                String Recurrence = rs2.getString(10);
 
-                Item temp = new Item(item_id,ItemType,price,discount);
+                Item temp = new Item(item_id,ItemType,price,discount,quantity,isRecurring);
                 temp.SetPayed(isPayed);
                 temp.setPayedDate(paymentDate);
+                temp.setRecurring(Recurrence);
                 items.add(temp);
+
+                LastItemId = Integer.parseInt(item_id);
             }
 
             Statement stmt3 = con.createStatement();
@@ -134,6 +140,7 @@ public class Read_Database extends Globals implements AboveGod {
                 Date PaymentDate = rs3.getDate(3);
                 float Price = rs3.getFloat(4);
                 String Notes = rs3.getString(5);
+                LastPaymentId = PaymentId;
 
 
                 Payment payment = new Payment(PaymentId,InvoiceId,PaymentDate,Price,Notes);
@@ -230,7 +237,7 @@ public class Read_Database extends Globals implements AboveGod {
 
         Statement stmt = con.createStatement();
         stmt.executeUpdate("INSERT INTO CUSTOMER_ITEMS VALUES("
-                +InvoiceID +","+item.getId()+ " , \""+item.getType()+"\" , " + item.getPrice()+    ","+item.getDiscount()+ ","+ "0"+  "," +" null "+ ");");
+                +InvoiceID +","+item.getId()+ " , \""+item.getType()+"\" , " + item.getPrice()+    ","+item.getDiscount()+ ","+ "1"+  ","+ "0"+"," +" null "+ ","+item.isRecurring() + " , \""+item.getRecurring()+"\"  " +");");
         con.close();
     }
 

@@ -1,5 +1,6 @@
 package sample;
 
+import Invoice_Price_Checking.Date_Checking;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -16,6 +17,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        //Check if the invoices are ending today
+        Date_Checking date_checking = new Date_Checking();
+        date_checking.Load_Recurring_Invoices();
+        date_checking.Check_Dates();
+
+
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
         primaryStage.setScene(new Scene(root));
         //set stage borderless

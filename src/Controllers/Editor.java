@@ -13,6 +13,7 @@ import calendar.WriteFileAppointment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,6 +27,10 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -357,6 +362,10 @@ public class Editor extends Globals implements AboveGod {
     @FXML
     private TextField AssignedWorkerF;
 
+    //NOTIFICATIONS
+    @FXML
+    private VBox notificationsBox;
+
     //Temporary variables
 
     private int DomainInvoiceId;
@@ -533,6 +542,8 @@ public class Editor extends Globals implements AboveGod {
         pendingTasksLabel.setText(String.valueOf(notCompletedTask));
 
 
+
+
         int total_tasks=completedTasks+notCompletedTask;
 
         double colmple=completedTasks;
@@ -540,12 +551,52 @@ public class Editor extends Globals implements AboveGod {
 
         double progress = (double) colmple/(double)total_tasks;
 
-        System.out.println("Progress = "+progress);
+        int daysToDeadline;
 
+
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate deadline=LocalDate.parse(projectMap.get(Integer.parseInt(projectid)).getDueDate().toString(),dtf);
+
+        LocalDate now= LocalDate.now();
+
+        int daysToDeadLine= (int) ChronoUnit.DAYS.between(now,deadline);
+
+        if(progress==1){
+            Hbc.setStyle("-fx-background-color: #74c474");
+        }
+
+        //Notification for days
+        if(progress<0.5 && (daysToDeadLine<5)){
+            Hbc.setStyle("-fx-background-color: #ece75c");
+            Label txt=new Label("There are " +daysToDeadLine+ " days remaining until deadline and Progress is at "+progress+" % . Hurry up ! ");
+            if (daysToDeadLine==1){
+                Hbc.setStyle("-fx-background-color: #bc4646");
+                txt.setText("There is " +daysToDeadLine+ " day remaining until deadline and Progress is at "+progress+" % . Hurry up or... ");
+
+            }
+            txt.setMinWidth(Region.USE_PREF_SIZE);
+            HBox notification;
+
+            FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../fxml/NotificationItem.fxml"));
+
+            notification = loader2.load();
+            notification.getChildren().add(txt);
+            txt.setPrefHeight(Region.USE_PREF_SIZE);
+
+            notificationsBox.getChildren().add(notification);
+        }
+
+//        if(projectMap.get(Integer.parseInt(projectid)).getWorkers().size()>3){
+//            Notification txt=new Notification(" Wow big project ");
+//            txt.addNotification(notificationsBox,Hbc);
+//        }
+
+
+
+        //Set Progress Bar
         progressBar.setProgress(progress);
-
         progressBar.setStyle("-fx-background-color: green;");
-
         progressLabel.setText(String.valueOf(Math.round(progress*100)));
 
     }
@@ -736,12 +787,24 @@ public class Editor extends Globals implements AboveGod {
 
             if (straytasks.get(strayTasksCounter).getStatus()){
                 box.getChildren().get(8).setStyle("-fx-background-color : #50b065;");
-//                Label txt=new Label("The task "+straytasks.get(strayTasksCounter).getName()+" was originally completed by "+workerMap.get(Integer.parseInt(workerIDstray.getText())).getName()+" Man !");
-//                ProjectToDoPanel.getChildren().add(txt);
+                Label txt=new Label("The task "+straytasks.get(strayTasksCounter).getName()+" was originally completed by "+workerMap.get(Integer.parseInt(workerIDstray.getText())).getName()+" Man !");
+                txt.setMinWidth(Region.USE_PREF_SIZE);
+                HBox notification;
+
+                FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../fxml/NotificationItem.fxml"));
+
+                notification = loader2.load();
+                notification.getChildren().add(txt);
+                txt.setPrefHeight(Region.USE_PREF_SIZE);
+
+                notificationsBox.getChildren().add(notification);
+
             }
             else{
                 box.getChildren().get(8).setStyle("-fx-background-color : #b3b3b3;");
             }
+
+
 
 
 

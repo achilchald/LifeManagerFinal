@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="724.0" prefWidth="561.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Editor">
+<AnchorPane prefHeight="724.0" prefWidth="979.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Editor">
    <children>
       <TextField fx:id="NameF" layoutX="137.0" layoutY="90.0" />
       <TextField fx:id="PriceF" layoutX="137.0" layoutY="198.0" />
@@ -45,7 +45,7 @@
          </content>
       </ScrollPane>
       <Button layoutX="137.0" layoutY="469.0" mnemonicParsing="false" onAction="#addToDo" text="+" />
-      <Label fx:id="projectIdLabel" layoutX="212.0" layoutY="50.0" text="id" />
+      <Label fx:id="projectIdLabel" layoutX="212.0" layoutY="50.0" text="id" visible="false" />
       <Label layoutX="362.0" layoutY="76.0" text="Completed Tasks" />
       <Label fx:id="completedTasksLabel" layoutX="400.0" layoutY="42.0" text="0" textFill="#15a146">
          <font>
@@ -66,6 +66,12 @@
       </Label>
       <Label fx:id="progressLabel" layoutX="520.0" layoutY="693.0" text="0" />
       <Label layoutX="542.0" layoutY="693.0" text="\%" />
-      <Button fx:id="ProjBtnBack" layoutX="494.0" layoutY="121.0" mnemonicParsing="false" onAction="#projGoBack" text="back" />
+      <Button fx:id="ProjBtnBack" layoutX="507.0" layoutY="14.0" mnemonicParsing="false" onAction="#projGoBack" text="&lt;-" />
+      <VBox fx:id="notificationsBox" layoutX="573.0" layoutY="90.0" prefHeight="626.0" prefWidth="307.0" />
+      <Label layoutX="573.0" layoutY="70.0" text="Notifications">
+         <font>
+            <Font name="System Bold Italic" size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

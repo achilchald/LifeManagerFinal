@@ -544,6 +544,16 @@ public class Editor extends Globals implements AboveGod {
         completedTasksLabel.setText(String.valueOf(completedTasks));
         pendingTasksLabel.setText(String.valueOf(notCompletedTask));
 
+        Read_Database rd=new Read_Database();
+        HashMap<Integer,LogEvent> tmp=(HashMap<Integer, LogEvent>)rd.loadProjectLogs(Integer.parseInt(projectid));
+
+
+        for (Map.Entry<Integer, LogEvent> currLog : tmp.entrySet()) {
+            System.out.println("Loading logs for project "+projectid);
+            currLog.getValue().addLog(notificationsBox);
+
+        }
+
 
 
 
@@ -565,6 +575,8 @@ public class Editor extends Globals implements AboveGod {
 
         int daysToDeadLine= (int) ChronoUnit.DAYS.between(now,deadline);
 
+
+        //If land from now on
         if(progress==1){
             Hbc.setStyle("-fx-background-color: #74c474");
         }
@@ -590,10 +602,11 @@ public class Editor extends Globals implements AboveGod {
             notificationsBox.getChildren().add(notification);
         }
 
-//        if(projectMap.get(Integer.parseInt(projectid)).getWorkers().size()>3){
-//            Notification txt=new Notification(" Wow big project ");
-//            txt.addNotification(notificationsBox,Hbc);
-//        }
+
+        if(projectMap.get(Integer.parseInt(projectid)).getWorkers().size()>3){
+            Notification txt=new Notification(" Wow big project ");
+            txt.addNotification(notificationsBox,Hbc);
+        }
 
 
 
@@ -610,6 +623,11 @@ public class Editor extends Globals implements AboveGod {
         initComboBoxesProject(Integer.parseInt(localid));
         initComboBoxCategory();
 
+
+    }
+
+    //todo Make setLogBox when in database
+    public void setLogBox(){
 
     }
 
@@ -747,6 +765,16 @@ public class Editor extends Globals implements AboveGod {
             WriteToDatabase wr = new WriteToDatabase();
             wr.reassignTask(Integer.parseInt(workerIDstray.getText()), Integer.parseInt(id), Integer.parseInt(projId));
 
+            //Gets now date
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+//            System.out.println(dtf.format(now));
+
+            //Creates the logEvent
+            LogEvent logEvent = new LogEvent("Task : "+test.getName()+" reassigned From : "+workerMap.get(test.getWorker_id()).getName()+" To : "+temp.getName()+"("+dtf.format(now)+")",Integer.parseInt(projId),test.getTaskid(),test.getWorker_id());
+            wr.addLog(logEvent);
+
+            logEvent.addLog(notificationsBox);
 
 
             //Handles the visual aspect of the reassign
@@ -787,6 +815,8 @@ public class Editor extends Globals implements AboveGod {
 
             Task tasktemp=straytasks.get(strayTasksCounter);
             //Make the status button the corresponding color
+
+
 
             if (straytasks.get(strayTasksCounter).getStatus()){
                 box.getChildren().get(8).setStyle("-fx-background-color : #50b065;");
@@ -852,6 +882,8 @@ public class Editor extends Globals implements AboveGod {
 
 
         }
+
+
 
 
         strayTasksCounter++;

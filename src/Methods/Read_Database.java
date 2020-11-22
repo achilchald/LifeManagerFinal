@@ -1,9 +1,12 @@
 package Methods;
 
 import Entities.*;
+import com.mysql.cj.log.Log;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Read_Database extends Globals implements AboveGod {
 
@@ -57,6 +60,26 @@ public class Read_Database extends Globals implements AboveGod {
 
         }
         con.close();
+    }
+
+    public Map<Integer,LogEvent> loadProjectLogs(int projId) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM casperweb_databse.log where projectid="+projId);
+        Map<Integer,LogEvent> tempmap=new HashMap<>();
+        while (rs.next()){
+            int id=rs.getInt(1);
+            String data=rs.getString(2);
+            int taskId=rs.getInt(4);
+            int workerId=rs.getInt(5);
+            LogEvent temp=new LogEvent(data,projId,taskId,workerId);
+            tempmap.put(id,temp);
+
+        }
+        return tempmap;
+
     }
 
     public void Load_Domains() throws ClassNotFoundException, SQLException {

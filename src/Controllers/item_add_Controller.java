@@ -77,7 +77,7 @@ public class item_add_Controller implements AboveGod {
 
             pnItems.getChildren().add(box);
 
-            invoiceTypes.add(new Invoice(item.getType(),Integer.valueOf(String.valueOf(item.getPrice())),item.getRecurring()));
+            invoiceTypes.add(new Invoice(item.getType(),Integer.parseInt(String.valueOf(item.getPrice())),item.getRecurring()));
 
             stage.close();
         }

@@ -1,37 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="436.0" prefWidth="224.0" style="-fx-background-color: reansparent;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.cust_add_Controller">
+<AnchorPane prefHeight="527.0" prefWidth="264.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 10px 10px 10px 10px;" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.cust_add_Controller">
    <children>
-      <TextField fx:id="NameC" layoutX="62.0" layoutY="53.0" />
-      <TextField fx:id="ZIP" layoutX="62.0" layoutY="214.0" />
-      <TextField fx:id="Country" layoutX="62.0" layoutY="94.0" />
-      <TextField fx:id="Address" layoutX="62.0" layoutY="174.0" />
-      <TextField fx:id="City" layoutX="62.0" layoutY="134.0" />
-      <TextField fx:id="Phone" layoutX="62.0" layoutY="254.0" />
-      <TextField fx:id="Email" layoutX="62.0" layoutY="294.0" />
-      <TextField fx:id="AFM" layoutX="62.0" layoutY="334.0" />
-      <Label layoutX="1.0" layoutY="57.0" text="Name" />
-      <Button fx:id="AddCustomer" layoutX="141.0" layoutY="375.0" mnemonicParsing="false" onAction="#pressed" prefHeight="50.0" prefWidth="70.0" style="-fx-background-color: #1672b9; -fx-background-radius: 10px 10px 10px 10px;" text="Add" textFill="WHITE">
+      <TextField fx:id="NameC" layoutX="77.0" layoutY="51.0" stylesheets="@../sample/style.css" />
+      <TextField fx:id="ZIP" layoutX="77.0" layoutY="214.0" stylesheets="@../sample/style.css" />
+      <TextField fx:id="Country" layoutX="77.0" layoutY="93.0" stylesheets="@../sample/style.css" />
+      <TextField fx:id="Address" layoutX="77.0" layoutY="174.0" stylesheets="@../sample/style.css" />
+      <TextField fx:id="City" layoutX="77.0" layoutY="134.0" stylesheets="@../sample/style.css" />
+      <TextField fx:id="Phone" layoutX="77.0" layoutY="254.0" stylesheets="@../sample/style.css" />
+      <TextField fx:id="Email" layoutX="77.0" layoutY="294.0" />
+      <TextField fx:id="AFM" layoutX="77.0" layoutY="334.0" />
+      <Label layoutX="38.0" layoutY="58.0" text="Name:" />
+      <Button fx:id="AddCustomer" layoutX="97.0" layoutY="381.0" mnemonicParsing="false" onAction="#pressed" prefHeight="50.0" prefWidth="70.0" style="-fx-background-color: #1672b9; -fx-background-radius: 10px 10px 10px 10px;" text="Add" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Label layoutX="4.0" text="New Customer">
+      <Label layoutX="28.0" layoutY="99.0" text="Country:" />
+      <Label layoutX="48.0" layoutY="139.0" text="City:" />
+      <Label layoutX="27.0" layoutY="180.0" text="Address:" />
+      <Label layoutX="52.0" layoutY="218.0" text="ZIP:" />
+      <Label layoutX="34.0" layoutY="259.0" text="Phone:" />
+      <Label layoutX="41.0" layoutY="301.0" text="Email:" />
+      <Label layoutX="44.0" layoutY="339.0" text="AFM:" />
+      <Label layoutX="67.0" layoutY="14.0" text="New Customer">
          <font>
-            <Font size="17.0" />
+            <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutY="98.0" text="Country" />
-      <Label layoutY="138.0" text="City" />
-      <Label layoutY="179.0" text="Address" />
-      <Label layoutY="217.0" text="ZIP" />
-      <Label layoutY="258.0" text="Phone" />
-      <Label layoutY="300.0" text="Email" />
-      <Label layoutY="338.0" text="AFM" />
    </children>
 </AnchorPane>

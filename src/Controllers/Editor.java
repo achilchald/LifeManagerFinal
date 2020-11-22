@@ -1600,8 +1600,6 @@ public class Editor extends Globals implements AboveGod {
         Parent root = Hbc.getParent().getParent().getParent().getParent().getParent();
 
         root.toFront();
-        new FadeInRight(root).play();
-
     }
 
     public void workerGoBack () {
@@ -1609,8 +1607,6 @@ public class Editor extends Globals implements AboveGod {
         Parent root = Hbc.getParent().getParent().getParent().getParent().getParent();
 
         root.toFront();
-        new FadeInRight(Hbc).play();
-
     }
 
     public void customerGoBack () {
@@ -1618,7 +1614,6 @@ public class Editor extends Globals implements AboveGod {
         Parent root = Hbc.getParent().getParent().getParent().getParent().getParent();
 
         root.toFront();
-        new FadeInRight(root).play();
     }
 
 

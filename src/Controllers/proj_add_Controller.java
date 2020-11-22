@@ -128,15 +128,10 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         LocalDate localdate=date.getValue();
         String price = PriceF.getText();
 
-
-
         HBox hbox = new HBox();
         hbox = FXMLLoader.load(getClass().getResource("../fxml/Project_Item.fxml"));
 
-
         int id=projectMap.size()+1;
-
-
 
         //check if neccessery attributes are added
         if (name.equals("")||localdate==null||price.equals("")){
@@ -162,7 +157,6 @@ public class proj_add_Controller  extends Globals implements AboveGod {
 
 
             ((Label) hbox.getChildren().get(4)).setText("23");
-
 
         }
 
@@ -200,12 +194,7 @@ public class proj_add_Controller  extends Globals implements AboveGod {
             taskCombo.getItems().add((projectMap.get(projectid).getWorkers().get(id).getWorkerid()+"."+projectMap.get(projectid).getWorkers().get(id).getName()));
             workersbox.getChildren().add(box);
 
-
         }
-
-
-
-
 
     }
 
@@ -243,12 +232,7 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         //now add it to the worker
         workerMap.get(id).addTasks(temp);
 
-
-        //projectMap.get(projectid).getWorkers().get(id).addTasks(temp);
-        // projectMap.get(projectid).getTasks().put()
-
         todobox.getChildren().add(box);
-//        }
 
     }
 

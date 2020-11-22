@@ -3,7 +3,7 @@ package Entities;
 
 import java.sql.Date;
 
-public class Item {
+public class Item extends Globals{
 
     String id;
     String type;
@@ -11,18 +11,23 @@ public class Item {
     float price;
     float Discount;
     Date PayedDate;
+    int quantity;
     boolean isPayed = false;
+    boolean isRecurring = false;
 
-    public Item(String id,String ItemType,float price,float discount)
+    public Item(String id, String ItemType, float price, float discount, int quantity, boolean isRecurring)
     {
         this.id = id;
         this.type = ItemType;
         this.price = price;
         this.Discount = discount;
+        this.quantity = quantity;
+        this.isRecurring = isRecurring;
     }
     public Item(Item item)
     {
-        this.id=item.getId();
+        LastItemId++;
+        this.id=Integer.toString(LastItemId);
         this.type = item.getType();
         this.recurring = item.getRecurring();
         this.price = item.getPrice();
@@ -60,6 +65,20 @@ public class Item {
         this.Discount = discount;
         this.price -= discount;
 
+    }
+
+    public void RemoveDiscount()
+    {
+        this.price += Discount;
+    }
+
+    public void SetRecurrence(boolean isRecurring)
+    {
+        this.isRecurring = isRecurring;
+    }
+
+    public boolean isRecurring() {
+        return isRecurring;
     }
 
     public void CalculateReccuringPrice(String Reccurence)
@@ -104,6 +123,56 @@ public class Item {
             else if(recurring.equals("MONTHLY"))
             {
                 this.price = this.price*12;
+            }
+            else if(recurring.equals("YEARLY"))
+            {
+                this.price = this.price;
+            }
+        }
+    }
+
+    public void DescaleItemPrice(String Reccurence)
+    {
+        if(Reccurence.equals("WEEKLY"))
+        {
+            if(recurring.equals("WEEKLY"))
+            {
+                this.price = this.price;
+            }
+            else if(recurring.equals("MONTHLY"))
+            {
+                this.price = this.price*4;
+            }
+            else if(recurring.equals("YEARLY"))
+            {
+                this.price = this.price*52;
+            }
+
+        }
+        else if(Reccurence.equals("MONTHLY"))
+        {
+            if(recurring.equals("WEEKLY"))
+            {
+                this.price = this.price/4;
+            }
+            else if(recurring.equals("MONTHLY"))
+            {
+                this.price = this.price;
+            }
+            else if(recurring.equals("YEARLY"))
+            {
+                this.price = this.price*12;
+            }
+        }
+        else if(Reccurence.equals("YEARLY"))
+        {
+            if(recurring.equals("WEEKLY"))
+            {
+                this.price = this.price/52;
+            }
+            else if(recurring.equals("MONTHLY"))
+            {
+                this.price = this.price/12;
             }
             else if(recurring.equals("YEARLY"))
             {

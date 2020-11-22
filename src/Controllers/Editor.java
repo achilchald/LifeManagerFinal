@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+//import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 
 
 import javax.swing.event.ChangeListener;
@@ -35,6 +36,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.jar.Attributes;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /*
 This controller is responsible for handling and applying changes the user does to the customer and its data
@@ -1376,23 +1379,45 @@ public class Editor extends Globals implements AboveGod {
         //This part is triggered if the user updates the customers data
         if (event.getSource() == UpdateCustomer)
         {
-            //Create a database reader so as to update the customer values in the database
-            Read_Database DatabaseUpdater = new Read_Database();
 
-            //Set to the customer the new values
-            customerMap.get(id).setName(NameC.getText());
-            customerMap.get(id).setName(NameC.getText());
-            customerMap.get(id).setCountry(Country.getText());
-            customerMap.get(id).setAddress(Address.getText());
-            customerMap.get(id).setZip(ZIP.getText());
-            customerMap.get(id).setAFM(AFM.getText());
-            customerMap.get(id).setCity(City.getText());
-            customerMap.get(id).setEmail(Email.getText());
-            customerMap.get(id).setPhone(Phone.getText());
-            ((Label) Hbc.getChildren().get(1)).setText(NameC.getText());
 
-            //Update the customer in the database
-            DatabaseUpdater.UpdateCustomer(id);
+            //First we check if the inputs are correct
+            String regex = "\\d+";
+
+            if (!AFM.getText().matches(regex) || !ZIP.getText().matches(regex) || !Phone.getText().matches(regex))
+            {
+                System.out.println("lamo");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Your new input has a typo \n Please check all the fields and type appropriate values", ButtonType.OK, ButtonType.CANCEL);
+                alert.showAndWait();
+
+                if(alert.getResult() == ButtonType.OK )
+                {
+                    System.out.println("lma0");
+                    return;
+                }
+            }
+            else {
+
+
+                //Create a database reader so as to update the customer values in the database
+                Read_Database DatabaseUpdater = new Read_Database();
+
+                //Set to the customer the new values
+
+                customerMap.get(id).setName(NameC.getText());
+                customerMap.get(id).setName(NameC.getText());
+                customerMap.get(id).setCountry(Country.getText());
+                customerMap.get(id).setAddress(Address.getText());
+                customerMap.get(id).setZip(ZIP.getText());
+                customerMap.get(id).setAFM(AFM.getText());
+                customerMap.get(id).setCity(City.getText());
+                customerMap.get(id).setEmail(Email.getText());
+                customerMap.get(id).setPhone(Phone.getText());
+                ((Label) Hbc.getChildren().get(1)).setText(NameC.getText());
+
+                //Update the customer in the database
+                DatabaseUpdater.UpdateCustomer(id);
+            }
         }
 
         //This part is triggered if the user updates the domain with new values
@@ -1472,6 +1497,7 @@ public class Editor extends Globals implements AboveGod {
                             float Hosting_Price = customerMap.get(id).GetInvoicesList().get(i).getItems().get(j).getPrice();
                             hostingType = HostType;
                             CustomerIncome -= Hosting_Price;
+                            assert HostingItem != null;
                             CustomerIncome += HostingItem.getPrice();
                             customerMap.get(id).GetInvoicesList().get(i).getItems().remove(j);
                             customerMap.get(id).GetInvoicesList().get(i).getItems().add(HostingItem);
@@ -1571,6 +1597,7 @@ public class Editor extends Globals implements AboveGod {
             DomainType.setPromptText("Domain Type");
             Database_Deleter deleter = new Database_Deleter();
             deleter.Delete_Domain(DomainId,DomainInvoiceId);
+            DeleteDomainInvoice(DomainInvoiceId);
 
             for(int i = 0; i<customerMap.get(id).getDomainsList().size(); i++)
             {
@@ -1613,6 +1640,45 @@ public class Editor extends Globals implements AboveGod {
         }
 
     }
+
+
+
+    public void DeleteDomainInvoice(int DomainInvoiceId) throws SQLException, ClassNotFoundException {
+        //Create a Database Deleter entity so as to delete the invoice from the database
+        //as well as any entries in the tables that contain its Invoice ID
+        Database_Deleter deleter = new Database_Deleter();
+        //Delete the invoice from the database
+        deleter.Delete_Invoice(DomainInvoiceId);
+        //Delete the invoice from its container VBox
+        CustomBox.getChildren().remove(CustomBox.lookup("#"+DomainInvoiceId));
+
+        //Create a linker so as to apply changes to the customer price label as well as the total income label
+        Linker link = new Linker();
+
+        //Get the values of the customer price label and total income label
+        String Tcost = link.GetLabelLink("IncomeLabel").getText();
+        Tcost = Tcost.substring(0 , Tcost.length() - 1);
+        float TotalCost = Float.parseFloat(Tcost);
+        float CustomerCost = Float.parseFloat(link.GetLabelLink(id+"CustomerPrice").getText());
+
+
+        //Apply the changes to the aforementioned labels and remove the invoice from the customer map
+        for(int i = 0;i<customerMap.get(id).GetInvoicesList().size();i++)
+        {
+            if(customerMap.get(id).GetInvoicesList().get(i).getId() == DomainInvoiceId)
+            {
+                TotalCost = TotalCost - customerMap.get(id).GetInvoicesList().get(i).getPrice();
+                CustomerCost = CustomerCost - customerMap.get(id).GetInvoicesList().get(i).getPrice();
+
+                link.GetLabelLink("IncomeLabel").setText(String.valueOf(TotalCost));
+                link.GetLabelLink(id+"CustomerPrice").setText(String.valueOf(CustomerCost));
+
+                customerMap.get(id).GetInvoicesList().remove(i);
+            }
+        }
+    }
+
+
 
     public void setTaskInfo(HBox ToDoItem){
 

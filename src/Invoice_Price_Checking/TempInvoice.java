@@ -1,12 +1,13 @@
-package Entities;
+package Invoice_Price_Checking;
 
-import java.util.ArrayList;
-import java.sql.*;
-public class Invoice {
+import java.sql.Date;
+
+public class TempInvoice {
+
     int id;
     String type;
-    ArrayList<Item> items = new ArrayList<>();
-    ArrayList<Payment> Payments = new ArrayList<>();
+    // ArrayList<Item> items = new ArrayList<>();
+    // ArrayList<Payment> Payments = new ArrayList<>();
 
     float price = 0;
     float PayedAmount = 0;
@@ -18,31 +19,32 @@ public class Invoice {
     String recurring;
     int Cycles = 0;
     int Repetitions = 0;
+    boolean Fully_Payed;
     String Notes;
 
 
 
-    public  Invoice(int id, Date Bill_Date, Date PaymentDate, String type,String recurring, ArrayList<Item> items, ArrayList<Payment> payments ,float change)
+    public  TempInvoice(int id, Date Bill_Date, Date PaymentDate, String type,String recurring ,float change)
     {
         this.id = id;
         this.Bill_Date = Bill_Date;
         this.Payment_Date = PaymentDate;
         this.type = type;
         this.recurring = recurring;
-        this.items = items;
-        this.Payments = payments;
+        //this.items = items;
+        // this.Payments = payments;
         this.ChangeFromPayment = change;
     }
 
 
 
-    public Invoice(String type, float price, String reccuring){
-    this.type=type;
-    this.price=price;
-    this.recurring =reccuring;
+    public TempInvoice(String type, float price, String reccuring){
+        this.type=type;
+        this.price=price;
+        this.recurring =reccuring;
     }
 
-    public Invoice (Invoice invoice)
+    public TempInvoice (TempInvoice invoice)
     {
         this.type = invoice.getType();
         this.price = invoice.getPrice();
@@ -50,48 +52,14 @@ public class Invoice {
 
     }
 
-    public Invoice() {
+    public TempInvoice() {
 
     }
 
-    public String DisplayInvoiceData()
-    {
-        String out = "";
-        Calc_Invoice_Price();
-        String item = "";
-        for(int i = 0;i<items.size();i++)
-        {
-            item = item + items.get(i).getType() + items.get(i).getPrice();
-        }
-        out = id+ " " + item + " " + price ;
-
-        return  out;
-    }
-
-
-    public void Calc_Invoice_Price()
-    {
-        this.price = 0;
-        for(int i = 0;i<items.size();i++)
-        {
-            this.price = this.price + items.get(i).getPrice();
-        }
-
-
-    }
 
     public float getPayedAmount() {
         return PayedAmount;
     }
-
-    public void Calc_Payed_Amount()
-    {
-        for(int i = 0;i<Payments.size();i++)
-        {
-            this.PayedAmount = this.PayedAmount + Payments.get(i).getPrice();
-        }
-    }
-
 
     public void NewPrice(float price)
     {
@@ -124,9 +92,7 @@ public class Invoice {
         return type;
     }
 
-    public ArrayList<Item> getItems() {
-        return items;
-    }
+
 
     public int getId() {
         return id;
@@ -136,14 +102,14 @@ public class Invoice {
         return Bill_Date;
     }
 
-    public ArrayList<Payment> getPayments() {
-        return Payments;
-    }
 
     public Date getPayment_Date() {
         return Payment_Date;
     }
 
+    public float getCostToMax() {
+        return CostToMax;
+    }
 
     public float getChangeFromPayment() {
         return ChangeFromPayment;
@@ -173,8 +139,21 @@ public class Invoice {
         Notes = notes;
     }
 
-    public void updatePayedAmount(float price)
+    public void UpdateRecurringData()
     {
-        this.PayedAmount -= price;
+        this.Cycles--;
+    }
+
+    public void SetPayed(boolean payed)
+    {
+        this.Fully_Payed = payed;
+    }
+
+    public boolean isFully_Payed() {
+        return Fully_Payed;
+    }
+
+    public void setPayment_Date(Date payment_Date) {
+        Payment_Date = payment_Date;
     }
 }

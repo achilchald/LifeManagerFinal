@@ -19,6 +19,7 @@
 <?import javafx.scene.text.Font?>
 
 
+
 <StackPane fx:id="pnlCustomers" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Customers_Controller">
    <children>
       <Pane prefHeight="782.0" prefWidth="1243.0" style="-fx-background-color: #eceef0;">
@@ -92,6 +93,7 @@
                      </HBox.margin>
                   </Label>
                </children>
+
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -135,6 +137,7 @@
                <font>
                   <Font size="30.0" />
                </font>
+
             </Label>
             <TextField layoutX="575.0" layoutY="40.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: transparent; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
          </children>

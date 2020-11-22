@@ -144,9 +144,6 @@ public class Invoice {
         return Payment_Date;
     }
 
-    public float getCostToMax() {
-        return CostToMax;
-    }
 
     public float getChangeFromPayment() {
         return ChangeFromPayment;
@@ -174,5 +171,10 @@ public class Invoice {
 
     public void setNotes(String notes) {
         Notes = notes;
+    }
+
+    public void updatePayedAmount(float price)
+    {
+        this.PayedAmount -= price;
     }
 }

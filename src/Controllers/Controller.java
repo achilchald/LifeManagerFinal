@@ -116,6 +116,7 @@ public class Controller implements Initializable {
         Stackpane.getChildren().add(home);
 
         home.toFront();
+
         isFront = "H";
     }
 

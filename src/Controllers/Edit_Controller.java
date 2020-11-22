@@ -327,7 +327,7 @@ public class Edit_Controller implements AboveGod {
 
         }
         else {
-            ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #000000; ");
+            ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #e0e0e0; ");
             completed_tasks--;
             pending_tasks++;
 

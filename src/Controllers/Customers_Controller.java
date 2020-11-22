@@ -4,6 +4,7 @@ import Entities.AboveGod;
 import Entities.Customer;
 import Entities.Item;
 import Entities.Linker;
+import Methods.Database_Sorter;
 import Methods.Read_Database;
 import animatefx.animation.SlideInLeft;
 import animatefx.animation.SlideOutLeft;
@@ -16,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -63,9 +65,19 @@ public class Customers_Controller implements AboveGod , Initializable  {
     @FXML
     private Label HostingLabel;
 
+    @FXML
+    private Label CustomerName;
+
+    @FXML
+    private Label CustomerPrice;
+
     public int counter = 0;
 
     private HBox itemC;
+
+    private String SortingType ;
+
+    private int SortingFlag = 0;
 
     public void setCounter(int counter) {
         this.counter = counter;
@@ -215,6 +227,92 @@ public class Customers_Controller implements AboveGod , Initializable  {
             }
 
         }
+
+    }
+
+
+    @FXML
+    public void SortCustomers(MouseEvent event) throws SQLException, ClassNotFoundException, InterruptedException {
+        String ColumnName = null;
+
+        if (event.getSource() == CustomerName)
+        {
+            ColumnName = "NAME";
+        }
+        else if(event.getSource() == CustomerPrice )
+        {
+            ColumnName = "Price";
+        }
+
+        Database_Sorter sorter = new Database_Sorter();
+
+        pnItems.getChildren().clear();
+        if(SortingFlag == 0)
+        {
+            SortingType = "DESC";
+            SortingFlag = 1;
+        }
+        else if(SortingFlag == 1)
+        {
+            SortingType = "ASC";
+            SortingFlag = 0;
+        }
+
+
+        List<String>SortedCustomers = sorter.GetSortedCustomers(ColumnName,SortingType);
+
+        for (int i = 0; i<SortedCustomers.size();i++) {
+
+            //entry.getValue().calculatePrice();
+            try {
+                //The main customer data are stored in a HBox component
+                HBox box;
+
+                String id = SortedCustomers.get(i);
+                //Load the fxml template for the customer data
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Item.fxml"));
+
+                box = loader.load();
+
+                //Get the Gui element Controller
+                Edit_Controller control = loader.getController();
+
+
+                ((Label) box.getChildren().get(1)).setText(customerMap.get(id).getName());
+
+
+                //Load the domains to the customer Combobox Component
+                for (int j = 0; j < customerMap.get(id).DomainsList.size(); j++) {
+                   ((ComboBox) box.getChildren().get(2)).getItems().add(customerMap.get(id).DomainsList.get(j).Name);
+               }
+
+                //Load the customer price to the Hbox's label
+                ((Label) box.getChildren().get(3)).setText(String.valueOf(customerMap.get(id).getPrice()));
+
+                //A hidden box with a customer id
+                ((Label) box.getChildren().get(4)).setText(customerMap.get(id).getId());
+
+                //Set to the Editor Controller the price label id
+                //this is done so as to update the label when items are added or removed from an  invoice
+                control.SetPriceLabelId();
+
+                //Set the box id so as to be able to remove the item if need be
+                box.setId(customerMap.get(id).getId());
+
+                //Add the customer Hbox to the Vbox containing all the customer boxes
+                pnItems.getChildren().add(box);
+
+
+                //Fill the Labels containing global data
+                ActiveCustomersPanel.setText(String.valueOf(customerMap.size()));
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
 
     }
 

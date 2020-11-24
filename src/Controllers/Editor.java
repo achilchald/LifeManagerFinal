@@ -10,6 +10,7 @@ import Methods.WriteToDatabase;
 //import animatefx.animation.*;
 import calendar.WriteFileAppointment;
 
+import com.mysql.cj.log.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,7 +56,7 @@ public class Editor extends Globals implements AboveGod {
     private TextField DateF;
 
     @FXML
-    private TextField WorkforceF;
+    private Label WorkforceF;
 
     @FXML
     private TextField NameC;
@@ -401,16 +402,20 @@ public class Editor extends Globals implements AboveGod {
     //SetBox 1 sets the projects view thing.
     public void SetBox1(HBox hb) throws IOException, SQLException, ClassNotFoundException {
         this.Hbc = hb;
+
+        String projectid = ((Label) Hbc.getChildren().get(5)).getText();
         NameF.setText(((Label) Hbc.getChildren().get(1)).getText());
         DateF.setText(((Label) Hbc.getChildren().get(2)).getText());
-        WorkforceF.setText(((Label) Hbc.getChildren().get(3)).getText());
-        PriceF.setText(((Label) Hbc.getChildren().get(4)).getText());
+
+        WorkforceF.setText(String.valueOf(projectMap.get(Integer.parseInt(projectid)).getWorkers().size()));
+
+        PriceF.setText(String.valueOf(projectMap.get(Integer.parseInt(projectid)).getPrice()));
         int completedTasks=0;
         int notCompletedTask=0;
 
 
 
-        String projectid = ((Label) Hbc.getChildren().get(5)).getText();
+
         projectIdLabel.setText(projectid);
 
 
@@ -471,10 +476,10 @@ public class Editor extends Globals implements AboveGod {
                         ((Label) box2.getChildren().get(1)).setText(temp.get(i).getName());
                         ((Label) box2.getChildren().get(2)).setText(String.valueOf(entry.getValue().getName()));
                         ((Label) box2.getChildren().get(3)).setText(temp.get(i).getDescription());
-                        System.out.println("Worker id : "+entry.getValue().getWorkerid());
+
 
                         ((Label) box2.getChildren().get(5)).setText(String.valueOf(entry.getValue().getWorkerid()));
-                        System.out.println("Index is : "+i);
+
                         ((Label) box2.getChildren().get(6)).setText(String.valueOf(i));
                         ((Label) box2.getChildren().get(7)).setText(projectid);
 
@@ -482,17 +487,29 @@ public class Editor extends Globals implements AboveGod {
                         //boolean status=projectMap.get(Integer.parseInt(projectid)).getWorkers().get(temp.get(i).getWorker_id()).getTasks().get(Integer.parseInt(projectid)).get(i).getStatus();
                         if (status2) {
                             box2.getChildren().get(8).setStyle("-fx-background-color: #34eb37; ");//set to green
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+
+                            LocalDateTime now = LocalDateTime.now();
+                            String text="Task "+temp.get(i).getName()+" Completed "+"("+dtf.format(now)+")";
+
+                            LogEvent logEvent=new LogEvent(text,temp.get(i).getProject_id(),temp.get(i).getTaskid(),temp.get(i).getWorker_id());
+
+                            logEvent.addLog(notificationsBox,"Comple"+logEvent.getTaskId());
+
+
+
                             completedTasks++;
                         }
                         else {
                             box2.getChildren().get(8).setStyle("-fx-background-color: #a7a7a7; ");//set to black
                             notCompletedTask++;
+                            notificationsBox.getChildren().remove(notificationsBox.lookup("#"+"Comple"+temp.get(i).getTaskid()));
                         }
 
                         Edit_Controller ctrl=loader.getController();
 
                         ctrl.setLabel(completedTasksLabel,pendingTasksLabel,progressBar,progressLabel);
-                        System.out.println("PRINTED TASK ID : "+temp.get(i).getTaskid());
+
                         box2.setId(String.valueOf(temp.get(i).getTaskid()));
                         ProjectToDoPanel.getChildren().add(box2);
 
@@ -545,6 +562,7 @@ public class Editor extends Globals implements AboveGod {
         pendingTasksLabel.setText(String.valueOf(notCompletedTask));
 
         Read_Database rd=new Read_Database();
+        System.out.println("Project id is "+projectid);
         HashMap<Integer,LogEvent> tmp=(HashMap<Integer, LogEvent>)rd.loadProjectLogs(Integer.parseInt(projectid));
 
 
@@ -584,10 +602,10 @@ public class Editor extends Globals implements AboveGod {
         //Notification for days
         if(progress<0.5 && (daysToDeadLine<5)){
             Hbc.setStyle("-fx-background-color: #ece75c");
-            Label txt=new Label("There are " +daysToDeadLine+ " days remaining until deadline and Progress is at "+progress+" % . Hurry up ! ");
+            Label txt=new Label("There are " +daysToDeadLine+ " days remaining until deadline and Progress is at "+Math.round(progress)+" % . Hurry up ! ");
             if (daysToDeadLine==1){
                 Hbc.setStyle("-fx-background-color: #bc4646");
-                txt.setText("There is " +daysToDeadLine+ " day remaining until deadline and Progress is at "+progress+" % . Hurry up or... ");
+                txt.setText("There is " +daysToDeadLine+ " day remaining until deadline and Progress is at "+Math.round(progress)+" % . Hurry up or... ");
 
             }
             txt.setMinWidth(Region.USE_PREF_SIZE);
@@ -640,7 +658,7 @@ public class Editor extends Globals implements AboveGod {
 
         setToDoBox(ProjectToDoPanel);
 
-        //initComboBoxesProject(Integer.parseInt(idLabel.getText()));
+
 
 
 
@@ -756,8 +774,8 @@ public class Editor extends Globals implements AboveGod {
             Task test=straytasks.get(strayTasksCounter);
             projectMap.get(Integer.parseInt(projId)).getWorkers().get(Integer.parseInt(id)).addTasks(test);
 
-            System.out.println("What is added :" +projectMap.get(Integer.parseInt(projId)).getWorkers().get(Integer.parseInt(id)).getTasks().get(Integer.parseInt(projId)).get(strayTasksCounter).getStatus());
-            System.out.println("Status of the newly added task is : "+test.getStatus());
+//            System.out.println("What is added :" +projectMap.get(Integer.parseInt(projId)).getWorkers().get(Integer.parseInt(id)).getTasks().get(Integer.parseInt(projId)).get(strayTasksCounter).getStatus());
+//            System.out.println("Status of the newly added task is : "+test.getStatus());
 
 
 //            workerMap.get(Integer.parseInt(id)).addTasks(straytasks.get(strayTasksCounter));
@@ -971,12 +989,20 @@ public class Editor extends Globals implements AboveGod {
         WriteToDatabase wr=new WriteToDatabase();
         wr.addTaskToProjectDB(temp,id);
 
+        //Here we create the log
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String text="Task "+temp.getName()+" added to "+workerMap.get(temp.getWorker_id()).getName()+"("+dtf.format(now)+")";
+        LogEvent log=new LogEvent(text,temp.getProject_id(),temp.getTaskid(),temp.getWorker_id());
+        System.out.println("Task added project id is"+log.getProjId());
+        log.addLog(notificationsBox);
+
+        wr.addLog(log);
+
+        //Here we update the Labels
         int pend= Integer.parseInt(pendingTasksLabel.getText());
-
         pend++;
-
         pendingTasksLabel.setText(String.valueOf(pend));
-
         int completed_tasks= Integer.parseInt(completedTasksLabel.getText());
         int pending_tasks= Integer.parseInt(pendingTasksLabel.getText());
         double total=completed_tasks+pending_tasks;
@@ -1084,7 +1110,8 @@ public class Editor extends Globals implements AboveGod {
         }
     }
 
-    public void AddTaskToWorker() throws IOException {
+    public void AddTaskToWorker() throws IOException, SQLException, ClassNotFoundException {
+
 
         //Loads the item to be added
         HBox box;
@@ -1106,6 +1133,10 @@ public class Editor extends Globals implements AboveGod {
 
         Task temptask=new Task(taskid,name,desc,Date.valueOf(LocalDate.now()),false,projectid,workid);
         projectMap.get(projectid).getWorkers().get(workid).addTasks(temptask);
+
+
+
+
 
         ((Label) box.getChildren().get(1)).setText(name);
         ((Label) box.getChildren().get(2)).setText("12");
@@ -1655,17 +1686,23 @@ public class Editor extends Globals implements AboveGod {
 
             Read_Database DatabaseUpdater = new Read_Database();
 
+            //Hidden id label.
             String id = ((Label) Hbc.getChildren().get(5)).getText();
 
             projectMap.get(Integer.valueOf(id)).setName(NameF.getText());
             projectMap.get(Integer.valueOf(id)).setDueDate(Date.valueOf(DateF.getText()));
             projectMap.get(Integer.valueOf(id)).setWorkforce(projectMap.get(Integer.valueOf(id)).getWorkers().size());
+
+            System.out.println("Price is"+PriceF.getText());
             projectMap.get(Integer.valueOf(id)).setPrice(Float.parseFloat(PriceF.getText()));
+
 
             ((Label) Hbc.getChildren().get(1)).setText(NameF.getText());
             ((Label) Hbc.getChildren().get(2)).setText(DateF.getText());
             ((Label) Hbc.getChildren().get(3)).setText(PriceF.getText());
             ((Label) Hbc.getChildren().get(4)).setText(String.valueOf(projectMap.get(Integer.valueOf(id)).getWorkers().size()));
+
+
 
             DatabaseUpdater.UpdateProject(Integer.valueOf(id));
 

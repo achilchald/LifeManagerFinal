@@ -169,7 +169,7 @@ public class WriteToDatabase extends Globals implements AboveGod {
         //here sonoo is database name, root is username and password
         Statement stmt = con.createStatement();
 
-        stmt.executeUpdate("INSERT INTO Log(data,workerid,taskid,projectid) Values (" + "\""+ event.getData()+ "\"," +event.getProjId()+ "," +event.getTaskId()+ "," +event.getWorkerId()+");");
+        stmt.executeUpdate("INSERT INTO Log(data,projectid,taskid,workerid) Values (" + "\""+ event.getData()+ "\"," +event.getProjId()+ "," +event.getTaskId()+ "," +event.getWorkerId()+");");
         System.out.println("INSERT INTO Log(data,workerid,taskid,projectid) Values (" + event.getData()+ "," +event.getProjId()+ "," +event.getTaskId()+ "," +event.getWorkerId()+";");
 
 

@@ -12,9 +12,8 @@
 <AnchorPane prefHeight="724.0" prefWidth="979.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Editor">
    <children>
       <TextField fx:id="NameF" layoutX="137.0" layoutY="90.0" />
-      <TextField fx:id="PriceF" layoutX="137.0" layoutY="198.0" />
       <TextField fx:id="DateF" layoutX="137.0" layoutY="146.0" />
-      <TextField fx:id="WorkforceF" layoutX="137.0" layoutY="248.0" />
+      <TextField fx:id="PriceF" layoutX="137.0" layoutY="248.0" />
       <Label layoutX="36.0" layoutY="94.0" text="Name" />
       <Label layoutX="36.0" layoutY="150.0" text="Date" />
       <Label layoutX="36.0" layoutY="202.0" text="Workforce" />
@@ -71,6 +70,11 @@
       <Label layoutX="573.0" layoutY="70.0" text="Notifications">
          <font>
             <Font name="System Bold Italic" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="WorkforceF" layoutX="137.0" layoutY="198.0" prefHeight="17.0" prefWidth="76.0" text="Label">
+         <font>
+            <Font name="System Bold" size="17.0" />
          </font>
       </Label>
    </children>

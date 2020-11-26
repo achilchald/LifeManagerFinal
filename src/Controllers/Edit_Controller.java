@@ -1,13 +1,11 @@
 package Controllers;
 
-import Entities.AboveGod;
-import Entities.Customer;
-import Entities.Linker;
-import Entities.Task;
+import Entities.*;
 import Methods.Database_Deleter;
 import Methods.WriteFile;
 
 import Methods.WriteToDatabase;
+import com.mysql.cj.log.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +22,8 @@ import javafx.stage.Stage;
 import javax.xml.transform.Source;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /*
@@ -108,6 +108,11 @@ public class Edit_Controller implements AboveGod {
 
     private StackPane stackPane;
 
+    private VBox notificationsBox;
+
+    private Task temp;
+
+
 
 
     //-----------------------------
@@ -168,6 +173,8 @@ public class Edit_Controller implements AboveGod {
 
         }
     }
+
+
 
 
     //---- Kwstas stuffs ----
@@ -289,7 +296,19 @@ public class Edit_Controller implements AboveGod {
 
     }
 
-    public void setStatus() throws SQLException, ClassNotFoundException {
+    public void getNotificationsBox(VBox notificationsBox,Task temp){
+        this.notificationsBox=notificationsBox;
+        this.temp=temp;
+    }
+
+
+
+
+
+    public void setStatus() throws SQLException, ClassNotFoundException, IOException {
+
+
+
         int ProjectId = Integer.parseInt(((Label) ToDoItem.getChildren().get(7)).getText());
         int WorkerId = Integer.parseInt(((Label) ToDoItem.getChildren().get(5)).getText());
         int IndexOfTask =  Integer.parseInt(((Label) ToDoItem.getChildren().get(6)).getText());
@@ -306,6 +325,21 @@ public class Edit_Controller implements AboveGod {
 
         if (status) {
             ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #34eb37; ");//set to green
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+
+            LocalDateTime now = LocalDateTime.now();
+
+            String text="Task "+temp.getName()+" Completed "+"("+dtf.format(now)+")";
+
+            LogEvent logEvent=new LogEvent(text,temp.getProject_id(),temp.getTaskid(),temp.getWorker_id());
+
+
+
+            logEvent.addLog(notificationsBox,"Comple"+logEvent.getTaskId());
+
+            WriteToDatabase wr=new WriteToDatabase();
+            wr.addLog(logEvent);
 
 
             completed_tasks++;
@@ -328,6 +362,17 @@ public class Edit_Controller implements AboveGod {
             ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #e0e0e0; ");
             completed_tasks--;
             pending_tasks++;
+            //Handles the log event part
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            String text="Task "+temp.getName()+" set to Uncompleted "+"("+dtf.format(now)+")";
+            LogEvent logEvent=new LogEvent(text,temp.getProject_id(),temp.getTaskid(),temp.getWorker_id());
+            notificationsBox.getChildren().remove(notificationsBox.lookup("#"+"Comple"+temp.getTaskid()));
+            logEvent.addLog(notificationsBox);
+            WriteToDatabase wr=new WriteToDatabase();
+            wr.addLog(logEvent);
+
+
 
             completed.setText(String.valueOf(completed_tasks));
             notCompleted.setText(String.valueOf(pending_tasks));

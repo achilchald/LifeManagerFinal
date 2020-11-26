@@ -127,6 +127,8 @@ public class WriteToDatabase extends Globals implements AboveGod {
         //Deletes the project
         stmt.executeUpdate("DELETE FROM casperweb_databse.projects WHERE Project_ID = "+ projectId +";");
 
+        stmt.executeUpdate("DELETE FROM casperweb_databse.log Where projectid="+ projectId +";");
+
 
 
 
@@ -170,7 +172,7 @@ public class WriteToDatabase extends Globals implements AboveGod {
         Statement stmt = con.createStatement();
 
         stmt.executeUpdate("INSERT INTO Log(data,projectid,taskid,workerid) Values (" + "\""+ event.getData()+ "\"," +event.getProjId()+ "," +event.getTaskId()+ "," +event.getWorkerId()+");");
-        System.out.println("INSERT INTO Log(data,workerid,taskid,projectid) Values (" + event.getData()+ "," +event.getProjId()+ "," +event.getTaskId()+ "," +event.getWorkerId()+";");
+//        System.out.println("INSERT INTO Log(data,workerid,taskid,projectid) Values (" + event.getData()+ "," +event.getProjId()+ "," +event.getTaskId()+ "," +event.getWorkerId()+";");
 
 
     }

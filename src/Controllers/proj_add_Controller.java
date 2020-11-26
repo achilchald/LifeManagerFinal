@@ -2,6 +2,7 @@
 package Controllers;
 
 import Entities.*;
+import Methods.Read_Database;
 import Methods.WriteFile;
 import Methods.WriteToDatabase;
 import javafx.collections.FXCollections;
@@ -123,7 +124,7 @@ public class proj_add_Controller  extends Globals implements AboveGod {
     }
 
     //todo delete newly added items
-    public void Add_Project() throws IOException {
+    public void Add_Project() throws IOException, SQLException, ClassNotFoundException {
         String name = NameF.getText();
         LocalDate localdate=date.getValue();
         String price = PriceF.getText();
@@ -133,8 +134,10 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         HBox hbox = new HBox();
         hbox = FXMLLoader.load(getClass().getResource("../fxml/Project_Item.fxml"));
 
+        Read_Database rd= new Read_Database();
 
-        int id=projectMap.size()+1;
+        System.out.println("New project id = "+rd.totalProjects()+1);
+        int id=rd.totalProjects()+1;
 
 
 
@@ -167,7 +170,7 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         }
 
     }
-
+//Todo Bug when adding
     public void addWorkerToProject() throws IOException {
         //get the selected option on the checkbox
         String selection = workerscombo.getSelectionModel().getSelectedItem();
@@ -178,6 +181,7 @@ public class proj_add_Controller  extends Globals implements AboveGod {
 
         int projectid=projectMap.size();
 
+        int flag=0;
         HBox box = new HBox();
         box = FXMLLoader.load(getClass().getResource("../fxml/worker_item.fxml"));
 
@@ -190,9 +194,18 @@ public class proj_add_Controller  extends Globals implements AboveGod {
 
         ((Label) box.getChildren().get(3)).setText(String.valueOf(id));
 
+        System.out.println("Project added "+projectMap.get(projectid));
+
         //if the worker is not already added add him
+        if (projectMap.get(projectid).getWorkers()==null){
+            projectMap.get(projectid).addWorker(id);
+            flag=1;
+        }
+
         if (projectMap.get(projectMap.size()).getWorkers().get(id)==null) {
-            projectMap.get(projectMap.size()).addWorker(id);
+            if(flag==0) {
+                projectMap.get(projectMap.size()).addWorker(id);
+            }
             workerMap.get(id).getTasks().put(projectid,new ArrayList<Task>());
             System.out.println("Project workers Added : " + projectMap.get(projectMap.size()).getWorkers().get(id));
 
@@ -255,7 +268,9 @@ public class proj_add_Controller  extends Globals implements AboveGod {
     @FXML
     public void finish() throws IOException, SQLException, ClassNotFoundException {
         SingleSelectionModel<Tab> selectionModel = TabProject.getSelectionModel();
-        int proj_id= projectMap.size();
+        Read_Database rd=new Read_Database();
+
+        int proj_id=rd.totalProjects()+1;
 
         String name = NameF.getText();
         LocalDate localdate=date.getValue();
@@ -362,7 +377,7 @@ public class proj_add_Controller  extends Globals implements AboveGod {
 
 
     @FXML
-    public void pressed(ActionEvent event) throws IOException {
+    public void pressed(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         if (event.getSource() == AddB) {
             Add_Project();
         }

@@ -536,5 +536,19 @@ public class Read_Database extends Globals implements AboveGod {
 
     }
 
+    public int totalProjects()throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT  MAX(Project_id)  FROM casperweb_databse.projects;");
+
+        rs.next();
+        int total = rs.getInt(1);
+        con.close();
+
+        return total;
+
+    }
+
 
 }

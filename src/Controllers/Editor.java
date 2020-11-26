@@ -11,6 +11,7 @@ import Methods.WriteToDatabase;
 import calendar.WriteFileAppointment;
 
 import com.mysql.cj.log.Log;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -473,6 +474,11 @@ public class Editor extends Globals implements AboveGod {
 
 
                         box2 = loader.load();
+
+                        Edit_Controller ctrl=loader.getController();
+
+                        ctrl.getNotificationsBox(notificationsBox,temp.get(i));
+
                         ((Label) box2.getChildren().get(1)).setText(temp.get(i).getName());
                         ((Label) box2.getChildren().get(2)).setText(String.valueOf(entry.getValue().getName()));
                         ((Label) box2.getChildren().get(3)).setText(temp.get(i).getDescription());
@@ -487,14 +493,7 @@ public class Editor extends Globals implements AboveGod {
                         //boolean status=projectMap.get(Integer.parseInt(projectid)).getWorkers().get(temp.get(i).getWorker_id()).getTasks().get(Integer.parseInt(projectid)).get(i).getStatus();
                         if (status2) {
                             box2.getChildren().get(8).setStyle("-fx-background-color: #34eb37; ");//set to green
-                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
-                            LocalDateTime now = LocalDateTime.now();
-                            String text="Task "+temp.get(i).getName()+" Completed "+"("+dtf.format(now)+")";
-
-                            LogEvent logEvent=new LogEvent(text,temp.get(i).getProject_id(),temp.get(i).getTaskid(),temp.get(i).getWorker_id());
-
-                            logEvent.addLog(notificationsBox,"Comple"+logEvent.getTaskId());
 
 
 
@@ -503,10 +502,10 @@ public class Editor extends Globals implements AboveGod {
                         else {
                             box2.getChildren().get(8).setStyle("-fx-background-color: #a7a7a7; ");//set to black
                             notCompletedTask++;
-                            notificationsBox.getChildren().remove(notificationsBox.lookup("#"+"Comple"+temp.get(i).getTaskid()));
+
                         }
 
-                        Edit_Controller ctrl=loader.getController();
+                        loader.getController();
 
                         ctrl.setLabel(completedTasksLabel,pendingTasksLabel,progressBar,progressLabel);
 
@@ -549,7 +548,7 @@ public class Editor extends Globals implements AboveGod {
                 plus.setOnAction(e -> {
                     try {
                         addWorkerToProject(currentWorker.getValue().getWorkerid(),projectid,boxAvailable);
-                    } catch (SQLException | ClassNotFoundException throwables) {
+                    } catch (SQLException | ClassNotFoundException | IOException throwables) {
                         throwables.printStackTrace();
                     }
                 });
@@ -634,6 +633,17 @@ public class Editor extends Globals implements AboveGod {
         progressLabel.setText(String.valueOf(Math.round(progress*100)));
 
     }
+
+    @FXML
+    public void clearLog(){
+    ObservableList<Node> toBeRemoved=notificationsBox.getChildren();
+
+    notificationsBox.getChildren().removeAll(toBeRemoved);
+
+
+    }
+
+
 
     public void setToDoBox(VBox box){
         this.VBoxToDo=box;
@@ -725,7 +735,7 @@ public class Editor extends Globals implements AboveGod {
                     plus.setOnAction(e -> {
                         try {
                             addWorkerToProject(workerId,projId,boxWorkerToDelete);
-                        } catch (SQLException | ClassNotFoundException throwables) {
+                        } catch (SQLException | ClassNotFoundException | IOException throwables) {
                             throwables.printStackTrace();
                         }
                     });
@@ -745,7 +755,11 @@ public class Editor extends Globals implements AboveGod {
                 boxWorkerToDelete.getChildren().add(plus);
                 plus.setOnAction(e -> {
                     try {
-                        addWorkerToProject(workerId,projId,boxWorkerToDelete);
+                        try {
+                            addWorkerToProject(workerId,projId,boxWorkerToDelete);
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
                     } catch (SQLException | ClassNotFoundException throwables) {
                         throwables.printStackTrace();
                     }
@@ -892,7 +906,11 @@ public class Editor extends Globals implements AboveGod {
             boxWorkerToDelete.getChildren().add(plus);
             plus.setOnAction(e -> {
                 try {
-                    addWorkerToProject(Integer.parseInt(workerIDstray.getText()), projId, boxWorkerToDelete);
+                    try {
+                        addWorkerToProject(Integer.parseInt(workerIDstray.getText()), projId, boxWorkerToDelete);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                 } catch (SQLException | ClassNotFoundException throwables) {
                     throwables.printStackTrace();
                 }
@@ -1020,7 +1038,7 @@ public class Editor extends Globals implements AboveGod {
 
     }
 
-    public void addWorkerToProject(int workId,String projectid,HBox box) throws SQLException, ClassNotFoundException {
+    public void addWorkerToProject(int workId,String projectid,HBox box) throws SQLException, ClassNotFoundException, IOException {
 
         projectMap.get(Integer.valueOf(projectid)).addWorker(workId);
         projectMap.get(Integer.parseInt(projectid)).getWorkers().get(workId).getTasks().put(Integer.parseInt(projectid),new ArrayList<Task>());
@@ -1041,8 +1059,16 @@ public class Editor extends Globals implements AboveGod {
             box.getChildren().remove(5);
         }
 
-        WriteToDatabase wr=new WriteToDatabase();
-        wr.addWorkerToProjectDB(workerMap.get(workId),Integer.parseInt(projectid));
+
+//        String text="Added worker :"+workerMap.get(workId).getName()+" to project";
+//        LogEvent log=new LogEvent(text,Integer.parseInt(projectid),0,workId);
+//        log.addLog(notificationsBox);
+//
+//
+//
+//        WriteToDatabase wr=new WriteToDatabase();
+//        wr.addWorkerToProjectDB(workerMap.get(workId),Integer.parseInt(projectid));
+//        wr.addLog(log);
     }
 
     @FXML
@@ -1746,6 +1772,8 @@ public class Editor extends Globals implements AboveGod {
             }
         }
     }
+
+
 
 
 

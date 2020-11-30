@@ -128,6 +128,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
 
 
 
+
     //Load the Invoice Items to the GUI
     public void LoadItems(String CustomerId, int InvoiceId,Label InvoiceCost,Label TotalIncome,Label PayedAmount) throws IOException {
 
@@ -193,6 +194,51 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         PayedAmountLabel.setText( String.valueOf( CurrentInvoice.getPayedAmount()) ) ;
         DueAmountLabel.setText( String.valueOf( CurrentInvoice.getPrice() - CurrentInvoice.getPayedAmount()) ) ;
         ChangeLabel.setText( String.valueOf( CurrentInvoice.getChangeFromPayment() ) );
+    }
+
+
+    //Load the Archived invoices data
+    public void LoadArchivedData(String CustomerId, int InvoiceId) throws IOException {
+
+
+        for (int i = 0;i<customerMap.get(CustomerId).getArchivedInvoices().size();i++)
+        {
+            if(customerMap.get(CustomerId).getArchivedInvoices().get(i).getId() == InvoiceId)
+            {
+                CurrentInvoice = customerMap.get(CustomerId).getArchivedInvoices().get(i);
+
+                //Get the list of the invoice payments
+                this.PaymentsList = customerMap.get(CustomerId).getArchivedInvoices().get(i).getPayments();
+
+
+                //Get the list of the invoice items,its type and cost
+                this.ItemList = customerMap.get(CustomerId).getArchivedInvoices().get(i).getItems();
+                this.InvoiceType = customerMap.get(CustomerId).getArchivedInvoices().get(i).getRecurring();
+
+                break ;
+            }
+        }
+
+
+        //Load the invoice items to the GUI
+        for (int i = 0; i < ItemList.size(); i++) {
+
+            LoadItems(i);
+
+        }
+
+        //Load the invoice payments to the GUI
+        for(int i = 0;i<PaymentsList.size();i++)
+        {
+            LoadPayments(i);
+        }
+
+        System.out.println("Invoice cost = " + CurrentInvoice.getPrice() + "Invoice payed amount = " + CurrentInvoice.getPayedAmount() + "Invoice change = " + CurrentInvoice.getChangeFromPayment());
+
+        //Initialize the invoice costings labels(cost,payed amount,due amount)
+        InvoiceCostLabel.setText( String.valueOf( CurrentInvoice.getPrice() ) );
+        PayedAmountLabel.setText( String.valueOf( CurrentInvoice.getPayedAmount()) ) ;
+
     }
 
 
@@ -522,6 +568,12 @@ public class InvoiceGuiController extends Globals implements AboveGod {
             PayedAmountLabel.setText( String.valueOf( CurrentInvoice.getPayedAmount()) ) ;
             DueAmountLabel.setText( String.valueOf( CurrentInvoice.getPrice() - CurrentInvoice.getPayedAmount()) ) ;
             //ChangeLabel.setText( String.valueOf( CurrentInvoice.getChangeFromPayment() ) );
+
+            if(CurrentInvoice.getPrice() == CurrentInvoice.getPayedAmount())
+            {
+                Read_Database Payer = new Read_Database();
+                Payer.setInvoiceAsPayed(CurrentInvoice.getId());
+            }
 
 
 

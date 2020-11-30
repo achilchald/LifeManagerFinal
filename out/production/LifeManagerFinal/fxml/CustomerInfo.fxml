@@ -174,15 +174,16 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Payments">
+            <Tab text="Archive">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="44.0" layoutY="44.0" text="Payments">
+                        <Label layoutX="44.0" layoutY="44.0" text="Archived Invoices">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
+                        <VBox fx:id="ArchiveBox" layoutX="44.0" layoutY="100.0" prefHeight="398.0" prefWidth="887.0" />
                      </children></AnchorPane>
                </content>
             </Tab>

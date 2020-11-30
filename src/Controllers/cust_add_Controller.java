@@ -85,6 +85,11 @@ public class cust_add_Controller extends Globals implements AboveGod {
         Read_Database adder = new Read_Database();
         adder.AddCustomer(NewCustomer);
 
+        NewCustomer.setPrice(0);
+
+
+
+
         //Add Customer to customers map
         customerMap.put(String.valueOf( LastCustomerId ), NewCustomer );
 
@@ -108,7 +113,7 @@ public class cust_add_Controller extends Globals implements AboveGod {
         ((Label)box.getChildren().get(1)).setText(NewCustomer.getName());
 
 
-        ((Label)box.getChildren().get(3)).setText( String.valueOf(0));
+        ((Label)box.getChildren().get(3)).setText( String.valueOf(NewCustomer.getPrice()));
 
         //A hidden box with a customer id
         ((Label)box.getChildren().get(4)).setText(NewCustomer.getId());

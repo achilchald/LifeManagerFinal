@@ -1,8 +1,7 @@
 package Controllers;
 
-import Entities.AboveGod;
-import Entities.Appointment;
-import Entities.Invoice;
+import Entities.*;
+import Methods.Read_Database;
 import Methods.WriteFile;
 import calendar.WriteFileAppointment;
 import javafx.fxml.FXML;
@@ -13,17 +12,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import Entities.Item;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
-public class item_add_Controller implements AboveGod {
+public class item_add_Controller extends Globals implements AboveGod {
 
     @FXML
     private TextField Type;
@@ -36,16 +35,36 @@ public class item_add_Controller implements AboveGod {
     @FXML
     private VBox pnItems;
 
+    @FXML
+    private Button EditButton;
+
+    private VBox ItemContainer;
+
+    private HBox ItemBox;
+
+    private Item CurrentItem;
+
 
     public void SetBox(VBox box)
     {
         this.pnItems = box;
     }
 
+    public void SetHbox(HBox box)
+    {
+        this.ItemBox = box;
+    }
 
-    public void add_Item(javafx.event.ActionEvent event) throws IOException {
+
+    public void add_Item(javafx.event.ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
 
         if (event.getSource() == AddB) {
+
+            int id = Integer.parseInt(LastTemplatedItemId);
+            id++;
+            LastTemplatedItemId = String.valueOf(id);
+
+            Read_Database Reader = new Read_Database();
 
             String type = Type.getText();
 
@@ -57,15 +76,19 @@ public class item_add_Controller implements AboveGod {
             Stage stage = (Stage) AddB.getScene().getWindow();
 
             // do what you have to do
-            Item item = new Item(type, Float.valueOf(price), recurring);
+            Item item = new Item(String.valueOf(id) , type , recurring , Float.valueOf(price));
 
-            WriteFile wr = new WriteFile();
-
-            wr.SaveItemAdded(type, price, recurring);
+            Reader.AddItem(item);
 
 
             HBox box;
-            box = FXMLLoader.load(getClass().getResource("../fxml/ItemForItems.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ItemForItems.fxml"));
+            box = loader.load();
+            box.setId(String.valueOf(id));
+
+            Edit_Controller ctrl = loader.getController();
+            ctrl.SetItemHbox(box);
+            ctrl.SetItemsContainer(pnItems);
 
             //give the items some effect
 
@@ -77,10 +100,46 @@ public class item_add_Controller implements AboveGod {
 
             pnItems.getChildren().add(box);
 
-            invoiceTypes.add(new Invoice(item.getType(),Integer.valueOf(String.valueOf(item.getPrice())),item.getRecurring()));
+            //invoiceTypes.add(new Invoice(item.getType(),Integer.valueOf(String.valueOf(item.getPrice())),item.getRecurring()));
+            ItemsMap.put(item.getId(),item);
+
+
 
             stage.close();
         }
+    }
+
+
+    public void Initialize()
+    {
+
+        String id = ItemBox.getId();
+
+        CurrentItem = ItemsMap.get(id);
+
+        Type.setText(CurrentItem.getType());
+        Price.setText(String.valueOf(CurrentItem.getPrice()));
+        Recurring.setText(CurrentItem.getRecurring());
+
+    }
+
+
+    @FXML
+    public void UpdateItem() throws SQLException, ClassNotFoundException {
+        CurrentItem.setType(Type.getText());
+        CurrentItem.setPrice( Float.parseFloat(Price.getText()) );
+        CurrentItem.setRecurring(Recurring.getText());
+
+
+        ((Label)ItemBox.getChildren().get(0)).setText(CurrentItem.getType());
+
+        ((Label)ItemBox.getChildren().get(1)).setText(String.valueOf(CurrentItem.getPrice()));
+
+        ((Label)ItemBox.getChildren().get(2)).setText(CurrentItem.getRecurring());
+
+        Read_Database reader = new Read_Database();
+        reader.UpdateItem(CurrentItem);
+
     }
 
 }

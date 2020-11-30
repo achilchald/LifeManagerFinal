@@ -22,8 +22,8 @@
          <HBox.margin>
             <Insets left="25.0" />
          </HBox.margin></Label>
-      <Button fx:id="EditC" mnemonicParsing="false" style="-fx-background-color: silver; -fx-text-fill: black; -fx-background-radius: 20px 20px 20px 20px;" text="Edit" />
-      <Button fx:id="DelC" mnemonicParsing="false" onAction="#Delete_Customer" prefHeight="52.0" prefWidth="0.0" styleClass="trashButton">
+      <Button fx:id="EditItemButton" mnemonicParsing="false" onAction="#EditItem" style="-fx-background-color: silver; -fx-text-fill: black; -fx-background-radius: 20px 20px 20px 20px;" text="Edit" />
+      <Button fx:id="DeleteItemButton" mnemonicParsing="false" onAction="#DeleteItem" prefHeight="52.0" prefWidth="0.0" styleClass="trashButton">
          <HBox.margin>
             <Insets left="-75.0" />
          </HBox.margin>

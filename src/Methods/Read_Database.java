@@ -52,6 +52,7 @@ public class Read_Database extends Globals implements AboveGod {
 
             Item item = new Item(id,name,Reccuring,price);
             ItemsMap.put(id,item);
+            LastTemplatedItemId = item.getId();
 
 
 
@@ -224,7 +225,7 @@ public class Read_Database extends Globals implements AboveGod {
         {
             stmt.executeUpdate("INSERT INTO CUSTOMER_ITEMS VALUES("
                     +UpdatedInvoice.getId() +","+UpdatedInvoice.getItems().get(i).getId()+", \""+UpdatedInvoice.getItems().get(i).getType() + "\" , "+UpdatedInvoice.getItems().get(i).getPrice()
-                    +",0"+ ","+ "0"+  ","+" null "+");");
+                    +",0"+ ","+ "0"+  ","+"0"+","+" null "+",0"+",\""+UpdatedInvoice.getItems().get(i).getRecurring()+"\");");
         }
 
 
@@ -239,6 +240,34 @@ public class Read_Database extends Globals implements AboveGod {
         stmt.executeUpdate("INSERT INTO CUSTOMER_ITEMS VALUES("
                 +InvoiceID +","+item.getId()+ " , \""+item.getType()+"\" , " + item.getPrice()+    ","+item.getDiscount()+ ","+ "1"+  ","+ "0"+"," +" null "+ ","+item.isRecurring() + " , \""+item.getRecurring()+"\"  " +");");
         con.close();
+    }
+
+    public void UpdateItem(Item item) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+
+        Statement stmt = con.createStatement();
+        stmt.executeUpdate("UPDATE ITEMS"
+                + " SET ITEM_NAME = \"" + item.getType()
+                + "\",RECCURING = \"" + item.getRecurring()
+                + "\",PRICE = " + item.getPrice()
+                + " WHERE ITEM_ID = "+ item.getId() +" ;");
+         con.close();
+    }
+
+    public void AddItem(Item item) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+
+        Statement stmt = con.createStatement();
+        stmt.executeUpdate("INSERT INTO ITEMS VALUES ( " +
+                item.getId() + " , \"" +
+                item.getType() + "\" , \"" +
+                item.getRecurring() + "\" , " +
+                item.getPrice() + " ) ;");
+        con.close();
+
+
     }
 
     public void AddDomain(String CustomerId,Domain NewDomain) throws ClassNotFoundException, SQLException {
@@ -339,6 +368,89 @@ public class Read_Database extends Globals implements AboveGod {
                 + "\");");
 
         con.close();
+    }
+
+    public void LoadArchivedInvoices(Customer customer) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from ARCHIVED_INVOICES WHERE CUSTOMER_ID = "+customer.getId() + " ;");
+        while (rs.next()) {
+            int id = rs.getInt(1);
+            int Customer_ID = rs.getInt(2);
+            Date Bill_Date = rs.getDate(3);
+            Date Payment_Date = rs.getDate(4);
+            String Type = rs.getString(5);
+            String Reccuring = rs.getString(6);
+            float change = rs.getFloat(9);
+
+
+
+
+            ArrayList<Item> items = new ArrayList<>();
+            ArrayList<Payment> payments = new ArrayList<>();
+
+            Statement stmt2 = con.createStatement();
+            ResultSet rs2 = stmt2.executeQuery("select  * from ARCHIVED_ITEMS\n" +
+                    "where INVOICE_ID = "+ id +  " ;");
+
+            while(rs2.next())
+            {
+                String item_id = Integer.toString(rs2.getInt(2));
+                String ItemType = rs2.getString(3);
+                float price = rs2.getFloat(4);
+                float discount = rs2.getFloat(5);
+                Boolean isPayed = rs2.getBoolean(7);
+                int quantity = rs2.getInt(6);
+                Date paymentDate = rs2.getDate(8);
+                boolean isRecurring = rs2.getBoolean(9);
+                String Recurrence = rs2.getString(10);
+
+                Item temp = new Item(item_id,ItemType,price,discount,quantity,isRecurring);
+                temp.SetPayed(isPayed);
+                temp.setPayedDate(paymentDate);
+                temp.setRecurring(Recurrence);
+                items.add(temp);
+                System.out.println(temp.getType());
+
+
+            }
+
+            Statement stmt3 = con.createStatement();
+            ResultSet rs3 = stmt2.executeQuery("select  * \n" +
+                    "from ARCHIVED_PAYMENTS pay\n"  +
+                    "where (pay.INVOICE_ID = "+ id +  ")");
+            while (rs3.next())
+            {
+                int PaymentId = rs3.getInt(1);
+                int InvoiceId = id;
+                Date PaymentDate = rs3.getDate(3);
+                float Price = rs3.getFloat(4);
+                String Notes = rs3.getString(5);
+
+
+
+                Payment payment = new Payment(PaymentId,InvoiceId,PaymentDate,Price,Notes);
+                payments.add(payment);
+            }
+
+
+            Invoice invoice = new Invoice(id,Bill_Date,Payment_Date,Type,Reccuring,items,payments,change);
+
+            invoice.Calc_Invoice_Price();
+            invoice.Calc_Payed_Amount();
+            invoice.setArchived(true);
+
+
+            customer.getArchivedInvoices().add(invoice);
+
+
+
+        }
+        con.close();
+
+
     }
 
     public void Load_Category() throws ClassNotFoundException, SQLException {

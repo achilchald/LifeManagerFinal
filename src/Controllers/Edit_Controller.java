@@ -112,10 +112,33 @@ public class Edit_Controller implements AboveGod {
 
     //-----------------------------
 
+    //------- Item Hbox Buttons -------
+
+    @FXML
+    private Button DeleteItemButton;
+
+    @FXML
+    private Button EditItemButton;
+
+    private HBox ItemBox;
+
+    private VBox ItemsContainer;
+
 
     public void SetEditArea (Pane EditArea) {this.EditPane = EditArea;}
 
     public void SetStackArea (StackPane stackPane) {this.stackPane = stackPane;}
+
+    public void SetItemHbox(HBox box)
+    {
+        this.ItemBox = box;
+    }
+
+    public void SetItemsContainer(VBox box)
+    {
+        this.ItemsContainer = box;
+    }
+
 
 
     //This method sets the is of the price label of the customer
@@ -132,7 +155,7 @@ public class Edit_Controller implements AboveGod {
     }
 
     //todo Na kleinei kai na apo8ikeyei to arxeio
-    public void Edit_Customer(MouseEvent event) throws IOException  {
+    public void Edit_Customer(MouseEvent event) throws IOException, SQLException, ClassNotFoundException {
 
         //Load the customer edit GUI
         FXMLLoader EditLoader = new FXMLLoader(getClass().getResource("/fxml/CustomerInfo.fxml"));
@@ -384,6 +407,46 @@ public class Edit_Controller implements AboveGod {
             //Delete the box
             ri.getChildren().remove(ri.lookup("#" + temp));
         }
+
+    }
+
+    @FXML
+    public void DeleteItem(ActionEvent event) throws SQLException, ClassNotFoundException {
+        String id = ItemBox.getId();
+        System.out.println("ID of item to be deleted = "+id);
+        ItemsContainer.getChildren().remove(ItemsContainer.lookup("#"+id));
+        ItemsMap.remove(id);
+        Database_Deleter deleter = new Database_Deleter();
+        deleter.Delete_Item(id);
+
+    }
+
+    @FXML
+    public void EditItem()
+    {
+        Parent root = null;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Edit_Item.fxml"));
+
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        item_add_Controller cntrl;
+
+        cntrl = loader.getController();
+
+
+        cntrl.SetBox(ItemsContainer);
+        cntrl.SetHbox(ItemBox);
+        cntrl.Initialize();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Edit Item");
+        stage.show();
 
     }
 

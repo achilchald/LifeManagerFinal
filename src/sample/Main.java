@@ -22,6 +22,10 @@ public class Main extends Application {
         Date_Checking date_checking = new Date_Checking();
         date_checking.Load_Recurring_Invoices();
         date_checking.Check_Dates();
+        date_checking.Load_Non_Recurring_Invoices();
+        date_checking.CheckNonRecurringInvoices();
+
+        date_checking= null;
 
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));

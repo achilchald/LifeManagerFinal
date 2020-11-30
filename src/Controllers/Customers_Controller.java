@@ -264,6 +264,8 @@ public class Customers_Controller implements AboveGod , Initializable  {
                 //Get the Gui element Controller
                 Edit_Controller control = loader.getController();
 
+                control.SetStackArea(pnlCustomers);
+
 
                 ((Label) box.getChildren().get(1)).setText(customerMap.get(id).getName());
 

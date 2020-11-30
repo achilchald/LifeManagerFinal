@@ -25,6 +25,8 @@ public class WriteToDatabase extends Globals implements AboveGod {
         con.close();
     }
 
+
+
     public void deleteWorker(String id) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
@@ -125,6 +127,8 @@ public class WriteToDatabase extends Globals implements AboveGod {
         //Deletes the project
         stmt.executeUpdate("DELETE FROM casperweb_databse.projects WHERE Project_ID = "+ projectId +";");
 
+        stmt.executeUpdate("DELETE FROM casperweb_databse.log Where projectid="+ projectId +";");
+
 
 
 
@@ -158,6 +162,18 @@ public class WriteToDatabase extends Globals implements AboveGod {
         stmt.executeUpdate("UPDATE TASKS " + "Set WORKER_ID = " + newWorkerID + " WHERE PROJECT_ID = " + projectID + " AND WORKER_ID = "+ prevWorkerID + ";");
 
         stmt.executeUpdate("Update proj_worker_link "+"set worker_id = "+newWorkerID +" Where project_id = "+projectID+" And worker_id = "+prevWorkerID+";");
+
+    }
+
+    public void addLog(LogEvent event ) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+        //here sonoo is database name, root is username and password
+        Statement stmt = con.createStatement();
+
+        stmt.executeUpdate("INSERT INTO Log(data,projectid,taskid,workerid) Values (" + "\""+ event.getData()+ "\"," +event.getProjId()+ "," +event.getTaskId()+ "," +event.getWorkerId()+");");
+//        System.out.println("INSERT INTO Log(data,workerid,taskid,projectid) Values (" + event.getData()+ "," +event.getProjId()+ "," +event.getTaskId()+ "," +event.getWorkerId()+";");
+
 
     }
 

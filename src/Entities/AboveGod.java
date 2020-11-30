@@ -1,5 +1,7 @@
 package Entities;
 
+
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +25,8 @@ public interface AboveGod {
     Map<Integer,Worker> workerMap=new HashMap<>();
 
    Map<Integer,String> categoryMap=new HashMap<>();
+
+   Map<Integer,LogEvent> logMap=new HashMap<>();
 
 
 

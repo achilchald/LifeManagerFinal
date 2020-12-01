@@ -11,7 +11,7 @@
 
 <Pane fx:id="pnlCustomers" prefHeight="839.0" prefWidth="1361.0" style="-fx-background-color: #253138;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.InvoiceItemController.InvoiceGuiController">
    <children>
-      <Label layoutX="50.0" layoutY="36.0" text="Invoice #ID" textFill="#c4dbe9">
+      <Label fx:id="InvoiceIdLabel" layoutX="50.0" layoutY="36.0" text="Invoice #ID" textFill="#c4dbe9">
          <font>
             <Font size="24.0" />
          </font>

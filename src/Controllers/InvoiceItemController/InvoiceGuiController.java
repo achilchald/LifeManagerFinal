@@ -101,6 +101,8 @@ public class InvoiceGuiController extends Globals implements AboveGod {
 
     private Label PayedAmount;
 
+    //--------GUI Labels-------
+
     @FXML
     private Label InvoiceCostLabel;
 
@@ -112,6 +114,18 @@ public class InvoiceGuiController extends Globals implements AboveGod {
 
     @FXML
     private Label ChangeLabel;
+
+    @FXML
+    private Label BillDate;
+
+    @FXML
+    private Label DueDate;
+
+    @FXML
+    private Label InvoiceIdLabel;
+
+    @FXML
+    private Label CustomerName;
 
 
 //--------------------------
@@ -147,10 +161,11 @@ public class InvoiceGuiController extends Globals implements AboveGod {
 
 
 
+
+
         //this.TotalIncome = TotalIncome;
 
         //Get the InvoiceId and its Items
-        ArrayList<Item> temp = customerMap.get(CustomerId).GetInvoicesList().get(0).getItems();
         for (int i = 0;i<customerMap.get(CustomerId).GetInvoicesList().size();i++)
         {
             if(customerMap.get(CustomerId).GetInvoicesList().get(i).getId() == InvoiceId)
@@ -174,6 +189,8 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         }
 
 
+
+
         //Load the invoice items to the GUI
         for (int i = 0; i < ItemList.size(); i++) {
 
@@ -194,6 +211,14 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         PayedAmountLabel.setText( String.valueOf( CurrentInvoice.getPayedAmount()) ) ;
         DueAmountLabel.setText( String.valueOf( CurrentInvoice.getPrice() - CurrentInvoice.getPayedAmount()) ) ;
         ChangeLabel.setText( String.valueOf( CurrentInvoice.getChangeFromPayment() ) );
+
+
+        InvoiceIdLabel.setText("InvoiceId#"+CurrentInvoice.getId());
+        BillDate.setText(CurrentInvoice.getBill_Date().toString());
+        DueDate.setText(CurrentInvoice.getPayment_Date().toString());
+        CustomerName.setText(customerMap.get(CustomerId).getName());
+
+
     }
 
 

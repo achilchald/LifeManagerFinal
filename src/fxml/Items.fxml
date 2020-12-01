@@ -18,17 +18,17 @@
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="34.0" layoutY="206.0" prefHeight="27.0" prefWidth="746.0" spacing="80.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 10px 10px 0px 0px;">
          <children>
-            <Label fx:id="ITEM_NAME" prefHeight="17.0" prefWidth="123.0" text="Type" wrapText="true">
+            <Label fx:id="ITEM_NAME" onMouseClicked="#SortItems" prefHeight="17.0" prefWidth="123.0" text="Type" wrapText="true">
                <HBox.margin>
                   <Insets left="50.0" />
                </HBox.margin>
             </Label>
-            <Label fx:id="PRICE" prefWidth="100.0" text="Price">
+            <Label fx:id="PRICE" onMouseClicked="#SortItems" prefWidth="100.0" text="Price">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </Label>
-            <Label fx:id="RECCURING" prefHeight="17.0" prefWidth="90.0" text="Recurring">
+            <Label fx:id="RECCURING" onMouseClicked="#SortItems" prefHeight="17.0" prefWidth="90.0" text="Recurring">
                <HBox.margin>
                   <Insets />
                </HBox.margin>

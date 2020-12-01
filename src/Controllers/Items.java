@@ -120,7 +120,7 @@ public class Items implements Initializable, AboveGod {
 
 
     @FXML
-    public void SortCustomers(MouseEvent event) throws SQLException, ClassNotFoundException, InterruptedException {
+    public void SortItems(MouseEvent event) throws SQLException, ClassNotFoundException, InterruptedException {
 
         String SortingType = null;
 
@@ -146,10 +146,15 @@ public class Items implements Initializable, AboveGod {
                 String id = SortedItems.get(i);
 
                 HBox box;
-                box = FXMLLoader.load(getClass().getResource("/fxml/ItemForItems.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ItemForItems.fxml"));
+                box = loader.load();
+
+                Edit_Controller ctrl = loader.getController();
+                ctrl.SetItemHbox(box);
+                ctrl.SetItemsContainer(pnItems);
 
                 //give the items some effect
-
+                box.setId(id);
                 ((Label)box.getChildren().get(0)).setText(ItemsMap.get(id).getType());
 
                 ((Label)box.getChildren().get(1)).setText(String.valueOf(ItemsMap.get(id).getPrice()));

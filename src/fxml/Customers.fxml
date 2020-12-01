@@ -8,12 +8,11 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-
 <StackPane fx:id="pnlCustomers" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Customers_Controller">
    <children>
       <Pane prefHeight="782.0" prefWidth="1243.0" style="-fx-background-color: #eceef0;" stylesheets="@../sample/style.css">
          <children>
-            <AnchorPane fx:id="EditArea" layoutX="785.0" layoutY="213.0" prefHeight="523.0" prefWidth="348.0" />
+            <AnchorPane fx:id="EditArea" layoutX="785.0" layoutY="199.0" prefHeight="538.0" prefWidth="348.0" />
             <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="213.0" prefHeight="27.0" prefWidth="746.0" spacing="80.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 10px 10px 0px 0px;" stylesheets="@../sample/style.css">
                <children>
                   <Label prefHeight="17.0" prefWidth="118.0" text="Company Name" wrapText="true">
@@ -112,12 +111,15 @@
             </HBox>
             <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="240.0" prefHeight="496.0" prefWidth="746.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 0px 0px 10px 10px;" stylesheets="@../sample/style.css">
                <content>
-                  <VBox fx:id="pnItems" alignment="BASELINE_LEFT" prefHeight="498.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 10px 10px 10px 10px;">
+                  <VBox fx:id="pnItems" alignment="BASELINE_LEFT" prefHeight="476.0" prefWidth="731.0" spacing="5.0" style="-fx-background-color: #fcfcfc;">
                      <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </VBox>
                </content>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
             </ScrollPane>
             <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="749.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
                <image>

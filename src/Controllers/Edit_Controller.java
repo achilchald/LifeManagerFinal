@@ -1,14 +1,12 @@
 package Controllers;
 
-import Entities.AboveGod;
-import Entities.Customer;
-import Entities.Linker;
-import Entities.Task;
+import Entities.*;
 import Methods.Database_Deleter;
 import Methods.WriteFile;
 
 import Methods.WriteToDatabase;
 import animatefx.animation.FadeInRight;
+import animatefx.animation.SlideInLeft;
 import animatefx.animation.SlideInRight;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,15 +15,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import javax.xml.transform.Source;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /*
@@ -35,6 +32,7 @@ where the user can change things in the customer such as basic data
 and invoices,domains etc
  */
 public class Edit_Controller implements AboveGod {
+
 
 
     @FXML
@@ -110,14 +108,42 @@ public class Edit_Controller implements AboveGod {
 
     private StackPane stackPane;
 
+    private VBox notificationsBox;
+
+    private Task temp;
+
+
 
 
     //-----------------------------
+
+    //------- Item Hbox Buttons -------
+
+    @FXML
+    private Button DeleteItemButton;
+
+    @FXML
+    private Button EditItemButton;
+
+    private HBox ItemBox;
+
+    private VBox ItemsContainer;
 
 
     public void SetEditArea (Pane EditArea) {this.EditPane = EditArea;}
 
     public void SetStackArea (StackPane stackPane) {this.stackPane = stackPane;}
+
+    public void SetItemHbox(HBox box)
+    {
+        this.ItemBox = box;
+    }
+
+    public void SetItemsContainer(VBox box)
+    {
+        this.ItemsContainer = box;
+    }
+
 
 
     //This method sets the is of the price label of the customer
@@ -134,7 +160,7 @@ public class Edit_Controller implements AboveGod {
     }
 
     //todo Na kleinei kai na apo8ikeyei to arxeio
-    public void Edit_Customer(MouseEvent event) throws IOException  {
+    public void Edit_Customer(MouseEvent event) throws IOException, SQLException, ClassNotFoundException {
 
         //Load the customer edit GUI
         FXMLLoader EditLoader = new FXMLLoader(getClass().getResource("/fxml/CustomerInfo.fxml"));
@@ -170,6 +196,8 @@ public class Edit_Controller implements AboveGod {
 
         }
     }
+
+
 
 
     //---- Kwstas stuffs ----
@@ -291,7 +319,19 @@ public class Edit_Controller implements AboveGod {
 
     }
 
-    public void setStatus() throws SQLException, ClassNotFoundException {
+    public void getNotificationsBox(VBox notificationsBox,Task temp){
+        this.notificationsBox=notificationsBox;
+        this.temp=temp;
+    }
+
+
+
+
+
+    public void setStatus() throws SQLException, ClassNotFoundException, IOException {
+
+
+
         int ProjectId = Integer.parseInt(((Label) ToDoItem.getChildren().get(7)).getText());
         int WorkerId = Integer.parseInt(((Label) ToDoItem.getChildren().get(5)).getText());
         int IndexOfTask =  Integer.parseInt(((Label) ToDoItem.getChildren().get(6)).getText());
@@ -308,6 +348,21 @@ public class Edit_Controller implements AboveGod {
 
         if (status) {
             ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #34eb37; ");//set to green
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+
+            LocalDateTime now = LocalDateTime.now();
+
+            String text="Task "+temp.getName()+" Completed "+"("+dtf.format(now)+")";
+
+            LogEvent logEvent=new LogEvent(text,temp.getProject_id(),temp.getTaskid(),temp.getWorker_id());
+
+
+
+            logEvent.addLog(notificationsBox,"Comple"+logEvent.getTaskId());
+
+            WriteToDatabase wr=new WriteToDatabase();
+            wr.addLog(logEvent);
 
 
             completed_tasks++;
@@ -330,6 +385,17 @@ public class Edit_Controller implements AboveGod {
             ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #e0e0e0; ");
             completed_tasks--;
             pending_tasks++;
+            //Handles the log event part
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            String text="Task "+temp.getName()+" set to Uncompleted "+"("+dtf.format(now)+")";
+            LogEvent logEvent=new LogEvent(text,temp.getProject_id(),temp.getTaskid(),temp.getWorker_id());
+            notificationsBox.getChildren().remove(notificationsBox.lookup("#"+"Comple"+temp.getTaskid()));
+            logEvent.addLog(notificationsBox);
+            WriteToDatabase wr=new WriteToDatabase();
+            wr.addLog(logEvent);
+
+
 
             completed.setText(String.valueOf(completed_tasks));
             notCompleted.setText(String.valueOf(pending_tasks));
@@ -362,7 +428,7 @@ public class Edit_Controller implements AboveGod {
 
             int IndexOfTask =  Integer.parseInt(((Label) ToDoItem.getChildren().get(6)).getText());
 
-           
+
 
 
             projectMap.get(ProjectId).getWorkers().get(WorkerId).getTasks().get(ProjectId).remove(IndexOfTask);
@@ -386,6 +452,40 @@ public class Edit_Controller implements AboveGod {
             //Delete the box
             ri.getChildren().remove(ri.lookup("#" + temp));
         }
+
+    }
+
+    @FXML
+    public void DeleteItem(ActionEvent event) throws SQLException, ClassNotFoundException {
+        String id = ItemBox.getId();
+        System.out.println("ID of item to be deleted = "+id);
+        ItemsContainer.getChildren().remove(ItemsContainer.lookup("#"+id));
+        ItemsMap.remove(id);
+        Database_Deleter deleter = new Database_Deleter();
+        deleter.Delete_Item(id);
+
+    }
+
+
+    @FXML
+    public void EditItem() throws IOException {
+
+        Parent root;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Edit_Item.fxml"));
+
+        root = loader.load();
+
+        item_add_Controller cntrl= loader.getController();
+
+        cntrl.SetBox(ItemsContainer);
+        cntrl.SetHbox(ItemBox);
+        cntrl.Initialize();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Edit Item");
+        stage.show();
+
 
     }
 

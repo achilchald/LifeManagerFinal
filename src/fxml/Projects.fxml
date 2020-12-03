@@ -100,22 +100,22 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="205.0" prefHeight="27.0" prefWidth="746.0" spacing="80.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 10px 10px 0px 0px;">
                <children>
-                  <Label text="Company Name" wrapText="true">
+                  <Label fx:id="PROJECT_NAME" onMouseClicked="#SortProjects" text="Company Name" wrapText="true">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>
                   </Label>
-                  <Label prefWidth="100.0" text="Delivery Date">
+                  <Label fx:id="DUE_DATE" onMouseClicked="#SortProjects" prefWidth="100.0" text="Delivery Date">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Price">
+                  <Label fx:id="PRICE" onMouseClicked="#SortProjects" text="Price">
                      <HBox.margin>
                         <Insets left="-25.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Workforce">
+                  <Label fx:id="WORKFORCE" onMouseClicked="#SortProjects" text="Workforce">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

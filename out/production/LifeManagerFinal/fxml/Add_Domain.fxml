@@ -4,32 +4,32 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="496.0" prefWidth="438.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DomainController.AddDomainController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="276.0" style="-fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DomainController.AddDomainController">
    <children>
-      <Pane fx:id="DomainPane" prefHeight="501.0" prefWidth="439.0">
+      <Pane fx:id="DomainPane" prefHeight="550.0" prefWidth="277.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 10 10 10 10;">
          <children>
-            <AnchorPane fx:id="anchor1" prefHeight="501.0" prefWidth="438.0" style="-fx-background-color: #fcfcfc;" stylesheets="@../sample/style.css">
+            <AnchorPane fx:id="anchor1" prefHeight="550.0" prefWidth="277.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 10 10 10 10;" stylesheets="@../sample/style.css">
                <children>
-                  <Label layoutX="38.0" layoutY="138.0" text="Domain Name" />
-                  <TextField fx:id="DomName" layoutX="126.0" layoutY="135.0" />
-                  <Label layoutX="32.0" layoutY="180.0" text="Expiration Date" />
-                  <Label layoutX="29.0" layoutY="218.0" text="Hosting Type" />
-                  <ComboBox fx:id="HostingType" layoutX="125.0" layoutY="214.0" prefWidth="150.0" promptText="Hosting Type" />
-                  <Label layoutX="42.0" layoutY="259.0" text="Domain Type" />
-                  <ComboBox fx:id="DomainType" layoutX="125.0" layoutY="255.0" prefWidth="150.0" promptText="Domain Type" />
-                  <Button fx:id="AddDomain" layoutX="127.0" layoutY="352.0" mnemonicParsing="false" onAction="#pressed" prefHeight="44.0" prefWidth="61.0" styleClass="addButton" text="Add">
+                  <Label layoutX="15.0" layoutY="99.0" text="Domain Name" />
+                  <TextField fx:id="DomName" layoutX="103.0" layoutY="95.0" />
+                  <Label layoutX="15.0" layoutY="149.0" text="Expiration Date" />
+                  <Label layoutX="15.0" layoutY="199.0" text="Hosting Type" />
+                  <ComboBox fx:id="HostingType" layoutX="102.0" layoutY="193.0" prefWidth="150.0" promptText="Hosting Type" />
+                  <Label layoutX="15.0" layoutY="249.0" text="Domain Type" />
+                  <ComboBox fx:id="DomainType" layoutX="102.0" layoutY="244.0" prefWidth="150.0" promptText="Domain Type" />
+                  <Button fx:id="AddDomain" layoutX="120.0" layoutY="350.0" mnemonicParsing="false" onAction="#pressed" prefHeight="45.0" prefWidth="60.0" styleClass="addButton" text="Add">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <DatePicker fx:id="ExpirationDate" layoutX="126.0" layoutY="176.0" prefHeight="25.0" prefWidth="149.0" />
+                  <DatePicker fx:id="ExpirationDate" layoutX="103.0" layoutY="144.0" prefHeight="25.0" prefWidth="149.0" />
+                  <Label layoutX="13.0" layoutY="13.0" prefHeight="32.0" prefWidth="130.0" text="New Domain">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
-            <Label layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="130.0" text="Add Domain">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
          </children>
       </Pane>
    </children>

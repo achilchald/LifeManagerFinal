@@ -88,7 +88,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="198.0" prefHeight="42.0" prefWidth="746.0" spacing="80.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 10px 10px 0px 0px;" stylesheets="@../sample/style.css">
                <children>
-                  <Label prefHeight="17.0" prefWidth="118.0" text="Company Name" wrapText="true">
+                  <Label fx:id="CustomerName" onMouseClicked="#SortCustomers" prefHeight="17.0" prefWidth="118.0" text="Company Name" wrapText="true">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>

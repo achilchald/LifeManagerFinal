@@ -8,8 +8,12 @@ import Methods.Read_Database;
 import Methods.WriteFile;
 import Methods.WriteToDatabase;
 //import animatefx.animation.*;
+import animatefx.animation.SlideInLeft;
+import animatefx.animation.SlideOutLeft;
 import calendar.WriteFileAppointment;
 
+
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -195,6 +199,9 @@ public class Editor extends Globals implements AboveGod {
 
     @FXML
     private Label completedTasksLabel;
+
+    @FXML
+    private VBox ArchiveBox;
 
 
     @FXML
@@ -384,6 +391,10 @@ public class Editor extends Globals implements AboveGod {
 
     public Map<String,Domain> CustomerDomains = new HashMap<>();
 
+
+    private Pane EditArea;
+    private StackPane Stackpane;
+
     Label TotalIncome;
 
 
@@ -391,6 +402,12 @@ public class Editor extends Globals implements AboveGod {
     int strayTasksCounterHelp=0;
 
     int flag = 0;
+
+
+    //this flags check if a selected domain had hosting/domain types
+    //they are used when updating the domains values
+    boolean HadDomainType ;
+    boolean HadHostingType ;
 
     @FXML
     private Button DeleteDomain;
@@ -400,16 +417,20 @@ public class Editor extends Globals implements AboveGod {
     //SetBox 1 sets the projects view thing.
     public void SetBox1(HBox hb) throws IOException, SQLException, ClassNotFoundException {
         this.Hbc = hb;
+
+        String projectid = ((Label) Hbc.getChildren().get(5)).getText();
         NameF.setText(((Label) Hbc.getChildren().get(1)).getText());
         DateF.setText(((Label) Hbc.getChildren().get(2)).getText());
-        WorkforceF.setText(((Label) Hbc.getChildren().get(3)).getText());
-        PriceF.setText(((Label) Hbc.getChildren().get(4)).getText());
+
+        WorkforceF.setText(String.valueOf(projectMap.get(Integer.parseInt(projectid)).getWorkers().size()));
+
+        PriceF.setText(String.valueOf(projectMap.get(Integer.parseInt(projectid)).getPrice()));
         int completedTasks=0;
         int notCompletedTask=0;
 
 
 
-        String projectid = ((Label) Hbc.getChildren().get(5)).getText();
+
         projectIdLabel.setText(projectid);
 
 
@@ -467,13 +488,18 @@ public class Editor extends Globals implements AboveGod {
 
 
                         box2 = loader.load();
+
+                        Edit_Controller ctrl=loader.getController();
+
+                        ctrl.getNotificationsBox(notificationsBox,temp.get(i));
+
                         ((Label) box2.getChildren().get(1)).setText(temp.get(i).getName());
                         ((Label) box2.getChildren().get(2)).setText(String.valueOf(entry.getValue().getName()));
                         ((Label) box2.getChildren().get(3)).setText(temp.get(i).getDescription());
-                        System.out.println("Worker id : "+entry.getValue().getWorkerid());
+
 
                         ((Label) box2.getChildren().get(5)).setText(String.valueOf(entry.getValue().getWorkerid()));
-                        System.out.println("Index is : "+i);
+
                         ((Label) box2.getChildren().get(6)).setText(String.valueOf(i));
                         ((Label) box2.getChildren().get(7)).setText(projectid);
 
@@ -481,17 +507,22 @@ public class Editor extends Globals implements AboveGod {
                         //boolean status=projectMap.get(Integer.parseInt(projectid)).getWorkers().get(temp.get(i).getWorker_id()).getTasks().get(Integer.parseInt(projectid)).get(i).getStatus();
                         if (status2) {
                             box2.getChildren().get(8).setStyle("-fx-background-color: #34eb37; ");//set to green
+
+
+
+
                             completedTasks++;
                         }
                         else {
                             box2.getChildren().get(8).setStyle("-fx-background-color: #a7a7a7; ");//set to black
                             notCompletedTask++;
+
                         }
 
-                        Edit_Controller ctrl=loader.getController();
+                        loader.getController();
 
                         ctrl.setLabel(completedTasksLabel,pendingTasksLabel,progressBar,progressLabel);
-                        System.out.println("PRINTED TASK ID : "+temp.get(i).getTaskid());
+
                         box2.setId(String.valueOf(temp.get(i).getTaskid()));
                         ProjectToDoPanel.getChildren().add(box2);
 
@@ -531,7 +562,7 @@ public class Editor extends Globals implements AboveGod {
                 plus.setOnAction(e -> {
                     try {
                         addWorkerToProject(currentWorker.getValue().getWorkerid(),projectid,boxAvailable);
-                    } catch (SQLException | ClassNotFoundException throwables) {
+                    } catch (SQLException | ClassNotFoundException | IOException throwables) {
                         throwables.printStackTrace();
                     }
                 });
@@ -542,6 +573,17 @@ public class Editor extends Globals implements AboveGod {
         //Sets the Data Labels
         completedTasksLabel.setText(String.valueOf(completedTasks));
         pendingTasksLabel.setText(String.valueOf(notCompletedTask));
+
+        Read_Database rd=new Read_Database();
+        System.out.println("Project id is "+projectid);
+        HashMap<Integer,LogEvent> tmp=(HashMap<Integer, LogEvent>)rd.loadProjectLogs(Integer.parseInt(projectid));
+
+
+        for (Map.Entry<Integer, LogEvent> currLog : tmp.entrySet()) {
+            System.out.println("Loading logs for project "+projectid);
+            currLog.getValue().addLog(notificationsBox);
+
+        }
 
 
 
@@ -564,6 +606,8 @@ public class Editor extends Globals implements AboveGod {
 
         int daysToDeadLine= (int) ChronoUnit.DAYS.between(now,deadline);
 
+
+        //If land from now on
         if(progress==1){
             Hbc.setStyle("-fx-background-color: #74c474");
         }
@@ -571,10 +615,10 @@ public class Editor extends Globals implements AboveGod {
         //Notification for days
         if(progress<0.5 && (daysToDeadLine<5)){
             Hbc.setStyle("-fx-background-color: #ece75c");
-            Label txt=new Label("There are " +daysToDeadLine+ " days remaining until deadline and Progress is at "+progress+" % . Hurry up ! ");
+            Label txt=new Label("There are " +daysToDeadLine+ " days remaining until deadline and Progress is at "+Math.round(progress)+" % . Hurry up ! ");
             if (daysToDeadLine==1){
                 Hbc.setStyle("-fx-background-color: #bc4646");
-                txt.setText("There is " +daysToDeadLine+ " day remaining until deadline and Progress is at "+progress+" % . Hurry up or... ");
+                txt.setText("There is " +daysToDeadLine+ " day remaining until deadline and Progress is at "+Math.round(progress)+" % . Hurry up or... ");
 
             }
             txt.setMinWidth(Region.USE_PREF_SIZE);
@@ -589,10 +633,11 @@ public class Editor extends Globals implements AboveGod {
             notificationsBox.getChildren().add(notification);
         }
 
-//        if(projectMap.get(Integer.parseInt(projectid)).getWorkers().size()>3){
-//            Notification txt=new Notification(" Wow big project ");
-//            txt.addNotification(notificationsBox,Hbc);
-//        }
+
+        if(projectMap.get(Integer.parseInt(projectid)).getWorkers().size()>3){
+            Notification txt=new Notification(" Wow big project ");
+            txt.addNotification(notificationsBox,Hbc);
+        }
 
 
 
@@ -603,12 +648,28 @@ public class Editor extends Globals implements AboveGod {
 
     }
 
+    @FXML
+    public void clearLog(){
+    ObservableList<Node> toBeRemoved=notificationsBox.getChildren();
+
+    notificationsBox.getChildren().removeAll(toBeRemoved);
+
+
+    }
+
+
+
     public void setToDoBox(VBox box){
         this.VBoxToDo=box;
         String localid= ((Label) Hbc.getChildren().get(5)).getText();
         initComboBoxesProject(Integer.parseInt(localid));
         initComboBoxCategory();
 
+
+    }
+
+    //todo Make setLogBox when in database
+    public void setLogBox(){
 
     }
 
@@ -621,7 +682,7 @@ public class Editor extends Globals implements AboveGod {
 
         setToDoBox(ProjectToDoPanel);
 
-        //initComboBoxesProject(Integer.parseInt(idLabel.getText()));
+
 
 
 
@@ -688,7 +749,7 @@ public class Editor extends Globals implements AboveGod {
                     plus.setOnAction(e -> {
                         try {
                             addWorkerToProject(workerId,projId,boxWorkerToDelete);
-                        } catch (SQLException | ClassNotFoundException throwables) {
+                        } catch (SQLException | ClassNotFoundException | IOException throwables) {
                             throwables.printStackTrace();
                         }
                     });
@@ -708,7 +769,11 @@ public class Editor extends Globals implements AboveGod {
                 boxWorkerToDelete.getChildren().add(plus);
                 plus.setOnAction(e -> {
                     try {
-                        addWorkerToProject(workerId,projId,boxWorkerToDelete);
+                        try {
+                            addWorkerToProject(workerId,projId,boxWorkerToDelete);
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
                     } catch (SQLException | ClassNotFoundException throwables) {
                         throwables.printStackTrace();
                     }
@@ -737,8 +802,8 @@ public class Editor extends Globals implements AboveGod {
             Task test=straytasks.get(strayTasksCounter);
             projectMap.get(Integer.parseInt(projId)).getWorkers().get(Integer.parseInt(id)).addTasks(test);
 
-            System.out.println("What is added :" +projectMap.get(Integer.parseInt(projId)).getWorkers().get(Integer.parseInt(id)).getTasks().get(Integer.parseInt(projId)).get(strayTasksCounter).getStatus());
-            System.out.println("Status of the newly added task is : "+test.getStatus());
+//            System.out.println("What is added :" +projectMap.get(Integer.parseInt(projId)).getWorkers().get(Integer.parseInt(id)).getTasks().get(Integer.parseInt(projId)).get(strayTasksCounter).getStatus());
+//            System.out.println("Status of the newly added task is : "+test.getStatus());
 
 
 //            workerMap.get(Integer.parseInt(id)).addTasks(straytasks.get(strayTasksCounter));
@@ -746,6 +811,16 @@ public class Editor extends Globals implements AboveGod {
             WriteToDatabase wr = new WriteToDatabase();
             wr.reassignTask(Integer.parseInt(workerIDstray.getText()), Integer.parseInt(id), Integer.parseInt(projId));
 
+            //Gets now date
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+//            System.out.println(dtf.format(now));
+
+            //Creates the logEvent
+            LogEvent logEvent = new LogEvent("Task : "+test.getName()+" reassigned From : "+workerMap.get(test.getWorker_id()).getName()+" To : "+temp.getName()+"("+dtf.format(now)+")",Integer.parseInt(projId),test.getTaskid(),test.getWorker_id());
+            wr.addLog(logEvent);
+
+            logEvent.addLog(notificationsBox);
 
 
             //Handles the visual aspect of the reassign
@@ -786,6 +861,8 @@ public class Editor extends Globals implements AboveGod {
 
             Task tasktemp=straytasks.get(strayTasksCounter);
             //Make the status button the corresponding color
+
+
 
             if (straytasks.get(strayTasksCounter).getStatus()){
                 box.getChildren().get(8).setStyle("-fx-background-color : #50b065;");
@@ -843,7 +920,11 @@ public class Editor extends Globals implements AboveGod {
             boxWorkerToDelete.getChildren().add(plus);
             plus.setOnAction(e -> {
                 try {
-                    addWorkerToProject(Integer.parseInt(workerIDstray.getText()), projId, boxWorkerToDelete);
+                    try {
+                        addWorkerToProject(Integer.parseInt(workerIDstray.getText()), projId, boxWorkerToDelete);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                 } catch (SQLException | ClassNotFoundException throwables) {
                     throwables.printStackTrace();
                 }
@@ -851,6 +932,8 @@ public class Editor extends Globals implements AboveGod {
 
 
         }
+
+
 
 
         strayTasksCounter++;
@@ -938,12 +1021,20 @@ public class Editor extends Globals implements AboveGod {
         WriteToDatabase wr=new WriteToDatabase();
         wr.addTaskToProjectDB(temp,id);
 
+        //Here we create the log
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String text="Task "+temp.getName()+" added to "+workerMap.get(temp.getWorker_id()).getName()+"("+dtf.format(now)+")";
+        LogEvent log=new LogEvent(text,temp.getProject_id(),temp.getTaskid(),temp.getWorker_id());
+        System.out.println("Task added project id is"+log.getProjId());
+        log.addLog(notificationsBox);
+
+        wr.addLog(log);
+
+        //Here we update the Labels
         int pend= Integer.parseInt(pendingTasksLabel.getText());
-
         pend++;
-
         pendingTasksLabel.setText(String.valueOf(pend));
-
         int completed_tasks= Integer.parseInt(completedTasksLabel.getText());
         int pending_tasks= Integer.parseInt(pendingTasksLabel.getText());
         double total=completed_tasks+pending_tasks;
@@ -961,7 +1052,7 @@ public class Editor extends Globals implements AboveGod {
 
     }
 
-    public void addWorkerToProject(int workId,String projectid,HBox box) throws SQLException, ClassNotFoundException {
+    public void addWorkerToProject(int workId,String projectid,HBox box) throws SQLException, ClassNotFoundException, IOException {
 
         projectMap.get(Integer.valueOf(projectid)).addWorker(workId);
         projectMap.get(Integer.parseInt(projectid)).getWorkers().get(workId).getTasks().put(Integer.parseInt(projectid),new ArrayList<Task>());
@@ -982,8 +1073,16 @@ public class Editor extends Globals implements AboveGod {
             box.getChildren().remove(5);
         }
 
-        WriteToDatabase wr=new WriteToDatabase();
-        wr.addWorkerToProjectDB(workerMap.get(workId),Integer.parseInt(projectid));
+
+//        String text="Added worker :"+workerMap.get(workId).getName()+" to project";
+//        LogEvent log=new LogEvent(text,Integer.parseInt(projectid),0,workId);
+//        log.addLog(notificationsBox);
+//
+//
+//
+//        WriteToDatabase wr=new WriteToDatabase();
+//        wr.addWorkerToProjectDB(workerMap.get(workId),Integer.parseInt(projectid));
+//        wr.addLog(log);
     }
 
     @FXML
@@ -1020,6 +1119,7 @@ public class Editor extends Globals implements AboveGod {
             taskCategory.getItems().add(entry2.getKey()+"."+entry2.getValue());
         }
     }
+
     @FXML
     public  void initComboBoxesHandleTask(int id, int prevID) {
         HashMap<Integer, Worker> workersInProject = projectMap.get(id).getWorkers();
@@ -1051,7 +1151,8 @@ public class Editor extends Globals implements AboveGod {
         }
     }
 
-    public void AddTaskToWorker() throws IOException {
+    public void AddTaskToWorker() throws IOException, SQLException, ClassNotFoundException {
+
 
         //Loads the item to be added
         HBox box;
@@ -1073,6 +1174,10 @@ public class Editor extends Globals implements AboveGod {
 
         Task temptask=new Task(taskid,name,desc,Date.valueOf(LocalDate.now()),false,projectid,workid);
         projectMap.get(projectid).getWorkers().get(workid).addTasks(temptask);
+
+
+
+
 
         ((Label) box.getChildren().get(1)).setText(name);
         ((Label) box.getChildren().get(2)).setText("12");
@@ -1161,7 +1266,7 @@ public class Editor extends Globals implements AboveGod {
 
 
     //This method is responsible for initializing the customer data to the GUI
-    public void SetEditArea(HBox CustomerBox,Label TotalIncome) throws IOException {
+    public void SetEditArea(HBox CustomerBox,Label TotalIncome) throws IOException, SQLException, ClassNotFoundException {
         //Pass The Customer Box Along With The Edit Area
         this.Hbc = CustomerBox;
         this.TotalIncome = TotalIncome;
@@ -1207,6 +1312,11 @@ public class Editor extends Globals implements AboveGod {
         //Create a linker so as to generate links to labels that will be updated
         Linker linker = new Linker();
 
+        //Get Current Date
+        Date CurrentDate = Date.valueOf( LocalDate.now() );
+
+
+
         //Set the customer invoices to the FXML Elements coresponding to them
         for (int i = 0;i<customerMap.get(id).GetInvoicesList().size();i++)
         {
@@ -1239,7 +1349,7 @@ public class Editor extends Globals implements AboveGod {
                 ((Label) box.getChildren().get(2)).setText(temp.getPayment_Date().toString());
                 ((Label) box.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
                 ((Label) box.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
-                ((ComboBox) box.getChildren().get(5)).getItems().addAll("Add Payment", "Edit", "Delete");
+                ((ComboBox) box.getChildren().get(5)).getItems().addAll( "Edit", "Delete");
 
 
 
@@ -1251,6 +1361,13 @@ public class Editor extends Globals implements AboveGod {
 
                 System.out.println(temp.getRecurring());
                 System.out.println(temp.getType());
+
+                //Check if the invoices time has expired
+                if(CurrentDate.compareTo(temp.getPayment_Date())>0)
+                {
+                    box.setStyle("-fx-background-color:#e04e10;");
+                }
+
 
                 //Add the invoice to a box that coresponds with its type
                 if (temp.getType().equals("MONTHLY")) {
@@ -1288,12 +1405,19 @@ public class Editor extends Globals implements AboveGod {
                 ((Label)RecBox.getChildren().get(2)).setText(temp.getPayment_Date().toString());
                 ((Label)RecBox.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
                 ((Label)RecBox.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
-                ((ComboBox)RecBox.getChildren().get(5)).getItems().addAll("Add Payment","Edit","Delete");
+                ((ComboBox)RecBox.getChildren().get(5)).getItems().addAll("Edit","Delete");
 
                 //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
                 ((Label) RecBox.getChildren().get(3)).setId(temp.getId() + ((Label) RecBox.getChildren().get(3)).getId());
                 System.out.println("Invoice price label id = " + ((Label) RecBox.getChildren().get(3)).getId());
                 linker.CreateLink(((Label) RecBox.getChildren().get(3)));
+
+                //Check if the invoices time has expired
+                if(CurrentDate.compareTo(temp.getPayment_Date())>0)
+                {
+                    RecBox.setStyle("-fx-background-color:#e04e10;");
+                }
+
 
                 //Add the component to the Reccurrence Box
                 CustomBox.getChildren().add(RecBox);
@@ -1301,8 +1425,54 @@ public class Editor extends Globals implements AboveGod {
             }
 
 
+
+
+
+
+
         }
 
+        Read_Database reader = new Read_Database();
+        reader.LoadArchivedInvoices(customerMap.get(id));
+
+        //Load the archived invoices
+        for(int i = 0;i < customerMap.get(id).getArchivedInvoices().size(); i++)
+        {
+            Invoice temp = customerMap.get(id).getArchivedInvoices().get(i);
+            HBox InvoiceBox = new HBox();
+            //Load the invoice template
+            FXMLLoader loaderRec = new FXMLLoader(getClass().getResource("../fxml/Invoice_Item.fxml"));
+
+            InvoiceBox = loaderRec.load();
+
+            //Append a controller to the invoice component
+            Invoice_Editing_Controller EditControlRec = loaderRec.getController();
+
+            //Set customer and invoice id's to the controller
+            EditControlRec.setCustomerAndInvoiceId(id,temp.getId());
+            EditControlRec.SetIncomeLabel(this.TotalIncome);
+            EditControlRec.isArchived(true);
+
+            //Initialize the Hbox values
+            ((Label)InvoiceBox.getChildren().get(0)).setText("Invoice#"+temp.getId());
+            ((Label)InvoiceBox.getChildren().get(1)).setText(temp.getBill_Date().toString());
+            ((Label)InvoiceBox.getChildren().get(2)).setText(temp.getPayment_Date().toString());
+            ((Label)InvoiceBox.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
+            ((Label)InvoiceBox.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
+            ((ComboBox)InvoiceBox.getChildren().get(5)).getItems().addAll("Edit","Delete");
+
+            //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
+            ((Label) InvoiceBox.getChildren().get(3)).setId(temp.getId() + ((Label) InvoiceBox.getChildren().get(3)).getId());
+            System.out.println("Invoice price label id = " + ((Label) InvoiceBox.getChildren().get(3)).getId());
+            linker.CreateLink(((Label) InvoiceBox.getChildren().get(3)));
+
+
+
+
+            //Add the component to the Reccurrence Box
+            ArchiveBox.getChildren().add(InvoiceBox);
+            EditControlRec.SetContainer(ArchiveBox);
+        }
 
     }
 
@@ -1313,6 +1483,10 @@ public class Editor extends Globals implements AboveGod {
 
         if (event.getSource() == DomList && !DeleteFlag)
         {
+
+            HadHostingType = false;
+            HadDomainType = false;
+
             System.out.println(DomList.getValue());
 
             //Get the domains invoice ID
@@ -1343,23 +1517,39 @@ public class Editor extends Globals implements AboveGod {
             //Set the expiration date to the Date Picker field
             ExpDate.setText(CustomerDomains.get(DomList.getValue()).getExpiry_Date().toString());
 
+            HostingType.setValue(null);
+            DomainType.setValue(null);
+
+            hostingType = null;
+            domainType = null;
+
             //Get the Hosting and Domain types and put show them in the combo box
             for (int i = 0;i<DomainInvoice.getItems().size();i++)
             {
-                System.out.println(DomainInvoice.getItems().get(i).getType());
+
                 if(DomainInvoice.getItems().get(i).getType().equals("HOSTING SMALL") || DomainInvoice.getItems().get(i).getType().equals("HOSTING MEDIUM") || DomainInvoice.getItems().get(i).getType().equals("HOSTING BIG"))
                 {
-                    HostingType.setPromptText(DomainInvoice.getItems().get(i).getType());
+                    HostingType.setValue(DomainInvoice.getItems().get(i).getType());
                     hostingType = DomainInvoice.getItems().get(i).getType();
                 }
                 else if(DomainInvoice.getItems().get(i).getType().equals("DOMAIN.GR") || DomainInvoice.getItems().get(i).getType().equals("DOMAIN.COM"))
                 {
-                    DomainType.setPromptText(DomainInvoice.getItems().get(i).getType());
+                    DomainType.setValue(DomainInvoice.getItems().get(i).getType());
                     domainType = DomainInvoice.getItems().get(i).getType();
                 }
             }
             System.out.println(hostingType);
             System.out.println(domainType);
+
+
+            //Mark the flags as true if the domain had the types before
+            if(hostingType != null)
+                HadHostingType = true;
+
+            if(domainType != null)
+                HadDomainType = true;
+
+            System.out.println("Hosting flag = "+HadHostingType + " Domain type flag = "+HadDomainType);
 
         } else if(event.getSource() == DomList && DeleteFlag)
         {
@@ -1372,6 +1562,7 @@ public class Editor extends Globals implements AboveGod {
 
     }
 
+    int isPressed = 0;
 
     @FXML
     void pressed(ActionEvent event) throws IOException,  SQLException, ClassNotFoundException {
@@ -1439,6 +1630,8 @@ public class Editor extends Globals implements AboveGod {
             //The price of the invoice before it was changed and the total income and customer cost
             Linker linker = new Linker();
             float PreviousPrice = 0 ;
+
+            //Get the labels to update their values
             Label TotalIncomeLabel = linker.GetLabelLink("IncomeLabel");
             Label CustomerCostLabel = linker.GetLabelLink(id+"CustomerPrice");
             String TotalIncomeString = TotalIncomeLabel.getText().substring(0, TotalIncomeLabel.getText().length() - 1);
@@ -1488,43 +1681,90 @@ public class Editor extends Globals implements AboveGod {
             {
                 if (customerMap.get(id).GetInvoicesList().get(i).getId() == DomainInvoiceId)
                 {
-                    for (int j = 0;j<customerMap.get(id).GetInvoicesList().get(i).getItems().size();j++)
+                    //get the previous invoice
+                    NewInvoice = customerMap.get(id).GetInvoicesList().get(i);
+
+                    for (int j = 0;j<NewInvoice.getItems().size();j++)
                     {
+
+
                         //Check if a new hosting is added
-                        if(customerMap.get(id).GetInvoicesList().get(i).getItems().get(j).getType().equals(hostingType) && HostType != null)
+                        if(NewInvoice.getItems().get(j).getType().equals(hostingType) && HostType != null)
                         {
-                            float Hosting_Price = customerMap.get(id).GetInvoicesList().get(i).getItems().get(j).getPrice();
+                            float Hosting_Price = NewInvoice.getItems().get(j).getPrice();
                             hostingType = HostType;
                             CustomerIncome -= Hosting_Price;
                             assert HostingItem != null;
                             CustomerIncome += HostingItem.getPrice();
-                            customerMap.get(id).GetInvoicesList().get(i).getItems().remove(j);
-                            customerMap.get(id).GetInvoicesList().get(i).getItems().add(HostingItem);
-                            NewInvoice = customerMap.get(id).GetInvoicesList().get(i);
 
+                            NewInvoice.getItems().remove(j);
+                            NewInvoice.getItems().add(HostingItem);
                             NewInvoice.RemovePrice(Hosting_Price);
 
                             System.out.println("HOSTING ADDED");
 
                         }
+
+
                         //Check if a new domain type is added
-                        if(customerMap.get(id).GetInvoicesList().get(i).getItems().get(j).getType().equals(domainType) && DomType != null)
+                        if(NewInvoice.getItems().get(j).getType().equals(domainType) && DomType != null)
                         {
-                            float Type_Price = customerMap.get(id).GetInvoicesList().get(i).getItems().get(j).getPrice();
+                            float Type_Price = 0;
+
+                            Type_Price = NewInvoice.getItems().get(j).getPrice();
+
+
                             domainType = DomType;
                             CustomerIncome -= Type_Price;
                             CustomerIncome += DomainItem.getPrice();
-                            customerMap.get(id).GetInvoicesList().get(i).getItems().remove(j);
-                            customerMap.get(id).GetInvoicesList().get(i).getItems().add(DomainItem);
-                            NewInvoice = customerMap.get(id).GetInvoicesList().get(i);
+
+                            NewInvoice.getItems().remove(j);
+                            NewInvoice.getItems().add(DomainItem);
                             NewInvoice.RemovePrice(Type_Price);
+
                             System.out.println("DOMAIN TYPE ADDED");
+                        }
+
+                        //If there was no hosting type and the user picked a new one, add it
+                        if(!HadHostingType && HostType != null)
+                        {
+                            hostingType = HostType;
+
+                            CustomerIncome += HostingItem.getPrice();
+
+                            NewInvoice.getItems().add(HostingItem);
+
+                            System.out.println("HOSTING ADDED");
+
+                            HostType = null;
+                            HadHostingType = false;
+                        }
+
+
+                        if(!HadDomainType && DomType != null)
+                        {
+                            domainType = DomType;
+
+                            CustomerIncome += DomainItem.getPrice();
+
+                            NewInvoice.getItems().add(DomainItem);
+
+                            System.out.println("DOMAIN TYPE ADDED");
+
+                            DomType = null;
+                            HadDomainType = false;
                         }
 
                     }
 
+                    break ;
+
                 }
             }
+
+
+
+
 
             //Calculate the new price of the invoice
             NewInvoice.Calc_Invoice_Price();
@@ -1545,23 +1785,37 @@ public class Editor extends Globals implements AboveGod {
         //This is triggered if the user decides to add a new domain to the customer
         if (event.getSource() == AddDomain)
         {
-            //Load the Add domain gui panel
-            FXMLLoader AddDomainLoader = new FXMLLoader(getClass().getResource("/fxml/Add_Domain.fxml"));
-            //Add the panel to the side of the screen
-            AddDomainPane.getChildren().add(AddDomainLoader.load());
 
-            //Append a controller to the panel so as to get the data inputted by the user
-            AddDomainController ctrl = AddDomainLoader.getController();
-            //Set to the controller the map containing the domains of the customer
-            ctrl.SetCustomerDomains(CustomerDomains);
-            //Set to the controller the id of the customer so as to add the domain successfully
-            ctrl.SetCustomerId(id);
+            if (isPressed==0) {
+                //Load the Add domain gui panel
+                FXMLLoader AddDomainLoader = new FXMLLoader(getClass().getResource("/fxml/Add_Domain.fxml"));
 
-            //Set the Domain Combox so as to update it when a new domain is added
-            ctrl.SetDomainCombox(DomList);
+                Parent root = AddDomainLoader.load();
 
-            //Set the containers that contain the invoices
-            ctrl.SetContainers(YearlyBox,CustomBox);
+                //Add the panel to the side of the screen
+                AddDomainPane.getChildren().setAll(root);
+
+                new SlideInLeft(AddDomainPane).play();
+                isPressed = 1;
+                AddDomain.setText("Cancel");
+
+                //Append a controller to the panel so as to get the data inputted by the user
+                AddDomainController ctrl = AddDomainLoader.getController();
+                //Set to the controller the map containing the domains of the customer
+                ctrl.SetCustomerDomains(CustomerDomains);
+                //Set to the controller the id of the customer so as to add the domain successfully
+                ctrl.SetCustomerId(id);
+
+                //Set the Domain Combox so as to update it when a new domain is added
+                ctrl.SetDomainCombox(DomList);
+
+                //Set the containers that contain the invoices
+                ctrl.SetContainers(YearlyBox, CustomBox);
+            }else {
+                new SlideOutLeft(AddDomainPane).play();
+                isPressed = 0;
+                AddDomain.setText("Add");
+            }
 
 
         }
@@ -1582,7 +1836,7 @@ public class Editor extends Globals implements AboveGod {
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Add Item");
+            stage.setTitle("Add Invoice");
             stage.show();
         }
 
@@ -1592,8 +1846,8 @@ public class Editor extends Globals implements AboveGod {
             DomList.getItems().remove(DomList.getValue());
             DomName.setText(null);
             ExpDate.setText(null);
-            HostingType.setPromptText("Hosting Types");
-            DomainType.setPromptText("Domain Type");
+            HostingType.getSelectionModel().clearSelection();
+            DomainType.getSelectionModel().clearSelection();
             Database_Deleter deleter = new Database_Deleter();
             deleter.Delete_Domain(DomainId,DomainInvoiceId);
             DeleteDomainInvoice(DomainInvoiceId);
@@ -1622,17 +1876,23 @@ public class Editor extends Globals implements AboveGod {
 
             Read_Database DatabaseUpdater = new Read_Database();
 
+            //Hidden id label.
             String id = ((Label) Hbc.getChildren().get(5)).getText();
 
             projectMap.get(Integer.valueOf(id)).setName(NameF.getText());
             projectMap.get(Integer.valueOf(id)).setDueDate(Date.valueOf(DateF.getText()));
             projectMap.get(Integer.valueOf(id)).setWorkforce(projectMap.get(Integer.valueOf(id)).getWorkers().size());
+
+            System.out.println("Price is"+PriceF.getText());
             projectMap.get(Integer.valueOf(id)).setPrice(Float.parseFloat(PriceF.getText()));
+
 
             ((Label) Hbc.getChildren().get(1)).setText(NameF.getText());
             ((Label) Hbc.getChildren().get(2)).setText(DateF.getText());
             ((Label) Hbc.getChildren().get(3)).setText(PriceF.getText());
             ((Label) Hbc.getChildren().get(4)).setText(String.valueOf(projectMap.get(Integer.valueOf(id)).getWorkers().size()));
+
+
 
             DatabaseUpdater.UpdateProject(Integer.valueOf(id));
 
@@ -1676,6 +1936,8 @@ public class Editor extends Globals implements AboveGod {
             }
         }
     }
+
+
 
 
 
@@ -1731,6 +1993,7 @@ public class Editor extends Globals implements AboveGod {
 
 
     }
+
 
 
     public void setImportant () {

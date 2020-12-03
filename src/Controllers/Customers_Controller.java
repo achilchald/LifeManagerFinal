@@ -4,6 +4,7 @@ import Entities.AboveGod;
 import Entities.Customer;
 import Entities.Item;
 import Entities.Linker;
+import Mail_Sending_Methods.Message_Handler;
 import Methods.Database_Sorter;
 import Methods.Read_Database;
 import javafx.event.ActionEvent;
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.*;
 
 /*
@@ -87,6 +89,8 @@ public class Customers_Controller implements AboveGod , Initializable  {
         //Create a database reader to load the Customer Data from the sql database
         Read_Database reader = new Read_Database();
 
+
+
         IncomeLabel.setText("0");
 
         //Create a linker so as to handle the income label from the various methods that change its pricing
@@ -101,6 +105,16 @@ public class Customers_Controller implements AboveGod , Initializable  {
             for(Map.Entry<String,Customer> entry : customerMap.entrySet())
             {
                 entry.getValue().GetCustomerData();
+            }
+
+
+            Message_Handler Handler = new Message_Handler();
+            try {
+                Handler.Deploy_Message();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
         } catch (ClassNotFoundException | SQLException e) {

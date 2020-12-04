@@ -5,6 +5,8 @@ import Entities.Customer;
 import Entities.Item;
 import Methods.Database_Sorter;
 import Methods.Read_Database;
+import animatefx.animation.SlideInLeft;
+import animatefx.animation.SlideOutLeft;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sample.ReadFromFile;
@@ -35,7 +38,13 @@ public class Items implements Initializable, AboveGod {
     private VBox pnItems;
 
     @FXML
-    private Button AddB;
+    public Pane EditArea;
+
+    @FXML
+    private StackPane pnlItem;
+
+    @FXML
+    private Button Add;
 
     @FXML
     private Label ITEM_NAME;
@@ -47,6 +56,7 @@ public class Items implements Initializable, AboveGod {
     private Label RECCURING;
 
     private int SortingFlag;
+    int isPressed = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
@@ -55,10 +65,8 @@ public class Items implements Initializable, AboveGod {
 
         try {
             reader.Load_Items();
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
 
 
@@ -96,26 +104,38 @@ public class Items implements Initializable, AboveGod {
     }
 
     public void pressed() {
-        Parent root = null;
+        if (isPressed==0) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/add_item.fxml"));
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/add_item.fxml"));
+            Parent root = null;
 
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            item_add_Controller cntrl = loader.getController();
+
+            cntrl.SetBox(pnItems);
+
+            cntrl.SetEditArea(EditArea);
+            cntrl.setItemStackPane(pnlItem);
+
+            EditArea.getChildren().setAll(root);
+
+            new SlideInLeft(EditArea).play();
+            isPressed = 1;
+            Add.setText("Cancel");
+
+        }else {
+
+            new SlideOutLeft(EditArea).play();
+            isPressed = 0;
+            Add.setText("Add Item");
+
         }
 
-        item_add_Controller cntrl;
-
-        cntrl = loader.getController();
-
-        cntrl.SetBox(pnItems);
-
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Add Item");
-        stage.show();
     }
 
 

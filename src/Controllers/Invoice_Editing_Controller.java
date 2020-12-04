@@ -57,6 +57,13 @@ private Pane pnlCustomers;
     @FXML
     private ComboBox<String> Options_Box;
 
+    @FXML
+    private Button EditInvoice;
+
+    @FXML
+    private Button DeleteInvoice;
+
+
     private String CustomerId;
 
     private int InvoiceId;
@@ -94,7 +101,7 @@ private Pane pnlCustomers;
     @FXML
     void OptionSelected(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         //This is triggered if the user selects the edit option in the Invoice HBox
-        if(Options_Box.getValue().equals("Edit") && !isArchived )
+        if(event.getSource() == EditInvoice && !isArchived )
         {
             //Options_Box.getSelectionModel().clearSelection();
             //Load the Invoice summary GUI panel
@@ -107,11 +114,11 @@ private Pane pnlCustomers;
             stage.setScene(new Scene(root));
             stage.setTitle("Editor");
             stage.show();
-            Options_Box.getSelectionModel().clearSelection();
 
 
 
-        }else if (Options_Box.getValue().equals("Edit") && isArchived)
+
+        }else if (event.getSource() == EditInvoice && isArchived)
         {
             FXMLLoader LoadEditGui = new FXMLLoader(getClass().getResource("/fxml/ArchivedInvoiceSummary.fxml"));
             Parent root = LoadEditGui.load();
@@ -122,11 +129,11 @@ private Pane pnlCustomers;
             stage.setScene(new Scene(root));
             stage.setTitle("Archived Invoice");
             stage.show();
-            Options_Box.getSelectionModel().clearSelection();
+
         }
 
         //This is triggered if the user selects the delete invoice option
-        if(Options_Box.getValue().equals("Delete"))
+        if(event.getSource() == DeleteInvoice)
         {
             //Create a Database Deleter entity so as to delete the invoice from the database
             //as well as any entries in the tables that contain its Invoice ID
@@ -159,7 +166,6 @@ private Pane pnlCustomers;
 
                     customerMap.get(CustomerId).GetInvoicesList().remove(i);
 
-                    Options_Box.getSelectionModel().clearSelection();
                     break ;
                 }
             }

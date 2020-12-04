@@ -9,8 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -43,6 +42,14 @@ public class item_add_Controller extends Globals implements AboveGod {
     private HBox ItemBox;
 
     private Item CurrentItem;
+    public Pane EditArea;
+    public StackPane Stackpane;
+
+    @FXML
+    public AnchorPane wholePanel;
+
+    @FXML
+    public StackPane pnlItem;
 
 
     public void SetBox(VBox box)
@@ -53,6 +60,12 @@ public class item_add_Controller extends Globals implements AboveGod {
     public void SetHbox(HBox box)
     {
         this.ItemBox = box;
+    }
+
+    public void SetEditArea(Pane EditPane){ this.EditArea = EditPane; }
+
+    public void setItemStackPane(StackPane Stackpane){
+        this.Stackpane=Stackpane;
     }
 
 
@@ -100,18 +113,14 @@ public class item_add_Controller extends Globals implements AboveGod {
 
             pnItems.getChildren().add(box);
 
-            //invoiceTypes.add(new Invoice(item.getType(),Integer.valueOf(String.valueOf(item.getPrice())),item.getRecurring()));
             ItemsMap.put(item.getId(),item);
-
-
 
             stage.close();
         }
     }
 
 
-    public void Initialize()
-    {
+    public void Initialize() {
 
         String id = ItemBox.getId();
 

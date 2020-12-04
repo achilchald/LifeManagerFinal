@@ -5,7 +5,9 @@ import Methods.Database_Deleter;
 import Methods.WriteFile;
 
 import Methods.WriteToDatabase;
-
+import animatefx.animation.FadeInRight;
+import animatefx.animation.SlideInLeft;
+import animatefx.animation.SlideInRight;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,10 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import javax.xml.transform.Source;
@@ -33,6 +32,7 @@ where the user can change things in the customer such as basic data
 and invoices,domains etc
  */
 public class Edit_Controller implements AboveGod {
+
 
 
     @FXML
@@ -428,7 +428,7 @@ public class Edit_Controller implements AboveGod {
 
             int IndexOfTask =  Integer.parseInt(((Label) ToDoItem.getChildren().get(6)).getText());
 
-           
+
 
 
             projectMap.get(ProjectId).getWorkers().get(WorkerId).getTasks().get(ProjectId).remove(IndexOfTask);
@@ -466,23 +466,16 @@ public class Edit_Controller implements AboveGod {
 
     }
 
-    @FXML
-    public void EditItem()
-    {
-        Parent root = null;
 
+    @FXML
+    public void EditItem() throws IOException {
+
+        Parent root;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Edit_Item.fxml"));
 
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        root = loader.load();
 
-        item_add_Controller cntrl;
-
-        cntrl = loader.getController();
-
+        item_add_Controller cntrl= loader.getController();
 
         cntrl.SetBox(ItemsContainer);
         cntrl.SetHbox(ItemBox);
@@ -492,6 +485,7 @@ public class Edit_Controller implements AboveGod {
         stage.setScene(new Scene(root));
         stage.setTitle("Edit Item");
         stage.show();
+
 
     }
 

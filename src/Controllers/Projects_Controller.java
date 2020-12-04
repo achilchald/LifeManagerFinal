@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 
 import Methods.Database_Sorter;
 import Methods.Read_Database;
+import animatefx.animation.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -200,22 +201,33 @@ public class Projects_Controller  extends Globals implements Initializable ,Abov
         }
     }
 
+    int isPressed = 0;
 
     @FXML
     public void Add_Project(ActionEvent event) throws IOException {
-        if (event.getSource() == Add)
-        {
-            int count=0;
+        if (event.getSource() == Add) {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/add_project.fxml"));
+            if (isPressed==0) {
+                int count = 0;
 
-            Parent root = loader.load();
-            proj_add_Controller ctrl = loader.getController();
-            ctrl.SetBox(pnItems,count,this.TabPaneAnchor);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/add_project.fxml"));
 
-            ctrl.setProjectStackPane(pnlProjects);
+                Parent root = loader.load();
+                proj_add_Controller ctrl = loader.getController();
+                ctrl.SetBox(pnItems, count, this.TabPaneAnchor);
+                new SlideInLeft(this.TabPaneAnchor).play();
 
-            setCounter(counter+1);
+                ctrl.setProjectStackPane(pnlProjects);
+
+                setCounter(counter + 1);
+                isPressed = 1;
+                Add.setText("Cancel");
+
+            }else{
+                new SlideOutLeft(this.TabPaneAnchor).play();
+                isPressed = 0;
+                Add.setText("Add Project");
+            }
 
         }
 

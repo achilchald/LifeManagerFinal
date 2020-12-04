@@ -8,6 +8,8 @@ import Methods.Read_Database;
 import Methods.WriteFile;
 import Methods.WriteToDatabase;
 //import animatefx.animation.*;
+import animatefx.animation.SlideInLeft;
+import animatefx.animation.SlideOutLeft;
 import calendar.WriteFileAppointment;
 
 
@@ -22,7 +24,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-//import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 
 
 import javax.swing.event.ChangeListener;
@@ -57,7 +58,7 @@ public class Editor extends Globals implements AboveGod {
     private TextField DateF;
 
     @FXML
-    private Label WorkforceF;
+    private TextField WorkforceF;
 
     @FXML
     private TextField NameC;
@@ -159,6 +160,9 @@ public class Editor extends Globals implements AboveGod {
     private boolean DeleteFlag = false;
 
     //Invoice Gui Data
+
+    @FXML
+    private Pane AddInvoicePane;
 
     @FXML
     private Pane InvoicePane;
@@ -389,6 +393,10 @@ public class Editor extends Globals implements AboveGod {
     private String id;
 
     public Map<String,Domain> CustomerDomains = new HashMap<>();
+
+
+    private Pane EditArea;
+    private StackPane Stackpane;
 
     Label TotalIncome;
 
@@ -1344,7 +1352,7 @@ public class Editor extends Globals implements AboveGod {
                 ((Label) box.getChildren().get(2)).setText(temp.getPayment_Date().toString());
                 ((Label) box.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
                 ((Label) box.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
-                ((ComboBox) box.getChildren().get(5)).getItems().addAll( "Edit", "Delete");
+
 
 
 
@@ -1400,7 +1408,7 @@ public class Editor extends Globals implements AboveGod {
                 ((Label)RecBox.getChildren().get(2)).setText(temp.getPayment_Date().toString());
                 ((Label)RecBox.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
                 ((Label)RecBox.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
-                ((ComboBox)RecBox.getChildren().get(5)).getItems().addAll("Edit","Delete");
+
 
                 //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
                 ((Label) RecBox.getChildren().get(3)).setId(temp.getId() + ((Label) RecBox.getChildren().get(3)).getId());
@@ -1454,7 +1462,7 @@ public class Editor extends Globals implements AboveGod {
             ((Label)InvoiceBox.getChildren().get(2)).setText(temp.getPayment_Date().toString());
             ((Label)InvoiceBox.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
             ((Label)InvoiceBox.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
-            ((ComboBox)InvoiceBox.getChildren().get(5)).getItems().addAll("Edit","Delete");
+
 
             //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
             ((Label) InvoiceBox.getChildren().get(3)).setId(temp.getId() + ((Label) InvoiceBox.getChildren().get(3)).getId());
@@ -1557,6 +1565,7 @@ public class Editor extends Globals implements AboveGod {
 
     }
 
+    int isPressed = 0;
 
     @FXML
     void pressed(ActionEvent event) throws IOException,  SQLException, ClassNotFoundException {
@@ -1779,23 +1788,37 @@ public class Editor extends Globals implements AboveGod {
         //This is triggered if the user decides to add a new domain to the customer
         if (event.getSource() == AddDomain)
         {
-            //Load the Add domain gui panel
-            FXMLLoader AddDomainLoader = new FXMLLoader(getClass().getResource("/fxml/Add_Domain.fxml"));
-            //Add the panel to the side of the screen
-            AddDomainPane.getChildren().add(AddDomainLoader.load());
 
-            //Append a controller to the panel so as to get the data inputted by the user
-            AddDomainController ctrl = AddDomainLoader.getController();
-            //Set to the controller the map containing the domains of the customer
-            ctrl.SetCustomerDomains(CustomerDomains);
-            //Set to the controller the id of the customer so as to add the domain successfully
-            ctrl.SetCustomerId(id);
+            if (isPressed==0) {
+                //Load the Add domain gui panel
+                FXMLLoader AddDomainLoader = new FXMLLoader(getClass().getResource("/fxml/Add_Domain.fxml"));
 
-            //Set the Domain Combox so as to update it when a new domain is added
-            ctrl.SetDomainCombox(DomList);
+                Parent root = AddDomainLoader.load();
 
-            //Set the containers that contain the invoices
-            ctrl.SetContainers(YearlyBox,CustomBox);
+                //Add the panel to the side of the screen
+                AddDomainPane.getChildren().setAll(root);
+
+                new SlideInLeft(AddDomainPane).play();
+                isPressed = 1;
+                AddDomain.setText("Cancel");
+
+                //Append a controller to the panel so as to get the data inputted by the user
+                AddDomainController ctrl = AddDomainLoader.getController();
+                //Set to the controller the map containing the domains of the customer
+                ctrl.SetCustomerDomains(CustomerDomains);
+                //Set to the controller the id of the customer so as to add the domain successfully
+                ctrl.SetCustomerId(id);
+
+                //Set the Domain Combox so as to update it when a new domain is added
+                ctrl.SetDomainCombox(DomList);
+
+                //Set the containers that contain the invoices
+                ctrl.SetContainers(YearlyBox, CustomBox);
+            }else {
+                new SlideOutLeft(AddDomainPane).play();
+                isPressed = 0;
+                AddDomain.setText("Add");
+            }
 
 
         }
@@ -1814,10 +1837,12 @@ public class Editor extends Globals implements AboveGod {
             //Set to the controller the VBoxes containing the invoices based on their type and reccurence
             ctrl.SetContainers(MonthlyBox,YearlyBox,OneTimeBox,CustomBox);
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Add Invoice");
-            stage.show();
+            AddInvoicePane.getChildren().setAll(root);
+
+          //  Stage stage = new Stage();
+          //  stage.setScene(new Scene(root));
+           // stage.setTitle("Add Invoice");
+           /// stage.show();
         }
 
         if(event.getSource() == DeleteDomain)
@@ -1975,6 +2000,7 @@ public class Editor extends Globals implements AboveGod {
     }
 
 
+
     public void setImportant () {
 
         if (importance.equals(Important.getId())) {
@@ -2008,8 +2034,6 @@ public class Editor extends Globals implements AboveGod {
         Parent root = Hbc.getParent().getParent().getParent().getParent().getParent();
 
         root.toFront();
-        //new FadeInRight(root).play();
-
     }
 
     public void workerGoBack () {
@@ -2017,7 +2041,6 @@ public class Editor extends Globals implements AboveGod {
         Parent root = Hbc.getParent().getParent().getParent().getParent().getParent();
 
         root.toFront();
-       // new FadeInRight(Hbc).play();
 
     }
 
@@ -2026,7 +2049,7 @@ public class Editor extends Globals implements AboveGod {
         Parent root = Hbc.getParent().getParent().getParent().getParent().getParent();
 
         root.toFront();
-        //new FadeInRight(root).play();
+
     }
 
 

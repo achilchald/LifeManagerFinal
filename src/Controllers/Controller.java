@@ -1,5 +1,7 @@
 package Controllers;
 import Entities.Customer;
+import animatefx.animation.SlideInRight;
+import animatefx.animation.SlideInUp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,6 +50,8 @@ public class Controller implements Initializable {
     private Pane Items_sp;
     private Pane Workers_sp;
     private Pane home;
+
+    private String isFront;
 
 
     @Override
@@ -113,6 +117,7 @@ public class Controller implements Initializable {
 
         home.toFront();
 
+        isFront = "H";
     }
 
     @FXML
@@ -126,19 +131,53 @@ public class Controller implements Initializable {
     public void handleClicks(ActionEvent actionEvent) {
 
         if (actionEvent.getSource() == btnHome) {
-            home.toFront();
+            if (!isFront.equals("H")) {
+                home.toFront();
+                new SlideInUp(home).play();
+                isFront = "H";
+            }
+
         }
         if(actionEvent.getSource()==btnProjects) {
-            prj.toFront();
+
+            if (!isFront.equals("P")) {
+                prj.toFront();
+                new SlideInUp(prj).play();
+                isFront = "P";
+            }
+
+
+
         }
         if (actionEvent.getSource() == btnCustomers) {
-            cust.toFront();
+
+            if (!isFront.equals("C")) {
+                cust.toFront();
+                new SlideInUp(cust).play();
+                isFront = "C";
+            }
+
+
         }
         if(actionEvent.getSource()==btnItems) {
-            Items_sp.toFront();
+
+            if (!isFront.equals("I")) {
+                Items_sp.toFront();
+                new SlideInUp(Items_sp).play();
+                isFront = "I";
+            }
+
+
         }
         if(actionEvent.getSource()== btnWorkers) {
-            Workers_sp.toFront();
+
+            if (!isFront.equals("W")) {
+                Workers_sp.toFront();
+                new SlideInUp(Workers_sp).play();
+                isFront = "W";
+            }
+
+
         }
         if(actionEvent.getSource()==btnExit) {
             closeButtonAction();

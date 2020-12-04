@@ -7,6 +7,8 @@ import Entities.Linker;
 import Mail_Sending_Methods.Message_Handler;
 import Methods.Database_Sorter;
 import Methods.Read_Database;
+import animatefx.animation.SlideInLeft;
+import animatefx.animation.SlideOutLeft;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,7 +50,6 @@ public class Customers_Controller implements AboveGod , Initializable  {
 
     @FXML
     private Pane EditArea;
-
 
     @FXML
     private Label ActiveCustomersPanel;
@@ -108,14 +109,14 @@ public class Customers_Controller implements AboveGod , Initializable  {
             }
 
 
-            Message_Handler Handler = new Message_Handler();
-            try {
-                Handler.Deploy_Message();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            Message_Handler Handler = new Message_Handler();
+//            try {
+//                Handler.Deploy_Message();
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -203,29 +204,40 @@ public class Customers_Controller implements AboveGod , Initializable  {
         return count;
     }
 
+    int isPressed = 0;
 
     //This method is responsible for adding a new Customer to the application
     public void Add_Customer(ActionEvent event) throws IOException {
         //If the add button is hit then show the gui for adding a customer
         if (event.getSource() == Add)
         {
+            if (isPressed==0) {
+                //Load the Gui elements
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add_customer.fxml"));
 
-            //Load the Gui elements
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add_customer.fxml"));
+                Parent root = loader.load();
 
-            Parent root = loader.load();
+                //Get the add customer controller
+                cust_add_Controller ctrl = loader.getController();
 
-            //Get the add customer controller
-            cust_add_Controller ctrl = loader.getController();
+                //Set to the controller the Vbox containing the customers and the small area to appear
+                ctrl.SetCustomerVbox(pnItems);
+                ctrl.SetEditArea(EditArea);
+                ctrl.setCustomerStackPane(pnlCustomers);
 
-            //Set to the controller the Vbox containing the customers and the small area to appear
-            ctrl.SetCustomerVbox(pnItems);
-            ctrl.SetEditArea(EditArea);
-            ctrl.setCustomerStackPane(pnlCustomers);
+                setCounter(counter + 1);
 
-            setCounter(counter+1);
+                EditArea.getChildren().setAll(root);
 
-            EditArea.getChildren().setAll(root);
+                new SlideInLeft(EditArea).play();
+                isPressed = 1;
+                Add.setText("Cancel");
+
+            }else {
+                new SlideOutLeft(EditArea).play();
+                isPressed = 0;
+                Add.setText("Add Customer");
+            }
 
         }
 

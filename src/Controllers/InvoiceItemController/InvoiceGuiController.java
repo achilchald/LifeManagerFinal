@@ -34,6 +34,9 @@ public class InvoiceGuiController extends Globals implements AboveGod {
     @FXML
     private VBox ItemsList;
 
+    @FXML
+    private TextArea InvoiceNotes;
+
 
 
 
@@ -143,6 +146,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
 
 
 
+
     //Load the Invoice Items to the GUI
     public void LoadItems(String CustomerId, int InvoiceId,Label InvoiceCost,Label TotalIncome,Label PayedAmount) throws IOException {
 
@@ -184,6 +188,8 @@ public class InvoiceGuiController extends Globals implements AboveGod {
                 this.ItemList = customerMap.get(CustomerId).GetInvoicesList().get(i).getItems();
                 this.InvoiceType = customerMap.get(CustomerId).GetInvoicesList().get(i).getRecurring();
                 this.cost = InvoiceCost;
+
+                InvoiceNotes.setText(CurrentInvoice.getNotes());
                 break ;
             }
         }

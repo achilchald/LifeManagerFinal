@@ -55,19 +55,7 @@ public class Invoice {
 
     }
 
-    public String DisplayInvoiceData()
-    {
-        String out = "";
-        Calc_Invoice_Price();
-        String item = "";
-        for(int i = 0;i<items.size();i++)
-        {
-            item = item + items.get(i).getType() + items.get(i).getPrice();
-        }
-        out = id+ " " + item + " " + price ;
 
-        return  out;
-    }
 
 
     public void Calc_Invoice_Price()
@@ -157,6 +145,8 @@ public class Invoice {
     public int getRepetitions() {
         return Repetitions;
     }
+
+
 
     public String getNotes() {
         return Notes;

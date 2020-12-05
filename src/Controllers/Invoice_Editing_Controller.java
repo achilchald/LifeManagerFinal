@@ -110,6 +110,7 @@ private Pane pnlCustomers;
             //Append a controller to the panel so as to apply any changes made
             InvoiceGuiController GuiControll = LoadEditGui.getController();
             GuiControll.LoadItems(CustomerId,InvoiceId,Price,TotalIncome,PayedAmount);
+
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Editor");

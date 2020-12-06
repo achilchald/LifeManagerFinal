@@ -5,7 +5,9 @@ import Methods.Database_Deleter;
 import Methods.WriteFile;
 
 import Methods.WriteToDatabase;
-import com.mysql.cj.log.Log;
+//import animatefx.animation.FadeInRight;
+//import animatefx.animation.SlideInLeft;
+//import animatefx.animation.SlideInRight;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,10 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import javax.xml.transform.Source;
@@ -33,6 +32,7 @@ where the user can change things in the customer such as basic data
 and invoices,domains etc
  */
 public class Edit_Controller implements AboveGod {
+
 
 
     @FXML
@@ -117,10 +117,33 @@ public class Edit_Controller implements AboveGod {
 
     //-----------------------------
 
+    //------- Item Hbox Buttons -------
+
+    @FXML
+    private Button DeleteItemButton;
+
+    @FXML
+    private Button EditItemButton;
+
+    private HBox ItemBox;
+
+    private VBox ItemsContainer;
+
 
     public void SetEditArea (Pane EditArea) {this.EditPane = EditArea;}
 
     public void SetStackArea (StackPane stackPane) {this.stackPane = stackPane;}
+
+    public void SetItemHbox(HBox box)
+    {
+        this.ItemBox = box;
+    }
+
+    public void SetItemsContainer(VBox box)
+    {
+        this.ItemsContainer = box;
+    }
+
 
 
     //This method sets the is of the price label of the customer
@@ -137,7 +160,7 @@ public class Edit_Controller implements AboveGod {
     }
 
     //todo Na kleinei kai na apo8ikeyei to arxeio
-    public void Edit_Customer(MouseEvent event) throws IOException  {
+    public void Edit_Customer(MouseEvent event) throws IOException, SQLException, ClassNotFoundException {
 
         //Load the customer edit GUI
         FXMLLoader EditLoader = new FXMLLoader(getClass().getResource("/fxml/CustomerInfo.fxml"));
@@ -365,7 +388,8 @@ public class Edit_Controller implements AboveGod {
             //Handles the log event part
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
-            String text="Task "+temp.getName()+" set to Uncompleted "+"("+dtf.format(now)+")";
+
+            String text="Task "+ToDoItem.getChildren().get(1)+" set to Uncompleted "+"("+dtf.format(now)+")";
             LogEvent logEvent=new LogEvent(text,temp.getProject_id(),temp.getTaskid(),temp.getWorker_id());
             notificationsBox.getChildren().remove(notificationsBox.lookup("#"+"Comple"+temp.getTaskid()));
             logEvent.addLog(notificationsBox);
@@ -390,7 +414,7 @@ public class Edit_Controller implements AboveGod {
     }
 
     @FXML
-    public void DeleteTask() throws SQLException, ClassNotFoundException {
+    public void deleteToDoFromProject() throws SQLException, ClassNotFoundException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to delete this task?", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
@@ -405,16 +429,7 @@ public class Edit_Controller implements AboveGod {
 
             int IndexOfTask =  Integer.parseInt(((Label) ToDoItem.getChildren().get(6)).getText());
 
-           
-
-
             projectMap.get(ProjectId).getWorkers().get(WorkerId).getTasks().get(ProjectId).remove(IndexOfTask);
-
-
-
-
-
-
 
             //Delete the Worker from the map
 
@@ -429,6 +444,40 @@ public class Edit_Controller implements AboveGod {
             //Delete the box
             ri.getChildren().remove(ri.lookup("#" + temp));
         }
+
+    }
+
+    @FXML
+    public void DeleteItem(ActionEvent event) throws SQLException, ClassNotFoundException {
+        String id = ItemBox.getId();
+        System.out.println("ID of item to be deleted = "+id);
+        ItemsContainer.getChildren().remove(ItemsContainer.lookup("#"+id));
+        ItemsMap.remove(id);
+        Database_Deleter deleter = new Database_Deleter();
+        deleter.Delete_Item(id);
+
+    }
+
+
+    @FXML
+    public void EditItem() throws IOException {
+
+        Parent root;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Edit_Item.fxml"));
+
+        root = loader.load();
+
+        item_add_Controller cntrl= loader.getController();
+
+        cntrl.SetBox(ItemsContainer);
+        cntrl.SetHbox(ItemBox);
+        cntrl.Initialize();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Edit Item");
+        stage.show();
+
 
     }
 

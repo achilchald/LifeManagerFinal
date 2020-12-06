@@ -111,6 +111,7 @@ public class EditItemController implements AboveGod {
     private Button EditPayment;
 
 
+    String PreviousPrice;
 
     String Myid;
 
@@ -375,9 +376,6 @@ public class EditItemController implements AboveGod {
             RecurrenceFlag = true;
         }
 
-
-
-
     }
 
 
@@ -401,6 +399,7 @@ public class EditItemController implements AboveGod {
 
         float Item_Price = Float.parseFloat(PriceText.getText());
         float Discount = Float.parseFloat(DiscountField.getText());
+
 
 
         CurrentItem.setPrice(Item_Price);
@@ -444,6 +443,8 @@ public class EditItemController implements AboveGod {
         }
 
 
+
+
        // FXMLLoader ItemLoader = new FXMLLoader(getClass().getResource("/fxml/ItemGrid.fxml"));
        // GridPane NewGrid = ItemLoader.load();
        // EditItemController ctrl = ItemLoader.getController();
@@ -474,6 +475,10 @@ public class EditItemController implements AboveGod {
         WriteToDatabase writer = new WriteToDatabase();
         writer.UpdateCustomerItem(CurrentInvoice.getId(),CurrentItem);
 
+        CurrentInvoice.Calc_Invoice_Price();
+
+        InvoiceCostLabel.setText(String.valueOf(CurrentInvoice.getPrice()));
+        Price.setText(String.valueOf(CurrentInvoice.getPrice()));
 
 
 

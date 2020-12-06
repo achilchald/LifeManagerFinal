@@ -189,7 +189,7 @@ public class AddInvoiceController extends Globals implements AboveGod, Initializ
                 ((Label) box.getChildren().get(2)).setText(NewInvoice.getPayment_Date().toString());
                 ((Label) box.getChildren().get(3)).setText(Float.toString(NewInvoice.getPrice()));
                 ((Label) box.getChildren().get(4)).setText(Float.toString(NewInvoice.getPayedAmount()));
-                ((ComboBox) box.getChildren().get(5)).getItems().addAll("Add Payment", "Edit", "Delete");
+
 
                 //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
                 ((Label) box.getChildren().get(3)).setId(NewInvoice.getId() + ((Label) box.getChildren().get(3)).getId());
@@ -234,7 +234,7 @@ public class AddInvoiceController extends Globals implements AboveGod, Initializ
                 ((Label)RecBox.getChildren().get(2)).setText(NewInvoice.getPayment_Date().toString());
                 ((Label)RecBox.getChildren().get(3)).setText(Float.toString(NewInvoice.getPrice()));
                 ((Label)RecBox.getChildren().get(4)).setText(Float.toString(NewInvoice.getPayedAmount()));
-                ((ComboBox)RecBox.getChildren().get(5)).getItems().addAll("Add Payment","Edit","Delete");
+
 
                 //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
                 ((Label) RecBox.getChildren().get(3)).setId(NewInvoice.getId() + ((Label) RecBox.getChildren().get(3)).getId());

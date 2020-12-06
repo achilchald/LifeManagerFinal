@@ -1,10 +1,10 @@
 .text-field {
-    -fx-background-color: #a9a9a9 , white , white;
+    -fx-background-color: #a9a9a9 , white ,  #fcfcfc;
     -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
 }
 
 .text-field:focused {
-    -fx-background-color: #a9a9a9 , #c5d0ff, white;
+    -fx-background-color: #a9a9a9 , #c5d0ff,  #fcfcfc;
     -fx-background-insets: 0 0 0 0, 0 0 0 0, 0 -1 2 -1;
 }
 

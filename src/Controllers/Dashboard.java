@@ -12,16 +12,24 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+//import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 
@@ -48,6 +56,10 @@ public class Dashboard implements Initializable, AboveGod {
     @FXML
     private Label tasks;
 
+    @FXML
+    private VBox NotificationsBox;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -67,14 +79,41 @@ public class Dashboard implements Initializable, AboveGod {
 
         tasks.setText(String.valueOf(i));
 
+        DatePicker datePicker = new DatePicker(LocalDate.now());
+       // DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
+       // Node popupContent = datePickerSkin.getPopupContent();
+        LocalDate selectedDate = datePicker.getValue();
 
-        Pane pane = null;
-        try {
-            pane = FXMLLoader.load(getClass().getResource("../fxml/fullCalendar.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        calendarPane.getChildren().add(pane);
+       // popupContent.setStyle("-fx-pref-width: 298px;");
+
+      //  calendarPane.getChildren().add(popupContent);
+
+        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("New Value: " + newValue);
+
+            Parent root = null;
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/add_appointment.fxml"));
+
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            appointment_add_Controller cntrl;
+
+            cntrl = loader.getController();
+
+            cntrl.setDate(newValue.toString());
+            cntrl.loadAppointments();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Set Appointment");
+            stage.show();
+
+        });
 
 
         // statisticsPie: Inovice type,

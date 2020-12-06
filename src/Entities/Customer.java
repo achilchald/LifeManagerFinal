@@ -39,7 +39,13 @@ public class Customer implements AboveGod{
 
     ArrayList<Invoice> invoicesList=new ArrayList<>();
 
-    public Customer(String id,String name,String Country,String City,String Address,String Zip,String Phone,String Email,String AFM)
+    private ArrayList<Invoice> ArchivedInvoices = new ArrayList<>();
+
+    public ArrayList<Invoice> getArchivedInvoices() {
+        return ArchivedInvoices;
+    }
+
+    public Customer(String id, String name, String Country, String City, String Address, String Zip, String Phone, String Email, String AFM)
     {
         this.id = id;
         this.name = name;

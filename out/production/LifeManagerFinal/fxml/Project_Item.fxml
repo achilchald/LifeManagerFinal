@@ -34,7 +34,7 @@
          <HBox.margin>
             <Insets left="10.0" />
          </HBox.margin></Label>
-        <Label fx:id="Projectid" textFill="WHITE" />
+        <Label fx:id="Projectid" opacity="0.0" textFill="WHITE" />
       <Button fx:id="Del" mnemonicParsing="false" onAction="#Delete_Project" prefWidth="20.0" styleClass="trashButton">
          <HBox.margin>
             <Insets left="-70.0" />

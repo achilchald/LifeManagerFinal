@@ -3,6 +3,8 @@ package Controllers;
 import Entities.AboveGod;
 import Entities.Worker;
 import Methods.Read_Database;
+import animatefx.animation.SlideInLeft;
+import animatefx.animation.SlideOutLeft;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -130,25 +132,37 @@ public class Workers_Controller  implements Initializable,AboveGod {
 
     }
 
+    int isPressed = 0;
 
     @FXML
     public void addWorker(ActionEvent event) throws IOException {
         if(event.getSource()==AddWorker){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/add_worker.fxml"));
 
-            Parent root = loader.load();
-            Worker_add_Controller ctrl = loader.getController();
+            if (isPressed==0) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/add_worker.fxml"));
 
-            ctrl.SetBox(pnWorkerItems);
+                Parent root = loader.load();
+                Worker_add_Controller ctrl = loader.getController();
 
-            ctrl.setWorkerPane(addWorkerPane);
+                ctrl.SetBox(pnWorkerItems);
 
-            ctrl.setWorkerStackPane(pnlWorkers);
+                ctrl.setWorkerPane(addWorkerPane);
+
+                ctrl.setWorkerStackPane(pnlWorkers);
 
 
-            setCounter(counter+1);
+                setCounter(counter + 1);
 
-            addWorkerPane.getChildren().setAll(root);
+                addWorkerPane.getChildren().setAll(root);
+                new SlideInLeft(addWorkerPane).play();
+                isPressed = 1;
+                AddWorker.setText("Cancel");
+
+            }else{
+                new SlideOutLeft(addWorkerPane).play();
+                isPressed = 0;
+                AddWorker.setText("Add Worker");
+            }
 
         }
     }

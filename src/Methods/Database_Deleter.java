@@ -1,6 +1,7 @@
 package Methods;
 
 import Entities.Customer;
+import Entities.Item;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -68,6 +69,15 @@ public class Database_Deleter {
 
 
         con.close();
+    }
+
+    public void Delete_Item(String id) throws ClassNotFoundException, SQLException
+    {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+
+        Statement stmt = con.createStatement();
+        stmt.executeUpdate("DELETE FROM ITEMS WHERE ITEM_ID = " + id);
     }
 
     public void Delete_Task(int TaskId) throws ClassNotFoundException, SQLException {

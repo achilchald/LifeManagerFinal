@@ -20,7 +20,7 @@ public class WriteToDatabase extends Globals implements AboveGod {
         Statement stmt = con.createStatement();
 
         //SQL INJECTION
-        stmt.executeUpdate("INSERT INTO WORKERS VALUES (" + worker.getWorkerid() + " ,  \"" + worker.getName() + "\"  , \" " +worker.getEmail()+  "\"  );");
+        stmt.executeUpdate("INSERT INTO WORKERS VALUES (" + worker.getWorkerid() + " ,  \"" + worker.getName() + "\"  , \"" +worker.getEmail()+  "\"  );");
 
         con.close();
     }

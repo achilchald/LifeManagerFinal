@@ -129,17 +129,16 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         LocalDate localdate=date.getValue();
         String price = PriceF.getText();
 
-
-
         HBox hbox = new HBox();
-        hbox = FXMLLoader.load(getClass().getResource("../fxml/Project_Item.fxml"));
+        hbox = FXMLLoader.load(getClass().getResource("/fxml/Project_Item.fxml"));
+
+        //todo change (kostas)
+        //int id=projectMap.size()+1;
 
         Read_Database rd= new Read_Database();
 
         System.out.println("New project id = "+rd.totalProjects()+1);
         int id=rd.totalProjects()+1;
-
-
 
         //check if neccessery attributes are added
         if (name.equals("")||localdate==null||price.equals("")){
@@ -166,7 +165,6 @@ public class proj_add_Controller  extends Globals implements AboveGod {
 
             ((Label) hbox.getChildren().get(4)).setText("23");
 
-
         }
 
     }
@@ -176,14 +174,14 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         String selection = workerscombo.getSelectionModel().getSelectedItem();
 
         //gets the WOKRER id from the name selected in the combobox
-        int id = Integer.valueOf(selection.substring(0, selection.indexOf(".")));
+        int id = Integer.parseInt(selection.substring(0, selection.indexOf(".")));
         System.out.println("Id of worker = " + id);
 
         int projectid=projectMap.size();
 
         int flag=0;
         HBox box = new HBox();
-        box = FXMLLoader.load(getClass().getResource("../fxml/worker_item.fxml"));
+        box = FXMLLoader.load(getClass().getResource("/fxml/worker_item.fxml"));
 
         //find the worker name selected and get its id;
 
@@ -213,12 +211,7 @@ public class proj_add_Controller  extends Globals implements AboveGod {
             taskCombo.getItems().add((projectMap.get(projectid).getWorkers().get(id).getWorkerid()+"."+projectMap.get(projectid).getWorkers().get(id).getName()));
             workersbox.getChildren().add(box);
 
-
         }
-
-
-
-
 
     }
 
@@ -233,7 +226,7 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         System.out.println("Id of worker = " + id);
 
         HBox box = new HBox();
-        box = FXMLLoader.load(getClass().getResource("../fxml/ToDoItem.fxml"));
+        box = FXMLLoader.load(getClass().getResource("/fxml/ToDoItem.fxml"));
 
         //find the worker name selected and get its id;
 
@@ -256,12 +249,14 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         //now add it to the worker
         workerMap.get(id).addTasks(temp);
 
-
-        //projectMap.get(projectid).getWorkers().get(id).addTasks(temp);
-        // projectMap.get(projectid).getTasks().put()
-
         todobox.getChildren().add(box);
-//        }
+
+        nametask.setText("");
+        desctask.setText("");
+
+        taskCategory.getSelectionModel().clearSelection();
+        taskCombo.getSelectionModel().clearSelection();
+
 
     }
 
@@ -292,7 +287,7 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         else {
             //now it sets the project item
             HBox hbox;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Project_Item.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Project_Item.fxml"));
 
             hbox = loader.load();
 

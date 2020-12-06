@@ -20,6 +20,7 @@ public class Invoice {
     int Repetitions = 0;
     String Notes;
 
+    boolean isArchived = false;
 
 
     public  Invoice(int id, Date Bill_Date, Date PaymentDate, String type,String recurring, ArrayList<Item> items, ArrayList<Payment> payments ,float change)
@@ -176,5 +177,13 @@ public class Invoice {
     public void updatePayedAmount(float price)
     {
         this.PayedAmount -= price;
+    }
+
+    public void setArchived(boolean archived) {
+        isArchived = archived;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
     }
 }

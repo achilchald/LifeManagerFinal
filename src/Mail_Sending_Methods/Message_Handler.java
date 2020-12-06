@@ -20,7 +20,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.activation.*;
+//import javax.activation.*;
 import java.time.LocalDate; // import the LocalDate class
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

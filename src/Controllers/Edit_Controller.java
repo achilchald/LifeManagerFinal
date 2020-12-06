@@ -5,10 +5,7 @@ import Methods.Database_Deleter;
 import Methods.WriteFile;
 
 import Methods.WriteToDatabase;
-import animatefx.animation.FadeInRight;
 import animatefx.animation.SlideInLeft;
-import animatefx.animation.SlideInRight;
-import animatefx.animation.SlideOutLeft;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +21,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 /*
 This Controller is responsible for for the Customer HBox gui element
@@ -387,7 +383,8 @@ public class Edit_Controller implements AboveGod {
             //Handles the log event part
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
-            String text="Task "+temp.getName()+" set to Uncompleted "+"("+dtf.format(now)+")";
+
+            String text="Task "+ToDoItem.getChildren().get(1)+" set to Uncompleted "+"("+dtf.format(now)+")";
             LogEvent logEvent=new LogEvent(text,temp.getProject_id(),temp.getTaskid(),temp.getWorker_id());
             notificationsBox.getChildren().remove(notificationsBox.lookup("#"+"Comple"+temp.getTaskid()));
             logEvent.addLog(notificationsBox);
@@ -412,7 +409,7 @@ public class Edit_Controller implements AboveGod {
     }
 
     @FXML
-    public void DeleteTask() throws SQLException, ClassNotFoundException {
+    public void deleteToDoFromProject() throws SQLException, ClassNotFoundException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to delete this task?", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
@@ -427,16 +424,7 @@ public class Edit_Controller implements AboveGod {
 
             int IndexOfTask =  Integer.parseInt(((Label) ToDoItem.getChildren().get(6)).getText());
 
-
-
-
             projectMap.get(ProjectId).getWorkers().get(WorkerId).getTasks().get(ProjectId).remove(IndexOfTask);
-
-
-
-
-
-
 
             //Delete the Worker from the map
 

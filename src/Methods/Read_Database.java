@@ -121,6 +121,7 @@ public class Read_Database extends Globals implements AboveGod {
             String Type = rs.getString(5);
             String Reccuring = rs.getString(6);
             float change = rs.getFloat(9);
+            String InvoiceNotes = rs.getString(11);
             LastInvoiceId = id;
 
 
@@ -178,6 +179,7 @@ public class Read_Database extends Globals implements AboveGod {
 
             invoice.Calc_Invoice_Price();
             invoice.Calc_Payed_Amount();
+            invoice.setNotes(InvoiceNotes);
 
 
             customerMap.get(Integer.toString(Customer_ID)).GetInvoicesList().add(invoice);
@@ -313,7 +315,10 @@ public class Read_Database extends Globals implements AboveGod {
         stmt.executeUpdate("INSERT INTO INVOICE VALUES("+
         invoice.getId()+" , "+customerid + " , \'" + invoice.getBill_Date() + "\' , \'" +
                 invoice.getPayment_Date() + "\' , \"" + invoice.getType() + "\" , \"" + invoice.getRecurring() +
-                "\"  , "  + invoice.getRepetitions() + " , " + invoice.getCycles() + " , " + invoice.getChangeFromPayment() + " , 0 " + " ) ;" );
+                "\"  , "  + invoice.getRepetitions() + " , " + invoice.getCycles() + " , " + invoice.getChangeFromPayment() + " , 0 ,\"" +invoice.getNotes()+ "\" ) ;" );
+
+
+
         con.close();
     }
 
@@ -633,6 +638,17 @@ public class Read_Database extends Globals implements AboveGod {
 
         con.close();
     }
+
+    public void setInvoiceAsUnPayed(int InvoiceId) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+
+        Statement stmt = con.createStatement();
+        stmt.executeUpdate("UPDATE INVOICE SET FULLYPAYED = 0 WHERE INVOICE_ID = " + InvoiceId);
+
+        con.close();
+    }
+
 
     public int totalTasks() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");

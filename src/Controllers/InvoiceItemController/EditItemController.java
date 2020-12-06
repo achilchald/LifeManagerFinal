@@ -489,6 +489,19 @@ public class EditItemController implements AboveGod {
     @FXML
     void Pay(ActionEvent event) throws SQLException, ClassNotFoundException {
 
+        if(Float.parseFloat(PaymentPrice.getText()) + (CurrentInvoice.getPayedAmount() - CurrentPayment.getPrice()) > CurrentInvoice.getPrice())
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong input \n The new payment price sum is greater than the invoices total cost \n Please put an appropriate amount", ButtonType.OK, ButtonType.CANCEL);
+            alert.showAndWait();
+
+            if(alert.getResult() == ButtonType.OK )
+            {
+                System.out.println("lma0");
+                return;
+            }
+        }
+
+
 
         CurrentInvoice.updatePayedAmount( CurrentPayment.getPrice() );
 
@@ -533,6 +546,19 @@ public class EditItemController implements AboveGod {
         MyGrid.add(Notes, 3, 0);
 
         WriteToDatabase Updater = new WriteToDatabase();
+
+        if(CurrentInvoice.getPayedAmount() == CurrentInvoice.getPrice())
+        {
+            Read_Database reader = new Read_Database();
+            reader.setInvoiceAsPayed(CurrentInvoice.getId());
+        }
+        else if(CurrentInvoice.getPayedAmount() < CurrentInvoice.getPrice())
+        {
+            Read_Database reader = new Read_Database();
+            reader.setInvoiceAsUnPayed(CurrentInvoice.getId());
+        }
+
+
         Updater.UpdatePayment(CurrentPayment.getPaymentId(),CurrentPayment.getPrice());
 
 

@@ -130,7 +130,7 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         String price = PriceF.getText();
 
         HBox hbox = new HBox();
-        hbox = FXMLLoader.load(getClass().getResource("../fxml/Project_Item.fxml"));
+        hbox = FXMLLoader.load(getClass().getResource("/fxml/Project_Item.fxml"));
 
         //todo change (kostas)
         //int id=projectMap.size()+1;
@@ -174,14 +174,14 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         String selection = workerscombo.getSelectionModel().getSelectedItem();
 
         //gets the WOKRER id from the name selected in the combobox
-        int id = Integer.valueOf(selection.substring(0, selection.indexOf(".")));
+        int id = Integer.parseInt(selection.substring(0, selection.indexOf(".")));
         System.out.println("Id of worker = " + id);
 
         int projectid=projectMap.size();
 
         int flag=0;
         HBox box = new HBox();
-        box = FXMLLoader.load(getClass().getResource("../fxml/worker_item.fxml"));
+        box = FXMLLoader.load(getClass().getResource("/fxml/worker_item.fxml"));
 
         //find the worker name selected and get its id;
 
@@ -226,7 +226,7 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         System.out.println("Id of worker = " + id);
 
         HBox box = new HBox();
-        box = FXMLLoader.load(getClass().getResource("../fxml/ToDoItem.fxml"));
+        box = FXMLLoader.load(getClass().getResource("/fxml/ToDoItem.fxml"));
 
         //find the worker name selected and get its id;
 
@@ -250,6 +250,13 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         workerMap.get(id).addTasks(temp);
 
         todobox.getChildren().add(box);
+
+        nametask.setText("");
+        desctask.setText("");
+
+        taskCategory.getSelectionModel().clearSelection();
+        taskCombo.getSelectionModel().clearSelection();
+
 
     }
 
@@ -280,7 +287,7 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         else {
             //now it sets the project item
             HBox hbox;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Project_Item.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Project_Item.fxml"));
 
             hbox = loader.load();
 

@@ -1,6 +1,6 @@
 package Mail_Sending_Methods;
-
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
+//
+//import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 
 import javax.mail.*;
 import javax.mail.internet.AddressException;

@@ -7,7 +7,7 @@ import Methods.Database_Deleter;
 import Methods.Read_Database;
 import Methods.WriteFile;
 import Methods.WriteToDatabase;
-//import animatefx.animation.*;
+import animatefx.animation.*;
 import animatefx.animation.SlideInLeft;
 import animatefx.animation.SlideOutLeft;
 import calendar.WriteFileAppointment;
@@ -460,7 +460,7 @@ public class Editor extends Globals implements AboveGod {
             //box for workers
 
             HBox box;
-            box = FXMLLoader.load(getClass().getResource("../fxml/Worker_Item_NoClick.fxml"));
+            box = FXMLLoader.load(getClass().getResource("/fxml/Worker_Item_NoClick.fxml"));
 
 
             ((Label) box.getChildren().get(1)).setText(entry.getValue().getName());
@@ -498,7 +498,7 @@ public class Editor extends Globals implements AboveGod {
                         //box for to do
                         HBox box2;
 
-                        FXMLLoader loader=new FXMLLoader(getClass().getResource("../fxml/ToDoItem.fxml"));
+                        FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/ToDoItem.fxml"));
 
 
 
@@ -559,7 +559,7 @@ public class Editor extends Globals implements AboveGod {
 
         for (Map.Entry<Integer, Worker> currentWorker : workerMap.entrySet()) {
             HBox boxAvailable;
-            boxAvailable = FXMLLoader.load(getClass().getResource("../fxml/Worker_Item_NoClick.fxml"));
+            boxAvailable = FXMLLoader.load(getClass().getResource("/fxml/Worker_Item_NoClick.fxml"));
 
             //Key for current
             Worker currWorker = currentWorker.getValue();
@@ -623,23 +623,20 @@ public class Editor extends Globals implements AboveGod {
 
 
         //If land from now on
-        if(progress==1){
-            Hbc.setStyle("-fx-background-color: #74c474");
-        }
+
 
         //Notification for days
         if(progress<0.5 && (daysToDeadLine<5)){
-            Hbc.setStyle("-fx-background-color: #ece75c");
+
             Label txt=new Label("There are " +daysToDeadLine+ " days remaining until deadline and Progress is at "+Math.round(progress)+" % . Hurry up ! ");
             if (daysToDeadLine==1){
-                Hbc.setStyle("-fx-background-color: #bc4646");
                 txt.setText("There is " +daysToDeadLine+ " day remaining until deadline and Progress is at "+Math.round(progress)+" % . Hurry up or... ");
 
             }
             txt.setMinWidth(Region.USE_PREF_SIZE);
             HBox notification;
 
-            FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../fxml/NotificationItem.fxml"));
+            FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/fxml/NotificationItem.fxml"));
 
             notification = loader2.load();
             notification.getChildren().add(txt);
@@ -691,7 +688,7 @@ public class Editor extends Globals implements AboveGod {
     @FXML
     public void addToDo() throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/addTaskToProject.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addTaskToProject.fxml"));
         loader.setController(this);
         Parent root = loader.load();
 
@@ -728,7 +725,7 @@ public class Editor extends Globals implements AboveGod {
                                 ButtonType.OK);
                         alert2.showAndWait();
                     }else {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/handleTasks.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/handleTasks.fxml"));
                         loader.setController(this);
                         Parent root = loader.load();
                         NameTask.setText(projectMap.get(Integer.parseInt(projId)).getWorkers().get(workerId).getTasks().get(Integer.parseInt(projId)).get(strayTasksCounter).getName());
@@ -842,11 +839,13 @@ public class Editor extends Globals implements AboveGod {
 
             HBox box;
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ToDoItem.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ToDoItem.fxml"));
 
             box = loader.load();
 
             Edit_Controller ctrl = loader.getController();
+
+            ctrl.getNotificationsBox(notificationsBox,test);
 
             ctrl.setLabel(completedTasksLabel, pendingTasksLabel, progressBar, progressLabel);
 
@@ -885,7 +884,7 @@ public class Editor extends Globals implements AboveGod {
                 txt.setMinWidth(Region.USE_PREF_SIZE);
                 HBox notification;
 
-                FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../fxml/NotificationItem.fxml"));
+                FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/fxml/NotificationItem.fxml"));
 
                 notification = loader2.load();
                 notification.getChildren().add(txt);
@@ -1014,7 +1013,7 @@ public class Editor extends Globals implements AboveGod {
 
         HBox box;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ToDoItem.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ToDoItem.fxml"));
 
         box = loader.load();
 
@@ -1103,7 +1102,7 @@ public class Editor extends Globals implements AboveGod {
     @FXML
     public void Add_Edited_Worker(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/add_worker_task.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add_worker_task.fxml"));
         Parent root = loader.load();
         Editor ctrl = loader.getController();
         ctrl.setAddTaskToWorkerBox(VBoxToDo,workerId);
@@ -1171,7 +1170,7 @@ public class Editor extends Globals implements AboveGod {
 
         //Loads the item to be added
         HBox box;
-        box = FXMLLoader.load(getClass().getResource("../fxml/ToDoItem.fxml"));
+        box = FXMLLoader.load(getClass().getResource("/fxml/ToDoItem.fxml"));
         String name=nametask.getText();
         String desc=desctask.getText();
 
@@ -1236,7 +1235,7 @@ public class Editor extends Globals implements AboveGod {
             for (int i=0;i<tempTasks.size();i++) {
 
                 HBox box;
-                box = FXMLLoader.load(getClass().getResource("../fxml/ToDoItem.fxml"));
+                box = FXMLLoader.load(getClass().getResource("/fxml/ToDoItem.fxml"));
 
 
                 ((Label) box.getChildren().get(1)).setText((tempTasks.get(i).getName()));
@@ -1362,7 +1361,7 @@ public class Editor extends Globals implements AboveGod {
 
             if(temp.getRecurring().equals("ONCE")) {
                 //Load the invoice template
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Invoice_Item.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Invoice_Item.fxml"));
 
                 box = loader.load();
 
@@ -1420,7 +1419,7 @@ public class Editor extends Globals implements AboveGod {
             if(!temp.getRecurring().equals("ONCE"))
             {
                 //Load the invoice template
-                FXMLLoader loaderRec = new FXMLLoader(getClass().getResource("../fxml/Invoice_Item.fxml"));
+                FXMLLoader loaderRec = new FXMLLoader(getClass().getResource("/fxml/Invoice_Item.fxml"));
 
                 RecBox = loaderRec.load();
 
@@ -1473,7 +1472,7 @@ public class Editor extends Globals implements AboveGod {
             Invoice temp = customerMap.get(id).getArchivedInvoices().get(i);
             HBox InvoiceBox = new HBox();
             //Load the invoice template
-            FXMLLoader loaderRec = new FXMLLoader(getClass().getResource("../fxml/Invoice_Item.fxml"));
+            FXMLLoader loaderRec = new FXMLLoader(getClass().getResource("/fxml/Invoice_Item.fxml"));
 
             InvoiceBox = loaderRec.load();
 

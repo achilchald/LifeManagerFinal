@@ -7,6 +7,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -15,7 +16,10 @@
    <children>
       <TextField fx:id="InvoiceName" layoutX="96.0" layoutY="77.0" prefHeight="25.0" prefWidth="149.0" />
       <DatePicker fx:id="PayDate" layoutX="96.0" layoutY="117.0" prefHeight="25.0" prefWidth="149.0" />
-      <RadioButton fx:id="Reccurence" layoutX="95.0" layoutY="331.0" mnemonicParsing="false" onAction="#pressed" prefHeight="18.0" prefWidth="0.0" />
+      <RadioButton fx:id="Reccurence" layoutX="95.0" layoutY="331.0" mnemonicParsing="false" onAction="#pressed" prefHeight="18.0" prefWidth="0.0">
+         <tooltip>
+            <Tooltip text="Tick if invoice is billed every some time amount." />
+         </tooltip></RadioButton>
       <Button fx:id="AddInvoice" layoutX="111.0" layoutY="537.0" mnemonicParsing="false" onAction="#pressed" prefHeight="37.0" prefWidth="55.0" styleClass="addButton" text="Add">
          <font>
             <Font size="15.0" />
@@ -25,7 +29,10 @@
       <ComboBox fx:id="InvoiceType" layoutX="95.0" layoutY="161.0" prefHeight="25.0" prefWidth="149.0" />
       <Label layoutX="20.0" layoutY="72.0" text="Name" />
       <Label layoutX="20.0" layoutY="121.0" text="Pay Date" />
-      <Label layoutX="20.0" layoutY="331.0" text="Reccurence" />
+      <Label layoutX="20.0" layoutY="331.0" text="Reccurence">
+         <tooltip>
+            <Tooltip text="Tick if invoice is billed every some time amount." />
+         </tooltip></Label>
       <Label layoutX="79.0" layoutY="14.0" text="New Invoice">
          <font>
             <Font size="22.0" />

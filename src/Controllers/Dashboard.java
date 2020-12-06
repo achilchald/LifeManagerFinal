@@ -22,6 +22,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 //import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -54,6 +55,10 @@ public class Dashboard implements Initializable, AboveGod {
 
     @FXML
     private Label tasks;
+
+    @FXML
+    private VBox NotificationsBox;
+
 
 
     @Override

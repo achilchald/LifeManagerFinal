@@ -122,7 +122,7 @@ public class AddInvoiceController extends Globals implements AboveGod, Initializ
             //Make the reccurence flag true so as to add the invoice correctly
             checkFlag = true;
         }
-        //If the user clicks the reccurence raido button again then close it
+        //If the user clicks the recurrence radio button again then close it
         else if(event.getSource() == Reccurence && checkFlag)
         {
             ReccuringOptions.getChildren().remove(0);
@@ -139,9 +139,16 @@ public class AddInvoiceController extends Globals implements AboveGod, Initializ
             //If the flag is true then the user made the invoice reccuring
             if (checkFlag)
             {
-                DefaultType = ReccurenceType.getValue();//Add the recurrence type to the Deafault type variable
-                cycles = Integer.parseInt( Cycles.getText() ) ;
-                repetitions = Integer.parseInt( TypeCount.getText() ) ;
+                DefaultType = ReccurenceType.getValue();//Add the recurrence type to the Default type variable
+
+                cycles = -1;
+                repetitions = 1;
+
+                if(!Cycles.getText().equals(""))
+                    cycles = Integer.parseInt( Cycles.getText() )  ;
+
+                if(!TypeCount.getText().equals(""))
+                    repetitions = Integer.parseInt( TypeCount.getText() ) ;
             }
 
 

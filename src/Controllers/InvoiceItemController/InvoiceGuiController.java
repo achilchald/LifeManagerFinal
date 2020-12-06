@@ -115,8 +115,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
     @FXML
     private Label DueAmountLabel;
 
-    @FXML
-    private Label ChangeLabel;
+
 
     @FXML
     private Label BillDate;
@@ -155,6 +154,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         this.TotalIncome = link.GetLabelLink("IncomeLabel");
         this.CustomerCost = link.GetLabelLink(CustomerId+"CustomerPrice");
         this.PayedAmount = PayedAmount;
+        CustomerID = CustomerId;
 
 
 
@@ -216,7 +216,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         InvoiceCostLabel.setText( String.valueOf( CurrentInvoice.getPrice() ) );
         PayedAmountLabel.setText( String.valueOf( CurrentInvoice.getPayedAmount()) ) ;
         DueAmountLabel.setText( String.valueOf( CurrentInvoice.getPrice() - CurrentInvoice.getPayedAmount()) ) ;
-        ChangeLabel.setText( String.valueOf( CurrentInvoice.getChangeFromPayment() ) );
+
 
 
         InvoiceIdLabel.setText("InvoiceId#"+CurrentInvoice.getId());
@@ -360,8 +360,22 @@ public class InvoiceGuiController extends Globals implements AboveGod {
 //            }
 //        }
 
+        Linker linker = new Linker();
+
         float Item_Price = Float.parseFloat(PriceText.getText());
         float Discount = Float.parseFloat(DiscountField.getText());
+
+
+
+        //Get total customers values
+        float TotalPayed = Float.parseFloat(linker.GetLabelLink("TotalCustomerPayed").getText()
+                .substring(0, linker.GetLabelLink("TotalCustomerPayed").getText().length() - 1 ));
+        float TotalDue = Float.parseFloat(linker.GetLabelLink("TotalCustomerDue").getText()
+                .substring(0, linker.GetLabelLink("TotalCustomerDue").getText().length() - 1 ));
+        TotalPayed -= customerMap.get(CustomerID).getPayedAmount();
+        TotalDue -= customerMap.get(CustomerID).getDueAmount();
+
+
 
 
         //Load the ItemGrid gridpane
@@ -436,6 +450,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         ctrl.SetPaymentsBox(PaymentsBox);
         ctrl.SetInvoice(CurrentInvoice);
         ctrl.SetItemGrid(pane);
+        ctrl.SetCustomerID(CustomerID);
 
 
 
@@ -489,6 +504,28 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         DueAmountLabel.setText( String.valueOf( CurrentInvoice.getPrice() - CurrentInvoice.getPayedAmount()) ) ;
 
 
+
+        customerMap.get(CustomerID).calculatePrice();
+
+        linker.GetLabelLink(CustomerID + "CustomerPayedAmount").setText(String.valueOf(customerMap.get(CustomerID).getPayedAmount()));
+        linker.GetLabelLink(CustomerID + "CustomerDueAmount").setText(String.valueOf(customerMap.get(CustomerID).getDueAmount()));
+
+        linker.GetLabelLink(CustomerID + "InterCustomerCost").setText(String.valueOf(customerMap.get(CustomerID).getPrice()));
+        linker.GetLabelLink(CustomerID + "InterCustomerPayed").setText(String.valueOf(customerMap.get(CustomerID).getPayedAmount()));
+        linker.GetLabelLink(CustomerID + "InterCustomerDue").setText(String.valueOf(customerMap.get(CustomerID).getDueAmount()));
+
+
+
+        //Update total customers values
+        TotalPayed += customerMap.get(CustomerID).getPayedAmount();
+        TotalDue += customerMap.get(CustomerID).getDueAmount();
+
+        linker.GetLabelLink("TotalCustomerPayed").setText(String.valueOf(TotalPayed) + "$");
+        linker.GetLabelLink("TotalCustomerDue").setText(String.valueOf(TotalDue) + "$");
+
+
+
+
     }
 
 
@@ -517,6 +554,24 @@ public class InvoiceGuiController extends Globals implements AboveGod {
 
 
         float NewAmount =  Float.parseFloat(  PaymentPrice.getText()  );
+
+
+
+
+        Linker linker = new Linker();
+        //Get total customers values
+        float TotalPayed = Float.parseFloat(linker.GetLabelLink("TotalCustomerPayed").getText()
+                .substring(0, linker.GetLabelLink("TotalCustomerPayed").getText().length() - 1 ));
+        float TotalDue = Float.parseFloat(linker.GetLabelLink("TotalCustomerDue").getText()
+                .substring(0, linker.GetLabelLink("TotalCustomerDue").getText().length() - 1 ));
+        TotalPayed -= customerMap.get(CustomerID).getPayedAmount();
+        TotalDue -= customerMap.get(CustomerID).getDueAmount();
+
+
+
+
+
+
 
         //Check if the payed amount is valid
         if(NewAmount > CurrentInvoice.getPrice() - CurrentInvoice.getPayedAmount())
@@ -553,6 +608,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
             ctrl.SetPaymentLabels(PayedAmountLabel,DueAmountLabel);
             ctrl.SetTotalPayedAmount(PayedAmount);
             ctrl.SetPaymentGrid(PaymentGrid);
+            ctrl.SetCustomerID(CustomerID);
 
 
             //Set the id of the payment to the gridpane
@@ -612,6 +668,23 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         }
 
 
+
+        customerMap.get(CustomerID).calculatePrice();
+
+        linker.GetLabelLink(CustomerID + "CustomerPayedAmount").setText(String.valueOf(customerMap.get(CustomerID).getPayedAmount()));
+        linker.GetLabelLink(CustomerID + "CustomerDueAmount").setText(String.valueOf(customerMap.get(CustomerID).getDueAmount()));
+
+        linker.GetLabelLink(CustomerID + "InterCustomerCost").setText(String.valueOf(customerMap.get(CustomerID).getPrice()));
+        linker.GetLabelLink(CustomerID + "InterCustomerPayed").setText(String.valueOf(customerMap.get(CustomerID).getPayedAmount()));
+        linker.GetLabelLink(CustomerID + "InterCustomerDue").setText(String.valueOf(customerMap.get(CustomerID).getDueAmount()));
+
+        //Update total customers values
+        TotalPayed += customerMap.get(CustomerID).getPayedAmount();
+        TotalDue += customerMap.get(CustomerID).getDueAmount();
+
+        linker.GetLabelLink("TotalCustomerPayed").setText(String.valueOf(TotalPayed) + "$");
+        linker.GetLabelLink("TotalCustomerDue").setText(String.valueOf(TotalDue) + "$");
+
     }
 
 
@@ -639,6 +712,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         ctrl.SetItemList(ItemList);
         ctrl.SetPaymentsBox(PaymentsBox);
         ctrl.SetInvoice(CurrentInvoice);
+        ctrl.SetCustomerID(CustomerID);
 
         System.out.println("Pane id = "+pane.getId());
 
@@ -695,6 +769,7 @@ public class InvoiceGuiController extends Globals implements AboveGod {
         ctrl.SetPaymentLabels(PayedAmountLabel,DueAmountLabel);
         ctrl.SetTotalPayedAmount(PayedAmount);
         ctrl.SetPaymentGrid(pane);
+        ctrl.SetCustomerID(CustomerID);
 
 
         pane.setId(String.valueOf(payment.getPaymentId()));

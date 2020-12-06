@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.SVGPath?>
 
-<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#Edit_Customer" prefHeight="35.0" prefWidth="724.0" spacing="80.0" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Edit_Controller">
+<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#Edit_Customer" prefHeight="35.0" prefWidth="945.0" spacing="80.0" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Edit_Controller">
     <children>
       <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -30,6 +30,8 @@
          <HBox.margin>
             <Insets left="10.0" />
          </HBox.margin></Label>
+      <Label fx:id="CustomerPayedAmount" text="Payed" />
+      <Label fx:id="CustomerDueAmount" text="Due" />
         <Label fx:id="Customerid" opacity="0.0" prefHeight="0.0" prefWidth="0.0" text="Id" visible="false">
          <padding>
             <Insets bottom="-36.0" left="-28.0" />

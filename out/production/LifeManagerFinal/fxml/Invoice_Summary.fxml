@@ -145,7 +145,7 @@
             <Font size="14.0" />
          </font>
       </TitledPane>
-      <VBox alignment="CENTER" layoutX="932.0" layoutY="43.0" prefHeight="80.0" prefWidth="90.0" style="-fx-background-color: #f06c71; -fx-background-radius: 10px 10px 10px 10px;">
+      <VBox alignment="CENTER" layoutX="830.0" layoutY="44.0" prefHeight="80.0" prefWidth="196.0" style="-fx-background-color: #f06c71; -fx-background-radius: 10px 10px 10px 10px;">
          <children>
             <Label fx:id="InvoiceCostLabel" text="0" textFill="#c4dbe9">
                <font>
@@ -166,16 +166,6 @@
                </font>
             </Label>
             <Label text="Payed Amount" textFill="#c4dbe9" />
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" layoutX="829.0" layoutY="43.0" prefHeight="80.0" prefWidth="90.0" style="-fx-background-color: #f0a66c; -fx-background-radius: 10px 10px 10px 10px;">
-         <children>
-            <Label fx:id="ChangeLabel" text="0" textFill="#c4dbe9">
-               <font>
-                  <Font name="System Bold" size="26.0" />
-               </font>
-            </Label>
-            <Label text="Change" textFill="#c4dbe9" />
          </children>
       </VBox>
       <VBox alignment="CENTER" layoutX="932.0" layoutY="134.0" prefHeight="80.0" prefWidth="90.0" style="-fx-background-color: #00b393; -fx-background-radius: 10px 10px 10px 10px;">

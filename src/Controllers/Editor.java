@@ -128,6 +128,18 @@ public class Editor extends Globals implements AboveGod {
 
     @FXML
     private TextField AFM;
+
+    @FXML
+    private Label InterCustomerCost;
+
+    @FXML
+    private Label InterCustomerPayed;
+
+    @FXML
+    private Label InterCustomerDue;
+
+
+
     //-------------------
 
     //-------   Domains Data --------
@@ -1275,7 +1287,25 @@ public class Editor extends Globals implements AboveGod {
         this.TotalIncome = TotalIncome;
 
         //Get the ID of the selected customer
-        id = (((Label) CustomerBox.getChildren().get(4)).getText());
+        id = (((Label) CustomerBox.getChildren().get(6)).getText());
+
+        //Inter customer labels links
+        Linker linker = new Linker();
+        InterCustomerCost.setId(id + InterCustomerCost.getId());
+        InterCustomerPayed.setId(id + InterCustomerPayed.getId());
+        InterCustomerDue.setId(id + InterCustomerDue.getId());
+
+        linker.CreateLink(InterCustomerCost);
+        linker.CreateLink(InterCustomerPayed);
+        linker.CreateLink(InterCustomerDue);
+
+
+
+
+        InterCustomerCost.setText(String.valueOf(customerMap.get(id).getPrice()));
+        InterCustomerPayed.setText(String.valueOf(customerMap.get(id).getPayedAmount()));
+        InterCustomerDue.setText(String.valueOf(customerMap.get(id).getDueAmount()));
+
 
         //Set the customer data to the Text fields
         NameC.setText(((Label) Hbc.getChildren().get(1)).getText());
@@ -1312,8 +1342,7 @@ public class Editor extends Globals implements AboveGod {
         }
 
 
-        //Create a linker so as to generate links to labels that will be updated
-        Linker linker = new Linker();
+
 
         //Get Current Date
         Date CurrentDate = Date.valueOf( LocalDate.now() );
@@ -1644,6 +1673,14 @@ public class Editor extends Globals implements AboveGod {
             TotalIncome -= CustomerIncome;
 
 
+            //Get total customers values
+            float TotalPayed = Float.parseFloat(linker.GetLabelLink("TotalCustomerPayed").getText()
+                    .substring(0, linker.GetLabelLink("TotalCustomerPayed").getText().length() - 1 ));
+            float TotalDue = Float.parseFloat(linker.GetLabelLink("TotalCustomerDue").getText()
+                    .substring(0, linker.GetLabelLink("TotalCustomerDue").getText().length() - 1 ));
+            TotalPayed -= customerMap.get(id).getPayedAmount();
+            TotalDue -= customerMap.get(id).getDueAmount();
+
 
             System.out.println("New Domain Name : " + DomainName);
             System.out.println("New Hosting Type : " + HostType);
@@ -1769,6 +1806,7 @@ public class Editor extends Globals implements AboveGod {
 
 
 
+
             //Calculate the new price of the invoice
             NewInvoice.Calc_Invoice_Price();
             System.out.println("New Price = " + NewInvoice.getPrice() + "Invoice Label Id = " + linker.GetLabelLink( NewInvoice.getId()+"Price").getId());
@@ -1776,6 +1814,23 @@ public class Editor extends Globals implements AboveGod {
             CustomerCostLabel.setText(String.valueOf(CustomerIncome));
             TotalIncome +=CustomerIncome;
             TotalIncomeLabel.setText(String.valueOf(TotalIncome));
+
+            customerMap.get(id).calculatePrice();
+
+            linker.GetLabelLink(id + "CustomerPayedAmount").setText(String.valueOf(customerMap.get(id).getPayedAmount()));
+            linker.GetLabelLink(id + "CustomerDueAmount").setText(String.valueOf(customerMap.get(id).getDueAmount()));
+
+
+            linker.GetLabelLink(id + "InterCustomerCost").setText(String.valueOf(customerMap.get(id).getPrice()));
+            linker.GetLabelLink(id + "InterCustomerPayed").setText(String.valueOf(customerMap.get(id).getPayedAmount()));
+            linker.GetLabelLink(id + "InterCustomerDue").setText(String.valueOf(customerMap.get(id).getDueAmount()));
+
+            //Update total customers values
+            TotalPayed += customerMap.get(id).getPayedAmount();
+            TotalDue += customerMap.get(id).getDueAmount();
+
+            linker.GetLabelLink("TotalCustomerPayed").setText(String.valueOf(TotalPayed) + "$");
+            linker.GetLabelLink("TotalCustomerDue").setText(String.valueOf(TotalDue) + "$");
 
 
 
@@ -1847,6 +1902,19 @@ public class Editor extends Globals implements AboveGod {
 
         if(event.getSource() == DeleteDomain)
         {
+
+            Linker linker = new Linker();
+
+            //Get total customers values
+            float TotalPayed = Float.parseFloat(linker.GetLabelLink("TotalCustomerPayed").getText()
+                    .substring(0, linker.GetLabelLink("TotalCustomerPayed").getText().length() - 1 ));
+            float TotalDue = Float.parseFloat(linker.GetLabelLink("TotalCustomerDue").getText()
+                    .substring(0, linker.GetLabelLink("TotalCustomerDue").getText().length() - 1 ));
+            TotalPayed -= customerMap.get(id).getPayedAmount();
+            TotalDue -= customerMap.get(id).getDueAmount();
+
+
+
             DeleteFlag = true;
             DomList.getItems().remove(DomList.getValue());
             DomName.setText(null);
@@ -1874,6 +1942,27 @@ public class Editor extends Globals implements AboveGod {
                     break;
                 }
             }
+
+
+            customerMap.get(id).calculatePrice();
+
+            linker.GetLabelLink(id + "CustomerPayedAmount").setText(String.valueOf(customerMap.get(id).getPayedAmount()));
+            linker.GetLabelLink(id + "CustomerDueAmount").setText(String.valueOf(customerMap.get(id).getDueAmount()));
+
+            linker.GetLabelLink(id + "InterCustomerCost").setText(String.valueOf(customerMap.get(id).getPrice()));
+            linker.GetLabelLink(id + "InterCustomerPayed").setText(String.valueOf(customerMap.get(id).getPayedAmount()));
+            linker.GetLabelLink(id + "InterCustomerDue").setText(String.valueOf(customerMap.get(id).getDueAmount()));
+
+
+            //Update total customers values
+            TotalPayed += customerMap.get(id).getPayedAmount();
+            TotalDue += customerMap.get(id).getDueAmount();
+
+            linker.GetLabelLink("TotalCustomerPayed").setText(String.valueOf(TotalPayed));
+            linker.GetLabelLink("TotalCustomerDue").setText(String.valueOf(TotalDue));
+
+
+
 
         }
 

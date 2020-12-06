@@ -77,6 +77,12 @@ public class Edit_Controller implements AboveGod {
     private Label CustomerPrice;
 
     @FXML
+    private Label CustomerPayedAmount;
+
+    @FXML
+    private Label CustomerDueAmount;
+
+    @FXML
     private Label Customerid;
 
 
@@ -150,8 +156,12 @@ public class Edit_Controller implements AboveGod {
     //So as to be able to be utilised by other controllers
     public void SetPriceLabelId(){
         CustomerPrice.setId(Customerid.getText()+CustomerPrice.getId());
+        CustomerPayedAmount.setId(Customerid.getText()+CustomerPayedAmount.getId());
+        CustomerDueAmount.setId(Customerid.getText()+CustomerDueAmount.getId());
         Linker link = new Linker();
         link.CreateLink(CustomerPrice);
+        link.CreateLink(CustomerPayedAmount);
+        link.CreateLink(CustomerDueAmount);
 
     }
 

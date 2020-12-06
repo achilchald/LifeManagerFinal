@@ -72,6 +72,14 @@ public class Customers_Controller implements AboveGod , Initializable  {
     @FXML
     private Label CustomerPrice;
 
+    @FXML
+    private Label TotalCustomerPayed;
+
+    @FXML
+    private Label TotalCustomerDue;
+
+
+
     public int counter = 0;
 
     private HBox itemC;
@@ -97,6 +105,11 @@ public class Customers_Controller implements AboveGod , Initializable  {
         //Create a linker so as to handle the income label from the various methods that change its pricing
         Linker Link = new Linker();
         Link.CreateLink(this.IncomeLabel);
+
+        Link.CreateLink(TotalCustomerPayed);
+        Link.CreateLink(TotalCustomerDue);
+
+
         try {
             reader.Load_Customers();
             reader.Load_Items();
@@ -155,8 +168,13 @@ public class Customers_Controller implements AboveGod , Initializable  {
                 //Load the customer price to the Hbox's label
                 ((Label)box.getChildren().get(3)).setText( String.valueOf(entry.getValue().getPrice()));
 
+                ((Label)box.getChildren().get(4)).setText( String.valueOf(entry.getValue().getPayedAmount()));
+
+                ((Label)box.getChildren().get(5)).setText( String.valueOf(entry.getValue().getDueAmount()));
+
+
                 //A hidden box with a customer id
-                ((Label)box.getChildren().get(4)).setText(entry.getValue().getId());
+                ((Label)box.getChildren().get(6)).setText(entry.getValue().getId());
 
                 //Set to the Editor Controller the price label id
                 //this is done so as to update the label when items are added or removed from an  invoice
@@ -187,9 +205,16 @@ public class Customers_Controller implements AboveGod , Initializable  {
     //Calculate the total price of all the customers and add it to the Total income label
     public int calcTotalPrice(){
         int total=0;
+        float payed = 0;
+        float due = 0;
+
         for (Map.Entry<String,Customer>entry:customerMap.entrySet()){
             total+=entry.getValue().getPrice();
+            payed += entry.getValue().getPayedAmount();
+            due += entry.getValue().getDueAmount();
         }
+        TotalCustomerPayed.setText(String.valueOf(payed) + "$");
+        TotalCustomerDue.setText( String.valueOf(due) + "$" );
         return total;
     }
 

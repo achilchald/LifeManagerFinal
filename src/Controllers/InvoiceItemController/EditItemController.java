@@ -110,6 +110,8 @@ public class EditItemController implements AboveGod {
     @FXML
     private Button EditPayment;
 
+    private String CustomerID;
+
 
     String PreviousPrice;
 
@@ -126,6 +128,11 @@ public class EditItemController implements AboveGod {
     void SetInvoiceID(int id)
     {
         this.InvoiceId = id;
+    }
+
+    void SetCustomerID(String id)
+    {
+        CustomerID = id;
     }
 
     //Get the total income and invoice price labels so that they can be updated when a Service is added or removed or payed
@@ -191,10 +198,22 @@ public class EditItemController implements AboveGod {
         if (event.getSource() == DeleteItem)
         {
 
+            Linker linker = new Linker();
             System.out.println("Item to be deleted = "+ItemId);
             String ItemID = null;
             float itemPrice = 0;
             boolean ItemStatus = false;
+
+
+//Get total customers values
+            float TotalPayed = Float.parseFloat(linker.GetLabelLink("TotalCustomerPayed").getText()
+                    .substring(0, linker.GetLabelLink("TotalCustomerPayed").getText().length() - 1 ));
+            float TotalDue = Float.parseFloat(linker.GetLabelLink("TotalCustomerDue").getText()
+                    .substring(0, linker.GetLabelLink("TotalCustomerDue").getText().length() - 1 ));
+            TotalPayed -= customerMap.get(CustomerID).getPayedAmount();
+            TotalDue -= customerMap.get(CustomerID).getDueAmount();
+
+
 
             //todo get the item on init so as to avoid the loops bellow
             for (int i = 0;i<CurrentInvoice.getItems().size();i++)
@@ -237,6 +256,23 @@ public class EditItemController implements AboveGod {
 
 
 
+            customerMap.get(CustomerID).calculatePrice();
+
+            linker.GetLabelLink(CustomerID + "CustomerPayedAmount").setText(String.valueOf(customerMap.get(CustomerID).getPayedAmount()));
+            linker.GetLabelLink(CustomerID + "CustomerDueAmount").setText(String.valueOf(customerMap.get(CustomerID).getDueAmount()));
+
+            linker.GetLabelLink(CustomerID + "InterCustomerCost").setText(String.valueOf(customerMap.get(CustomerID).getPrice()));
+            linker.GetLabelLink(CustomerID + "InterCustomerPayed").setText(String.valueOf(customerMap.get(CustomerID).getPayedAmount()));
+            linker.GetLabelLink(CustomerID + "InterCustomerDue").setText(String.valueOf(customerMap.get(CustomerID).getDueAmount()));
+
+
+
+//Update total customers values
+            TotalPayed += customerMap.get(CustomerID).getPayedAmount();
+            TotalDue += customerMap.get(CustomerID).getDueAmount();
+
+            linker.GetLabelLink("TotalCustomerPayed").setText(String.valueOf(TotalPayed) + "$");
+            linker.GetLabelLink("TotalCustomerDue").setText(String.valueOf(TotalDue) + "$");
 
         }
         //        if (event.getSource() == PayItem)
@@ -300,8 +336,18 @@ public class EditItemController implements AboveGod {
 //        }
         if (event.getSource() == DeletePaymentButton)
         {
+            Linker linker = new Linker();
             Database_Deleter deleter = new Database_Deleter();
             deleter.Delete_Payment(CurrentPayment.getPaymentId());
+
+
+            //Get total customers values
+            float TotalPayed = Float.parseFloat(linker.GetLabelLink("TotalCustomerPayed").getText()
+                    .substring(0, linker.GetLabelLink("TotalCustomerPayed").getText().length() - 1 ));
+            float TotalDue = Float.parseFloat(linker.GetLabelLink("TotalCustomerDue").getText()
+                    .substring(0, linker.GetLabelLink("TotalCustomerDue").getText().length() - 1 ));
+            TotalPayed -= customerMap.get(CustomerID).getPayedAmount();
+            TotalDue -= customerMap.get(CustomerID).getDueAmount();
 
 
             System.out.println("ID of deleted payment = "+CurrentPayment.getPaymentId() + "Price of deleted payment = "+CurrentPayment.getPrice());
@@ -322,6 +368,24 @@ public class EditItemController implements AboveGod {
                     break;
                 }
             }
+
+
+            customerMap.get(CustomerID).calculatePrice();
+
+            linker.GetLabelLink(CustomerID + "CustomerPayedAmount").setText(String.valueOf(customerMap.get(CustomerID).getPayedAmount()));
+            linker.GetLabelLink(CustomerID + "CustomerDueAmount").setText(String.valueOf(customerMap.get(CustomerID).getDueAmount()));
+
+            linker.GetLabelLink(CustomerID + "InterCustomerCost").setText(String.valueOf(customerMap.get(CustomerID).getPrice()));
+            linker.GetLabelLink(CustomerID + "InterCustomerPayed").setText(String.valueOf(customerMap.get(CustomerID).getPayedAmount()));
+            linker.GetLabelLink(CustomerID + "InterCustomerDue").setText(String.valueOf(customerMap.get(CustomerID).getDueAmount()));
+
+
+            //Update total customers values
+            TotalPayed += customerMap.get(CustomerID).getPayedAmount();
+            TotalDue += customerMap.get(CustomerID).getDueAmount();
+
+            linker.GetLabelLink("TotalCustomerPayed").setText(String.valueOf(TotalPayed) + "$");
+            linker.GetLabelLink("TotalCustomerDue").setText(String.valueOf(TotalDue) + "$");
 
 
 
@@ -400,6 +464,24 @@ public class EditItemController implements AboveGod {
         float Item_Price = Float.parseFloat(PriceText.getText());
         float Discount = Float.parseFloat(DiscountField.getText());
 
+        Linker linker = new Linker();
+
+        //Get the total income price
+        String TotalIncomeString = TotalIncome.getText().substring(0, TotalIncome.getText().length() - 1);
+        float TotalIncomeNumber = Float.parseFloat(TotalIncomeString) - CurrentItem.getPrice();
+
+
+
+        //Get total customers values
+        float TotalPayed = Float.parseFloat(linker.GetLabelLink("TotalCustomerPayed").getText()
+                .substring(0, linker.GetLabelLink("TotalCustomerPayed").getText().length() - 1 ));
+        float TotalDue = Float.parseFloat(linker.GetLabelLink("TotalCustomerDue").getText()
+                .substring(0, linker.GetLabelLink("TotalCustomerDue").getText().length() - 1 ));
+        TotalPayed -= customerMap.get(CustomerID).getPayedAmount();
+        TotalDue -= customerMap.get(CustomerID).getDueAmount();
+
+
+
 
 
         CurrentItem.setPrice(Item_Price);
@@ -443,16 +525,6 @@ public class EditItemController implements AboveGod {
         }
 
 
-
-
-       // FXMLLoader ItemLoader = new FXMLLoader(getClass().getResource("/fxml/ItemGrid.fxml"));
-       // GridPane NewGrid = ItemLoader.load();
-       // EditItemController ctrl = ItemLoader.getController();
-
-        //VBox GridContainer = (VBox) MyGrid.getParent();
-
-        //GridContainer.getChildren().remove(GridContainer.lookup("#"+MyGrid.getId()));
-
         MyGrid.getChildren().remove(MyGrid.lookup("#Type"));
         MyGrid.getChildren().remove(MyGrid.lookup("#Discount"));
         MyGrid.getChildren().remove(MyGrid.lookup("#Price"));
@@ -479,8 +551,34 @@ public class EditItemController implements AboveGod {
 
         InvoiceCostLabel.setText(String.valueOf(CurrentInvoice.getPrice()));
         Price.setText(String.valueOf(CurrentInvoice.getPrice()));
+        DueAmountLabel.setText(String.valueOf( CurrentInvoice.getPrice() - CurrentInvoice.getPayedAmount() ));
 
 
+
+        customerMap.get(CustomerID).calculatePrice();
+
+        linker.GetLabelLink(CustomerID + "CustomerPayedAmount").setText(String.valueOf(customerMap.get(CustomerID).getPayedAmount()));
+        linker.GetLabelLink(CustomerID + "CustomerDueAmount").setText(String.valueOf(customerMap.get(CustomerID).getDueAmount()));
+
+        linker.GetLabelLink(CustomerID + "InterCustomerCost").setText(String.valueOf(customerMap.get(CustomerID).getPrice()));
+        linker.GetLabelLink(CustomerID + "InterCustomerPayed").setText(String.valueOf(customerMap.get(CustomerID).getPayedAmount()));
+        linker.GetLabelLink(CustomerID + "InterCustomerDue").setText(String.valueOf(customerMap.get(CustomerID).getDueAmount()));
+
+
+        CustomerCost.setText(String.valueOf(customerMap.get(CustomerID).getPrice()));
+
+        TotalIncomeNumber += CurrentItem.getPrice();
+
+        System.out.println("Total income = " + TotalIncomeNumber);
+        TotalIncome.setText(String.valueOf( TotalIncomeNumber ) + "$");
+
+
+        //Update total customers values
+        TotalPayed += customerMap.get(CustomerID).getPayedAmount();
+        TotalDue += customerMap.get(CustomerID).getDueAmount();
+
+        linker.GetLabelLink("TotalCustomerPayed").setText(String.valueOf(TotalPayed) + "$");
+        linker.GetLabelLink("TotalCustomerDue").setText(String.valueOf(TotalDue) + "$");
 
 
     }
@@ -501,6 +599,15 @@ public class EditItemController implements AboveGod {
             }
         }
 
+        Linker linker = new Linker();
+
+        //Get total customers values
+        float TotalPayed = Float.parseFloat(linker.GetLabelLink("TotalCustomerPayed").getText()
+                .substring(0, linker.GetLabelLink("TotalCustomerPayed").getText().length() - 1 ));
+        float TotalDue = Float.parseFloat(linker.GetLabelLink("TotalCustomerDue").getText()
+                .substring(0, linker.GetLabelLink("TotalCustomerDue").getText().length() - 1 ));
+        TotalPayed -= customerMap.get(CustomerID).getPayedAmount();
+        TotalDue -= customerMap.get(CustomerID).getDueAmount();
 
 
         CurrentInvoice.updatePayedAmount( CurrentPayment.getPrice() );
@@ -563,6 +670,23 @@ public class EditItemController implements AboveGod {
 
 
 
+
+        customerMap.get(CustomerID).calculatePrice();
+
+        linker.GetLabelLink(CustomerID + "CustomerPayedAmount").setText(String.valueOf(customerMap.get(CustomerID).getPayedAmount()));
+        linker.GetLabelLink(CustomerID + "CustomerDueAmount").setText(String.valueOf(customerMap.get(CustomerID).getDueAmount()));
+
+        linker.GetLabelLink(CustomerID + "InterCustomerCost").setText(String.valueOf(customerMap.get(CustomerID).getPrice()));
+        linker.GetLabelLink(CustomerID + "InterCustomerPayed").setText(String.valueOf(customerMap.get(CustomerID).getPayedAmount()));
+        linker.GetLabelLink(CustomerID + "InterCustomerDue").setText(String.valueOf(customerMap.get(CustomerID).getDueAmount()));
+
+
+        //Update total customers values
+        TotalPayed += customerMap.get(CustomerID).getPayedAmount();
+        TotalDue += customerMap.get(CustomerID).getDueAmount();
+
+        linker.GetLabelLink("TotalCustomerPayed").setText(String.valueOf(TotalPayed) + "$");
+        linker.GetLabelLink("TotalCustomerDue").setText(String.valueOf(TotalDue) + "$");
 
     }
 

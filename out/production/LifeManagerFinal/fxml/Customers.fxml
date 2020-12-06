@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
 <StackPane fx:id="pnlCustomers" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Customers_Controller">
    <children>
@@ -35,7 +45,7 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="98.0" prefHeight="92.0" prefWidth="746.0" spacing="50.0" style="-fx-background-color: transparent; -fx-background-radius: 17px 17px 0px 0px;">
+            <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="98.0" prefHeight="92.0" prefWidth="832.0" spacing="50.0" style="-fx-background-color: transparent; -fx-background-radius: 17px 17px 0px 0px;">
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #f06c71; -fx-background-radius: 10px 10px 10px 10px;" styleClass="statisticVbox" stylesheets="@../sample/style.css">
                      <children>
@@ -65,6 +75,29 @@
                      <HBox.margin>
                         <Insets left="40.0" />
                      </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #f06c71; -fx-background-radius: 10px 10px 10px 10px;" styleClass="statisticVbox" stylesheets="@../sample/style.css">
+                     <children>
+                        <Label fx:id="TotalCustomerPayed" text="0" textFill="#c4dbe9">
+                           <font>
+                              <Font name="System Bold" size="26.0" />
+                           </font>
+                        </Label>
+                        <Label text="Payed Amount" textFill="#c4dbe9" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #35a7d6; -fx-background-radius: 10px 10px 10px 10px;" styleClass="statisticVbox" stylesheets="@../sample/style.css">
+                     <children>
+                        <Label fx:id="TotalCustomerDue" text="0" textFill="#c4dbe9">
+                           <font>
+                              <Font name="System Bold" size="26.0" />
+                           </font>
+                        </Label>
+                        <Label text="Due Amount" textFill="#c4dbe9" />
+                     </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #00b393; -fx-background-radius: 10px 10px 10px 10px;" styleClass="statisticVbox" stylesheets="@../sample/style.css">
                      <children>
@@ -132,12 +165,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.2078431397676468" green="0.2235294133424759" blue="0.33725491166114807" />
+                              <Color blue="0.33725491166114807" green="0.2235294133424759" red="0.2078431397676468" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.2046000063419342" green="0.2213200032711029" blue="0.33000001311302185" opacity="0.0" />
+                              <Color blue="0.33000001311302185" green="0.2213200032711029" opacity="0.0" red="0.2046000063419342" />
                            </color>
                         </Stop>
                      </stops>

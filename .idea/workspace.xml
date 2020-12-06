@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="3215ca71-47da-4cb2-96fc-77a7fb5b3e66" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Methods/CheckDateFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Customers_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Customers_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/DomainController/AddDomainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/DomainController/AddDomainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Edit_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Edit_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Editor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Editor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/InvoiceItemController/AddInvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/InvoiceItemController/AddInvoiceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/InvoiceItemController/EditItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/InvoiceItemController/EditItemController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/InvoiceItemController/InvoiceGuiController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/InvoiceItemController/InvoiceGuiController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Invoice_Editing_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/Invoice_Editing_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/item_add_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Controllers/item_add_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Entities/Customer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Entities/Customer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Entities/Globals.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Entities/Globals.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/Invoice_Price_Checking/Date_Checking.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/Invoice_Price_Checking/Date_Checking.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/CustomerInfo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/CustomerInfo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Customers.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Customers.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Edit_Item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Edit_Item.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Invoice_Summary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Invoice_Summary.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/Item.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/add_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LifeManagerFinal/fxml/add_item.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Customers_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Customers_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/DomainController/AddDomainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/DomainController/AddDomainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Edit_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Edit_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Editor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Editor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/InvoiceItemController/AddInvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/InvoiceItemController/AddInvoiceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/InvoiceItemController/EditItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/InvoiceItemController/EditItemController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/InvoiceItemController/InvoiceGuiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/InvoiceItemController/InvoiceGuiController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/Invoice_Editing_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Invoice_Editing_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Invoice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Methods/Read_Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Methods/Read_Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/item_add_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/item_add_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/Globals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Globals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Invoice_Price_Checking/Date_Checking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Invoice_Price_Checking/Date_Checking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/CustomerInfo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/CustomerInfo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Customers.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Customers.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Edit_Item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Edit_Item.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fxml/Invoice_Summary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Invoice_Summary.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Item.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/add_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/add_item.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +67,13 @@
   </component>
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -32,7 +89,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../JobStuff/mysql-connector-java-8.0.21" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -65,15 +122,26 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607014379665">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607259620050">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607014379665" />
-    <state x="765" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1607186901122">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607259620050" />
+    <state x="765" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1607213133749">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="221" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607186901122" />
+    <state x="765" y="221" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607213133749" />
     <state x="689" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1607014372674">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -82,26 +150,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="757" y="390" key="DetectedRootsChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607014416440" />
-    <state x="666" y="261" key="FileChooserDialogImpl" timestamp="1607014415317">
+    <state x="666" y="261" key="FileChooserDialogImpl" timestamp="1607267130257">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="666" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1607014415317" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1607190120931">
+    <state x="666" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1607267130257" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1607272412251">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607190120931" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1607190120931">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607272412251" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1607272412251">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607190120931" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1607190120931">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607272412251" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1607272412250">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607190120931" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1607190120931">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607272412250" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1607272412251">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607190120931" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607272412251" />
     <state x="440" y="94" key="SettingsEditor" timestamp="1607014422905">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -4,6 +4,7 @@ package Controllers.InvoiceItemController;
 import Controllers.Invoice_Editing_Controller;
 import Entities.*;
 import Methods.Read_Database;
+import animatefx.animation.SlideInLeft;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -117,7 +118,6 @@ public class AddInvoiceController extends Globals implements AboveGod, Initializ
             //Initialize the RecurringOptions Combo box with the types of recurrence
             ((ComboBox) pane.lookup("#"+"ReccurenceType")).getItems().addAll("WEEKLY","MONTHLY","YEARLY");
             ReccuringOptions.getChildren().add(0,pane);
-
 
             //Make the reccurence flag true so as to add the invoice correctly
             checkFlag = true;

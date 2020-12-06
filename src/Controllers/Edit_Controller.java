@@ -8,6 +8,7 @@ import Methods.WriteToDatabase;
 import animatefx.animation.FadeInRight;
 import animatefx.animation.SlideInLeft;
 import animatefx.animation.SlideInRight;
+import animatefx.animation.SlideOutLeft;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,8 +33,6 @@ where the user can change things in the customer such as basic data
 and invoices,domains etc
  */
 public class Edit_Controller implements AboveGod {
-
-
 
     @FXML
     private Button Edit;
@@ -466,29 +465,29 @@ public class Edit_Controller implements AboveGod {
 
     }
 
-
     @FXML
     public void EditItem() throws IOException {
 
-        Parent root;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Edit_Item.fxml"));
+            Parent root;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Edit_Item.fxml"));
 
-        root = loader.load();
+            root = loader.load();
 
-        item_add_Controller cntrl= loader.getController();
+            item_add_Controller cntrl = loader.getController();
 
-        cntrl.SetBox(ItemsContainer);
-        cntrl.SetHbox(ItemBox);
-        cntrl.Initialize();
+            cntrl.SetBox(ItemsContainer);
+            cntrl.SetHbox(ItemBox);
+            cntrl.Initialize();
 
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Edit Item");
-        stage.show();
+            cntrl.SetEditArea(EditPane);
+
+            cntrl.ItemName.setText("Edit "+((Label)ItemBox.getChildren().get(0)).getText());
+
+            EditPane.getChildren().setAll(root);
+
+            new SlideInLeft(EditPane).play();
 
 
     }
-
-
 
 }

@@ -836,6 +836,8 @@ public class Editor extends Globals implements AboveGod {
 
             Edit_Controller ctrl = loader.getController();
 
+            ctrl.getNotificationsBox(notificationsBox,test);
+
             ctrl.setLabel(completedTasksLabel, pendingTasksLabel, progressBar, progressLabel);
 
             int index = projectMap.get(Integer.parseInt(projId)).getWorkers().get(Integer.parseInt(id)).getTasks().get(Integer.parseInt(projId)).size()-1 ;
@@ -1088,23 +1090,7 @@ public class Editor extends Globals implements AboveGod {
 //        wr.addLog(log);
     }
 
-    @FXML
-    public void Add_Edited_Worker(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/add_worker_task.fxml"));
-        Parent root = loader.load();
-        Editor ctrl = loader.getController();
-        ctrl.setAddTaskToWorkerBox(VBoxToDo,workerId);
-
-
-
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Add ToDo to "+workerMap.get(Integer.valueOf(workerId.getText())).getName());
-        stage.show();
-
-
-    }
 
     public void setAddTaskToWorkerBox(VBox VBoxToDo,Label label) throws IOException {
         this.VBoxToDo=VBoxToDo;
@@ -1566,7 +1552,6 @@ public class Editor extends Globals implements AboveGod {
     }
 
     int isPressed = 0;
-
     @FXML
     void pressed(ActionEvent event) throws IOException,  SQLException, ClassNotFoundException {
         //This part is triggered if the user updates the customers data
@@ -1823,21 +1808,32 @@ public class Editor extends Globals implements AboveGod {
 
         }
 
+
         //This is triggered if the user decides to add a new invoice to the customer
         if (event.getSource() == AddInvoice)
         {
-            //Load the add invoice GUI panel and show it to the user
-            FXMLLoader AddInvoiceLoader = new FXMLLoader(getClass().getResource("/fxml/Add_Invoice.fxml"));
-            Parent root = AddInvoiceLoader.load();
-            //Append a controller to the panel
-            AddInvoiceController ctrl = AddInvoiceLoader.getController();
+            if (isPressed==0) {
+                //Load the add invoice GUI panel and show it to the user
+                FXMLLoader AddInvoiceLoader = new FXMLLoader(getClass().getResource("/fxml/Add_Invoice.fxml"));
+                Parent root = AddInvoiceLoader.load();
+                //Append a controller to the panel
+                AddInvoiceController ctrl = AddInvoiceLoader.getController();
 
-            //Set to the cotroller the Customer id
-            ctrl.SetCustomerData(id);
-            //Set to the controller the VBoxes containing the invoices based on their type and reccurence
-            ctrl.SetContainers(MonthlyBox,YearlyBox,OneTimeBox,CustomBox);
+                //Set to the cotroller the Customer id
+                ctrl.SetCustomerData(id);
+                //Set to the controller the VBoxes containing the invoices based on their type and reccurence
+                ctrl.SetContainers(MonthlyBox, YearlyBox, OneTimeBox, CustomBox);
 
-            AddInvoicePane.getChildren().setAll(root);
+                AddInvoicePane.getChildren().setAll(root);
+
+                new SlideInLeft(AddInvoicePane).play();
+                isPressed = 1;
+                AddInvoice.setText("Cancel");
+            }else {
+                new SlideOutLeft(AddInvoicePane).play();
+                isPressed = 0;
+                AddInvoice.setText("Add");
+            }
 
           //  Stage stage = new Stage();
           //  stage.setScene(new Scene(root));

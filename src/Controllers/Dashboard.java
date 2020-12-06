@@ -2,6 +2,7 @@ package Controllers;
 
 import Entities.AboveGod;
 import Methods.Read_Database;
+import com.sun.javafx.scene.control.skin.DatePickerSkin;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,7 +21,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-//import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -75,13 +75,13 @@ public class Dashboard implements Initializable, AboveGod {
         tasks.setText(String.valueOf(i));
 
         DatePicker datePicker = new DatePicker(LocalDate.now());
-       // DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
-       // Node popupContent = datePickerSkin.getPopupContent();
+        DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
+        Node popupContent = datePickerSkin.getPopupContent();
         LocalDate selectedDate = datePicker.getValue();
 
-       // popupContent.setStyle("-fx-pref-width: 298px;");
+        popupContent.setStyle("-fx-pref-width: 298px;");
 
-      //  calendarPane.getChildren().add(popupContent);
+        calendarPane.getChildren().add(popupContent);
 
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("New Value: " + newValue);

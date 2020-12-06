@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="javax.mail">
+  <library name="javafx-sdk-11.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../javax.mail.jar!/" />
+      <root url="file://$PROJECT_DIR$/../javafx-sdk-11.0.2" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

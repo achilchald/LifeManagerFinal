@@ -92,7 +92,7 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <Button fx:id="ProjBtnBack" layoutX="1149.0" layoutY="36.0" mnemonicParsing="false" onAction="#projGoBack" prefHeight="36.0" prefWidth="53.0" style="-fx-background-radius: 30 30 30 30;" text="Back">
+      <Button fx:id="ProjBtnBack" layoutX="734.0" layoutY="36.0" mnemonicParsing="false" onAction="#projGoBack" prefHeight="35.0" prefWidth="55.0" style="-fx-background-radius: 30 30 30 30;" text="Back">
          <font>
             <Font size="15.0" />
          </font></Button>

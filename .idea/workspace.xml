@@ -25,6 +25,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3215ca71-47da-4cb2-96fc-77a7fb5b3e66" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/LifeManagerFinal_jar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
@@ -196,6 +197,15 @@
       <change beforePath="$PROJECT_DIR$/src/fxml/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/style.css" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/InvoiceItemController/EditItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/InvoiceItemController/EditItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/InvoiceItemController/InvoiceGuiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/InvoiceItemController/InvoiceGuiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Invoice_Editing_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Invoice_Editing_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Invoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Methods/Read_Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Methods/Read_Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fxml/Invoice_Summary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/fxml/Invoice_Summary.fxml" afterDir="false" />
+>>>>>>> 6b1a11eaca13ab52abc0c21e63f16c57afbb283d
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,8 +333,17 @@
     </state>
     <state x="188" y="166" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.984@0.0.1280.984" timestamp="1607259717168" />
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607014379665" />
+<<<<<<< HEAD
     <state x="459" y="293" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1607260015135">
       <screen x="0" y="0" width="1280" height="984" />
+=======
+    <state x="765" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1607186901122">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="221" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607186901122" />
+    <state x="689" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1607014372674">
+      <screen x="0" y="0" width="1920" height="1040" />
+>>>>>>> 6b1a11eaca13ab52abc0c21e63f16c57afbb283d
     </state>
     <state x="459" y="293" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1280.984@0.0.1280.984" timestamp="1607260015135" />
     <state x="689" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607014372674" />
@@ -338,6 +357,7 @@
     </state>
     <state x="370" y="154" key="FileChooserDialogImpl/0.0.1280.984@0.0.1280.984" timestamp="1607259683340" />
     <state x="666" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1607014415317" />
+<<<<<<< HEAD
     <state width="1237" height="184" key="GridCell.Tab.0.bottom" timestamp="1607262408157">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
@@ -360,6 +380,26 @@
     <state width="1877" height="208" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607043774074" />
     <state x="61" y="69" key="SettingsEditor" timestamp="1607260021991">
       <screen x="0" y="0" width="1280" height="984" />
+=======
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1607190120931">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607190120931" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1607190120931">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607190120931" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1607190120931">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607190120931" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1607190120931">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607190120931" />
+    <state x="440" y="94" key="SettingsEditor" timestamp="1607014422905">
+      <screen x="0" y="0" width="1920" height="1040" />
+>>>>>>> 6b1a11eaca13ab52abc0c21e63f16c57afbb283d
     </state>
     <state x="61" y="69" key="SettingsEditor/0.0.1280.984@0.0.1280.984" timestamp="1607260021991" />
     <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607014422905" />

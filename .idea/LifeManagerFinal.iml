@@ -14,5 +14,6 @@
     <orderEntry type="library" name="javafx-sdk-11.0" level="project" />
     <orderEntry type="library" name="view-11.8.3" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0" level="project" />
+    <orderEntry type="library" name="com.smattme:mysql-backup4j:1.0.1" level="project" />
   </component>
 </module>

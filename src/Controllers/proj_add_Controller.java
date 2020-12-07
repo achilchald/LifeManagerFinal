@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -141,11 +142,13 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         int id=rd.totalProjects()+1;
 
         //check if neccessery attributes are added
-        if (name.equals("")||localdate==null||price.equals("")){
+        String regex = "\\d+";
+        //System.out.println(Date.valueOf(localdate).toString());
+        if (name.equals("")||localdate==null||price.equals("")||(!price.matches(regex))||(!Date.valueOf(localdate).toString().matches("\\d{4}-\\d{2}-\\d{2}"))) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Invalid Text Input ");
-            alert.setHeaderText("Please enter all neccessery values");
-            alert.setContentText("Vro min eisai etsi!");
+            alert.setHeaderText("Input Error");
+            alert.setContentText("Date must be picked and price must be a number.");
 
             alert.showAndWait();
         }
@@ -272,14 +275,15 @@ public class proj_add_Controller  extends Globals implements AboveGod {
         LocalDate localdate=date.getValue();
         String price = PriceF.getText();
 
-        //todo there may be a bug when adding blank project
+        String regex = "\\d+";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         //Validate Checks
-        if (name.equals("")||localdate==null||price.equals("")){
+        if (name.equals("")||localdate==null||price.equals("")||(!price.matches(regex))||(!Date.valueOf(localdate).toString().matches("\\d{4}-\\d{2}-\\d{2}"))){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Invalid Text Input ");
-            alert.setHeaderText("Please enter valid types on the");
-            alert.setContentText("Vro min eisai etsi!");
+            alert.setHeaderText("Input Error");
+            alert.setContentText("Date must be picked and price must be a number.");
 
             alert.showAndWait();
             selectionModel.select(0);

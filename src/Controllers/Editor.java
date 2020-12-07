@@ -438,8 +438,9 @@ public class Editor extends Globals implements AboveGod {
         DateF.setText(((Label) Hbc.getChildren().get(2)).getText());
 
         WorkforceF.setText(String.valueOf(projectMap.get(Integer.parseInt(projectid)).getWorkers().size()));
+        String price=String.valueOf(projectMap.get(Integer.parseInt(projectid)).getPrice());
 
-        PriceF.setText(String.valueOf(projectMap.get(Integer.parseInt(projectid)).getPrice()));
+        PriceF.setText(price.substring(0,price.indexOf(".")));
         int completedTasks=0;
         int notCompletedTask=0;
 
@@ -585,12 +586,12 @@ public class Editor extends Globals implements AboveGod {
         pendingTasksLabel.setText(String.valueOf(notCompletedTask));
 
         Read_Database rd=new Read_Database();
-        System.out.println("Project id is "+projectid);
+
         HashMap<Integer,LogEvent> tmp=(HashMap<Integer, LogEvent>)rd.loadProjectLogs(Integer.parseInt(projectid));
 
 
         for (Map.Entry<Integer, LogEvent> currLog : tmp.entrySet()) {
-            System.out.println("Loading logs for project "+projectid);
+
             currLog.getValue().addLog(notificationsBox);
 
         }
@@ -799,7 +800,6 @@ public class Editor extends Globals implements AboveGod {
 
         String worker=workersComboHandle.getSelectionModel().getSelectedItem();
 
-        String id = worker.substring(0, worker.indexOf("."));
 
         Worker temp = workerMap.get(Integer.parseInt(id));
 
@@ -983,10 +983,10 @@ public class Editor extends Globals implements AboveGod {
 
 
         int id = Integer.parseInt(worker.substring(0, worker.indexOf(".")));
-        System.out.println("Id of worker = " + id);
+//        System.out.println("Id of worker = " + id);
 
         int catid = Integer.parseInt(category.substring(0, category.indexOf(".")));
-        System.out.println("Id of Category = " + id);
+//        System.out.println("Id of Category = " + id);
 
         String nameid=category.substring(category.indexOf("."));
 
@@ -1038,7 +1038,7 @@ public class Editor extends Globals implements AboveGod {
         LocalDateTime now = LocalDateTime.now();
         String text="Task "+temp.getName()+" added to "+workerMap.get(temp.getWorker_id()).getName()+"("+dtf.format(now)+")";
         LogEvent log=new LogEvent(text,temp.getProject_id(),temp.getTaskid(),temp.getWorker_id());
-        System.out.println("Task added project id is"+log.getProjId());
+//        System.out.println("Task added project id is"+log.getProjId());
         log.addLog(notificationsBox);
 
         wr.addLog(log);
@@ -1068,7 +1068,7 @@ public class Editor extends Globals implements AboveGod {
 
         projectMap.get(Integer.valueOf(projectid)).addWorker(workId);
         projectMap.get(Integer.parseInt(projectid)).getWorkers().get(workId).getTasks().put(Integer.parseInt(projectid),new ArrayList<Task>());
-        System.out.println("His list"+projectMap.get(Integer.parseInt(projectid)).getWorkers().get(workId).getTasks().get(Integer.parseInt(projectid)));
+//        System.out.println("His list"+projectMap.get(Integer.parseInt(projectid)).getWorkers().get(workId).getTasks().get(Integer.parseInt(projectid)));
         //box.setStyle("-fx-background-color : #a0a0a0;");
         box.getChildren().remove(4);
         Button minus=new Button("-");
@@ -1350,7 +1350,7 @@ public class Editor extends Globals implements AboveGod {
                 //Append a controller to the invoice GUI component
                 Invoice_Editing_Controller EditControl = loader.getController();
 
-                System.out.println("Customer id = " + id + "Invoice id = " + temp.getId());
+//                System.out.println("Customer id = " + id + "Invoice id = " + temp.getId());
                 //Set to the controller the invoice and customer id's
                 EditControl.setCustomerAndInvoiceId(id, temp.getId());
 
@@ -1367,12 +1367,12 @@ public class Editor extends Globals implements AboveGod {
 
                 //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
                 ((Label) box.getChildren().get(3)).setId(temp.getId() + ((Label) box.getChildren().get(3)).getId());
-                System.out.println("Invoice price label id = " + ((Label) box.getChildren().get(3)).getId());
+//                System.out.println("Invoice price label id = " + ((Label) box.getChildren().get(3)).getId());
                 linker.CreateLink(((Label) box.getChildren().get(3)));
 
 
-                System.out.println(temp.getRecurring());
-                System.out.println(temp.getType());
+//                System.out.println(temp.getRecurring());
+//                System.out.println(temp.getType());
 
                 //Check if the invoices time has expired
                 if(CurrentDate.compareTo(temp.getPayment_Date())>0)
@@ -1421,7 +1421,7 @@ public class Editor extends Globals implements AboveGod {
 
                 //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
                 ((Label) RecBox.getChildren().get(3)).setId(temp.getId() + ((Label) RecBox.getChildren().get(3)).getId());
-                System.out.println("Invoice price label id = " + ((Label) RecBox.getChildren().get(3)).getId());
+//                System.out.println("Invoice price label id = " + ((Label) RecBox.getChildren().get(3)).getId());
                 linker.CreateLink(((Label) RecBox.getChildren().get(3)));
 
                 //Check if the invoices time has expired
@@ -1475,7 +1475,7 @@ public class Editor extends Globals implements AboveGod {
 
             //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
             ((Label) InvoiceBox.getChildren().get(3)).setId(temp.getId() + ((Label) InvoiceBox.getChildren().get(3)).getId());
-            System.out.println("Invoice price label id = " + ((Label) InvoiceBox.getChildren().get(3)).getId());
+//            System.out.println("Invoice price label id = " + ((Label) InvoiceBox.getChildren().get(3)).getId());
             linker.CreateLink(((Label) InvoiceBox.getChildren().get(3)));
 
 
@@ -1550,8 +1550,8 @@ public class Editor extends Globals implements AboveGod {
                     domainType = DomainInvoice.getItems().get(i).getType();
                 }
             }
-            System.out.println(hostingType);
-            System.out.println(domainType);
+//            System.out.println(hostingType);
+//            System.out.println(domainType);
 
 
             //Mark the flags as true if the domain had the types before
@@ -1561,7 +1561,7 @@ public class Editor extends Globals implements AboveGod {
             if(domainType != null)
                 HadDomainType = true;
 
-            System.out.println("Hosting flag = "+HadHostingType + " Domain type flag = "+HadDomainType);
+//            System.out.println("Hosting flag = "+HadHostingType + " Domain type flag = "+HadDomainType);
 
         } else if(event.getSource() == DomList && DeleteFlag)
         {
@@ -1587,13 +1587,13 @@ public class Editor extends Globals implements AboveGod {
 
             if (!AFM.getText().matches(regex) || !ZIP.getText().matches(regex) || !Phone.getText().matches(regex))
             {
-                System.out.println("lamo");
+//                System.out.println("lamo");
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Your new input has a typo \n Please check all the fields and type appropriate values", ButtonType.OK, ButtonType.CANCEL);
                 alert.showAndWait();
 
                 if(alert.getResult() == ButtonType.OK )
                 {
-                    System.out.println("lma0");
+//                    System.out.println("lma0");
                     return;
                 }
             }
@@ -1661,9 +1661,9 @@ public class Editor extends Globals implements AboveGod {
             TotalDue -= customerMap.get(id).getDueAmount();
 
 
-            System.out.println("New Domain Name : " + DomainName);
-            System.out.println("New Hosting Type : " + HostType);
-            System.out.println("New Domain Type : " + DomType);
+//            System.out.println("New Domain Name : " + DomainName);
+//            System.out.println("New Hosting Type : " + HostType);
+//            System.out.println("New Domain Type : " + DomType);
 
 
             //Get the domain from the customer
@@ -1720,7 +1720,7 @@ public class Editor extends Globals implements AboveGod {
                             NewInvoice.getItems().add(HostingItem);
                             NewInvoice.RemovePrice(Hosting_Price);
 
-                            System.out.println("HOSTING ADDED");
+//                            System.out.println("HOSTING ADDED");
 
                         }
 
@@ -1741,7 +1741,7 @@ public class Editor extends Globals implements AboveGod {
                             NewInvoice.getItems().add(DomainItem);
                             NewInvoice.RemovePrice(Type_Price);
 
-                            System.out.println("DOMAIN TYPE ADDED");
+//                            System.out.println("DOMAIN TYPE ADDED");
                         }
 
                         //If there was no hosting type and the user picked a new one, add it
@@ -1753,7 +1753,7 @@ public class Editor extends Globals implements AboveGod {
 
                             NewInvoice.getItems().add(HostingItem);
 
-                            System.out.println("HOSTING ADDED");
+//                            System.out.println("HOSTING ADDED");
 
                             HostType = null;
                             HadHostingType = false;
@@ -1768,7 +1768,7 @@ public class Editor extends Globals implements AboveGod {
 
                             NewInvoice.getItems().add(DomainItem);
 
-                            System.out.println("DOMAIN TYPE ADDED");
+                           // System.out.println("DOMAIN TYPE ADDED");
 
                             DomType = null;
                             HadDomainType = false;
@@ -1788,7 +1788,7 @@ public class Editor extends Globals implements AboveGod {
 
             //Calculate the new price of the invoice
             NewInvoice.Calc_Invoice_Price();
-            System.out.println("New Price = " + NewInvoice.getPrice() + "Invoice Label Id = " + linker.GetLabelLink( NewInvoice.getId()+"Price").getId());
+//            System.out.println("New Price = " + NewInvoice.getPrice() + "Invoice Label Id = " + linker.GetLabelLink( NewInvoice.getId()+"Price").getId());
             linker.GetLabelLink( NewInvoice.getId() + "Price").setText( String.valueOf( NewInvoice.getPrice() ) );
             CustomerCostLabel.setText(String.valueOf(CustomerIncome));
             TotalIncome +=CustomerIncome;
@@ -1964,22 +1964,38 @@ public class Editor extends Globals implements AboveGod {
             String id = ((Label) Hbc.getChildren().get(5)).getText();
 
             projectMap.get(Integer.valueOf(id)).setName(NameF.getText());
-            projectMap.get(Integer.valueOf(id)).setDueDate(Date.valueOf(DateF.getText()));
-            projectMap.get(Integer.valueOf(id)).setWorkforce(projectMap.get(Integer.valueOf(id)).getWorkers().size());
 
-            System.out.println("Price is"+PriceF.getText());
-            projectMap.get(Integer.valueOf(id)).setPrice(Float.parseFloat(PriceF.getText()));
-
-
-            ((Label) Hbc.getChildren().get(1)).setText(NameF.getText());
-            ((Label) Hbc.getChildren().get(2)).setText(DateF.getText());
-            ((Label) Hbc.getChildren().get(3)).setText(PriceF.getText());
-            ((Label) Hbc.getChildren().get(4)).setText(String.valueOf(projectMap.get(Integer.valueOf(id)).getWorkers().size()));
+            String price=PriceF.getText();
 
 
 
-            DatabaseUpdater.UpdateProject(Integer.valueOf(id));
 
+            if (!DateF.getText().matches("\\d{4}-\\d{2}-\\d{2}") || (!price.matches("\\d+"))) {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Text Input ");
+                alert.setHeaderText("Input Error");
+                alert.setContentText("Date must be picked and price must be a number.");
+
+                alert.showAndWait();
+            } else {
+
+                projectMap.get(Integer.valueOf(id)).setDueDate(Date.valueOf(DateF.getText()));
+                projectMap.get(Integer.valueOf(id)).setWorkforce(projectMap.get(Integer.valueOf(id)).getWorkers().size());
+
+//                System.out.println("Price is" + PriceF.getText());
+                projectMap.get(Integer.valueOf(id)).setPrice(Float.parseFloat(PriceF.getText()));
+
+
+                ((Label) Hbc.getChildren().get(1)).setText(NameF.getText());
+                ((Label) Hbc.getChildren().get(2)).setText(DateF.getText());
+                ((Label) Hbc.getChildren().get(3)).setText(PriceF.getText());
+                ((Label) Hbc.getChildren().get(4)).setText(String.valueOf(projectMap.get(Integer.valueOf(id)).getWorkers().size()));
+
+
+                DatabaseUpdater.UpdateProject(Integer.valueOf(id));
+
+            }
         }
 
     }

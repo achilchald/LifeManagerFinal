@@ -2,6 +2,8 @@ package Controllers;
 
 import Entities.*;
 import Methods.Read_Database;
+import Methods.WriteToDatabase;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -63,12 +65,15 @@ public class Dashboard implements Initializable, AboveGod {
     private Label tasks;
 
     @FXML
+    private TextArea stickyNote;
+
+    @FXML
     private  VBox NotificationsBox;
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        LoadStickyNote();
 
         customers.setText(String.valueOf(customerMap.size()));
         projects.setText(String.valueOf(projectMap.size()));
@@ -200,6 +205,30 @@ public class Dashboard implements Initializable, AboveGod {
 
 
 
+    }
+
+    public void LoadStickyNote(){
+
+        Read_Database rd = new Read_Database();
+        String note = "";
+        try {
+            note = rd.LoadStickyNote();
+
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+
+        stickyNote.setText(note);
+
+    }
+
+    @FXML
+    public void SaveStickyNote() throws SQLException, ClassNotFoundException {
+
+        String note = stickyNote.getText();
+        WriteToDatabase wr = new WriteToDatabase();
+
+        wr.UpdateStickyNote(note);
     }
 
     public static ArrayList<LogEvent> checkProjectNotifications() throws IOException {

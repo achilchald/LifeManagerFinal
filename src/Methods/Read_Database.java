@@ -678,5 +678,19 @@ public class Read_Database extends Globals implements AboveGod {
 
     }
 
+    public String LoadStickyNote() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM STICKYNOTE;");
+
+        rs.next();
+        String note = rs.getString(1);
+        con.close();
+
+        return note;
+
+    }
+
 
 }

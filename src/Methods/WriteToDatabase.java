@@ -213,4 +213,18 @@ public class WriteToDatabase extends Globals implements AboveGod {
 
     }
 
+    public void UpdateStickyNote(String note) throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+        //here sonoo is database name, root is username and password
+        Statement stmt = con.createStatement();
+
+
+        stmt.executeUpdate("UPDATE STICKYNOTE Set NOTES = \"" + note +  "\" ;");
+
+
+
+    }
+
 }

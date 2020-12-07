@@ -119,7 +119,10 @@ public class AddDomainController extends Globals implements Initializable, Above
             Domain NewDomain = new Domain(LastDomainId,DomName.getText(),PaymentDate,Date.valueOf(ExpirationDate.getValue()),LastInvoiceId);
 
             //Create an invoice for the new domain,containing the hosting and domain type items
-            Invoice NewInvoice = new Invoice(LastInvoiceId,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusYears(1)),"YEARLY","YEARLY",DomainServices,new ArrayList<Payment>(),0);
+            Invoice NewInvoice = new Invoice(LastInvoiceId,Date.valueOf(LocalDate.now()),Date.valueOf(ExpirationDate.getValue()),"YEARLY","YEARLY",DomainServices,new ArrayList<Payment>(),0);
+            NewInvoice.setCycles(-1);
+            NewInvoice.setRepetitions(1);
+
             //Put the new domain to the customer domains map
             CustomerDomains.put(DomName.getText(),NewDomain);
 

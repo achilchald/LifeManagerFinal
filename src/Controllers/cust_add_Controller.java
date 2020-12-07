@@ -86,6 +86,7 @@ public class cust_add_Controller extends Globals implements AboveGod {
         adder.AddCustomer(NewCustomer);
 
         NewCustomer.setPrice(0);
+        NewCustomer.calculatePrice();
 
 
         //Add Customer to customers map

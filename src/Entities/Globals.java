@@ -13,4 +13,6 @@ public class Globals {
     public static float TotalPayed = 0;
     public static float TotalDue = 0;
 
+
+
 }

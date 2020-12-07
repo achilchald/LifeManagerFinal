@@ -57,8 +57,6 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        MainAnchor.setPrefSize(1450, 760);
-
 
         prj = new Pane();
         try {

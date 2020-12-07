@@ -1,6 +1,7 @@
 package Methods;
 
 import Entities.*;
+import Invoice_Price_Checking.Date_Checking;
 
 
 import java.sql.*;
@@ -191,6 +192,9 @@ public class Read_Database extends Globals implements AboveGod {
         }
         con.close();
 
+        Date_Checking checker = new Date_Checking();
+
+        LastInvoiceId = checker.GetMaxInvoiceId();
 
     }
 

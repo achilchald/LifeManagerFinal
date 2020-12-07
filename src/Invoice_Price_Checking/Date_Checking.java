@@ -131,7 +131,7 @@ public class Date_Checking {
         {
             TempInvoice invoice = RecurringInvoices.get(i);
 
-            if ( CurrentDate.equals(invoice.getPayment_Date()) && invoice.getRecurring().equals("YEARLY") && invoice.Fully_Payed )
+            if ( invoice.getRecurring().equals("YEARLY") && invoice.Fully_Payed )
             {
                 LocalDate temp = invoice.getPayment_Date().toLocalDate();
                 System.out.println("Repetition = " + invoice.getRepetitions() + " Cycles = " + invoice.getCycles());
@@ -163,7 +163,7 @@ public class Date_Checking {
 
             }
 
-            if ( CurrentDate.equals(invoice.getPayment_Date()) && invoice.getRecurring().equals("MONTHLY") && invoice.Fully_Payed )
+            if ( invoice.getRecurring().equals("MONTHLY") && invoice.Fully_Payed )
             {
                 LocalDate temp = invoice.getPayment_Date().toLocalDate();
                 System.out.println("Repetition = " + invoice.getRepetitions() + " Cycles = " + invoice.getCycles());
@@ -185,7 +185,7 @@ public class Date_Checking {
                     invoice.SetPayed(false);
                     UpdateDatabase(invoice);
                 }
-                else if(invoice.getCycles() == 0 && CurrentDate.equals(invoice.getPayment_Date()) && invoice.Fully_Payed || invoice.getCycles() == 0 && CurrentDate.compareTo(invoice.getPayment_Date())>0 && invoice.Fully_Payed)
+                else if(invoice.getCycles() == 0  && invoice.Fully_Payed )
                 {
                     PayedInvoices.add(invoice.getId());
                 }
@@ -214,7 +214,7 @@ public class Date_Checking {
             System.out.println("Non rec invoice id = " + NonRecurringInvoices.get(i).getId());
 
 
-            if ( CurrentDate.equals(invoice.getPayment_Date()) && invoice.Fully_Payed || CurrentDate.compareTo(invoice.getPayment_Date())>0 && invoice.Fully_Payed )
+            if ( invoice.Fully_Payed )
             {
                 LocalDate temp = invoice.getPayment_Date().toLocalDate();
                 System.out.println("This invoice is fully payed and its time has elapsed");
@@ -233,6 +233,42 @@ public class Date_Checking {
 
 
 
+
+    public int GetMaxInvoiceId() throws ClassNotFoundException, SQLException {
+        int max = 0;
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
+
+        Statement stmt = con.createStatement();
+        Statement stmt2 = con.createStatement();
+        ResultSet rs = stmt.executeQuery("select max(INVOICE_ID) from INVOICE;");
+        ResultSet rs2 = stmt2.executeQuery("select max(INVOICE_ID) from archived_invoices;");
+
+        while (rs.next())
+        {
+            if(max < rs.getInt(1))
+            {
+                max = rs.getInt(1);
+            }
+        }
+
+        while(rs2.next())
+        {
+            if(max < rs2.getInt(1))
+            {
+                max = rs2.getInt(1);
+            }
+        }
+
+con.close();
+
+
+
+
+
+        return max;
+    }
 
 
 

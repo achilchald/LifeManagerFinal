@@ -28,7 +28,7 @@ public class item_add_Controller extends Globals implements AboveGod {
     @FXML
     private TextField Price;
     @FXML
-    private TextField Recurring;
+    private ComboBox<String> Recurring;
     @FXML
     private Button AddB;
     @FXML
@@ -67,9 +67,13 @@ public class item_add_Controller extends Globals implements AboveGod {
     public void SetHbox(HBox box)
     {
         this.ItemBox = box;
+
     }
 
-    public void SetEditArea(Pane EditPane){ this.EditArea = EditPane; }
+    public void SetEditArea(Pane EditPane){
+        this.EditArea = EditPane;
+        Recurring.getItems().setAll("ONCE","MONTHLY","YEARLY");
+    }
 
     public void setItemStackPane(StackPane Stackpane){
         this.Stackpane=Stackpane;
@@ -92,7 +96,7 @@ public class item_add_Controller extends Globals implements AboveGod {
 
             String price = Price.getText();
 
-            String recurring = Recurring.getText();
+            String recurring = Recurring.getValue();
 
             // get a handle to the stage
             Stage stage = (Stage) AddB.getScene().getWindow();
@@ -137,7 +141,8 @@ public class item_add_Controller extends Globals implements AboveGod {
 
         Type.setText(CurrentItem.getType());
         Price.setText(String.valueOf(CurrentItem.getPrice()));
-        Recurring.setText(CurrentItem.getRecurring());
+        Recurring.getItems().setAll("ONCE","MONTHLY","YEARLY");
+        Recurring.setValue(CurrentItem.getRecurring());
 
     }
 
@@ -146,7 +151,7 @@ public class item_add_Controller extends Globals implements AboveGod {
     public void UpdateItem() throws SQLException, ClassNotFoundException {
         CurrentItem.setType(Type.getText());
         CurrentItem.setPrice( Float.parseFloat(Price.getText()) );
-        CurrentItem.setRecurring(Recurring.getText());
+        CurrentItem.setRecurring(Recurring.getValue());
 
 
         ((Label)ItemBox.getChildren().get(0)).setText(CurrentItem.getType());

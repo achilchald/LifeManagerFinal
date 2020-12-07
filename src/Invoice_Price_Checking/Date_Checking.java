@@ -127,6 +127,7 @@ public class Date_Checking {
         //Get Current Date
         Date CurrentDate = Date.valueOf( LocalDate.now() );
         System.out.println("Current Date = " + CurrentDate);
+        ArrayList<Integer> PayedInvoices = new ArrayList<>();
 
         for(int i = 0 ; i <RecurringInvoices.size() ; i++)
         {
@@ -136,25 +137,64 @@ public class Date_Checking {
             {
                 LocalDate temp = invoice.getPayment_Date().toLocalDate();
                 System.out.println("Repetition = " + invoice.getRepetitions() + " Cycles = " + invoice.getCycles());
-                temp = temp.plusYears(invoice.getRepetitions());
-                System.out.println("Next Payment Date = " + temp);
-                invoice.setPayment_Date(Date.valueOf(temp));
-                invoice.UpdateRecurringData();
-                invoice.SetPayed(false);
-                UpdateDatabase(invoice);
+
+                if(invoice.getCycles() <= -1)
+                {
+                    temp = temp.plusYears(invoice.getRepetitions());
+                    System.out.println("Next Payment Date = " + temp);
+                    invoice.setPayment_Date(Date.valueOf(temp));
+                    invoice.SetPayed(false);
+                    UpdateDatabase(invoice);
+                }
+                else if(invoice.getCycles() > 0)
+                {
+                    temp = temp.plusYears(invoice.getRepetitions());
+                    System.out.println("Next Payment Date = " + temp);
+                    invoice.setPayment_Date(Date.valueOf(temp));
+                    invoice.UpdateRecurringData();
+                    invoice.SetPayed(false);
+                    UpdateDatabase(invoice);
+                }
+                else if(invoice.getCycles() == 0 && CurrentDate.equals(invoice.getPayment_Date()) && invoice.Fully_Payed || invoice.getCycles() == 0 && CurrentDate.compareTo(invoice.getPayment_Date())>0 && invoice.Fully_Payed)
+                {
+                    PayedInvoices.add(invoice.getId());
+                }
+
+
+
 
             }
 
             if ( CurrentDate.equals(invoice.getPayment_Date()) && invoice.getRecurring().equals("MONTHLY") && invoice.Fully_Payed )
             {
                 LocalDate temp = invoice.getPayment_Date().toLocalDate();
-                temp = temp.plusMonths(invoice.getRepetitions());
-                invoice.setPayment_Date(Date.valueOf(temp));
-                invoice.UpdateRecurringData();
-                invoice.SetPayed(false);
-                UpdateDatabase(invoice);
+                System.out.println("Repetition = " + invoice.getRepetitions() + " Cycles = " + invoice.getCycles());
+
+                if(invoice.getCycles() <= -1)
+                {
+                    temp = temp.plusMonths(invoice.getRepetitions());
+                    System.out.println("Next Payment Date = " + temp);
+                    invoice.setPayment_Date(Date.valueOf(temp));
+                    invoice.SetPayed(false);
+                    UpdateDatabase(invoice);
+                }
+                else if(invoice.getCycles() > 0)
+                {
+                    temp = temp.plusMonths(invoice.getRepetitions());
+                    System.out.println("Next Payment Date = " + temp);
+                    invoice.setPayment_Date(Date.valueOf(temp));
+                    invoice.UpdateRecurringData();
+                    invoice.SetPayed(false);
+                    UpdateDatabase(invoice);
+                }
+                else if(invoice.getCycles() == 0 && CurrentDate.equals(invoice.getPayment_Date()) && invoice.Fully_Payed || invoice.getCycles() == 0 && CurrentDate.compareTo(invoice.getPayment_Date())>0 && invoice.Fully_Payed)
+                {
+                    PayedInvoices.add(invoice.getId());
+                }
             }
 
+
+            ArchiveInvoices(PayedInvoices);
 
 
         }

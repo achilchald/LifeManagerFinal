@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -194,7 +191,7 @@
                                     <Tooltip text="For items billed annualy" />
                                  </tooltip>
                               </Tab>
-                              <Tab text="Custom">
+                              <Tab text="Recurring">
                                  <content>
                                     <AnchorPane fx:id="anchor23" prefHeight="518.0" prefWidth="1134.0">
                                        <children>
@@ -247,5 +244,38 @@
             <Font size="30.0" />
          </font>
       </Label>
+      <VBox alignment="CENTER" layoutX="862.0" layoutY="33.0" prefHeight="90.0" prefWidth="100.0" style="-fx-background-color: #f06c71; -fx-background-radius: 10px 10px 10px 10px;" styleClass="statisticVbox" stylesheets="@../sample/style.css">
+         <children>
+            <Label fx:id="InterCustomerCost" text="0" textFill="#c4dbe9">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label text="Customer Cost" textFill="#c4dbe9" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="991.0" layoutY="33.0" prefHeight="90.0" prefWidth="100.0" style="-fx-background-color: #35a7d6; -fx-background-radius: 10px 10px 10px 10px;" styleClass="statisticVbox" stylesheets="@../sample/style.css">
+         <children>
+            <Label fx:id="InterCustomerPayed" text="0" textFill="#c4dbe9">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label text="Payed Amount" textFill="#c4dbe9" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="1112.0" layoutY="30.0" prefHeight="90.0" prefWidth="100.0" style="-fx-background-color: #00b393; -fx-background-radius: 10px 10px 10px 10px;" styleClass="statisticVbox" stylesheets="@../sample/style.css">
+         <children>
+            <Label fx:id="InterCustomerDue" text="0" textFill="#c4dbe9">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label text="Due Amount" textFill="#c4dbe9" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

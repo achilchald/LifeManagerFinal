@@ -187,10 +187,11 @@ public class proj_add_Controller  extends Globals implements AboveGod {
 
 
         ((Label) box.getChildren().get(1)).setText(workerMap.get(id).getName());
+        box.getChildren().remove(2,3);
 
-        ((Label) box.getChildren().get(2)).setText(workerMap.get(id).getEmail());
+//        ((Label) box.getChildren().get(2)).setText(workerMap.get(id).getEmail());
 
-        ((Label) box.getChildren().get(3)).setText(String.valueOf(id));
+//        ((Label) box.getChildren().get(3)).setText(String.valueOf(id));
 
         System.out.println("Project added "+projectMap.get(projectid));
 

@@ -20,6 +20,6 @@
       </Label>
       <TextField fx:id="Price" layoutX="72.0" layoutY="182.0" />
       <Label layoutX="15.0" layoutY="251.0" text="Recurring" />
-      <TextField fx:id="Recurring" layoutX="74.0" layoutY="247.0" />
+      <ComboBox fx:id="Recurring" layoutX="74.0" layoutY="247.0" />
    </children>
 </AnchorPane>

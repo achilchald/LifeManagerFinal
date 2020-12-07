@@ -88,8 +88,6 @@ public class cust_add_Controller extends Globals implements AboveGod {
         NewCustomer.setPrice(0);
 
 
-
-
         //Add Customer to customers map
         customerMap.put(String.valueOf( LastCustomerId ), NewCustomer );
 
@@ -107,16 +105,18 @@ public class cust_add_Controller extends Globals implements AboveGod {
         control.SetStackArea(Stackpane);
 
 
-
         //give the items some effect
 
         ((Label)box.getChildren().get(1)).setText(NewCustomer.getName());
 
-
         ((Label)box.getChildren().get(3)).setText( String.valueOf(NewCustomer.getPrice()));
 
+        ((Label)box.getChildren().get(4)).setText( String.valueOf(NewCustomer.getPayedAmount()));
+
+        ((Label)box.getChildren().get(5)).setText( String.valueOf(NewCustomer.getDueAmount()));
+
         //A hidden box with a customer id
-        ((Label)box.getChildren().get(4)).setText(NewCustomer.getId());
+        ((Label)box.getChildren().get(6)).setText(NewCustomer.getId());
 
         control.SetPriceLabelId();
         box.setId(NewCustomer.getId());

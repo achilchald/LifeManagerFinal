@@ -27,6 +27,10 @@ public class Customer implements AboveGod{
 
     float price;
 
+    float PayedAmount;
+
+    float DueAmount;
+
     String domain;
 
     String invoices;
@@ -202,11 +206,13 @@ public class Customer implements AboveGod{
     
     public void calculatePrice(){
         price = 0;
+        PayedAmount = 0;
        for (int i=0;i<invoicesList.size();i++){
 
-
                this.price += invoicesList.get(i).getPrice();
+               this.PayedAmount += invoicesList.get(i).getPayedAmount();
            }
+       DueAmount = price - PayedAmount;
        }
 
 
@@ -310,5 +316,19 @@ public class Customer implements AboveGod{
         Zip = zip;
     }
 
+    public float getPayedAmount() {
+        return PayedAmount;
+    }
 
+    public void setPayedAmount(float payedAmount) {
+        PayedAmount = payedAmount;
+    }
+
+    public float getDueAmount() {
+        return DueAmount;
+    }
+
+    public void setDueAmount(float dueAmount) {
+        DueAmount = dueAmount;
+    }
 }

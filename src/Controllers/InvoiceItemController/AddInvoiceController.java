@@ -90,7 +90,7 @@ public class AddInvoiceController extends Globals implements AboveGod, Initializ
     {
         this.CustomerID = CustomerId;
         //Initialize the InvoiceType combo box
-        InvoiceType.getItems().addAll("ONCE","WEEKLY","MONTHLY","YEARLY");
+        InvoiceType.getItems().addAll("ONCE","MONTHLY","YEARLY");
     }
 
     //Set the containers where the invoice will be added to the controller
@@ -116,13 +116,13 @@ public class AddInvoiceController extends Globals implements AboveGod, Initializ
             AnchorPane pane = ReccuringOptionsLoader.load();
 
             //Initialize the RecurringOptions Combo box with the types of recurrence
-            ((ComboBox) pane.lookup("#"+"ReccurenceType")).getItems().addAll("WEEKLY","MONTHLY","YEARLY");
+            ((ComboBox) pane.lookup("#"+"ReccurenceType")).getItems().addAll("MONTHLY","YEARLY");
             ReccuringOptions.getChildren().add(0,pane);
 
             //Make the reccurence flag true so as to add the invoice correctly
             checkFlag = true;
         }
-        //If the user clicks the reccurence raido button again then close it
+        //If the user clicks the recurrence radio button again then close it
         else if(event.getSource() == Reccurence && checkFlag)
         {
             ReccuringOptions.getChildren().remove(0);
@@ -139,9 +139,16 @@ public class AddInvoiceController extends Globals implements AboveGod, Initializ
             //If the flag is true then the user made the invoice reccuring
             if (checkFlag)
             {
-                DefaultType = ReccurenceType.getValue();//Add the recurrence type to the Deafault type variable
-                cycles = Integer.parseInt( Cycles.getText() ) ;
-                repetitions = Integer.parseInt( TypeCount.getText() ) ;
+                DefaultType = ReccurenceType.getValue();//Add the recurrence type to the Default type variable
+
+                cycles = -1;
+                repetitions = 1;
+
+                if(!Cycles.getText().equals(""))
+                    cycles = Integer.parseInt( Cycles.getText() )  ;
+
+                if(!TypeCount.getText().equals(""))
+                    repetitions = Integer.parseInt( TypeCount.getText() ) ;
             }
 
 

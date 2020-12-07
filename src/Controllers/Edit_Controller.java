@@ -72,6 +72,12 @@ public class Edit_Controller implements AboveGod {
     private Label CustomerPrice;
 
     @FXML
+    private Label CustomerPayedAmount;
+
+    @FXML
+    private Label CustomerDueAmount;
+
+    @FXML
     private Label Customerid;
 
 
@@ -145,8 +151,12 @@ public class Edit_Controller implements AboveGod {
     //So as to be able to be utilised by other controllers
     public void SetPriceLabelId(){
         CustomerPrice.setId(Customerid.getText()+CustomerPrice.getId());
+        CustomerPayedAmount.setId(Customerid.getText()+CustomerPayedAmount.getId());
+        CustomerDueAmount.setId(Customerid.getText()+CustomerDueAmount.getId());
         Linker link = new Linker();
         link.CreateLink(CustomerPrice);
+        link.CreateLink(CustomerPayedAmount);
+        link.CreateLink(CustomerDueAmount);
 
     }
 
@@ -341,12 +351,18 @@ public class Edit_Controller implements AboveGod {
         int pending_tasks= Integer.parseInt(notCompleted.getText());
         double total=completed_tasks+pending_tasks;
 
+
+
         if (status) {
-            ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #34eb37; ");//set to green
+          //  ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #34eb37; ");//set to green
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
             LocalDateTime now = LocalDateTime.now();
+
+            System.out.println("To do Children : "+ToDoItem.getChildren());
+
+           // this.getNotificationsBox(notificationsBox,);
 
             String text="Task "+temp.getName()+" Completed "+"("+dtf.format(now)+")";
 
@@ -354,7 +370,7 @@ public class Edit_Controller implements AboveGod {
 
 
 
-            logEvent.addLog(notificationsBox,"Comple"+logEvent.getTaskId());
+            logEvent.addLog(notificationsBox," Completed "+logEvent.getTaskId());
 
             WriteToDatabase wr=new WriteToDatabase();
             wr.addLog(logEvent);
@@ -377,16 +393,21 @@ public class Edit_Controller implements AboveGod {
 
         }
         else {
-            ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #e0e0e0; ");
+          //  ToDoItem.getChildren().get(8).setStyle("-fx-background-color: #e0e0e0; ");
             completed_tasks--;
             pending_tasks++;
             //Handles the log event part
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
 
-            String text="Task "+ToDoItem.getChildren().get(1)+" set to Uncompleted "+"("+dtf.format(now)+")";
-            LogEvent logEvent=new LogEvent(text,temp.getProject_id(),temp.getTaskid(),temp.getWorker_id());
-            notificationsBox.getChildren().remove(notificationsBox.lookup("#"+"Comple"+temp.getTaskid()));
+            String text="Task "+((Label)ToDoItem.getChildren().get(1)).getText()+" set to Uncompleted "+"("+dtf.format(now)+")";
+
+            //int projectId= Integer.parseInt(((Label)ToDoItem.getChildren().get(1)).getText());
+
+
+            LogEvent logEvent=new LogEvent(text, temp.getProject_id(), temp.getTaskid(),temp.getWorker_id());
+
+            //notificationsBox.getChildren().remove(notificationsBox.lookup("#"+"Comple"+temp.getTaskid()));
             logEvent.addLog(notificationsBox);
             WriteToDatabase wr=new WriteToDatabase();
             wr.addLog(logEvent);

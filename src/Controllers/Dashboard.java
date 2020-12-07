@@ -2,7 +2,6 @@ package Controllers;
 
 import Entities.*;
 import Methods.Read_Database;
-import com.mysql.cj.log.Log;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;

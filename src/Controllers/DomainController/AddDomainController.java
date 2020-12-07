@@ -80,6 +80,15 @@ public class AddDomainController extends Globals implements Initializable, Above
             float CustomerIncome = Float.parseFloat( CustomerIncomeString );
 
 
+            //Get total customers values
+            float TotalPayed = Float.parseFloat(linker.GetLabelLink("TotalCustomerPayed").getText()
+                    .substring(0, linker.GetLabelLink("TotalCustomerPayed").getText().length() - 1 ));
+            float TotalDue = Float.parseFloat(linker.GetLabelLink("TotalCustomerDue").getText()
+                    .substring(0, linker.GetLabelLink("TotalCustomerDue").getText().length() - 1 ));
+            TotalPayed -= customerMap.get(CustomerId).getPayedAmount();
+            TotalDue -= customerMap.get(CustomerId).getDueAmount();
+
+
 
             //Create a database reader so as to add the new domain to the customer in the database
             Read_Database AddDomain = new Read_Database();
@@ -142,6 +151,28 @@ public class AddDomainController extends Globals implements Initializable, Above
 
             //Add the invoice to the Recurring and Yearly Boxes
             Add_Invoice_to_VBox(YearlyBox,RecurringBox,NewInvoice);
+
+
+            customerMap.get(CustomerId).calculatePrice();
+
+            linker.GetLabelLink(CustomerId + "CustomerPayedAmount").setText(String.valueOf(customerMap.get(CustomerId).getPayedAmount()));
+            linker.GetLabelLink(CustomerId + "CustomerDueAmount").setText(String.valueOf(customerMap.get(CustomerId).getDueAmount()));
+
+            linker.GetLabelLink(CustomerId + "InterCustomerCost").setText(String.valueOf(customerMap.get(CustomerId).getPrice()));
+            linker.GetLabelLink(CustomerId + "InterCustomerPayed").setText(String.valueOf(customerMap.get(CustomerId).getPayedAmount()));
+            linker.GetLabelLink(CustomerId + "InterCustomerDue").setText(String.valueOf(customerMap.get(CustomerId).getDueAmount()));
+
+
+
+
+
+
+            //Update total customers values
+            TotalPayed += customerMap.get(CustomerId).getPayedAmount();
+            TotalDue += customerMap.get(CustomerId).getDueAmount();
+
+            linker.GetLabelLink("TotalCustomerPayed").setText(String.valueOf(TotalPayed) + "$");
+            linker.GetLabelLink("TotalCustomerDue").setText(String.valueOf(TotalDue) + "$");
 
 
 
@@ -266,7 +297,7 @@ public class AddDomainController extends Globals implements Initializable, Above
             ((Label)RecBox.getChildren().get(2)).setText(temp.getPayment_Date().toString());
             ((Label)RecBox.getChildren().get(3)).setText(Float.toString(temp.getPrice()));
             ((Label)RecBox.getChildren().get(4)).setText(Float.toString(temp.getPayedAmount()));
-            ((ComboBox)RecBox.getChildren().get(5)).getItems().addAll("Add Payment","Edit","Delete");
+
 
         //Create a link to the invoice Price Label so it can be updated on domain hosting/type change
         ((Label) RecBox.getChildren().get(3)).setId(temp.getId() + ((Label) RecBox.getChildren().get(3)).getId());

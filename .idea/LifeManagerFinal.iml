@@ -9,13 +9,10 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="adaptive" level="project" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="Thing" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-8.0.21" level="project" />
-    <orderEntry type="library" name="javax.mail_1" level="project" />
     <orderEntry type="library" name="io.github.typhon0:AnimateFX:1.2.1" level="project" />
     <orderEntry type="library" name="javax.mail" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-8.0" level="project" />
     <orderEntry type="library" name="javafx-sdk-11.0" level="project" />
     <orderEntry type="library" name="view-11.8.3" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-8.0" level="project" />
   </component>
 </module>

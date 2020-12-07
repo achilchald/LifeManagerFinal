@@ -10,4 +10,7 @@ public class Globals {
     public static String LastTemplatedItemId = "0";
     public static int lastProjectId=0;
 
+    public static float TotalPayed = 0;
+    public static float TotalDue = 0;
+
 }

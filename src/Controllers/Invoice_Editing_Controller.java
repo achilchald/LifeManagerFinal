@@ -153,6 +153,15 @@ private Pane pnlCustomers;
             float TotalCost = Float.parseFloat(Tcost);
             float CustomerCost = Float.parseFloat(link.GetLabelLink(CustomerId+"CustomerPrice").getText());
 
+            //Get total customers values
+            float TotalPayed = Float.parseFloat(link.GetLabelLink("TotalCustomerPayed").getText()
+                    .substring(0, link.GetLabelLink("TotalCustomerPayed").getText().length() - 1 ));
+            float TotalDue = Float.parseFloat(link.GetLabelLink("TotalCustomerDue").getText()
+                    .substring(0, link.GetLabelLink("TotalCustomerDue").getText().length() - 1 ));
+            TotalPayed -= customerMap.get(CustomerId).getPayedAmount();
+            TotalDue -= customerMap.get(CustomerId).getDueAmount();
+
+
 
             //Apply the changes to the aforementioned labels and remove the invoice from the customer map
             for(int i = 0;i<customerMap.get(CustomerId).GetInvoicesList().size();i++)
@@ -170,6 +179,24 @@ private Pane pnlCustomers;
                     break ;
                 }
             }
+
+
+            customerMap.get(CustomerId).calculatePrice();
+
+            link.GetLabelLink(CustomerId + "CustomerPayedAmount").setText(String.valueOf(customerMap.get(CustomerId).getPayedAmount()));
+            link.GetLabelLink(CustomerId + "CustomerDueAmount").setText(String.valueOf(customerMap.get(CustomerId).getDueAmount()));
+
+            link.GetLabelLink(CustomerId + "InterCustomerCost").setText(String.valueOf(customerMap.get(CustomerId).getPrice()));
+            link.GetLabelLink(CustomerId + "InterCustomerPayed").setText(String.valueOf(customerMap.get(CustomerId).getPayedAmount()));
+            link.GetLabelLink(CustomerId + "InterCustomerDue").setText(String.valueOf(customerMap.get(CustomerId).getDueAmount()));
+
+
+            //Update total customers values
+            TotalPayed += customerMap.get(CustomerId).getPayedAmount();
+            TotalDue += customerMap.get(CustomerId).getDueAmount();
+
+            link.GetLabelLink("TotalCustomerPayed").setText(String.valueOf(TotalPayed) + "$");
+            link.GetLabelLink("TotalCustomerDue").setText(String.valueOf(TotalDue) + "$");
 
         }
 

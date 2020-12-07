@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="pnlCustomers" prefHeight="826.0" prefWidth="1077.0" style="-fx-background-color: #eceef0;" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.InvoiceItemController.InvoiceGuiController">
@@ -178,5 +179,10 @@
             <Label prefHeight="17.0" prefWidth="72.0" text="Due Amount" textFill="#c4dbe9" />
          </children>
       </VBox>
+      <Button layoutX="775.0" layoutY="45.0" mnemonicParsing="false" prefWidth="0.0" styleClass="trashButton">
+         <graphic>
+            <SVGPath content="M232.4,251l-3.4-3.4c-0.4-0.4-0.8-0.6-1.4-0.6H217c-1.1,0-1.9,0.9-1.9,1.9V263c0,1.1,0.9,1.9,1.9,1.9H231c1.1,0,1.9-0.9,1.9-1.9v-10.7C233,251.8,232.8,251.3,232.4,251L232.4,251z M224,262.4c-1.4,0-2.6-1.1-2.6-2.6s1.1-2.6,2.6-2.6s2.6,1.1,2.6,2.6S225.4,262.4,224,262.4z M227.8,250.2v4c0,0.3-0.2,0.5-0.5,0.5h-9.3c-0.3,0-0.5-0.2-0.5-0.5v-4.2c0-0.3,0.2-0.5,0.5-0.5h9.1c0.1,0,0.2,0.1,0.3,0.1l0.1,0.1C227.8,250,227.8,250.1,227.8,250.2z" styleClass="trashButton" />
+         </graphic>
+      </Button>
    </children>
 </Pane>

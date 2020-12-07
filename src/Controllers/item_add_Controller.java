@@ -35,6 +35,13 @@ public class item_add_Controller extends Globals implements AboveGod {
     private VBox pnItems;
 
     @FXML
+    public Label ItemName;
+
+    @FXML
+    public AnchorPane editItemPane;
+
+
+    @FXML
     private Button EditButton;
 
     private VBox ItemContainer;
@@ -71,6 +78,8 @@ public class item_add_Controller extends Globals implements AboveGod {
     public void setItemStackPane(StackPane Stackpane){
         this.Stackpane=Stackpane;
     }
+
+    public void SetEditItemPane(AnchorPane EditPane){ this.editItemPane = EditPane; }
 
 
     public void add_Item(javafx.event.ActionEvent event) throws IOException, SQLException, ClassNotFoundException {

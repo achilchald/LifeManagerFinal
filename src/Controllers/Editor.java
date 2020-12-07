@@ -521,15 +521,10 @@ public class Editor extends Globals implements AboveGod {
                         boolean status2=temp.get(i).getStatus();
                         //boolean status=projectMap.get(Integer.parseInt(projectid)).getWorkers().get(temp.get(i).getWorker_id()).getTasks().get(Integer.parseInt(projectid)).get(i).getStatus();
                         if (status2) {
-                            box2.getChildren().get(8).setStyle("-fx-background-color: #34eb37; ");//set to green
-
-
-
 
                             completedTasks++;
                         }
                         else {
-                            box2.getChildren().get(8).setStyle("-fx-background-color: #a7a7a7; ");//set to black
                             notCompletedTask++;
 
                         }
@@ -571,7 +566,7 @@ public class Editor extends Globals implements AboveGod {
                 boxAvailable.setId(String.valueOf(currentWorker.getValue().getWorkerid()));
                 boxAvailable.getChildren().remove(4);
 
-                boxAvailable.setStyle("-fx-background-color : #00ce52;");
+                //boxAvailable.setStyle("-fx-background-color : #00ce52;");
                 Button plus=new Button("+");
                 boxAvailable.getChildren().add(plus);
                 plus.setOnAction(e -> {
@@ -655,7 +650,7 @@ public class Editor extends Globals implements AboveGod {
 
         //Set Progress Bar
         progressBar.setProgress(progress);
-        progressBar.setStyle("-fx-background-color: green;");
+        //progressBar.setStyle("-fx-background-color: green;");
         progressLabel.setText(String.valueOf(Math.round(progress*100)));
 
     }
@@ -753,7 +748,7 @@ public class Editor extends Globals implements AboveGod {
                     projectMap.get(Integer.parseInt(projId)).getWorkers().remove(workerId);
                     WriteToDatabase wr=new WriteToDatabase();
                     wr.deleteWorkerFromProject(String.valueOf(workerId),Integer.parseInt(projId));
-                    ProjectWorkersPanel.lookup("#" + workerId).setStyle("-fx-background-color : #50b065;");
+                    //ProjectWorkersPanel.lookup("#" + workerId).setStyle("-fx-background-color : #50b065;");
                     HBox boxWorkerToDelete=(HBox)ProjectWorkersPanel.lookup("#" + workerId);
                     boxWorkerToDelete.getChildren().remove(4);
                     Button plus=new Button("+");
@@ -773,7 +768,7 @@ public class Editor extends Globals implements AboveGod {
                 projectMap.get(Integer.parseInt(projId)).getWorkers().remove(workerId);
                 WriteToDatabase wr=new WriteToDatabase();
                 wr.deleteWorkerFromProject(String.valueOf(workerId),Integer.parseInt(projId));
-                ProjectWorkersPanel.lookup("#" + workerId).setStyle("-fx-background-color : #50b065;");
+                //ProjectWorkersPanel.lookup("#" + workerId).setStyle("-fx-background-color : #50b065;");
                 HBox boxWorkerToDelete=(HBox)ProjectWorkersPanel.lookup("#" + workerId);
                 boxWorkerToDelete.getChildren().remove(4);
 
@@ -879,7 +874,7 @@ public class Editor extends Globals implements AboveGod {
 
 
             if (straytasks.get(strayTasksCounter).getStatus()){
-                box.getChildren().get(8).setStyle("-fx-background-color : #50b065;");
+                //box.getChildren().get(8).setStyle("-fx-background-color : #50b065;");
                 Label txt=new Label("The task "+straytasks.get(strayTasksCounter).getName()+" was originally completed by "+workerMap.get(Integer.parseInt(workerIDstray.getText())).getName()+" Man !");
                 txt.setMinWidth(Region.USE_PREF_SIZE);
                 HBox notification;
@@ -894,7 +889,7 @@ public class Editor extends Globals implements AboveGod {
 
             }
             else{
-                box.getChildren().get(8).setStyle("-fx-background-color : #b3b3b3;");
+                //box.getChildren().get(8).setStyle("-fx-background-color : #b3b3b3;");
             }
 
 
@@ -924,7 +919,7 @@ public class Editor extends Globals implements AboveGod {
             wr.deleteWorkerFromProject(workerIDstray.getText(), Integer.parseInt(projId));
 
 
-            ProjectWorkersPanel.lookup("#" + workerIDstray.getText()).setStyle("-fx-background-color : #50b065;");
+            //ProjectWorkersPanel.lookup("#" + workerIDstray.getText()).setStyle("-fx-background-color : #50b065;");
             HBox boxWorkerToDelete = (HBox) ProjectWorkersPanel.lookup("#" + workerIDstray.getText());
             boxWorkerToDelete.getChildren().remove(4);
 
@@ -1019,6 +1014,8 @@ public class Editor extends Globals implements AboveGod {
 
         Edit_Controller ctrl = loader.getController();
 
+        ctrl.getNotificationsBox(notificationsBox,temp);
+
         ctrl.setLabel(completedTasksLabel, pendingTasksLabel, progressBar, progressLabel);
 
         ((Label) box.getChildren().get(1)).setText(temp.getName());
@@ -1029,6 +1026,7 @@ public class Editor extends Globals implements AboveGod {
         ((Label) box.getChildren().get(7)).setText(String.valueOf(temp.getProject_id()));
 
         box.setId(String.valueOf(temp.getTaskid()));
+
 
         ProjectToDoPanel.getChildren().add(box);
 
@@ -1071,7 +1069,7 @@ public class Editor extends Globals implements AboveGod {
         projectMap.get(Integer.valueOf(projectid)).addWorker(workId);
         projectMap.get(Integer.parseInt(projectid)).getWorkers().get(workId).getTasks().put(Integer.parseInt(projectid),new ArrayList<Task>());
         System.out.println("His list"+projectMap.get(Integer.parseInt(projectid)).getWorkers().get(workId).getTasks().get(Integer.parseInt(projectid)));
-        box.setStyle("-fx-background-color : #a0a0a0;");
+        //box.setStyle("-fx-background-color : #a0a0a0;");
         box.getChildren().remove(4);
         Button minus=new Button("-");
         box.getChildren().add(minus);
@@ -1099,23 +1097,6 @@ public class Editor extends Globals implements AboveGod {
 //        wr.addLog(log);
     }
 
-    @FXML
-    public void Add_Edited_Worker(ActionEvent event) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add_worker_task.fxml"));
-        Parent root = loader.load();
-        Editor ctrl = loader.getController();
-        ctrl.setAddTaskToWorkerBox(VBoxToDo,workerId);
-
-
-
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Add ToDo to "+workerMap.get(Integer.valueOf(workerId.getText())).getName());
-        stage.show();
-
-
-    }
 
     public void setAddTaskToWorkerBox(VBox VBoxToDo,Label label) throws IOException {
         this.VBoxToDo=VBoxToDo;
@@ -1396,7 +1377,7 @@ public class Editor extends Globals implements AboveGod {
                 //Check if the invoices time has expired
                 if(CurrentDate.compareTo(temp.getPayment_Date())>0)
                 {
-                    box.setStyle("-fx-background-color:#e04e10;");
+                    //box.setStyle("-fx-background-color:#e04e10;");
                 }
 
 
@@ -1446,7 +1427,7 @@ public class Editor extends Globals implements AboveGod {
                 //Check if the invoices time has expired
                 if(CurrentDate.compareTo(temp.getPayment_Date())>0)
                 {
-                    RecBox.setStyle("-fx-background-color:#e04e10;");
+                    //RecBox.setStyle("-fx-background-color:#e04e10;");
                 }
 
 
@@ -1594,7 +1575,6 @@ public class Editor extends Globals implements AboveGod {
     }
 
     int isPressed = 0;
-
     @FXML
     void pressed(ActionEvent event) throws IOException,  SQLException, ClassNotFoundException {
         //This part is triggered if the user updates the customers data
@@ -1877,21 +1857,32 @@ public class Editor extends Globals implements AboveGod {
 
         }
 
+
         //This is triggered if the user decides to add a new invoice to the customer
         if (event.getSource() == AddInvoice)
         {
-            //Load the add invoice GUI panel and show it to the user
-            FXMLLoader AddInvoiceLoader = new FXMLLoader(getClass().getResource("/fxml/Add_Invoice.fxml"));
-            Parent root = AddInvoiceLoader.load();
-            //Append a controller to the panel
-            AddInvoiceController ctrl = AddInvoiceLoader.getController();
+            if (isPressed==0) {
+                //Load the add invoice GUI panel and show it to the user
+                FXMLLoader AddInvoiceLoader = new FXMLLoader(getClass().getResource("/fxml/Add_Invoice.fxml"));
+                Parent root = AddInvoiceLoader.load();
+                //Append a controller to the panel
+                AddInvoiceController ctrl = AddInvoiceLoader.getController();
 
-            //Set to the cotroller the Customer id
-            ctrl.SetCustomerData(id);
-            //Set to the controller the VBoxes containing the invoices based on their type and reccurence
-            ctrl.SetContainers(MonthlyBox,YearlyBox,OneTimeBox,CustomBox);
+                //Set to the cotroller the Customer id
+                ctrl.SetCustomerData(id);
+                //Set to the controller the VBoxes containing the invoices based on their type and reccurence
+                ctrl.SetContainers(MonthlyBox, YearlyBox, OneTimeBox, CustomBox);
 
-            AddInvoicePane.getChildren().setAll(root);
+                AddInvoicePane.getChildren().setAll(root);
+
+                new SlideInLeft(AddInvoicePane).play();
+                isPressed = 1;
+                AddInvoice.setText("Cancel");
+            }else {
+                new SlideOutLeft(AddInvoicePane).play();
+                isPressed = 0;
+                AddInvoice.setText("Add");
+            }
 
           //  Stage stage = new Stage();
           //  stage.setScene(new Scene(root));

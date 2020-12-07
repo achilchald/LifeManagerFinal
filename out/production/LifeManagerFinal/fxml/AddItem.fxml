@@ -6,16 +6,29 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="257.0" style="-fx-background-color: #fcfcfc;" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ComboBox fx:id="ItemListBox" layoutX="115.0" layoutY="61.0" onAction="#GetSelectedItem" prefWidth="150.0" promptText="Items" />
-      <TextField fx:id="NameText" layoutX="116.0" layoutY="111.0" text="Name" />
-      <TextField fx:id="PriceText" layoutX="116.0" layoutY="157.0" text="Price" />
-      <TextField fx:id="ReccuringText" layoutX="116.0" layoutY="200.0" text="Reccuring" />
-      <TextField fx:id="DiscountField" layoutX="116.0" layoutY="244.0" text="0.0" />
-      <Button fx:id="AddItemButton" layoutX="115.0" layoutY="281.0" mnemonicParsing="false" onAction="#TakeItem" prefHeight="34.0" prefWidth="79.0" text="Add Item" />
-      <CheckBox fx:id="Scaling" layoutX="300.0" layoutY="204.0" mnemonicParsing="false" text="Scale With Reccurence" />
-      <Label layoutX="57.0" layoutY="248.0" text="Discount" />
+      <ComboBox fx:id="ItemListBox" layoutX="80.0" layoutY="61.0" onAction="#GetSelectedItem" prefWidth="150.0" />
+      <TextField fx:id="NameText" layoutX="80.0" layoutY="100.0" />
+      <TextField fx:id="PriceText" layoutX="81.0" layoutY="140.0" />
+      <TextField fx:id="ReccuringText" layoutX="81.0" layoutY="180.0" />
+      <TextField fx:id="DiscountField" layoutX="81.0" layoutY="221.0" />
+      <Button fx:id="AddItemButton" layoutX="99.0" layoutY="331.0" mnemonicParsing="false" onAction="#TakeItem" styleClass="addButton" text="Add">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <CheckBox fx:id="Scaling" layoutX="56.0" layoutY="274.0" mnemonicParsing="false" text="Scale With Reccurence" />
+      <Label layoutX="15.0" layoutY="225.0" text="Discount" />
+      <Label layoutX="15.0" layoutY="65.0" text="Items" />
+      <Label layoutX="15.0" layoutY="104.0" text="Name" />
+      <Label layoutX="15.0" layoutY="144.0" text="Price" />
+      <Label layoutX="15.0" layoutY="184.0" text="Reccuring" />
+      <Label layoutX="82.0" layoutY="14.0" text="New Item">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

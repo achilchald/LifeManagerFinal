@@ -1,7 +1,9 @@
 package Controllers;
 
-import Entities.AboveGod;
+import Entities.*;
 import Methods.Read_Database;
+import com.sun.javafx.scene.control.skin.DatePickerSkin;
+//import javafx.scene.control.skin.DatePickerSkin;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,7 +22,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-//import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -28,8 +29,14 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 
@@ -57,7 +64,7 @@ public class Dashboard implements Initializable, AboveGod {
     private Label tasks;
 
     @FXML
-    private VBox NotificationsBox;
+    private  VBox NotificationsBox;
 
 
 
@@ -67,6 +74,31 @@ public class Dashboard implements Initializable, AboveGod {
         customers.setText(String.valueOf(customerMap.size()));
         projects.setText(String.valueOf(projectMap.size()));
         workers.setText(String.valueOf(workerMap.size()));
+        ArrayList<LogEvent> logEventArrayList=null;
+        ArrayList<LogEvent> customerLogs=null;
+
+        try { logEventArrayList=checkProjectNotifications();
+            customerLogs=checkCustomerNotifications();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < logEventArrayList.size(); i++) {
+            try {
+                logEventArrayList.get(i).addLog(NotificationsBox);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        for (int i = 0; i < customerLogs.size(); i++) {
+            try {
+                customerLogs.get(i).addLog(NotificationsBox);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         Read_Database rd = new Read_Database();
         int i=0;
@@ -80,13 +112,13 @@ public class Dashboard implements Initializable, AboveGod {
         tasks.setText(String.valueOf(i));
 
         DatePicker datePicker = new DatePicker(LocalDate.now());
-       // DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
-       // Node popupContent = datePickerSkin.getPopupContent();
+        DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
+        Node popupContent = datePickerSkin.getPopupContent();
         LocalDate selectedDate = datePicker.getValue();
 
-       // popupContent.setStyle("-fx-pref-width: 298px;");
+        popupContent.setStyle("-fx-pref-width: 298px;");
 
-      //  calendarPane.getChildren().add(popupContent);
+        calendarPane.getChildren().add(popupContent);
 
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("New Value: " + newValue);
@@ -169,7 +201,55 @@ public class Dashboard implements Initializable, AboveGod {
 
 
 
+    }
 
+    public static ArrayList<LogEvent> checkProjectNotifications() throws IOException {
+        //Check deadlines
+        LogEvent temp=null;
+        ArrayList<LogEvent> result=new ArrayList<>();
+
+        for (Map.Entry<Integer, Project> entry : projectMap.entrySet()) {
+            //Days remaining
+            int daysToDeadline;
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate deadline=LocalDate.parse(entry.getValue().getDueDate().toString(),dtf);
+            LocalDate now= LocalDate.now();
+            int daysToDeadLine= (int) ChronoUnit.DAYS.between(now,deadline);
+
+            if (daysToDeadLine<5&&daysToDeadLine>0){
+                String text="There are "+daysToDeadLine+" days remaining for project : "+entry.getValue().getName();
+                temp=new LogEvent(text);
+                result.add(temp);
+            }
+        }
+        return  result;
+    }
+
+    public static ArrayList<LogEvent> checkCustomerNotifications(){
+
+        LogEvent log=null;
+        ArrayList<LogEvent> result=new ArrayList<>();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        for (Map.Entry<String, Customer> entry : customerMap.entrySet()){
+            for (int i = 0; i < entry.getValue().GetInvoicesList().size(); i++) {
+                Invoice temp=entry.getValue().GetInvoicesList().get(i);
+                LocalDate billdate=LocalDate.parse(entry.getValue().GetInvoicesList().get(i).getPayment_Date().toString(),dtf);
+                LocalDate now= LocalDate.now();
+                int daysToDeadLine= (int) ChronoUnit.DAYS.between(now,billdate);
+
+
+                int remaining_amount= (int) (temp.getPrice()-temp.getPayedAmount());
+
+                if (daysToDeadLine<5&daysToDeadLine>0&&remaining_amount>0){
+                    String txt="Invoice "+ " should be paid in " +daysToDeadLine +" days";
+                    log=new LogEvent(txt);
+                    result.add(log);
+                }
+
+            }
+        }
+        return result;
     }
 
     private void setPieChart(int i) {

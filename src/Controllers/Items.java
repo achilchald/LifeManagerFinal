@@ -83,6 +83,9 @@ public class Items implements Initializable, AboveGod {
                 ctrl.SetItemHbox(box);
                 ctrl.SetItemsContainer(pnItems);
 
+                ctrl.SetEditArea(EditArea);
+
+
                 //give the items some effect
                 box.setId(item.getId());
 

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="wholePanel" prefHeight="474.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.item_add_Controller">
+<AnchorPane fx:id="editItemPane" prefHeight="518.0" prefWidth="243.0" style="-fx-background-color: #fcfcfc; -fx-background-radius: 10 10 10 10;" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.item_add_Controller">
    <children>
-      <TextField fx:id="Type" layoutX="105.0" layoutY="178.0" />
-      <Label layoutX="39.0" layoutY="182.0" text="Type" />
-      <Button fx:id="EditButton" layoutX="140.0" layoutY="307.0" mnemonicParsing="false" onAction="#UpdateItem" text="Update" />
-      <Label layoutX="40.0" layoutY="225.0" text="Price" />
-      <Label layoutX="64.0" layoutY="59.0" text="Item">
+      <TextField fx:id="Type" layoutX="73.0" layoutY="110.0" />
+      <Label layoutX="16.0" layoutY="116.0" text="Type" />
+      <Button fx:id="EditButton" layoutX="90.0" layoutY="324.0" mnemonicParsing="false" onAction="#UpdateItem" styleClass="addButton" text="Update">
          <font>
-            <Font size="30.0" />
+            <Font size="16.0" />
+         </font></Button>
+      <Label layoutX="16.0" layoutY="188.0" text="Price" />
+      <Label fx:id="ItemName" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="42.0" prefHeight="30.0" prefWidth="225.0" text="ed" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="Price" layoutX="105.0" layoutY="221.0" />
-      <Label layoutX="37.0" layoutY="262.0" text="Recurring" />
-      <ComboBox fx:id="Recurring" layoutX="105.0" layoutY="258.0" prefWidth="150.0" />
+      <TextField fx:id="Price" layoutX="72.0" layoutY="182.0" />
+      <Label layoutX="15.0" layoutY="251.0" text="Recurring" />
+      <ComboBox fx:id="Recurring" layoutX="74.0" layoutY="247.0" />
    </children>
 </AnchorPane>

@@ -5,13 +5,22 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="332.0" prefWidth="240.0" style="-fx-background-color: #fcfcfc;" stylesheets="@../../sample/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="87.0" layoutY="79.0" text="Amount" />
-      <Label layoutX="95.0" layoutY="112.0" text="Note" />
-      <TextField fx:id="PaymentPrice" layoutX="151.0" layoutY="75.0" promptText="Amount" />
-      <TextArea fx:id="PaymentNote" layoutX="151.0" layoutY="112.0" prefHeight="200.0" prefWidth="200.0" promptText="Notes" />
-      <Button fx:id="UpdatePayment" layoutX="151.0" layoutY="331.0" mnemonicParsing="false" onAction="#Pay" text="Update" />
+      <Label layoutX="14.0" layoutY="64.0" text="Amount" />
+      <Label layoutX="14.0" layoutY="97.0" text="Notes" />
+      <TextField fx:id="PaymentPrice" layoutX="68.0" layoutY="60.0" />
+      <TextArea fx:id="PaymentNote" layoutX="68.0" layoutY="97.0" prefHeight="148.0" prefWidth="149.0" />
+      <Button fx:id="UpdatePayment" layoutX="83.0" layoutY="270.0" mnemonicParsing="false" onAction="#Pay" prefHeight="40.0" prefWidth="75.0" styleClass="addButton" text="Update">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Label layoutX="62.0" layoutY="14.0" text="Edit Payment">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

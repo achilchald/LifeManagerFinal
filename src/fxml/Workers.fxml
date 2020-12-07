@@ -83,7 +83,7 @@
                   </Label>
                   <Label text="Amount" textFill="#171717">
                      <HBox.margin>
-                        <Insets left="65.0" />
+                        <Insets left="30.0" />
                      </HBox.margin>
                   </Label>
                </children>

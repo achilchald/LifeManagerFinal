@@ -37,10 +37,10 @@ public class CheckDateFile {
         if(!CurrentDate.equals(date))
         {
             myObj.delete();
-            myObj = new File("app\\CheckingFile.txt");
+            myObj = new File("CheckingFile.txt");
             myObj.createNewFile();
             FileWriter myWriter = new FileWriter("CheckingFile.txt");
-            //myWriter.write(date.toString());
+            myWriter.write(CurrentDate.toString());
             myWriter.close();
             flag = true;
 

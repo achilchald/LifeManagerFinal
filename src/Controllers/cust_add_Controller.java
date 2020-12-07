@@ -86,6 +86,7 @@ public class cust_add_Controller extends Globals implements AboveGod {
         adder.AddCustomer(NewCustomer);
 
         NewCustomer.setPrice(0);
+        NewCustomer.calculatePrice();
 
 
 
@@ -115,8 +116,13 @@ public class cust_add_Controller extends Globals implements AboveGod {
 
         ((Label)box.getChildren().get(3)).setText( String.valueOf(NewCustomer.getPrice()));
 
+        ((Label)box.getChildren().get(4)).setText( String.valueOf(NewCustomer.getPayedAmount()));
+
+        ((Label)box.getChildren().get(5)).setText( String.valueOf(NewCustomer.getDueAmount()));
+
+
         //A hidden box with a customer id
-        ((Label)box.getChildren().get(4)).setText(NewCustomer.getId());
+        ((Label)box.getChildren().get(6)).setText(NewCustomer.getId());
 
         control.SetPriceLabelId();
         box.setId(NewCustomer.getId());

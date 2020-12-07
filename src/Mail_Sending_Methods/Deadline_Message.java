@@ -746,15 +746,24 @@ public class Deadline_Message {
 
 
 
-        if (time<30 && time>10)
-        {
-            sender.SendMail(mail,"Domain expires soon",Body);
-        }
 
-        if (time<10)
+
+        if (time == 10)
         {
             sender.SendMail(mail,"Domain about to expire",Body);
         }
+
+        if(time == 5)
+        {
+            sender.SendMail(mail,"Reminder,Domain expires in 5 days",Body);
+        }
+
+        if(time == 1)
+        {
+            sender.SendMail(mail,"Important,Domain expires tomorrow",Body);
+        }
+
+
     }
 
 }

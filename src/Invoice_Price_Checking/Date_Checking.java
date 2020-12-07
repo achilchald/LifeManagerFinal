@@ -16,16 +16,14 @@ public class Date_Checking {
 
     }
 
+
+
     public void Load_Recurring_Invoices() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/CASPERWEB_DATABSE", "root", "root");
 
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("select * from INVOICE  WHERE INVOICE.RECCURENCE != \"ONCE\";");
-
-
-
-
 
 
 

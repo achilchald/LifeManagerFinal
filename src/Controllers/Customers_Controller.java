@@ -4,7 +4,10 @@ import Entities.AboveGod;
 import Entities.Customer;
 import Entities.Item;
 import Entities.Linker;
+import Invoice_Price_Checking.Date_Checking;
+import Invoice_Price_Checking.DomainUpdater;
 import Mail_Sending_Methods.Message_Handler;
+import Methods.CheckDateFile;
 import Methods.Database_Sorter;
 import Methods.Read_Database;
 import animatefx.animation.SlideInLeft;
@@ -98,6 +101,44 @@ public class Customers_Controller implements AboveGod , Initializable  {
         //Create a database reader to load the Customer Data from the sql database
         Read_Database reader = new Read_Database();
 
+        boolean flag = false;
+
+
+
+
+        CheckDateFile test = new CheckDateFile();
+        try {
+         flag = test.CheckDate();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        //Check if the invoices are ending today and the customer domains expiration
+        if(flag)
+        {
+            Date_Checking date_checking = new Date_Checking();
+            DomainUpdater Updater = new DomainUpdater();
+
+            try {
+                date_checking.Load_Recurring_Invoices();
+                date_checking.Check_Dates();
+                date_checking.Load_Non_Recurring_Invoices();
+                date_checking.CheckNonRecurringInvoices();
+                Updater.UpdateDomains();
+
+
+
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
+
+
+
 
 
         IncomeLabel.setText("0");
@@ -122,17 +163,26 @@ public class Customers_Controller implements AboveGod , Initializable  {
             }
 
 
-//            Message_Handler Handler = new Message_Handler();
-//            try {
-//                Handler.Deploy_Message();
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
+        }
+
+
+        if(flag)
+        {
+            Message_Handler Handler = new Message_Handler();
+
+            try {
+                Handler.Deploy_Message();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
         }
 
 

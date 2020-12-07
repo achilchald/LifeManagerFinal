@@ -19,17 +19,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        //Check if the invoices are ending today
-        Date_Checking date_checking = new Date_Checking();
-        date_checking.Load_Recurring_Invoices();
-        date_checking.Check_Dates();
-        date_checking.Load_Non_Recurring_Invoices();
-        date_checking.CheckNonRecurringInvoices();
 
-        date_checking= null;
 
-      //  CheckDateFile test = new CheckDateFile();
-      //  test.CheckDate();
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
         primaryStage.setScene(new Scene(root));
